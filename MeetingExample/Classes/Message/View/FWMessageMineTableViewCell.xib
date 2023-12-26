@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FWMessageMineTableViewCell" rowHeight="229" id="8N2-W1-ECu" customClass="FWMessageMineTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8N2-W1-ECu" id="Wge-Uz-LNh">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_common_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="EsN-hc-Zde">
+                        <rect key="frame" x="264" y="5" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="EsN-hc-Zde" secondAttribute="height" multiplier="1:1" id="6RG-Ym-YYO"/>
+                            <constraint firstAttribute="height" constant="40" id="P1d-Qa-7sP"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="SailorGa" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJd-oG-A2W">
+                        <rect key="frame" x="206.33333333333334" y="5" width="47.666666666666657" height="14.666666666666664"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E4m-I3-3kk">
+                        <rect key="frame" x="91.666666666666671" y="24.666666666666671" width="167.33333333333331" height="27"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="通话还要多久可以结束？" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGe-IQ-cbs">
+                                <rect key="frame" x="5" y="5" width="157.33333333333334" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90196078430000004" green="0.92941176469999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="fGe-IQ-cbs" firstAttribute="leading" secondItem="E4m-I3-3kk" secondAttribute="leading" constant="5" id="9MA-md-v5C"/>
+                            <constraint firstAttribute="trailing" secondItem="fGe-IQ-cbs" secondAttribute="trailing" constant="5" id="Ctq-qB-TGV"/>
+                            <constraint firstAttribute="bottom" secondItem="fGe-IQ-cbs" secondAttribute="bottom" constant="5" id="DSd-OQ-g32"/>
+                            <constraint firstItem="fGe-IQ-cbs" firstAttribute="top" secondItem="E4m-I3-3kk" secondAttribute="top" constant="5" id="Jl4-9C-nZH"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="EsN-hc-Zde" firstAttribute="leading" secondItem="E4m-I3-3kk" secondAttribute="trailing" constant="5" id="0lC-Vm-Dq0"/>
+                    <constraint firstItem="GJd-oG-A2W" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Wge-Uz-LNh" secondAttribute="leading" constant="20" id="8oT-l5-BOG"/>
+                    <constraint firstItem="E4m-I3-3kk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Wge-Uz-LNh" secondAttribute="leading" constant="60" id="931-8h-crJ"/>
+                    <constraint firstAttribute="bottom" secondItem="E4m-I3-3kk" secondAttribute="bottom" constant="8.5" id="9GT-bK-Es8"/>
+                    <constraint firstItem="EsN-hc-Zde" firstAttribute="top" secondItem="Wge-Uz-LNh" secondAttribute="top" constant="5" id="I4x-7B-17D"/>
+                    <constraint firstAttribute="trailing" secondItem="EsN-hc-Zde" secondAttribute="trailing" constant="16" id="WNM-OW-Duz"/>
+                    <constraint firstItem="E4m-I3-3kk" firstAttribute="top" secondItem="GJd-oG-A2W" secondAttribute="bottom" constant="5" id="jYI-wz-vaC"/>
+                    <constraint firstItem="GJd-oG-A2W" firstAttribute="top" secondItem="Wge-Uz-LNh" secondAttribute="top" constant="5" id="jhX-eh-X1K"/>
+                    <constraint firstItem="EsN-hc-Zde" firstAttribute="leading" secondItem="GJd-oG-A2W" secondAttribute="trailing" constant="10" id="yi5-2I-aqz"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="avatarImageView" destination="EsN-hc-Zde" id="AqN-37-iEi"/>
+                <outlet property="messageLabel" destination="fGe-IQ-cbs" id="XQS-G6-JIh"/>
+                <outlet property="nameLabel" destination="GJd-oG-A2W" id="3Ox-7F-Odj"/>
+            </connections>
+            <point key="canvasLocation" x="137.40458015267174" y="140.49295774647888"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon_common_avatar" width="80" height="80"/>
+    </resources>
+</document>

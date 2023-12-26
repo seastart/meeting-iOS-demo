@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FWRoomTopView">
+            <connections>
+                <outlet property="cameraButton" destination="nVo-Zq-Za7" id="ZsQ-Dt-Aml"/>
+                <outlet property="changeButton" destination="uq9-Ic-WZY" id="paa-Zi-Rx9"/>
+                <outlet property="hangupButton" destination="T4B-8O-UGi" id="04X-RF-Xct"/>
+                <outlet property="roomNoLabel" destination="XRp-Mj-xkf" id="uUe-8L-faO"/>
+                <outlet property="speakerButton" destination="Oe8-au-r5u" id="lSZ-b2-Ksw"/>
+                <outlet property="timeLabel" destination="vDt-Zs-ked" id="XYh-kr-Cck"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="XTa-48-PiP">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="113"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVo-Zq-Za7">
+                    <rect key="frame" x="16" y="39" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="fPC-WO-mUB"/>
+                        <constraint firstAttribute="width" secondItem="nVo-Zq-Za7" secondAttribute="height" multiplier="1:1" id="hn8-d1-lNM"/>
+                    </constraints>
+                    <state key="normal" image="icon_room_camera"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oe8-au-r5u">
+                    <rect key="frame" x="56" y="39" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Oe8-au-r5u" secondAttribute="height" multiplier="1:1" id="EUI-IG-mKf"/>
+                    </constraints>
+                    <state key="normal" image="icon_room_speaker"/>
+                    <state key="selected" image="icon_room_speaker_un"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T4B-8O-UGi">
+                    <rect key="frame" x="332" y="44" width="66" height="30"/>
+                    <color key="backgroundColor" red="0.98431372549999996" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="66" id="ALK-7W-XdH"/>
+                        <constraint firstAttribute="height" constant="30" id="O7o-QX-t9s"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="结束">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDt-Zs-ked">
+                    <rect key="frame" x="182.66666666666666" y="60.666666666666664" width="48.666666666666657" height="13.333333333333336"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0000000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRp-Mj-xkf">
+                    <rect key="frame" x="176.66666666666666" y="41.666666666666664" width="61" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="tsT-7c-46P"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uq9-Ic-WZY">
+                    <rect key="frame" x="167" y="59" width="80" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="fux-za-IOh"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="C41-2A-Xbk"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="C41-2A-Xbk" firstAttribute="bottom" secondItem="nVo-Zq-Za7" secondAttribute="bottom" id="4ju-gb-Q9m"/>
+                <constraint firstItem="vDt-Zs-ked" firstAttribute="top" secondItem="XRp-Mj-xkf" secondAttribute="bottom" constant="2" id="5Gv-47-sEp"/>
+                <constraint firstItem="nVo-Zq-Za7" firstAttribute="leading" secondItem="C41-2A-Xbk" secondAttribute="leading" constant="16" id="CLn-NT-MWX"/>
+                <constraint firstItem="XRp-Mj-xkf" firstAttribute="centerX" secondItem="vDt-Zs-ked" secondAttribute="centerX" id="Uba-Yk-aBu"/>
+                <constraint firstItem="T4B-8O-UGi" firstAttribute="centerY" secondItem="Oe8-au-r5u" secondAttribute="centerY" id="Vxf-wi-aOk"/>
+                <constraint firstItem="Oe8-au-r5u" firstAttribute="height" secondItem="nVo-Zq-Za7" secondAttribute="height" id="aSj-DV-CAD"/>
+                <constraint firstItem="vDt-Zs-ked" firstAttribute="centerX" secondItem="XTa-48-PiP" secondAttribute="centerX" id="eRQ-9V-UWB"/>
+                <constraint firstItem="Oe8-au-r5u" firstAttribute="centerY" secondItem="nVo-Zq-Za7" secondAttribute="centerY" id="fRw-wd-WsR"/>
+                <constraint firstItem="C41-2A-Xbk" firstAttribute="bottom" secondItem="vDt-Zs-ked" secondAttribute="bottom" constant="5" id="hn3-Uu-uL6"/>
+                <constraint firstItem="uq9-Ic-WZY" firstAttribute="centerX" secondItem="C41-2A-Xbk" secondAttribute="centerX" id="jDZ-mN-mrV"/>
+                <constraint firstItem="C41-2A-Xbk" firstAttribute="trailing" secondItem="T4B-8O-UGi" secondAttribute="trailing" constant="16" id="t2E-OP-AOP"/>
+                <constraint firstItem="Oe8-au-r5u" firstAttribute="leading" secondItem="nVo-Zq-Za7" secondAttribute="trailing" id="tI4-hv-I0t"/>
+                <constraint firstItem="uq9-Ic-WZY" firstAttribute="bottom" secondItem="C41-2A-Xbk" secondAttribute="bottom" id="vwr-U7-fCL"/>
+                <constraint firstItem="C41-2A-Xbk" firstAttribute="top" secondItem="uq9-Ic-WZY" secondAttribute="top" id="w0w-0B-JIs"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-315" y="43"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_room_camera" width="20" height="20"/>
+        <image name="icon_room_speaker" width="20" height="20"/>
+        <image name="icon_room_speaker_un" width="20" height="20"/>
+    </resources>
+</document>
