@@ -20,10 +20,10 @@
 #import <ReactiveObjC/ReactiveObjC.h>
 /// 网络请求
 #import <AFNetworking/AFNetworking.h>
-/// RTC引擎
-/// #import <RTCEngineKit/RTCEngineKit.h>
 /// 内存监测
 #import <MLeaksFinder/MLeaksFinder.h>
+/// 会议引擎
+#import <MeetingKit/MeetingKit.h>
 /// 数据模型
 #import <YYModel/YYModel.h>
 /// 异常捕捉
