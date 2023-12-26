@@ -21,6 +21,7 @@ PODS:
   - MLeaksFinder (1.0.0):
     - FBRetainCycleDetector
   - ReactiveObjC (3.1.1)
+  - RTCEngineKit (1.0.4)
   - SDWebImage (5.15.0):
     - SDWebImage/Core (= 5.15.0)
   - SDWebImage/Core (5.15.0)
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - LYEmptyView
   - MLeaksFinder
   - ReactiveObjC
+  - RTCEngineKit
   - SDWebImage
   - YYModel
 
@@ -45,6 +47,7 @@ SPEC REPOS:
     - LYEmptyView
     - MLeaksFinder
     - ReactiveObjC
+    - RTCEngineKit
     - SDWebImage
     - YYModel
 
@@ -56,9 +59,10 @@ SPEC CHECKSUMS:
   LYEmptyView: b6d418cfa38b78df0cf243f9a9c25ccbdc399922
   MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
+  RTCEngineKit: f4cc10a9dc6855952296fb13863db5946ec6a04c
   SDWebImage: 9bec4c5cdd9579e1f57104735ee0c37df274d593
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 22a1ce8c7d325317651a58666c4f949a0efd7e54
+PODFILE CHECKSUM: 5aa51145f0d49fe973fc5be3c9919d0d2d920da1
 
 COCOAPODS: 1.12.1

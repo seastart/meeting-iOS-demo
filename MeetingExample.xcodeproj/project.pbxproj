@@ -54,6 +54,7 @@
 		F4219D8729B04C130069483A /* FWRoomMemberCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D8529B04C130069483A /* FWRoomMemberCollectionViewCell.m */; };
 		F4219D8829B04C130069483A /* FWRoomMemberCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4219D8629B04C130069483A /* FWRoomMemberCollectionViewCell.xib */; };
 		F4219D8B29B055AD0069483A /* FWRoomMemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D8A29B055AD0069483A /* FWRoomMemberModel.m */; };
+		F429AC602B3AC5AA003D127D /* MeetingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492D5012B3AB9BE00E55CDE /* MeetingKit.framework */; };
 		F43AD83A2727EE670056B3EE /* FWConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD8392727EE670056B3EE /* FWConstants.m */; };
 		F43AD83D2727F1780056B3EE /* FWHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD83C2727F1780056B3EE /* FWHomeViewModel.m */; };
 		F43AD8542728EE8B0056B3EE /* FWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD8522728EE8B0056B3EE /* FWLoginViewController.m */; };
@@ -85,7 +86,6 @@
 		F492A90627EC4E240014C3CB /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492A90527EC4E230014C3CB /* Metal.framework */; };
 		F492A90A27EC8AEF0014C3CB /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492A90927EC8AEF0014C3CB /* VideoToolbox.framework */; };
 		F492D5022B3AB9BE00E55CDE /* MeetingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492D5012B3AB9BE00E55CDE /* MeetingKit.framework */; };
-		F492D5032B3AB9BE00E55CDE /* MeetingKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F492D5012B3AB9BE00E55CDE /* MeetingKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F49B1E56287EB14000D1CA6E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E55287EB14000D1CA6E /* CoreGraphics.framework */; };
 		F49B1E58287EB14900D1CA6E /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E57287EB14900D1CA6E /* CoreML.framework */; };
 		F49B1E5A287EB14F00D1CA6E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E59287EB14F00D1CA6E /* Accelerate.framework */; };
@@ -136,27 +136,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		F4124C04289A5D200075EB82 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				F492D5032B3AB9BE00E55CDE /* MeetingKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F465538A289BA66A00EF2CA8 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F4AA77B0288AA21900EBC0E7 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -403,6 +382,7 @@
 				F4E5F320288BD66800A864DB /* libiconv.tbd in Frameworks */,
 				F4E5F321288BD66800A864DB /* OpenGLES.framework in Frameworks */,
 				F4E5F326288BD66900A864DB /* AudioToolbox.framework in Frameworks */,
+				F429AC602B3AC5AA003D127D /* MeetingKit.framework in Frameworks */,
 				F4E5F31F288BD66800A864DB /* libz.tbd in Frameworks */,
 				F4E5F319288BD66800A864DB /* CoreFoundation.framework in Frameworks */,
 				F4E5F31A288BD66800A864DB /* CoreGraphics.framework in Frameworks */,
@@ -971,7 +951,7 @@
 				F40B5CE826C27A6C00F42370 /* Resources */,
 				2426EB1F6C9FE17EB83EA535 /* [CP] Embed Pods Frameworks */,
 				F4AA77B0288AA21900EBC0E7 /* Embed App Extensions */,
-				F4124C04289A5D200075EB82 /* Embed Frameworks */,
+				C938A77749DDB023D554C659 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -991,7 +971,7 @@
 				F4AA7791288AA21900EBC0E7 /* Sources */,
 				F4AA7792288AA21900EBC0E7 /* Frameworks */,
 				F4AA7793288AA21900EBC0E7 /* Resources */,
-				F465538A289BA66A00EF2CA8 /* Embed Frameworks */,
+				7ED5FC076CF4C6C5153A5975 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1096,6 +1076,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/LYEmptyView/LYEmptyView.framework",
 				"${BUILT_PRODUCTS_DIR}/MLeaksFinder/MLeaksFinder.framework",
+				"${PODS_ROOT}/RTCEngineKit/RTCEngineKit/Depend/FURenderKit.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
@@ -1107,6 +1088,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LYEmptyView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLeaksFinder.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FURenderKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
@@ -1138,6 +1120,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7ED5FC076CF4C6C5153A5975 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MeetingBroadcastUpload/Pods-MeetingBroadcastUpload-resources.sh",
+				"${PODS_ROOT}/RTCEngineKit/RTCEngineKit/Resources/RTCEngineKit.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RTCEngineKit.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MeetingBroadcastUpload/Pods-MeetingBroadcastUpload-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A526D6E1B3DC4756B9F193D9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1158,6 +1158,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C938A77749DDB023D554C659 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MeetingExample/Pods-MeetingExample-resources.sh",
+				"${PODS_ROOT}/RTCEngineKit/RTCEngineKit/Resources/RTCEngineKit.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RTCEngineKit.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MeetingExample/Pods-MeetingExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
