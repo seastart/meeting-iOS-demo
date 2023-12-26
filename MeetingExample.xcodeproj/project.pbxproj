@@ -84,6 +84,8 @@
 		F492A90227EC46F30014C3CB /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492A90127EC46F30014C3CB /* CoreVideo.framework */; };
 		F492A90627EC4E240014C3CB /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492A90527EC4E230014C3CB /* Metal.framework */; };
 		F492A90A27EC8AEF0014C3CB /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492A90927EC8AEF0014C3CB /* VideoToolbox.framework */; };
+		F492D5022B3AB9BE00E55CDE /* MeetingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492D5012B3AB9BE00E55CDE /* MeetingKit.framework */; };
+		F492D5032B3AB9BE00E55CDE /* MeetingKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F492D5012B3AB9BE00E55CDE /* MeetingKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F49B1E56287EB14000D1CA6E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E55287EB14000D1CA6E /* CoreGraphics.framework */; };
 		F49B1E58287EB14900D1CA6E /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E57287EB14900D1CA6E /* CoreML.framework */; };
 		F49B1E5A287EB14F00D1CA6E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E59287EB14F00D1CA6E /* Accelerate.framework */; };
@@ -140,6 +142,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F492D5032B3AB9BE00E55CDE /* MeetingKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,6 +314,7 @@
 		F492A90127EC46F30014C3CB /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		F492A90527EC4E230014C3CB /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		F492A90927EC8AEF0014C3CB /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		F492D5012B3AB9BE00E55CDE /* MeetingKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MeetingKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49B1E55287EB14000D1CA6E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F49B1E57287EB14900D1CA6E /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
 		F49B1E59287EB14F00D1CA6E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -370,6 +374,7 @@
 				F4644F6028913059007D46ED /* SystemConfiguration.framework in Frameworks */,
 				F4DA7C8627279D4E003FDE9B /* CoreFoundation.framework in Frameworks */,
 				F49B1E62287EB18500D1CA6E /* OpenGLES.framework in Frameworks */,
+				F492D5022B3AB9BE00E55CDE /* MeetingKit.framework in Frameworks */,
 				F49B1E60287EB17A00D1CA6E /* libiconv.tbd in Frameworks */,
 				F49B1E5C287EB15600D1CA6E /* Security.framework in Frameworks */,
 				F49B1E5E287EB16B00D1CA6E /* libz.tbd in Frameworks */,
@@ -441,6 +446,7 @@
 		A5AC7F029DBEA4800B47467A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F492D5012B3AB9BE00E55CDE /* MeetingKit.framework */,
 				F4644F5F28913059007D46ED /* SystemConfiguration.framework */,
 				F4E5F2F1288BD65C00A864DB /* ReplayKit.framework */,
 				F4E5F2F2288BD65C00A864DB /* QuartzCore.framework */,

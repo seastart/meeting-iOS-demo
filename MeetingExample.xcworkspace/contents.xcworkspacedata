@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../MeetingKit/MeetingKit.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:MeetingExample.xcodeproj">
    </FileRef>
    <FileRef
