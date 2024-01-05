@@ -17,23 +17,32 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否在加载状态
 @property (nonatomic, assign) BOOL loading;
 
-/// 服务地址
-@property (copy, nonatomic) NSString *serverText;
-/// 用户签名
-@property (copy, nonatomic) NSString *userSigText;
-/// 用户昵称
-@property (copy, nonatomic) NSString *nicknameText;
-/// SDK版本
-@property (copy, nonatomic) NSString *versionText;
-/// 编译时间
-@property (copy, nonatomic) NSString *buildText;
+/// 验证码登录标识
+@property (nonatomic, assign) BOOL isVcodeLogin;
+/// 密码明文状态
+@property (nonatomic, assign) BOOL isSecure;
+/// 协议同意状态
+@property (nonatomic, assign) BOOL isAgreement;
+
+/// 手机号码
+@property (nonatomic, copy) NSString *mobileText;
+/// 用户密码
+@property (nonatomic, copy) NSString *passwordText;
+/// 验证码
+@property (nonatomic, copy) NSString *vcodeText;
+/// 版本信息
+@property (nonatomic, copy) NSString *versionText;
 
 /// 提示框订阅
 @property (nonatomic, strong, readonly) RACSubject *toastSubject;
 /// 登录成功订阅
 @property (nonatomic, strong, readonly) RACSubject *loginSubject;
+/// 验证码请求订阅
+@property (nonatomic, strong, readonly) RACSubject *mobileCodeSubject;
 
-/// 登录事件
+/// 获取验证码
+- (void)getMobileCode;
+/// 请求登录
 - (void)onLoginEvent;
 
 @end

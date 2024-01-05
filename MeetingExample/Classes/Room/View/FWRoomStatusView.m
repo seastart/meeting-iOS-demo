@@ -8,7 +8,6 @@
 
 #import "FWRoomStatusView.h"
 #import "FWRoomMemberModel.h"
-#import "FWUserExtendModel.h"
 
 @interface FWRoomStatusView()
 

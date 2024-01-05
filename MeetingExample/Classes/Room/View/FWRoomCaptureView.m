@@ -9,7 +9,6 @@
 #import "FWRoomCaptureView.h"
 #import "FWRoomStatusView.h"
 #import "FWRoomMemberModel.h"
-#import "FWUserExtendModel.h"
 
 @interface FWRoomCaptureView()
 

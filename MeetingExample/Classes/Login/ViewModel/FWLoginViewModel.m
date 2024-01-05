@@ -7,13 +7,8 @@
 //
 
 #import "FWLoginViewModel.h"
-#import "FWUserExtendModel.h"
-#import "FWAuthToken.h"
 
 @interface FWLoginViewModel()
-
-/// 账户扩展信息
-@property (nonatomic, strong) FWUserExtendModel *extendModel;
 
 @end
 
@@ -25,152 +20,103 @@
     if (self = [super init]) {
         _loginSubject = [RACSubject subject];
         _toastSubject = [RACSubject subject];
-        _serverText = [[FWStoreDataBridge sharedManager] getServerUrl];
-        _userSigText = [[FWStoreDataBridge sharedManager] getUserSig];
-        _nicknameText = [[FWStoreDataBridge sharedManager] getNickname];
-        /// _versionText = [NSString stringWithFormat:@"当前SDK版本信息：%@", [[FWEngineBridge sharedManager] version]];
-        _buildText = [NSString stringWithFormat:@"Demo编译时间：%@", BundleVersion];
+        _mobileCodeSubject = [RACSubject subject];
+        _mobileText = [[FWStoreDataBridge sharedManager] getMobileText];
+        _passwordText = [[FWStoreDataBridge sharedManager] getPasswordText];
+        _versionText = [NSString stringWithFormat:@"当前SDK版本信息 %@", BundleVersion];
+        _isVcodeLogin = NO;
+        _isAgreement = NO;
+        _isSecure = YES;
         _loading = NO;
     }
     return self;
 }
 
-#pragma mark - 懒加载账户扩展信息
-/// 懒加载账户扩展信息
-- (FWUserExtendModel *)extendModel {
+#pragma mark - 获取验证码
+/// 获取验证码
+- (void)getMobileCode {
     
-    if (!_extendModel) {
-        _extendModel = [[FWUserExtendModel alloc] init];
-        _extendModel.videoState = NO;
-        _extendModel.audioState = NO;
+    if (kStringIsEmpty(self.mobileText)) {
+        [self.toastSubject sendNext:NSLocalizedString(@"请输入您的手机号", nil)];
+        return;
     }
-    return _extendModel;
+    
+    /// 标记加载状态
+    self.loading = YES;
+    /// 恢复加载状态
+    self.loading = NO;
+    
+    /// 提示信息
+    /// [self.toastSubject sendNext:errorMsg];
+    /// 回调验证码获取成功
+    [self.mobileCodeSubject sendNext:NSLocalizedString(@"验证码发送成功", nil)];
 }
 
-#pragma mark - 登录事件
-/// 登录事件
+#pragma mark - 请求登录
+/// 请求登录
 - (void)onLoginEvent {
     
-    if (kStringIsEmpty(self.serverText)) {
-        [self.toastSubject sendNext:NSLocalizedString(@"请输入服务地址", nil)];
+    if (kStringIsEmpty(self.mobileText)) {
+        [self.toastSubject sendNext:NSLocalizedString(@"请输入您的手机号", nil)];
         return;
     }
     
-    if (kStringIsEmpty(self.userSigText)) {
-        [self.toastSubject sendNext:NSLocalizedString(@"请输入token", nil)];
+    if (!self.isAgreement) {
+        [self.toastSubject sendNext:NSLocalizedString(@"请阅读并同意用户协议和隐私协议", nil)];
         return;
     }
     
-    if (kStringIsEmpty(self.nicknameText)) {
-        [self.toastSubject sendNext:NSLocalizedString(@"请输入用户昵称", nil)];
-        return;
-    }
-    
-#ifdef DEBUG
-    /// 接口获取用户签名userSig
-    [self develop];
-#else
-    /// 手动输入用户签名userSig
-    [self testing];
-#endif
+    /// 根据分段栏目确定登录方式
+    self.isVcodeLogin ? [self handleVcodeLogin] : [self handlePasswordLogin];
 }
 
-#pragma mark - 手动输入用户签名userSig
-/// 手动输入用户签名userSig
-- (void)testing {
+#pragma mark - 验证码登录
+/// 验证码登录
+- (void)handleVcodeLogin {
+    
+    if (kStringIsEmpty(self.vcodeText)) {
+        [self.toastSubject sendNext:NSLocalizedString(@"请输入验证码", nil)];
+        return;
+    }
+    
+    /// 标记加载状态
+    self.loading = YES;
+    /// 恢复加载状态
+    self.loading = NO;
     
     /// 缓存用户输入信息
-    [[FWStoreDataBridge sharedManager] setServerUrl:self.serverText];
-    [[FWStoreDataBridge sharedManager] setUserSig:self.userSigText];
-    [[FWStoreDataBridge sharedManager] setNickname:self.nicknameText];
-    
-//    /// 创建账户对象
-//    RTCEngineUserModel *userModel = [[RTCEngineUserModel alloc] init];
-//    userModel.name = self.nicknameText;
-//    userModel.avatar = FWDEFAULTAVATAR;
-//    userModel.terminalType = RTCTerminalTypeIOS;
-//    userModel.terminalDesc = RTCTERMINALDESC;
-//    /// 设置账户扩展信息
-//    userModel.props = self.extendModel;
-//    
-//    /// 创建配置对象
-//    RTCEngineConfig *engineConfig = [[RTCEngineConfig alloc] init];
-//    engineConfig.userSig = self.userSigText;
-//    engineConfig.domain = self.serverText;
-//    
-//    /// 初始化RTC服务
-//    RTCEngineError errorCode = [[FWEngineBridge sharedManager] initializeWithConfig:engineConfig userModel:userModel];
-//    /// 根据返回值判断初始化是否成功
-//    if (errorCode != RTCEngineErrorOK) {
-//        NSString *toastStr = [NSString stringWithFormat:@"初始化RTC服务失败 errorCode = %ld", errorCode];
-//        [self.toastSubject sendNext:toastStr];
-//        SGLOG(@"%@", toastStr);
-//        return;
-//    }
-//    
-//    /// 缓存登录用户信息
-//    [[FWStoreDataBridge sharedManager] login:userModel];
+    [[FWStoreDataBridge sharedManager] setMobileText:self.mobileText];
+    /// 缓存登录用户信息
+    /// [[FWStoreDataBridge sharedManager] login:userModel];
+    /// 提示信息
+    /// [self.toastSubject sendNext:errorMsg];
     /// 回调登录成功
     [self.loginSubject sendNext:nil];
 }
 
-#pragma mark - 接口获取用户签名userSig
-/// 接口获取用户签名userSig
-- (void)develop {
+#pragma mark - 密码登录
+/// 密码登录
+- (void)handlePasswordLogin {
+    
+    if (kStringIsEmpty(self.passwordText)) {
+        [self.toastSubject sendNext:NSLocalizedString(@"请输入用户密码", nil)];
+        return;
+    }
     
     /// 标记加载状态
     self.loading = YES;
-    /// 创建请求参数
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    /// 用户标识
-    [params setValue:[FWToolBridge getIdentifierForVendor] forKey:@"uid"];
-    /// 向服务请求鉴权令牌
-    [[FWNetworkBridge sharedManager] POST:FWSIGNATUREINFOFACE params:params className:@"FWAuthToken" resultBlock:^(BOOL result, id  _Nullable data, NSString * _Nullable errorMsg) {
-        /// 恢复加载状态
-        self.loading = NO;
-        /// 请求成功处理
-        if (result) {
-            /// 获取请求结果对象
-            FWAuthToken *model = (FWAuthToken *)data;
-            
-            /// 缓存用户输入信息
-            [[FWStoreDataBridge sharedManager] setServerUrl:self.serverText];
-            [[FWStoreDataBridge sharedManager] setUserSig:model.data.token];
-            [[FWStoreDataBridge sharedManager] setNickname:self.nicknameText];
-            
-//            /// 创建账户对象
-//            RTCEngineUserModel *userModel = [[RTCEngineUserModel alloc] init];
-//            userModel.name = self.nicknameText;
-//            userModel.avatar = FWDEFAULTAVATAR;
-//            userModel.terminalType = RTCTerminalTypeIOS;
-//            userModel.terminalDesc = RTCTERMINALDESC;
-//            /// 设置账户扩展信息
-//            userModel.props = self.extendModel;
-//            
-//            /// 创建配置对象
-//            RTCEngineConfig *engineConfig = [[RTCEngineConfig alloc] init];
-//            engineConfig.userSig = model.data.token;
-//            engineConfig.domain = self.serverText;
-//            
-//            /// 初始化RTC服务
-//            RTCEngineError errorCode = [[FWEngineBridge sharedManager] initializeWithConfig:engineConfig userModel:userModel];
-//            /// 根据返回值判断初始化是否成功
-//            if (errorCode != RTCEngineErrorOK) {
-//                NSString *toastStr = [NSString stringWithFormat:@"初始化RTC服务失败 errorCode = %ld", errorCode];
-//                [self.toastSubject sendNext:toastStr];
-//                SGLOG(@"%@", toastStr);
-//                return;
-//            }
-//            
-//            /// 缓存登录用户信息
-//            [[FWStoreDataBridge sharedManager] login:userModel];
-            /// 回调登录成功
-            [self.loginSubject sendNext:nil];
-        } else {
-            /// 提示信息
-            [self.toastSubject sendNext:errorMsg];
-        }
-    }];
+    /// 恢复加载状态
+    self.loading = NO;
+    
+    /// 缓存用户输入信息
+    [[FWStoreDataBridge sharedManager] setMobileText:self.mobileText];
+    [[FWStoreDataBridge sharedManager] setPasswordText:self.passwordText];
+    /// 缓存登录用户信息
+    /// [[FWStoreDataBridge sharedManager] login:userModel];
+    /// 提示信息
+    /// [self.toastSubject sendNext:errorMsg];
+    /// 回调登录成功
+    [self.loginSubject sendNext:nil];
 }
 
 @end

@@ -11,7 +11,6 @@
 #import "FWRoomBottomView.h"
 #import "FWRoomMemberView.h"
 #import "FWRoomCaptureView.h"
-#import "FWUserExtendModel.h"
 #import "FWRoomExtendModel.h"
 
 /// 房间持续时长统计周期

@@ -81,7 +81,7 @@ static NSString *FWRoomMemberCollectionViewCellName = @"FWRoomMemberCollectionVi
     /// 注册CollectionViewCell
     /// [self registerNib:[UINib nibWithNibName:@"FWRoomMemberCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:FWRoomMemberCollectionViewCellName];
     /// 设置列表占位图
-    [self setupEmptyViewWithImage:kGetImage(@"icon_common_empty_data") titleStr:NSLocalizedString(@"房间暂无成员~", nil) detailStr:nil];
+    [self setupEmptyViewWithImage:kGetImage(@"icon_common_empty") titleStr:NSLocalizedString(@"房间暂无成员~", nil) detailStr:nil];
 }
 
 #pragma mark - 成员更新信息

@@ -10,7 +10,7 @@
 #define FWMacros_h
 
 #pragma mark - 自定义输出
-#define SGLOG(format,...) NSLog((@"[RTCLOG][%@][%d] " format),[[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__,##__VA_ARGS__)
+#define SGLOG(format,...) NSLog((@"[RTCLOG][%@][%d] " format), [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__,##__VA_ARGS__)
 /// #define SGLOG(str, args...) ((void)0)
 
 #pragma mark - 是否是iPad

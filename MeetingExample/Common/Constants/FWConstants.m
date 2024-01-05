@@ -21,10 +21,10 @@ NSString * const RTCTERMINALDESC = @"iOS 移动终端";
 
 #pragma mark - 默认头像地址
 NSString * const FWDEFAULTAVATAR = @"http://assets.sailorhub.cn/avatar.png";
-#pragma mark - 存储服务器地址的KEY
-NSString * const FWSERVERURLKEY = @"cn.seastart.meetingkit.freewind.serverurl";
-#pragma mark - 存储USERSIG的KEY
-NSString * const FWUSERSIGKEY = @"cn.seastart.meetingkit.freewind.usersig";
+#pragma mark - 存储手机号码的KEY
+NSString * const FWMOBILEKEY = @"cn.seastart.meetingkit.freewind.mobile";
+#pragma mark - 存储用户密码的KEY
+NSString * const FWPASSWORDKEY = @"cn.seastart.meetingkit.freewind.password";
 #pragma mark - 存储用户昵称的KEY
 NSString * const FWNICKNAMEKEY = @"cn.seastart.meetingkit.freewind.nickname";
 #pragma mark - 存储房间编号的KEY

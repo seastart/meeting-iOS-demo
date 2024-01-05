@@ -21,10 +21,10 @@ FOUNDATION_EXTERN NSString *__nonnull const RTCTERMINALDESC;
 
 #pragma mark - 默认头像地址
 FOUNDATION_EXTERN NSString *__nonnull const FWDEFAULTAVATAR;
-#pragma mark - 存储服务器地址的KEY
-FOUNDATION_EXTERN NSString *__nonnull const FWSERVERURLKEY;
-#pragma mark - 存储USERSIG的KEY
-FOUNDATION_EXTERN NSString *__nonnull const FWUSERSIGKEY;
+#pragma mark - 存储手机号码的KEY
+FOUNDATION_EXTERN NSString *__nonnull const FWMOBILEKEY;
+#pragma mark - 存储用户密码的KEY
+FOUNDATION_EXTERN NSString *__nonnull const FWPASSWORDKEY;
 #pragma mark - 存储用户昵称的KEY
 FOUNDATION_EXTERN NSString *__nonnull const FWNICKNAMEKEY;
 #pragma mark - 存储房间编号的KEY

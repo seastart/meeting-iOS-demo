@@ -34,42 +34,42 @@
     /// self.userModel = nil;
 }
 
-#pragma mark - 获取服务器地址
-/// 获取服务器地址
-- (NSString *)getServerUrl {
+#pragma mark - 获取手机号码
+/// 获取手机号码
+- (NSString *)getMobileText {
     
-    NSString *serverUrl = [self valueWithKey:FWSERVERURLKEY];
-    if (!kStringIsEmpty(serverUrl)) {
-        return serverUrl;
+    NSString *mobileText = [self valueWithKey:FWMOBILEKEY];
+    if (!kStringIsEmpty(mobileText)) {
+        return mobileText;
     }
-    return RTCENGINEURI;
+    return @"";
 }
 
-#pragma mark - 设置服务器地址
-/// 设置服务器地址
-/// @param serverUrl 服务地址
-- (void)setServerUrl:(NSString *)serverUrl {
+#pragma mark - 设置手机号码
+/// 设置手机号码
+/// @param mobileText 手机号码
+- (void)setMobileText:(NSString *)mobileText {
     
-    [self storeValue:serverUrl withKey:FWSERVERURLKEY];
+    [self storeValue:mobileText withKey:FWMOBILEKEY];
 }
 
-#pragma mark - 获取UserSig
-/// 获取UserSig
-- (NSString *)getUserSig {
+#pragma mark - 获取用户密码
+/// 获取用户密码
+- (NSString *)getPasswordText {
     
-    NSString *userSig = [self valueWithKey:FWUSERSIGKEY];
-    if (!kStringIsEmpty(userSig)) {
-        return userSig;
+    NSString *passwordText = [self valueWithKey:FWPASSWORDKEY];
+    if (!kStringIsEmpty(passwordText)) {
+        return passwordText;
     }
-    return RTCENGINEUSERSIG;
+    return @"";
 }
 
-#pragma mark - 设置UserSig
-/// 设置UserSig
-/// @param userSig UserSig
-- (void)setUserSig:(NSString *)userSig {
+#pragma mark - 设置用户密码
+/// 设置用户密码
+/// @param passwordText 用户密码
+- (void)setPasswordText:(NSString *)passwordText {
     
-    [self storeValue:userSig withKey:FWUSERSIGKEY];
+    [self storeValue:passwordText withKey:FWPASSWORDKEY];
 }
 
 #pragma mark - 获取用户昵称

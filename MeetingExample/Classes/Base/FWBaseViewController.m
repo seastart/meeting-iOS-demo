@@ -6,8 +6,8 @@
 //  Copyright © 2021 SailorGa. All rights reserved.
 //
 
-#import "FWBaseViewController.h"
 #import "FWBaseNavigationViewController.h"
+#import "FWBaseViewController.h"
 
 @interface FWBaseViewController ()
 
@@ -268,6 +268,24 @@
         return targetVC;
     }
     return nil;
+}
+
+#pragma mark - 跳转用户协议
+/// 跳转用户协议
+- (void)presentUserAgreement {
+    
+    NSString *webpageUrl = @"http://vcs.anyconf.cn:5000/upgrade/protos/agreement.html";
+    SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:webpageUrl]];
+    [self presentViewController:safariVC animated:YES completion:nil];
+}
+
+#pragma mark - 跳转隐私协议
+/// 跳转隐私协议
+- (void)presentPrivacyAgreement {
+    
+    NSString *webpageUrl = @"https://www.baidu.com";
+    SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:webpageUrl]];
+    [self presentViewController:safariVC animated:YES completion:nil];
 }
 
 #pragma mark - 退出房间

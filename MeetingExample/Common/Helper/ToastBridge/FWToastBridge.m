@@ -173,10 +173,9 @@ static UIView *toastViewLabel = nil;
         toastLabel.frame = labFrame;
         toastLabel.text = message;
         toastLabel.alpha = 1;
-        [UIView animateWithDuration:showTime animations:^{
+        FWDispatchAfter((int64_t)(showTime * NSEC_PER_SEC), ^{
             toastLabel.alpha = 0;
-        } completion:^(BOOL finished) {
-        }];
+        });
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self showToast:message location:locationStr showTime:showTime];

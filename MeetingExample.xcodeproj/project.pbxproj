@@ -10,7 +10,6 @@
 		68710262BE66C4B1A0EC3A2E /* Pods_MeetingExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB386CE2BE5DB46349915139 /* Pods_MeetingExample.framework */; };
 		6B29BA1ACF7434ECBB78A8B4 /* Pods_MeetingBroadcastUpload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98828E7086C0D6121716238C /* Pods_MeetingBroadcastUpload.framework */; };
 		F40B619D26C27D0C00F42370 /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F40B5D2A26C27D0A00F42370 /* AppIcon.xcassets */; };
-		F40B61A126C27D0C00F42370 /* Launch.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F40B5D2E26C27D0A00F42370 /* Launch.xcassets */; };
 		F40B61A426C27D0C00F42370 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B5D3426C27D0A00F42370 /* main.m */; };
 		F40B61A526C27D0C00F42370 /* FWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B5D3726C27D0A00F42370 /* FWAppDelegate.m */; };
 		F40B61CA26C27D0C00F42370 /* FWToastBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B5DA026C27D0B00F42370 /* FWToastBridge.m */; };
@@ -22,7 +21,6 @@
 		F40B634926C2936C00F42370 /* FWHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F40B634726C2936C00F42370 /* FWHomeViewController.xib */; };
 		F4124BFF289A5D030075EB82 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AA7796288AA21900EBC0E7 /* ReplayKit.framework */; };
 		F4219D2229AC88510069483A /* Login.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4219D2129AC88510069483A /* Login.xcassets */; };
-		F4219D2529ACB1C70069483A /* FWUserExtendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D2429ACB1C70069483A /* FWUserExtendModel.m */; };
 		F4219D2C29AD988C0069483A /* CALayer+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D2B29AD988C0069483A /* CALayer+Extension.m */; };
 		F4219D3129AD9E270069483A /* FWMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D2F29AD9E270069483A /* FWMessageViewController.m */; };
 		F4219D3229AD9E270069483A /* FWMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4219D3029AD9E270069483A /* FWMessageViewController.xib */; };
@@ -55,6 +53,10 @@
 		F4219D8829B04C130069483A /* FWRoomMemberCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4219D8629B04C130069483A /* FWRoomMemberCollectionViewCell.xib */; };
 		F4219D8B29B055AD0069483A /* FWRoomMemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D8A29B055AD0069483A /* FWRoomMemberModel.m */; };
 		F429AC602B3AC5AA003D127D /* MeetingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492D5012B3AB9BE00E55CDE /* MeetingKit.framework */; };
+		F429AC632B455C07003D127D /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F429AC622B455C07003D127D /* SafariServices.framework */; };
+		F429AC672B456957003D127D /* FWRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F429AC652B456957003D127D /* FWRegisterViewController.m */; };
+		F429AC682B456957003D127D /* FWRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F429AC662B456957003D127D /* FWRegisterViewController.xib */; };
+		F429AC6B2B47A8EA003D127D /* FWRegisterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F429AC6A2B47A8EA003D127D /* FWRegisterViewModel.m */; };
 		F43AD83A2727EE670056B3EE /* FWConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD8392727EE670056B3EE /* FWConstants.m */; };
 		F43AD83D2727F1780056B3EE /* FWHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD83C2727F1780056B3EE /* FWHomeViewModel.m */; };
 		F43AD8542728EE8B0056B3EE /* FWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD8522728EE8B0056B3EE /* FWLoginViewController.m */; };
@@ -169,7 +171,6 @@
 		EB43ABE36BE8C041191AD5AE /* Pods-RTCEngineExample.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RTCEngineExample.adhoc.xcconfig"; path = "Target Support Files/Pods-RTCEngineExample/Pods-RTCEngineExample.adhoc.xcconfig"; sourceTree = "<group>"; };
 		F40B5CEA26C27A6C00F42370 /* MeetingExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F40B5D2A26C27D0A00F42370 /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
-		F40B5D2E26C27D0A00F42370 /* Launch.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Launch.xcassets; sourceTree = "<group>"; };
 		F40B5D3426C27D0A00F42370 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F40B5D3626C27D0A00F42370 /* FWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWAppDelegate.h; sourceTree = "<group>"; };
 		F40B5D3726C27D0A00F42370 /* FWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWAppDelegate.m; sourceTree = "<group>"; };
@@ -188,8 +189,6 @@
 		F40B634626C2936C00F42370 /* FWHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWHomeViewController.m; sourceTree = "<group>"; };
 		F40B634726C2936C00F42370 /* FWHomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWHomeViewController.xib; sourceTree = "<group>"; };
 		F4219D2129AC88510069483A /* Login.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Login.xcassets; sourceTree = "<group>"; };
-		F4219D2329ACB1C70069483A /* FWUserExtendModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWUserExtendModel.h; sourceTree = "<group>"; };
-		F4219D2429ACB1C70069483A /* FWUserExtendModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWUserExtendModel.m; sourceTree = "<group>"; };
 		F4219D2A29AD988C0069483A /* CALayer+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+Extension.h"; sourceTree = "<group>"; };
 		F4219D2B29AD988C0069483A /* CALayer+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Extension.m"; sourceTree = "<group>"; };
 		F4219D2E29AD9E270069483A /* FWMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMessageViewController.h; sourceTree = "<group>"; };
@@ -242,6 +241,12 @@
 		F4219D8629B04C130069483A /* FWRoomMemberCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWRoomMemberCollectionViewCell.xib; sourceTree = "<group>"; };
 		F4219D8929B055AD0069483A /* FWRoomMemberModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRoomMemberModel.h; sourceTree = "<group>"; };
 		F4219D8A29B055AD0069483A /* FWRoomMemberModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRoomMemberModel.m; sourceTree = "<group>"; };
+		F429AC622B455C07003D127D /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		F429AC642B456957003D127D /* FWRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRegisterViewController.h; sourceTree = "<group>"; };
+		F429AC652B456957003D127D /* FWRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRegisterViewController.m; sourceTree = "<group>"; };
+		F429AC662B456957003D127D /* FWRegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWRegisterViewController.xib; sourceTree = "<group>"; };
+		F429AC692B47A8EA003D127D /* FWRegisterViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRegisterViewModel.h; sourceTree = "<group>"; };
+		F429AC6A2B47A8EA003D127D /* FWRegisterViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRegisterViewModel.m; sourceTree = "<group>"; };
 		F437E6CD2B32E0A400C76967 /* MeetingExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingExample.entitlements; sourceTree = "<group>"; };
 		F437E6CE2B32E0BA00C76967 /* MeetingBroadcastUpload.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingBroadcastUpload.entitlements; sourceTree = "<group>"; };
 		F43AD8382727EE670056B3EE /* FWConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWConstants.h; sourceTree = "<group>"; };
@@ -366,6 +371,7 @@
 				F492A8E027EAF4F80014C3CB /* CoreMedia.framework in Frameworks */,
 				F492A90227EC46F30014C3CB /* CoreVideo.framework in Frameworks */,
 				68710262BE66C4B1A0EC3A2E /* Pods_MeetingExample.framework in Frameworks */,
+				F429AC632B455C07003D127D /* SafariServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +432,7 @@
 		A5AC7F029DBEA4800B47467A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F429AC622B455C07003D127D /* SafariServices.framework */,
 				F492D5012B3AB9BE00E55CDE /* MeetingKit.framework */,
 				F4644F5F28913059007D46ED /* SystemConfiguration.framework */,
 				F4E5F2F1288BD65C00A864DB /* ReplayKit.framework */,
@@ -521,7 +528,6 @@
 			isa = PBXGroup;
 			children = (
 				F40B5D2A26C27D0A00F42370 /* AppIcon.xcassets */,
-				F40B5D2E26C27D0A00F42370 /* Launch.xcassets */,
 				F4219D2129AC88510069483A /* Login.xcassets */,
 				F43CDA9226C69EEE00FBB94D /* Home.xcassets */,
 				F4DA7C8A27279E62003FDE9B /* Common.xcassets */,
@@ -631,8 +637,6 @@
 		F4219D2629ACB6090069483A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F4219D2329ACB1C70069483A /* FWUserExtendModel.h */,
-				F4219D2429ACB1C70069483A /* FWUserExtendModel.m */,
 				F482EF0329B6E1CC00815C9C /* FWAuthToken.h */,
 				F482EF0429B6E1CC00815C9C /* FWAuthToken.m */,
 			);
@@ -645,6 +649,9 @@
 				F43AD8512728EE8B0056B3EE /* FWLoginViewController.h */,
 				F43AD8522728EE8B0056B3EE /* FWLoginViewController.m */,
 				F43AD8532728EE8B0056B3EE /* FWLoginViewController.xib */,
+				F429AC642B456957003D127D /* FWRegisterViewController.h */,
+				F429AC652B456957003D127D /* FWRegisterViewController.m */,
+				F429AC662B456957003D127D /* FWRegisterViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -654,6 +661,8 @@
 			children = (
 				F43AD85A2728F1E70056B3EE /* FWLoginViewModel.h */,
 				F43AD85B2728F1E70056B3EE /* FWLoginViewModel.m */,
+				F429AC692B47A8EA003D127D /* FWRegisterViewModel.h */,
+				F429AC6A2B47A8EA003D127D /* FWRegisterViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1046,9 +1055,9 @@
 				F482EEF429B5DA6600815C9C /* FWRoomCaptureView.xib in Resources */,
 				F4219D3229AD9E270069483A /* FWMessageViewController.xib in Resources */,
 				F40B634926C2936C00F42370 /* FWHomeViewController.xib in Resources */,
+				F429AC682B456957003D127D /* FWRegisterViewController.xib in Resources */,
 				F4219D4329ADB1760069483A /* FWMessageMineTableViewCell.xib in Resources */,
 				F4219D8829B04C130069483A /* FWRoomMemberCollectionViewCell.xib in Resources */,
-				F40B61A126C27D0C00F42370 /* Launch.xcassets in Resources */,
 				F4219D3E29ADAFBB0069483A /* FWMessageTableSectionHeaderView.xib in Resources */,
 				F4219D7129AF05DD0069483A /* FWRoomBottomView.xib in Resources */,
 			);
@@ -1193,13 +1202,13 @@
 				F4219D4729ADB1850069483A /* FWMessageTableViewCell.m in Sources */,
 				F4219D7929AF225E0069483A /* FWRoomStatusView.m in Sources */,
 				F482EEF229B5DA5E00815C9C /* FWRoomCaptureView.m in Sources */,
+				F429AC6B2B47A8EA003D127D /* FWRegisterViewModel.m in Sources */,
 				F4219D4B29ADCE440069483A /* FWMessageChatManager.m in Sources */,
 				F4219D8729B04C130069483A /* FWRoomMemberCollectionViewCell.m in Sources */,
 				F4219D2C29AD988C0069483A /* CALayer+Extension.m in Sources */,
 				F40B633B26C27D0D00F42370 /* FWBaseViewController.m in Sources */,
 				F482EF3129C08EC700815C9C /* FWRoomExtendModel.m in Sources */,
 				F43AD83A2727EE670056B3EE /* FWConstants.m in Sources */,
-				F4219D2529ACB1C70069483A /* FWUserExtendModel.m in Sources */,
 				F4219D6F29AF05D70069483A /* FWRoomBottomView.m in Sources */,
 				F4C417BC29B09EE200A7EBCB /* FWRoomViewModel.m in Sources */,
 				F482EF2A29BEE2D900815C9C /* FWEnum.m in Sources */,
@@ -1231,6 +1240,7 @@
 				F4219D8329B04B1D0069483A /* FWRoomMemberView.m in Sources */,
 				F482EF0229B6DF9900815C9C /* FWToolBridge.m in Sources */,
 				F4219D4229ADB1760069483A /* FWMessageMineTableViewCell.m in Sources */,
+				F429AC672B456957003D127D /* FWRegisterViewController.m in Sources */,
 				F4219D5829ADE8790069483A /* FWMessageViewModel.m in Sources */,
 				F43AD8592728EF4D0056B3EE /* FWEntryBridge.m in Sources */,
 				F40B61A426C27D0C00F42370 /* main.m in Sources */,
@@ -1385,7 +1395,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "MeetingExample/Resources/MeetingExample-Prefix.pch";
 				INFOPLIST_FILE = "MeetingExample/Resources/MeetingExample-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Meeting;
+				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
@@ -1432,7 +1442,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "MeetingExample/Resources/MeetingExample-Prefix.pch";
 				INFOPLIST_FILE = "MeetingExample/Resources/MeetingExample-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Meeting;
+				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
@@ -1631,7 +1641,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "MeetingExample/Resources/MeetingExample-Prefix.pch";
 				INFOPLIST_FILE = "MeetingExample/Resources/MeetingExample-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Meeting;
+				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;

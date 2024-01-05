@@ -20,23 +20,23 @@ NS_ASSUME_NONNULL_BEGIN
 /// 退出登录
 - (void)logout;
 
-#pragma mark - 获取服务器地址
-/// 获取服务器地址
-- (NSString *)getServerUrl;
+#pragma mark - 获取手机号码
+/// 获取手机号码
+- (NSString *)getMobileText;
 
-#pragma mark - 设置服务器地址
-/// 设置服务器地址
-/// @param serverUrl 版本号
-- (void)setServerUrl:(NSString *)serverUrl;
+#pragma mark - 设置手机号码
+/// 设置手机号码
+/// @param mobileText 手机号码
+- (void)setMobileText:(NSString *)mobileText;
 
-#pragma mark - 获取UserSig
-/// 获取UserSig
-- (NSString *)getUserSig;
+#pragma mark - 获取用户密码
+/// 获取用户密码
+- (NSString *)getPasswordText;
 
-#pragma mark - 设置UserSig
-/// 设置UserSig
-/// @param userSig UserSig
-- (void)setUserSig:(NSString *)userSig;
+#pragma mark - 设置用户密码
+/// 设置用户密码
+/// @param passwordText 用户密码
+- (void)setPasswordText:(NSString *)passwordText;
 
 #pragma mark - 获取用户昵称
 /// 获取用户昵称

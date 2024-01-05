@@ -8,7 +8,6 @@
 
 #import "FWRoomViewController.h"
 #import "FWRoomMemberModel.h"
-#import "FWUserExtendModel.h"
 #import "FWRoomExtendModel.h"
 #import "FWRoomViewModel.h"
 #import "FWRoomMainView.h"

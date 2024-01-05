@@ -11,18 +11,42 @@
 
 @interface FWLoginViewController ()
 
-/// 服务地址
-@property (weak, nonatomic) IBOutlet UITextField *serverTextField;
-/// 用户签名
-@property (weak, nonatomic) IBOutlet UITextField *userSigTextField;
-/// 用户昵称
-@property (weak, nonatomic) IBOutlet UITextField *nicknameTextField;
+/// 密码视图
+@property (weak, nonatomic) IBOutlet UIView *passwordView;
+/// 验证码视图
+@property (weak, nonatomic) IBOutlet UIView *vcodeView;
+
+/// 密码登录分段按钮
+@property (weak, nonatomic) IBOutlet UIButton *loginSegmentButton;
+/// 验证码登录分段按钮
+@property (weak, nonatomic) IBOutlet UIButton *vcodeSegmentButton;
+/// 密码明文按钮
+@property (weak, nonatomic) IBOutlet UIButton *secureButton;
+/// 验证码按钮
+@property (weak, nonatomic) IBOutlet UIButton *vcodeButton;
+/// 协议选择按钮
+@property (weak, nonatomic) IBOutlet UIButton *selectButton;
+/// 用户协议按钮
+@property (weak, nonatomic) IBOutlet UIButton *agreementButton;
+/// 隐私协议按钮
+@property (weak, nonatomic) IBOutlet UIButton *privacyButton;
 /// 登录按钮
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+/// 注册按钮
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
+
+/// 手机号码
+@property (weak, nonatomic) IBOutlet UITextField *mobileTextField;
+/// 用户密码
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+/// 验证码
+@property (weak, nonatomic) IBOutlet UITextField *vcodeTextField;
+
 /// 当前SDK版本
 @property (weak, nonatomic) IBOutlet UILabel *versionLable;
-/// 编译构建时间
-@property (weak, nonatomic) IBOutlet UILabel *buildLable;
+
+/// 验证码计时器
+@property (strong, nonatomic) dispatch_source_t timer;
 
 /// ViewModel
 @property (strong, nonatomic) FWLoginViewModel *viewModel;
@@ -37,6 +61,14 @@
     [super viewDidLoad];
     /// 初始化UI
     [self buildView];
+}
+
+#pragma mark - 页面出现前
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    /// 隐藏顶部导航栏
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 #pragma mark - 初始化UI
@@ -54,9 +86,8 @@
 #pragma mark - 设置默认数据
 - (void)setupDefaultData {
     
-    self.serverTextField.text = [[FWStoreDataBridge sharedManager] getServerUrl];
-    self.userSigTextField.text = [[FWStoreDataBridge sharedManager] getUserSig];
-    self.nicknameTextField.text = [[FWStoreDataBridge sharedManager] getNickname];
+    self.mobileTextField.text = [[FWStoreDataBridge sharedManager] getMobileText];
+    self.passwordTextField.text = [[FWStoreDataBridge sharedManager] getPasswordText];
 }
 
 #pragma mark - 设置ViewModel
@@ -75,27 +106,99 @@
     
     @weakify(self);
     
-    /// 绑定编译构建时间
-    RAC(self.buildLable, text) = RACObserve(self.viewModel, buildText);
     /// 绑定版本信息
     RAC(self.versionLable, text) = RACObserve(self.viewModel, versionText);
+    /// 绑定用户协议按钮状态
+    RAC(self.selectButton, selected) = RACObserve(self.viewModel, isAgreement);
+    /// 绑定密码按钮明文状态
+    RAC(self.secureButton, selected) = RACObserve(self.viewModel, isSecure);
+    /// 绑定密码框明文状态
+    RAC(self.passwordTextField, secureTextEntry) = RACObserve(self.viewModel, isSecure);
     
-    /// 监听服务地址
-    [self.serverTextField.rac_textSignal subscribeNext:^(NSString * _Nullable text) {
+    /// 监听手机号码变化
+    [self.mobileTextField.rac_textSignal subscribeNext:^(NSString * _Nullable text) {
         @strongify(self);
-        self.viewModel.serverText = [FWToolBridge clearMarginsBlank:text];
+        self.viewModel.mobileText = text;
     }];
     
-    /// 监听用户签名
-    [self.userSigTextField.rac_textSignal subscribeNext:^(NSString * _Nullable text) {
+    /// 监听用户密码变化
+    [self.passwordTextField.rac_textSignal subscribeNext:^(NSString * _Nullable text) {
         @strongify(self);
-        self.viewModel.userSigText = [FWToolBridge clearMarginsBlank:text];
+        self.viewModel.passwordText = text;
     }];
     
-    /// 监听用户昵称
-    [self.nicknameTextField.rac_textSignal subscribeNext:^(NSString * _Nullable text) {
+    /// 监听验证码变化
+    [self.vcodeTextField.rac_textSignal subscribeNext:^(NSString * _Nullable text) {
         @strongify(self);
-        self.viewModel.nicknameText = [FWToolBridge clearMarginsBlank:text];
+        self.viewModel.vcodeText = text;
+    }];
+    
+    /// 绑定密码登录分段按钮事件
+    [[self.loginSegmentButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        self.viewModel.isVcodeLogin = NO;
+    }];
+    
+    /// 绑验证码登录分段按钮事件
+    [[self.vcodeSegmentButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        self.viewModel.isVcodeLogin = YES;
+    }];
+    
+    /// 绑定密码明文按钮事件
+    [[self.secureButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        self.viewModel.isSecure = !self.viewModel.isSecure;
+    }];
+    
+    /// 绑定协议选择按钮事件
+    [[self.selectButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        self.viewModel.isAgreement = !self.viewModel.isAgreement;
+    }];
+    
+    /// 绑定验证码按钮事件
+    [[self.vcodeButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        /// 获取短信验证码
+        [self.viewModel getMobileCode];
+    }];
+    
+    /// 绑定用户协议按钮事件
+    [[self.agreementButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        /// 跳转到用户协议
+        [self presentUserAgreement];
+    }];
+    
+    /// 绑定隐私协议按钮事件
+    [[self.privacyButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        /// 跳转隐私协议
+        [self presentPrivacyAgreement];
+    }];
+    
+    /// 绑定注册按钮事件
+    [[self.registerButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        /// 注册按钮事件
+        [self push:@"FWRegisterViewController"];
+    }];
+    
+    /// 绑定登录按钮事件
+    [[self.loginButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        /// 登录事件
+        [self.viewModel onLoginEvent];
+    }];
+    
+    /// 监听订阅验证码登录标识
+    [RACObserve(self.viewModel, isVcodeLogin) subscribeNext:^(NSNumber * _Nullable value) {
+        @strongify(self);
+        self.loginSegmentButton.selected = !value.boolValue;
+        self.vcodeSegmentButton.selected = value.boolValue;
+        self.passwordView.hidden = value.boolValue;
+        self.vcodeView.hidden = !value.boolValue;
     }];
     
     /// 监听订阅加载状态
@@ -107,25 +210,89 @@
         }
     }];
     
-    /// 提示框订阅
-    [self.viewModel.toastSubject subscribeNext:^(id _Nullable message) {
+    /// 监听提示框订阅
+    [self.viewModel.toastSubject subscribeNext:^(NSString * _Nullable message) {
         if (!kStringIsEmpty(message)) {
             [FWToastBridge showToastAction:message];
         }
     }];
     
-    /// 登录成功订阅
+    /// 监听验证码获取成功订阅
+    [self.viewModel.mobileCodeSubject subscribeNext:^(NSString * _Nullable value) {
+        @strongify(self);
+        if (!kStringIsEmpty(value)) {
+            [FWToastBridge showToastAction:value];
+        }
+        /// 获取验证码成功处理
+        [self countdownAction];
+    }];
+    
+    /// 监听登录成功订阅
     [self.viewModel.loginSubject subscribeNext:^(NSNumber * _Nullable value) {
         /// 设置根视图为首页模块
         [[FWEntryBridge sharedManager] setWindowRootHome];
     }];
+}
+
+#pragma mark - 验证码按钮读秒
+/// 验证码按钮读秒
+- (void)countdownAction {
     
-    /// 绑定登录按钮事件
-    [[self.loginButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
-        @strongify(self);
-        /// 登录事件
-        [self.viewModel onLoginEvent];
-    }];
+    /// 倒计时时间
+    __block NSInteger time = 59;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    /// 每秒执行
+    dispatch_source_set_timer(self.timer,DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(self.timer, ^{
+        /// 倒计时结束，关闭
+        if(time <= 0) {
+            dispatch_source_cancel(self.timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                /// 设置常规效果的样式
+                [self noneStyle];
+            });
+        } else {
+            int seconds = time % 60;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                /// 设置label读秒效果
+                [self countdownStyle:seconds];
+            });
+            time--;
+        }
+    });
+    dispatch_resume(self.timer);
+}
+
+#pragma mark - -------- 验证码按钮效果 ---------
+#pragma mark 常规效果
+- (void)noneStyle {
+    
+    [self.vcodeButton setTitle:NSLocalizedString(@"发送验证码", nil) forState:UIControlStateNormal];
+    [self.vcodeButton setTitleColor:RGBOF(0x0039B3) forState:UIControlStateNormal];
+    self.vcodeButton.userInteractionEnabled = YES;
+}
+
+#pragma mark 读秒效果
+- (void)countdownStyle:(int)seconds {
+    
+    [self.vcodeButton setTitle:[NSString stringWithFormat:@"%.2dS%@", seconds, NSLocalizedString(@"后重发", nil)] forState:UIControlStateNormal];
+    [self.vcodeButton setTitleColor:RGBOF(0x999999) forState:UIControlStateNormal];
+    self.vcodeButton.userInteractionEnabled = NO;
+}
+
+#pragma mark - 释放计时器
+/// 释放计时器
+- (void)invalidate {
+    
+    if (!self.timer) {
+        /// 定时器为空不做释放
+        return;
+    }
+    /// 释放定时器
+    dispatch_source_cancel(self.timer);
+    /// 置空定时器
+    self.timer = nil;
 }
 
 @end

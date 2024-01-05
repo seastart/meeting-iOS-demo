@@ -35,7 +35,7 @@
         /// 重置背景和阴影属性以显示适合主题的不透明颜色
         [appearance configureWithOpaqueBackground];
         /// 设置标题属性、字体大小和字体颜色等
-        [appearance setTitleTextAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16 weight:UIFontWeightMedium], NSForegroundColorAttributeName : RGBOF(0x333333)}];
+        [appearance setTitleTextAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17 weight:UIFontWeightMedium], NSForegroundColorAttributeName : RGBOF(0x333333)}];
         /// 更改背景色为白色
         appearance.backgroundColor = [UIColor whiteColor];
         /// 更改阴影颜色为透明色
@@ -48,7 +48,7 @@
         /// 去除毛玻璃效果
         [self.navigationBar setTranslucent:NO];
         /// 设置标题属性、字体大小和字体颜色等
-        [self.navigationBar setTitleTextAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16 weight:UIFontWeightMedium], NSForegroundColorAttributeName : RGBOF(0x333333)}];
+        [self.navigationBar setTitleTextAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17 weight:UIFontWeightMedium], NSForegroundColorAttributeName : RGBOF(0x333333)}];
         /// 设置背景颜色
         [self.navigationBar setBarTintColor:[UIColor whiteColor]];
         /// 去除导航栏背景颜色
@@ -109,12 +109,12 @@
         /// 兼容系统版本调整
         if (@available(iOS 13.0, *)) {
             /// 创建返回按钮
-            UIButton *buttonItem = [UIButton systemButtonWithImage:[kGetImage(@"icon_common_goback_black") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] target:self action:@selector(baseGoBack)];
+            UIButton *buttonItem = [UIButton systemButtonWithImage:[kGetImage(@"icon_common_goback") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] target:self action:@selector(baseGoBack)];
             /// 设置返回按钮
             viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:buttonItem];
         } else {
             /// 创建返回按钮
-            UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithImage:[kGetImage(@"icon_common_goback_black") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(baseGoBack)];
+            UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithImage:[kGetImage(@"icon_common_goback") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(baseGoBack)];
             /// 设置返回按钮
             viewController.navigationItem.leftBarButtonItem = buttonItem;
         }

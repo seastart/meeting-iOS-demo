@@ -6,6 +6,7 @@
 //  Copyright © 2021 SailorGa. All rights reserved.
 //
 
+#import <SafariServices/SafariServices.h>
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -61,6 +62,14 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 获取顶层控制器
 /// 获取顶层控制器
 - (UIViewController *)topViewController;
+
+#pragma mark - 跳转用户协议
+/// 跳转用户协议
+- (void)presentUserAgreement;
+
+#pragma mark - 跳转隐私协议
+/// 跳转隐私协议
+- (void)presentPrivacyAgreement;
 
 /// 退出房间
 - (void)dismissRoom;
