@@ -213,7 +213,9 @@
     
     /// 监听注册成功订阅
     [self.viewModel.registerSubject subscribeNext:^(NSNumber * _Nullable value) {
-        
+        @strongify(self);
+        /// 注册按钮事件
+        [self push:@"FWRegisterUserinfoViewController"];
     }];
 }
 

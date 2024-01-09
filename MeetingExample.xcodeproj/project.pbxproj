@@ -88,6 +88,9 @@
 		F492A90627EC4E240014C3CB /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492A90527EC4E230014C3CB /* Metal.framework */; };
 		F492A90A27EC8AEF0014C3CB /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492A90927EC8AEF0014C3CB /* VideoToolbox.framework */; };
 		F492D5022B3AB9BE00E55CDE /* MeetingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492D5012B3AB9BE00E55CDE /* MeetingKit.framework */; };
+		F49A40EF2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A40ED2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.m */; };
+		F49A40F02B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A40EE2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.xib */; };
+		F49A40F32B4BF1CE0049DF6D /* FWRegisterUserinfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A40F22B4BF1CE0049DF6D /* FWRegisterUserinfoViewModel.m */; };
 		F49B1E56287EB14000D1CA6E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E55287EB14000D1CA6E /* CoreGraphics.framework */; };
 		F49B1E58287EB14900D1CA6E /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E57287EB14900D1CA6E /* CoreML.framework */; };
 		F49B1E5A287EB14F00D1CA6E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E59287EB14F00D1CA6E /* Accelerate.framework */; };
@@ -299,6 +302,11 @@
 		F492A90527EC4E230014C3CB /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		F492A90927EC8AEF0014C3CB /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		F492D5012B3AB9BE00E55CDE /* MeetingKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MeetingKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F49A40EC2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRegisterUserinfoViewController.h; sourceTree = "<group>"; };
+		F49A40ED2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRegisterUserinfoViewController.m; sourceTree = "<group>"; };
+		F49A40EE2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWRegisterUserinfoViewController.xib; sourceTree = "<group>"; };
+		F49A40F12B4BF1CE0049DF6D /* FWRegisterUserinfoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRegisterUserinfoViewModel.h; sourceTree = "<group>"; };
+		F49A40F22B4BF1CE0049DF6D /* FWRegisterUserinfoViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRegisterUserinfoViewModel.m; sourceTree = "<group>"; };
 		F49B1E55287EB14000D1CA6E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F49B1E57287EB14900D1CA6E /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
 		F49B1E59287EB14F00D1CA6E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -652,6 +660,9 @@
 				F429AC642B456957003D127D /* FWRegisterViewController.h */,
 				F429AC652B456957003D127D /* FWRegisterViewController.m */,
 				F429AC662B456957003D127D /* FWRegisterViewController.xib */,
+				F49A40EC2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.h */,
+				F49A40ED2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.m */,
+				F49A40EE2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -663,6 +674,8 @@
 				F43AD85B2728F1E70056B3EE /* FWLoginViewModel.m */,
 				F429AC692B47A8EA003D127D /* FWRegisterViewModel.h */,
 				F429AC6A2B47A8EA003D127D /* FWRegisterViewModel.m */,
+				F49A40F12B4BF1CE0049DF6D /* FWRegisterUserinfoViewModel.h */,
+				F49A40F22B4BF1CE0049DF6D /* FWRegisterUserinfoViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1046,6 +1059,7 @@
 				F40B633F26C2901F00F42370 /* MeetingExample-Info.plist in Resources */,
 				F45C830C27D6F50D008EEA31 /* Room.xcassets in Resources */,
 				F43CDA9326C69EEE00FBB94D /* Home.xcassets in Resources */,
+				F49A40F02B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.xib in Resources */,
 				F4DA7C8B27279E62003FDE9B /* Common.xcassets in Resources */,
 				F40B619D26C27D0C00F42370 /* AppIcon.xcassets in Resources */,
 				F4219D4829ADB1850069483A /* FWMessageTableViewCell.xib in Resources */,
@@ -1195,6 +1209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F482EF2329B88C3F00815C9C /* UIView+EmptyView.m in Sources */,
+				F49A40F32B4BF1CE0049DF6D /* FWRegisterUserinfoViewModel.m in Sources */,
 				F4219D4E29ADCEA90069483A /* FWMessageChatModel.m in Sources */,
 				F4219D7429AF21A90069483A /* FWRoomMainView.m in Sources */,
 				F4219D3829ADABAB0069483A /* UIScrollView+AutoHeight.m in Sources */,
@@ -1214,6 +1229,7 @@
 				F482EF2A29BEE2D900815C9C /* FWEnum.m in Sources */,
 				F4219D6129AE00230069483A /* FWHomeModel.m in Sources */,
 				F43AD85C2728F1E70056B3EE /* FWLoginViewModel.m in Sources */,
+				F49A40EF2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.m in Sources */,
 				F482EF1A29B885D900815C9C /* FWBaseEmptyView.m in Sources */,
 				F4219D3129AD9E270069483A /* FWMessageViewController.m in Sources */,
 				F43AD8542728EE8B0056B3EE /* FWLoginViewController.m in Sources */,
