@@ -33,6 +33,14 @@
     [self buildView];
 }
 
+#pragma mark - 页面出现前
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    /// 显示顶部导航栏
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 #pragma mark - 初始化UI
 /// 初始化UI
 - (void)buildView {
@@ -48,6 +56,8 @@
 #pragma mark - 设置默认数据
 - (void)setupDefaultData {
     
+    /// 设置标题
+    self.navigationItem.title = NSLocalizedString(@"海星音视频", nil);
     self.roomNoTextField.text = [[FWStoreDataBridge sharedManager] getRoomNo];
 }
 

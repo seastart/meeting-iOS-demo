@@ -53,35 +53,35 @@
 /// 请求注册
 - (void)onRegisterEvent {
     
-//    if (kStringIsEmpty(self.mobileText)) {
-//        [self.toastSubject sendNext:NSLocalizedString(@"请输入您的手机号", nil)];
-//        return;
-//    }
-//    
-//    if (kStringIsEmpty(self.vcodeText)) {
-//        [self.toastSubject sendNext:NSLocalizedString(@"请输入验证码", nil)];
-//        return;
-//    }
-//    
-//    if (kStringIsEmpty(self.passwordText)) {
-//        [self.toastSubject sendNext:NSLocalizedString(@"请输入用户密码", nil)];
-//        return;
-//    }
-//    
-//    if (kStringIsEmpty(self.passwordCheckText)) {
-//        [self.toastSubject sendNext:NSLocalizedString(@"请输入确认密码", nil)];
-//        return;
-//    }
-//    
-//    if (![self.passwordText isEqualToString:self.passwordCheckText]) {
-//        [self.toastSubject sendNext:NSLocalizedString(@"两次密码不一致，请核对", nil)];
-//        return;
-//    }
-//    
-//    if (!self.isAgreement) {
-//        [self.toastSubject sendNext:NSLocalizedString(@"请阅读并同意用户协议和隐私协议", nil)];
-//        return;
-//    }
+    if (kStringIsEmpty(self.mobileText)) {
+        [self.toastSubject sendNext:NSLocalizedString(@"请输入您的手机号", nil)];
+        return;
+    }
+    
+    if (kStringIsEmpty(self.vcodeText)) {
+        [self.toastSubject sendNext:NSLocalizedString(@"请输入验证码", nil)];
+        return;
+    }
+    
+    if (kStringIsEmpty(self.passwordText)) {
+        [self.toastSubject sendNext:NSLocalizedString(@"请输入用户密码", nil)];
+        return;
+    }
+    
+    if (kStringIsEmpty(self.passwordCheckText)) {
+        [self.toastSubject sendNext:NSLocalizedString(@"请输入确认密码", nil)];
+        return;
+    }
+    
+    if (![self.passwordText isEqualToString:self.passwordCheckText]) {
+        [self.toastSubject sendNext:NSLocalizedString(@"两次密码不一致，请核对", nil)];
+        return;
+    }
+    
+    if (!self.isAgreement) {
+        [self.toastSubject sendNext:NSLocalizedString(@"请阅读并同意用户协议和隐私协议", nil)];
+        return;
+    }
     
     /// 缓存用户输入信息
     [[FWStoreDataBridge sharedManager] setMobileText:self.mobileText];

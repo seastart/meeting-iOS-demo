@@ -71,6 +71,14 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
+#pragma mark - 页面即将消失
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    /// 释放计时器
+    /// [self invalidate];
+}
+
 #pragma mark - 初始化UI
 /// 初始化UI
 - (void)buildView {

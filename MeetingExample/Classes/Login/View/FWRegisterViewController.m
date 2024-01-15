@@ -66,7 +66,7 @@
     
     [super viewWillDisappear:animated];
     /// 释放计时器
-    [self invalidate];
+    /// [self invalidate];
 }
 
 #pragma mark - 初始化UI
@@ -274,6 +274,8 @@
         /// 定时器为空不做释放
         return;
     }
+    /// 重置按钮回常规效果
+    [self noneStyle];
     /// 释放定时器
     dispatch_source_cancel(self.timer);
     /// 置空定时器

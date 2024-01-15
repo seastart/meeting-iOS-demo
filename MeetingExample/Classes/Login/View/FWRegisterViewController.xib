@@ -380,9 +380,9 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="dEU-Lt-ZKz" firstAttribute="top" secondItem="KVE-DQ-PnX" secondAttribute="top" id="3v6-Gn-PpN"/>
-                <constraint firstAttribute="trailing" secondItem="dEU-Lt-ZKz" secondAttribute="trailing" id="61X-eS-kpR"/>
+                <constraint firstItem="KVE-DQ-PnX" firstAttribute="trailing" secondItem="dEU-Lt-ZKz" secondAttribute="trailing" id="61X-eS-kpR"/>
                 <constraint firstItem="KVE-DQ-PnX" firstAttribute="bottom" secondItem="dEU-Lt-ZKz" secondAttribute="bottom" id="DJ1-8t-t0L"/>
-                <constraint firstItem="dEU-Lt-ZKz" firstAttribute="leading" secondItem="vyC-qu-eu8" secondAttribute="leading" id="elc-FR-lkg"/>
+                <constraint firstItem="dEU-Lt-ZKz" firstAttribute="leading" secondItem="KVE-DQ-PnX" secondAttribute="leading" id="elc-FR-lkg"/>
             </constraints>
             <point key="canvasLocation" x="23.664122137404579" y="97.183098591549296"/>
         </view>

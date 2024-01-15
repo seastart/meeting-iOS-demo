@@ -45,7 +45,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="-23" translatesAutoresizingMaskIntoConstraints="NO" id="Onk-7v-nqF">
                                     <rect key="frame" x="16" y="177" width="382" height="55"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M3N-Kq-AW3">
+                                        <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M3N-Kq-AW3">
                                             <rect key="frame" x="0.0" y="0.0" width="202.5" height="55"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -56,7 +56,7 @@
                                                 <color key="titleColor" red="0.0" green="0.22352941176470587" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cV-d1-PdW">
+                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cV-d1-PdW">
                                             <rect key="frame" x="179.5" y="0.0" width="202.5" height="55"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -409,8 +409,8 @@
                 <constraint firstItem="8da-sL-tKD" firstAttribute="bottom" secondItem="gVi-Hq-jWu" secondAttribute="bottom" constant="16" id="YaL-ya-xTx"/>
                 <constraint firstItem="8da-sL-tKD" firstAttribute="trailing" secondItem="gVi-Hq-jWu" secondAttribute="trailing" constant="16" id="Yw9-uV-q45"/>
                 <constraint firstItem="vwp-KG-XNP" firstAttribute="top" secondItem="EXR-oe-wFA" secondAttribute="top" id="aGZ-VG-cni"/>
-                <constraint firstItem="vwp-KG-XNP" firstAttribute="leading" secondItem="EXR-oe-wFA" secondAttribute="leading" id="pJm-C6-AC8"/>
-                <constraint firstAttribute="trailing" secondItem="vwp-KG-XNP" secondAttribute="trailing" id="vs0-5V-g07"/>
+                <constraint firstItem="vwp-KG-XNP" firstAttribute="leading" secondItem="8da-sL-tKD" secondAttribute="leading" id="pJm-C6-AC8"/>
+                <constraint firstItem="8da-sL-tKD" firstAttribute="trailing" secondItem="vwp-KG-XNP" secondAttribute="trailing" id="vs0-5V-g07"/>
             </constraints>
             <point key="canvasLocation" x="24.637681159420293" y="97.767857142857139"/>
         </view>

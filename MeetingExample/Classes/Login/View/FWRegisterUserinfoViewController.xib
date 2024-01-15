@@ -222,8 +222,8 @@
                 <constraint firstItem="SiQ-0y-8vH" firstAttribute="trailing" secondItem="e4D-8i-8tJ" secondAttribute="trailing" constant="16" id="LDq-eL-R2K"/>
                 <constraint firstItem="SiQ-0y-8vH" firstAttribute="bottom" secondItem="e4D-8i-8tJ" secondAttribute="bottom" constant="10" id="Ynx-sm-MLh"/>
                 <constraint firstItem="0ct-It-9uw" firstAttribute="top" secondItem="SiQ-0y-8vH" secondAttribute="top" id="a6u-vL-d6A"/>
-                <constraint firstItem="0ct-It-9uw" firstAttribute="leading" secondItem="VUJ-2J-bpm" secondAttribute="leading" id="bKn-Kf-I7F"/>
-                <constraint firstAttribute="trailing" secondItem="0ct-It-9uw" secondAttribute="trailing" id="xl7-AR-mqv"/>
+                <constraint firstItem="0ct-It-9uw" firstAttribute="leading" secondItem="SiQ-0y-8vH" secondAttribute="leading" id="bKn-Kf-I7F"/>
+                <constraint firstItem="SiQ-0y-8vH" firstAttribute="trailing" secondItem="0ct-It-9uw" secondAttribute="trailing" id="xl7-AR-mqv"/>
             </constraints>
             <point key="canvasLocation" x="23.664122137404579" y="97.183098591549296"/>
         </view>

@@ -91,6 +91,12 @@
 		F49A40EF2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A40ED2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.m */; };
 		F49A40F02B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A40EE2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.xib */; };
 		F49A40F32B4BF1CE0049DF6D /* FWRegisterUserinfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A40F22B4BF1CE0049DF6D /* FWRegisterUserinfoViewModel.m */; };
+		F49A41062B5522760049DF6D /* FWBaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41052B5522760049DF6D /* FWBaseTabBarViewController.m */; };
+		F49A410E2B5523650049DF6D /* FWAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A410C2B5523650049DF6D /* FWAccountViewController.m */; };
+		F49A410F2B5523650049DF6D /* FWAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A410D2B5523650049DF6D /* FWAccountViewController.xib */; };
+		F49A41122B5523840049DF6D /* FWAccountViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41112B5523840049DF6D /* FWAccountViewModel.m */; };
+		F49A41152B5523BE0049DF6D /* FWAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41142B5523BE0049DF6D /* FWAccountModel.m */; };
+		F49A41172B55286A0049DF6D /* Tabbar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F49A41162B55286A0049DF6D /* Tabbar.xcassets */; };
 		F49B1E56287EB14000D1CA6E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E55287EB14000D1CA6E /* CoreGraphics.framework */; };
 		F49B1E58287EB14900D1CA6E /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E57287EB14900D1CA6E /* CoreML.framework */; };
 		F49B1E5A287EB14F00D1CA6E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E59287EB14F00D1CA6E /* Accelerate.framework */; };
@@ -307,6 +313,16 @@
 		F49A40EE2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWRegisterUserinfoViewController.xib; sourceTree = "<group>"; };
 		F49A40F12B4BF1CE0049DF6D /* FWRegisterUserinfoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRegisterUserinfoViewModel.h; sourceTree = "<group>"; };
 		F49A40F22B4BF1CE0049DF6D /* FWRegisterUserinfoViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRegisterUserinfoViewModel.m; sourceTree = "<group>"; };
+		F49A41042B5522760049DF6D /* FWBaseTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWBaseTabBarViewController.h; sourceTree = "<group>"; };
+		F49A41052B5522760049DF6D /* FWBaseTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWBaseTabBarViewController.m; sourceTree = "<group>"; };
+		F49A410B2B5523650049DF6D /* FWAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWAccountViewController.h; sourceTree = "<group>"; };
+		F49A410C2B5523650049DF6D /* FWAccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWAccountViewController.m; sourceTree = "<group>"; };
+		F49A410D2B5523650049DF6D /* FWAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWAccountViewController.xib; sourceTree = "<group>"; };
+		F49A41102B5523840049DF6D /* FWAccountViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWAccountViewModel.h; sourceTree = "<group>"; };
+		F49A41112B5523840049DF6D /* FWAccountViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWAccountViewModel.m; sourceTree = "<group>"; };
+		F49A41132B5523BE0049DF6D /* FWAccountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWAccountModel.h; sourceTree = "<group>"; };
+		F49A41142B5523BE0049DF6D /* FWAccountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWAccountModel.m; sourceTree = "<group>"; };
+		F49A41162B55286A0049DF6D /* Tabbar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Tabbar.xcassets; sourceTree = "<group>"; };
 		F49B1E55287EB14000D1CA6E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F49B1E57287EB14900D1CA6E /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
 		F49B1E59287EB14F00D1CA6E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -537,6 +553,7 @@
 			children = (
 				F40B5D2A26C27D0A00F42370 /* AppIcon.xcassets */,
 				F4219D2129AC88510069483A /* Login.xcassets */,
+				F49A41162B55286A0049DF6D /* Tabbar.xcassets */,
 				F43CDA9226C69EEE00FBB94D /* Home.xcassets */,
 				F4DA7C8A27279E62003FDE9B /* Common.xcassets */,
 				F45C830B27D6F50D008EEA31 /* Room.xcassets */,
@@ -613,6 +630,7 @@
 				F40B618426C27D0C00F42370 /* Base */,
 				F43AD8502728EE690056B3EE /* Login */,
 				F40B634426C2933500F42370 /* Home */,
+				F49A41072B5523350049DF6D /* Account */,
 				F4219D2D29AD9DFA0069483A /* Message */,
 				F4DA7C132726DB78003FDE9B /* Room */,
 			);
@@ -624,6 +642,8 @@
 			children = (
 				F40B618A26C27D0C00F42370 /* FWBaseNavigationViewController.h */,
 				F40B618726C27D0C00F42370 /* FWBaseNavigationViewController.m */,
+				F49A41042B5522760049DF6D /* FWBaseTabBarViewController.h */,
+				F49A41052B5522760049DF6D /* FWBaseTabBarViewController.m */,
 				F40B618826C27D0C00F42370 /* FWBaseViewController.h */,
 				F40B618626C27D0C00F42370 /* FWBaseViewController.m */,
 				F482EF1829B885D900815C9C /* FWBaseEmptyView.h */,
@@ -880,6 +900,44 @@
 			path = LogTraceBridge;
 			sourceTree = "<group>";
 		};
+		F49A41072B5523350049DF6D /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				F49A41092B5523350049DF6D /* Model */,
+				F49A410A2B5523350049DF6D /* View */,
+				F49A41082B5523350049DF6D /* ViewModel */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		F49A41082B5523350049DF6D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F49A41102B5523840049DF6D /* FWAccountViewModel.h */,
+				F49A41112B5523840049DF6D /* FWAccountViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F49A41092B5523350049DF6D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F49A41132B5523BE0049DF6D /* FWAccountModel.h */,
+				F49A41142B5523BE0049DF6D /* FWAccountModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F49A410A2B5523350049DF6D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F49A410B2B5523650049DF6D /* FWAccountViewController.h */,
+				F49A410C2B5523650049DF6D /* FWAccountViewController.m */,
+				F49A410D2B5523650049DF6D /* FWAccountViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F4AA7798288AA21900EBC0E7 /* MeetingBroadcastUpload */ = {
 			isa = PBXGroup;
 			children = (
@@ -1061,6 +1119,7 @@
 				F43CDA9326C69EEE00FBB94D /* Home.xcassets in Resources */,
 				F49A40F02B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.xib in Resources */,
 				F4DA7C8B27279E62003FDE9B /* Common.xcassets in Resources */,
+				F49A410F2B5523650049DF6D /* FWAccountViewController.xib in Resources */,
 				F40B619D26C27D0C00F42370 /* AppIcon.xcassets in Resources */,
 				F4219D4829ADB1850069483A /* FWMessageTableViewCell.xib in Resources */,
 				F4219D7629AF21B10069483A /* FWRoomMainView.xib in Resources */,
@@ -1074,6 +1133,7 @@
 				F4219D8829B04C130069483A /* FWRoomMemberCollectionViewCell.xib in Resources */,
 				F4219D3E29ADAFBB0069483A /* FWMessageTableSectionHeaderView.xib in Resources */,
 				F4219D7129AF05DD0069483A /* FWRoomBottomView.xib in Resources */,
+				F49A41172B55286A0049DF6D /* Tabbar.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1238,7 +1298,9 @@
 				F40B634826C2936C00F42370 /* FWHomeViewController.m in Sources */,
 				F4219D8B29B055AD0069483A /* FWRoomMemberModel.m in Sources */,
 				F482EEFB29B6D15200815C9C /* FWNetworkBridge.m in Sources */,
+				F49A41152B5523BE0049DF6D /* FWAccountModel.m in Sources */,
 				F482EEFE29B6D2D100815C9C /* FWInterfaces.m in Sources */,
+				F49A41062B5522760049DF6D /* FWBaseTabBarViewController.m in Sources */,
 				F47A3B5627D1F0FA00C88F2C /* FWStoreDataBridge.m in Sources */,
 				F482EEF829B6D0F500815C9C /* FWBaseModel.m in Sources */,
 				F4219D6629AEF6A30069483A /* FWRoomViewController.m in Sources */,
@@ -1250,6 +1312,7 @@
 				F482EF0529B6E1CC00815C9C /* FWAuthToken.m in Sources */,
 				F40B633C26C27D0D00F42370 /* FWBaseNavigationViewController.m in Sources */,
 				F4219D6A29AF05C10069483A /* FWRoomTopView.m in Sources */,
+				F49A410E2B5523650049DF6D /* FWAccountViewController.m in Sources */,
 				F40B61A526C27D0C00F42370 /* FWAppDelegate.m in Sources */,
 				F482EF2E29BF286A00815C9C /* FWLogTraceBridge.m in Sources */,
 				F4219D3929ADABAB0069483A /* UITextView+AutoHeight.m in Sources */,
@@ -1257,6 +1320,7 @@
 				F482EF0229B6DF9900815C9C /* FWToolBridge.m in Sources */,
 				F4219D4229ADB1760069483A /* FWMessageMineTableViewCell.m in Sources */,
 				F429AC672B456957003D127D /* FWRegisterViewController.m in Sources */,
+				F49A41122B5523840049DF6D /* FWAccountViewModel.m in Sources */,
 				F4219D5829ADE8790069483A /* FWMessageViewModel.m in Sources */,
 				F43AD8592728EF4D0056B3EE /* FWEntryBridge.m in Sources */,
 				F40B61A426C27D0C00F42370 /* main.m in Sources */,

@@ -7,8 +7,8 @@
 //
 
 #import "FWEntryBridge.h"
-#import "FWHomeViewController.h"
 #import "FWLoginViewController.h"
+#import "FWBaseTabBarViewController.h"
 #import "FWBaseNavigationViewController.h"
 
 @interface FWEntryBridge()
@@ -67,10 +67,9 @@
 /// 设置根视图为主功能模块(登录状态下)
 - (void)setWindowRootHome {
     
-    FWBaseNavigationViewController *navigation = [[FWBaseNavigationViewController alloc] initWithRootViewController:[[FWHomeViewController alloc] init]];
-    [navigation setNavigationBarHidden:YES animated:YES];
+    FWBaseTabBarViewController *tabBar = [[FWBaseTabBarViewController alloc] initTabBarViewController];
     [UIView transitionWithView:[self appDelegate].window duration:0.5f options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
-        [self appDelegate].window.rootViewController = navigation;
+        [self appDelegate].window.rootViewController = tabBar;
     } completion:nil];
 }
 
