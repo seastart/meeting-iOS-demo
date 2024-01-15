@@ -34,6 +34,10 @@
         appearance.backgroundColor = [UIColor whiteColor];
         /// 更改阴影颜色为透明色
         appearance.shadowColor = [UIColor clearColor];
+        /// 更改常规模式标题样式
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:10.0], NSForegroundColorAttributeName:RGBOF(0x0039B3)};
+        /// 更改选中模式标题样式
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:10.0], NSForegroundColorAttributeName:RGBOF(0x999999)};
         /// 重置标准外观
         self.tabBar.standardAppearance = appearance;
         /// 重置滚动边缘外观
@@ -126,6 +130,5 @@
     
     return YES;
 }
-
 
 @end
