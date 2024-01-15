@@ -7,16 +7,20 @@
 //
 
 #import "FWHomeViewController.h"
+#import "FWHomeTableViewCell.h"
 #import "FWHomeViewModel.h"
+
+/// 列表头部高度
+#define kFWHomeTableSectionHeaderViewH 10.0
+/// 列表项目高度
+#define kFWHomeTableCellHeaderViewH 128.0
+/// 列表项目数据
+#define kFWHomeItemList @[@{@"type" : @(1), @"imageName" : @"icon_home_itembg", @"title" : NSLocalizedString(@"多人音视频房间", nil), @"describe" : NSLocalizedString(@"适用于视频会议", nil)}]
 
 @interface FWHomeViewController ()
 
-/// 房间号码
-@property (weak, nonatomic) IBOutlet UITextField *roomNoTextField;
-/// 加入房间按钮
-@property (weak, nonatomic) IBOutlet UIButton *joinRoomButton;
-/// 退出登录按钮
-@property (weak, nonatomic) IBOutlet UIButton *logoutButton;
+/// tableView
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 /// ViewModel
 @property (strong, nonatomic) FWHomeViewModel *viewModel;
@@ -58,7 +62,6 @@
     
     /// 设置标题
     self.navigationItem.title = NSLocalizedString(@"海星音视频", nil);
-    self.roomNoTextField.text = [[FWStoreDataBridge sharedManager] getRoomNo];
 }
 
 #pragma mark - 设置ViewModel
@@ -75,13 +78,7 @@
 /// 绑定信号
 - (void)bindSignal {
     
-    @weakify(self);
-    
-    /// 监听房间号码
-    [self.roomNoTextField.rac_textSignal subscribeNext:^(NSString * _Nullable text) {
-        @strongify(self);
-        self.viewModel.roomNoText = [FWToolBridge clearMarginsBlank:text];
-    }];
+    /// @weakify(self);
     
     /// 监听订阅加载状态
     [RACObserve(self.viewModel, loading) subscribeNext:^(NSNumber * _Nullable value) {
@@ -98,68 +95,87 @@
             [FWToastBridge showToastAction:message];
         }
     }];
-    
-    /// 加入房间订阅
-    [self.viewModel.joinRoomSubject subscribeNext:^(id _Nullable value) {
-        @strongify(self);
-        /// 加入房间
-        [self joinRoomWithRoomNo:value];
-    }];
-    
-    /// 退出登录订阅
-    [self.viewModel.logoutSubject subscribeNext:^(id _Nullable value) {
-        /// 设置根视图为登录模块
-        [[FWEntryBridge sharedManager] setWindowRootEntry];
-    }];
-    
-    /// 绑定加入房间按钮事件
-    [[self.joinRoomButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
-        @strongify(self);
-        /// 调整按钮激活状态
-        self.joinRoomButton.enabled = NO;
-        /// 加入房间事件
-        [self.viewModel onJoinRoomEvent];
-        /// 延迟重置按钮激活状态
-        FWDispatchAfter((int64_t)(1.5 * NSEC_PER_SEC), ^{
-            self.joinRoomButton.enabled = YES;
-        });
-    }];
-    
-    /// 绑定退出登录按钮事件
-    [[self.logoutButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
-        @strongify(self);
-        /// 退出登录对话框
-        [self logoutAlert];
-    }];
 }
 
-#pragma mark - 退出登录对话框
-/// 退出登录对话框
-- (void)logoutAlert {
+#pragma mark ------- TableView的代理方法 -------
+#pragma mark 分组数
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    @weakify(self);
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"您确定退出登录吗？" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-    }];
-    UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"退出登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
-        @strongify(self);
-        /// 销毁用户信息
-        [[FWStoreDataBridge sharedManager] logout];
-        /// 退出登录事件
-        [self.viewModel onLogoutEvent];
-    }];
-    [alert addAction:cancelAction];
-    [alert addAction:ensureAction];
-    [self presentViewController:alert animated:YES completion:nil];
+    return 1;
 }
 
-#pragma mark - 加入房间
-/// 加入房间
-/// @param roomNo 房间号码
-- (void)joinRoomWithRoomNo:(NSString * _Nonnull)roomNo {
+#pragma mark 行数
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    /// 跳转房间页面
-    [self push:@"FWRoomViewController" info:roomNo block:nil];
+    return kFWHomeItemList.count;
+}
+
+#pragma mark 菜单头部高度
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    return kFWHomeTableSectionHeaderViewH;
+}
+
+#pragma mark 自定义分组头部
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    static NSString *hIdentifier = @"kFWHomeTableSectionHeaderViewIdentifier";
+    UITableViewHeaderFooterView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:hIdentifier];
+    if(header == nil) {
+        header = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:hIdentifier];
+    }
+    header.contentView.backgroundColor = [UIColor clearColor];
+    return header;
+}
+
+#pragma mark 每个项目高度
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return kFWHomeTableCellHeaderViewH;
+}
+
+#pragma mark 初始化项目
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    FWHomeTableViewCell *rCell = [FWHomeTableViewCell cellWithTableView:tableView];
+    [self configHomeCell:rCell atIndexPath:indexPath];
+    return rCell;
+}
+
+#pragma mark 设置项目内容
+- (void)configHomeCell:(FWHomeTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    /// 获取项目数据
+    NSDictionary *itemDic = [kFWHomeItemList objectAtIndex:indexPath.row];
+    /// 设置项目内容
+    [cell setupWithImageName:[itemDic objectForKey:@"imageName"] titleText:[itemDic objectForKey:@"title"] describeText:[itemDic objectForKey:@"describe"]];
+}
+
+#pragma mark 项目点击事件
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    /// 获取项目数据
+    NSDictionary *itemDic = [kFWHomeItemList objectAtIndex:indexPath.row];
+    /// 获取项目类型
+    NSInteger type = [[itemDic objectForKey:@"type"] integerValue];
+    
+}
+
+#pragma mark - 处理项目点击事件
+/// 处理项目点击事件
+/// - Parameter type: 项目类型
+- (void)handleSelectRowWithType:(NSInteger)type {
+    
+    switch (type) {
+        case 1:
+            /// 跳转房间页面
+            [self push:@"FWRoomViewController" block:nil];
+            break;
+        default:
+            break;
+    }
 }
 
 @end

@@ -97,6 +97,8 @@
 		F49A41122B5523840049DF6D /* FWAccountViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41112B5523840049DF6D /* FWAccountViewModel.m */; };
 		F49A41152B5523BE0049DF6D /* FWAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41142B5523BE0049DF6D /* FWAccountModel.m */; };
 		F49A41172B55286A0049DF6D /* Tabbar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F49A41162B55286A0049DF6D /* Tabbar.xcassets */; };
+		F49A411B2B55399F0049DF6D /* FWHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41192B55399F0049DF6D /* FWHomeTableViewCell.m */; };
+		F49A411C2B55399F0049DF6D /* FWHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A411A2B55399F0049DF6D /* FWHomeTableViewCell.xib */; };
 		F49B1E56287EB14000D1CA6E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E55287EB14000D1CA6E /* CoreGraphics.framework */; };
 		F49B1E58287EB14900D1CA6E /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E57287EB14900D1CA6E /* CoreML.framework */; };
 		F49B1E5A287EB14F00D1CA6E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E59287EB14F00D1CA6E /* Accelerate.framework */; };
@@ -323,6 +325,9 @@
 		F49A41132B5523BE0049DF6D /* FWAccountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWAccountModel.h; sourceTree = "<group>"; };
 		F49A41142B5523BE0049DF6D /* FWAccountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWAccountModel.m; sourceTree = "<group>"; };
 		F49A41162B55286A0049DF6D /* Tabbar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Tabbar.xcassets; sourceTree = "<group>"; };
+		F49A41182B55399F0049DF6D /* FWHomeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWHomeTableViewCell.h; sourceTree = "<group>"; };
+		F49A41192B55399F0049DF6D /* FWHomeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWHomeTableViewCell.m; sourceTree = "<group>"; };
+		F49A411A2B55399F0049DF6D /* FWHomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWHomeTableViewCell.xib; sourceTree = "<group>"; };
 		F49B1E55287EB14000D1CA6E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F49B1E57287EB14900D1CA6E /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
 		F49B1E59287EB14F00D1CA6E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -799,6 +804,9 @@
 				F40B634526C2936C00F42370 /* FWHomeViewController.h */,
 				F40B634626C2936C00F42370 /* FWHomeViewController.m */,
 				F40B634726C2936C00F42370 /* FWHomeViewController.xib */,
+				F49A41182B55399F0049DF6D /* FWHomeTableViewCell.h */,
+				F49A41192B55399F0049DF6D /* FWHomeTableViewCell.m */,
+				F49A411A2B55399F0049DF6D /* FWHomeTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1124,6 +1132,7 @@
 				F4219D4829ADB1850069483A /* FWMessageTableViewCell.xib in Resources */,
 				F4219D7629AF21B10069483A /* FWRoomMainView.xib in Resources */,
 				F43AD8552728EE8B0056B3EE /* FWLoginViewController.xib in Resources */,
+				F49A411C2B55399F0049DF6D /* FWHomeTableViewCell.xib in Resources */,
 				F4219D6C29AF05C80069483A /* FWRoomTopView.xib in Resources */,
 				F482EEF429B5DA6600815C9C /* FWRoomCaptureView.xib in Resources */,
 				F4219D3229AD9E270069483A /* FWMessageViewController.xib in Resources */,
@@ -1297,6 +1306,7 @@
 				F43AD83D2727F1780056B3EE /* FWHomeViewModel.m in Sources */,
 				F40B634826C2936C00F42370 /* FWHomeViewController.m in Sources */,
 				F4219D8B29B055AD0069483A /* FWRoomMemberModel.m in Sources */,
+				F49A411B2B55399F0049DF6D /* FWHomeTableViewCell.m in Sources */,
 				F482EEFB29B6D15200815C9C /* FWNetworkBridge.m in Sources */,
 				F49A41152B5523BE0049DF6D /* FWAccountModel.m in Sources */,
 				F482EEFE29B6D2D100815C9C /* FWInterfaces.m in Sources */,
