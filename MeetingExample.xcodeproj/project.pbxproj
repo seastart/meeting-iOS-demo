@@ -99,6 +99,15 @@
 		F49A41172B55286A0049DF6D /* Tabbar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F49A41162B55286A0049DF6D /* Tabbar.xcassets */; };
 		F49A411B2B55399F0049DF6D /* FWHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41192B55399F0049DF6D /* FWHomeTableViewCell.m */; };
 		F49A411C2B55399F0049DF6D /* FWHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A411A2B55399F0049DF6D /* FWHomeTableViewCell.xib */; };
+		F49A41242B565D8B0049DF6D /* FWMeetingEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41222B565D8B0049DF6D /* FWMeetingEntryViewController.m */; };
+		F49A41252B565D8B0049DF6D /* FWMeetingEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A41232B565D8B0049DF6D /* FWMeetingEntryViewController.xib */; };
+		F49A41282B565DE40049DF6D /* FWMeetingEntryViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41272B565DE40049DF6D /* FWMeetingEntryViewModel.m */; };
+		F49A412B2B565DFD0049DF6D /* FWMeetingEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A412A2B565DFD0049DF6D /* FWMeetingEntryModel.m */; };
+		F49A412D2B565EB70049DF6D /* Meeting.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F49A412C2B565EB70049DF6D /* Meeting.xcassets */; };
+		F49A41312B56669B0049DF6D /* FWMeetingCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A412F2B56669B0049DF6D /* FWMeetingCreateViewController.m */; };
+		F49A41322B56669B0049DF6D /* FWMeetingCreateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A41302B56669B0049DF6D /* FWMeetingCreateViewController.xib */; };
+		F49A41362B5666FC0049DF6D /* FWMeetingAttendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41342B5666FC0049DF6D /* FWMeetingAttendViewController.m */; };
+		F49A41372B5666FC0049DF6D /* FWMeetingAttendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A41352B5666FC0049DF6D /* FWMeetingAttendViewController.xib */; };
 		F49B1E56287EB14000D1CA6E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E55287EB14000D1CA6E /* CoreGraphics.framework */; };
 		F49B1E58287EB14900D1CA6E /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E57287EB14900D1CA6E /* CoreML.framework */; };
 		F49B1E5A287EB14F00D1CA6E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E59287EB14F00D1CA6E /* Accelerate.framework */; };
@@ -328,6 +337,20 @@
 		F49A41182B55399F0049DF6D /* FWHomeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWHomeTableViewCell.h; sourceTree = "<group>"; };
 		F49A41192B55399F0049DF6D /* FWHomeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWHomeTableViewCell.m; sourceTree = "<group>"; };
 		F49A411A2B55399F0049DF6D /* FWHomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWHomeTableViewCell.xib; sourceTree = "<group>"; };
+		F49A41212B565D8B0049DF6D /* FWMeetingEntryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMeetingEntryViewController.h; sourceTree = "<group>"; };
+		F49A41222B565D8B0049DF6D /* FWMeetingEntryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMeetingEntryViewController.m; sourceTree = "<group>"; };
+		F49A41232B565D8B0049DF6D /* FWMeetingEntryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWMeetingEntryViewController.xib; sourceTree = "<group>"; };
+		F49A41262B565DE40049DF6D /* FWMeetingEntryViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMeetingEntryViewModel.h; sourceTree = "<group>"; };
+		F49A41272B565DE40049DF6D /* FWMeetingEntryViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMeetingEntryViewModel.m; sourceTree = "<group>"; };
+		F49A41292B565DFD0049DF6D /* FWMeetingEntryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMeetingEntryModel.h; sourceTree = "<group>"; };
+		F49A412A2B565DFD0049DF6D /* FWMeetingEntryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMeetingEntryModel.m; sourceTree = "<group>"; };
+		F49A412C2B565EB70049DF6D /* Meeting.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Meeting.xcassets; sourceTree = "<group>"; };
+		F49A412E2B56669B0049DF6D /* FWMeetingCreateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMeetingCreateViewController.h; sourceTree = "<group>"; };
+		F49A412F2B56669B0049DF6D /* FWMeetingCreateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMeetingCreateViewController.m; sourceTree = "<group>"; };
+		F49A41302B56669B0049DF6D /* FWMeetingCreateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWMeetingCreateViewController.xib; sourceTree = "<group>"; };
+		F49A41332B5666FC0049DF6D /* FWMeetingAttendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMeetingAttendViewController.h; sourceTree = "<group>"; };
+		F49A41342B5666FC0049DF6D /* FWMeetingAttendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMeetingAttendViewController.m; sourceTree = "<group>"; };
+		F49A41352B5666FC0049DF6D /* FWMeetingAttendViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWMeetingAttendViewController.xib; sourceTree = "<group>"; };
 		F49B1E55287EB14000D1CA6E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F49B1E57287EB14900D1CA6E /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
 		F49B1E59287EB14F00D1CA6E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -557,10 +580,11 @@
 			isa = PBXGroup;
 			children = (
 				F40B5D2A26C27D0A00F42370 /* AppIcon.xcassets */,
+				F4DA7C8A27279E62003FDE9B /* Common.xcassets */,
 				F4219D2129AC88510069483A /* Login.xcassets */,
 				F49A41162B55286A0049DF6D /* Tabbar.xcassets */,
 				F43CDA9226C69EEE00FBB94D /* Home.xcassets */,
-				F4DA7C8A27279E62003FDE9B /* Common.xcassets */,
+				F49A412C2B565EB70049DF6D /* Meeting.xcassets */,
 				F45C830B27D6F50D008EEA31 /* Room.xcassets */,
 			);
 			path = Assets;
@@ -635,6 +659,7 @@
 				F40B618426C27D0C00F42370 /* Base */,
 				F43AD8502728EE690056B3EE /* Login */,
 				F40B634426C2933500F42370 /* Home */,
+				F49A411D2B565CBC0049DF6D /* Meeting */,
 				F49A41072B5523350049DF6D /* Account */,
 				F4219D2D29AD9DFA0069483A /* Message */,
 				F4DA7C132726DB78003FDE9B /* Room */,
@@ -946,6 +971,50 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		F49A411D2B565CBC0049DF6D /* Meeting */ = {
+			isa = PBXGroup;
+			children = (
+				F49A411F2B565CBC0049DF6D /* Model */,
+				F49A41202B565CBC0049DF6D /* View */,
+				F49A411E2B565CBC0049DF6D /* ViewModel */,
+			);
+			path = Meeting;
+			sourceTree = "<group>";
+		};
+		F49A411E2B565CBC0049DF6D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F49A41262B565DE40049DF6D /* FWMeetingEntryViewModel.h */,
+				F49A41272B565DE40049DF6D /* FWMeetingEntryViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F49A411F2B565CBC0049DF6D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F49A41292B565DFD0049DF6D /* FWMeetingEntryModel.h */,
+				F49A412A2B565DFD0049DF6D /* FWMeetingEntryModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F49A41202B565CBC0049DF6D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F49A41212B565D8B0049DF6D /* FWMeetingEntryViewController.h */,
+				F49A41222B565D8B0049DF6D /* FWMeetingEntryViewController.m */,
+				F49A41232B565D8B0049DF6D /* FWMeetingEntryViewController.xib */,
+				F49A412E2B56669B0049DF6D /* FWMeetingCreateViewController.h */,
+				F49A412F2B56669B0049DF6D /* FWMeetingCreateViewController.m */,
+				F49A41302B56669B0049DF6D /* FWMeetingCreateViewController.xib */,
+				F49A41332B5666FC0049DF6D /* FWMeetingAttendViewController.h */,
+				F49A41342B5666FC0049DF6D /* FWMeetingAttendViewController.m */,
+				F49A41352B5666FC0049DF6D /* FWMeetingAttendViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F4AA7798288AA21900EBC0E7 /* MeetingBroadcastUpload */ = {
 			isa = PBXGroup;
 			children = (
@@ -1121,6 +1190,8 @@
 				F40B634326C292DB00F42370 /* LaunchScreen.storyboard in Resources */,
 				F4219D2229AC88510069483A /* Login.xcassets in Resources */,
 				F4219D6729AEF6A30069483A /* FWRoomViewController.xib in Resources */,
+				F49A41372B5666FC0049DF6D /* FWMeetingAttendViewController.xib in Resources */,
+				F49A412D2B565EB70049DF6D /* Meeting.xcassets in Resources */,
 				F4219D7B29AF22650069483A /* FWRoomStatusView.xib in Resources */,
 				F40B633F26C2901F00F42370 /* MeetingExample-Info.plist in Resources */,
 				F45C830C27D6F50D008EEA31 /* Room.xcassets in Resources */,
@@ -1132,7 +1203,9 @@
 				F4219D4829ADB1850069483A /* FWMessageTableViewCell.xib in Resources */,
 				F4219D7629AF21B10069483A /* FWRoomMainView.xib in Resources */,
 				F43AD8552728EE8B0056B3EE /* FWLoginViewController.xib in Resources */,
+				F49A41252B565D8B0049DF6D /* FWMeetingEntryViewController.xib in Resources */,
 				F49A411C2B55399F0049DF6D /* FWHomeTableViewCell.xib in Resources */,
+				F49A41322B56669B0049DF6D /* FWMeetingCreateViewController.xib in Resources */,
 				F4219D6C29AF05C80069483A /* FWRoomTopView.xib in Resources */,
 				F482EEF429B5DA6600815C9C /* FWRoomCaptureView.xib in Resources */,
 				F4219D3229AD9E270069483A /* FWMessageViewController.xib in Resources */,
@@ -1290,7 +1363,9 @@
 				F4219D4B29ADCE440069483A /* FWMessageChatManager.m in Sources */,
 				F4219D8729B04C130069483A /* FWRoomMemberCollectionViewCell.m in Sources */,
 				F4219D2C29AD988C0069483A /* CALayer+Extension.m in Sources */,
+				F49A412B2B565DFD0049DF6D /* FWMeetingEntryModel.m in Sources */,
 				F40B633B26C27D0D00F42370 /* FWBaseViewController.m in Sources */,
+				F49A41362B5666FC0049DF6D /* FWMeetingAttendViewController.m in Sources */,
 				F482EF3129C08EC700815C9C /* FWRoomExtendModel.m in Sources */,
 				F43AD83A2727EE670056B3EE /* FWConstants.m in Sources */,
 				F4219D6F29AF05D70069483A /* FWRoomBottomView.m in Sources */,
@@ -1310,6 +1385,7 @@
 				F482EEFB29B6D15200815C9C /* FWNetworkBridge.m in Sources */,
 				F49A41152B5523BE0049DF6D /* FWAccountModel.m in Sources */,
 				F482EEFE29B6D2D100815C9C /* FWInterfaces.m in Sources */,
+				F49A41282B565DE40049DF6D /* FWMeetingEntryViewModel.m in Sources */,
 				F49A41062B5522760049DF6D /* FWBaseTabBarViewController.m in Sources */,
 				F47A3B5627D1F0FA00C88F2C /* FWStoreDataBridge.m in Sources */,
 				F482EEF829B6D0F500815C9C /* FWBaseModel.m in Sources */,
@@ -1317,6 +1393,7 @@
 				F482EF2729BEE17C00815C9C /* FWBuglyBridge.m in Sources */,
 				F4C417C029B1A85900A7EBCB /* FWTimerBridge.m in Sources */,
 				F482EF3429C4187F00815C9C /* NSString+Extension.m in Sources */,
+				F49A41242B565D8B0049DF6D /* FWMeetingEntryViewController.m in Sources */,
 				F4219D5529ADD78E0069483A /* UIView+Extension.m in Sources */,
 				F4219D5229ADD2530069483A /* FWDateBridge.m in Sources */,
 				F482EF0529B6E1CC00815C9C /* FWAuthToken.m in Sources */,
@@ -1331,6 +1408,7 @@
 				F4219D4229ADB1760069483A /* FWMessageMineTableViewCell.m in Sources */,
 				F429AC672B456957003D127D /* FWRegisterViewController.m in Sources */,
 				F49A41122B5523840049DF6D /* FWAccountViewModel.m in Sources */,
+				F49A41312B56669B0049DF6D /* FWMeetingCreateViewController.m in Sources */,
 				F4219D5829ADE8790069483A /* FWMessageViewModel.m in Sources */,
 				F43AD8592728EF4D0056B3EE /* FWEntryBridge.m in Sources */,
 				F40B61A426C27D0C00F42370 /* main.m in Sources */,

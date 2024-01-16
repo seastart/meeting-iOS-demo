@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FWMeetingEntryViewController">
+            <connections>
+                <outlet property="createdButton" destination="v22-CH-hGE" id="hXH-6T-Z5Z"/>
+                <outlet property="joinButton" destination="ckK-7e-8tS" id="xMx-Ir-Uuy"/>
+                <outlet property="view" destination="gm2-c0-5VP" id="mPv-kR-vGM"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="gm2-c0-5VP">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_meeting_entry_thumbnail" translatesAutoresizingMaskIntoConstraints="NO" id="QSo-hA-HKD">
+                    <rect key="frame" x="20" y="78.999999999999986" width="353" height="178.66666666666663"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v22-CH-hGE">
+                    <rect key="frame" x="32" y="670" width="329" height="44"/>
+                    <color key="backgroundColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="8hL-CS-7SF"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="tintColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="创建房间">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <state key="selected">
+                        <color key="titleColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ckK-7e-8tS">
+                    <rect key="frame" x="32" y="734" width="329" height="44"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="J1Y-zw-qkK"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="tintColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="加入房间">
+                        <color key="titleColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="selected">
+                        <color key="titleColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="ut3-HH-8Vj"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="ut3-HH-8Vj" firstAttribute="bottom" secondItem="ckK-7e-8tS" secondAttribute="bottom" constant="40" id="7Ye-cq-qB6"/>
+                <constraint firstItem="ckK-7e-8tS" firstAttribute="top" secondItem="v22-CH-hGE" secondAttribute="bottom" constant="20" id="FJ6-H2-FOa"/>
+                <constraint firstItem="v22-CH-hGE" firstAttribute="leading" secondItem="ut3-HH-8Vj" secondAttribute="leading" constant="32" id="Hor-v7-Vfc"/>
+                <constraint firstItem="ut3-HH-8Vj" firstAttribute="trailing" secondItem="ckK-7e-8tS" secondAttribute="trailing" constant="32" id="LlK-OZ-xdJ"/>
+                <constraint firstItem="ckK-7e-8tS" firstAttribute="leading" secondItem="ut3-HH-8Vj" secondAttribute="leading" constant="32" id="aD6-3M-ba2"/>
+                <constraint firstItem="ut3-HH-8Vj" firstAttribute="trailing" secondItem="v22-CH-hGE" secondAttribute="trailing" constant="32" id="kae-2B-dHR"/>
+                <constraint firstItem="ut3-HH-8Vj" firstAttribute="trailing" secondItem="QSo-hA-HKD" secondAttribute="trailing" constant="20" id="myl-50-H5e"/>
+                <constraint firstItem="QSo-hA-HKD" firstAttribute="top" secondItem="ut3-HH-8Vj" secondAttribute="top" constant="20" id="oXh-Cb-TP0"/>
+                <constraint firstItem="QSo-hA-HKD" firstAttribute="leading" secondItem="ut3-HH-8Vj" secondAttribute="leading" constant="20" id="pwd-BF-HZR"/>
+            </constraints>
+            <point key="canvasLocation" x="23.664122137404579" y="97.183098591549296"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_meeting_entry_thumbnail" width="311" height="178.66667175292969"/>
+    </resources>
+</document>

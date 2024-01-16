@@ -171,8 +171,8 @@
     
     switch (type) {
         case FWHomeFunctionTypeMetting:
-            /// 跳转房间页面
-            [self push:@"FWRoomViewController" block:nil];
+            /// 跳转会议入口页面
+            [self push:@"FWMeetingEntryViewController"];
             break;
         default:
             break;
