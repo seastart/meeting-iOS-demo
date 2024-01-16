@@ -15,7 +15,7 @@
 /// 列表项目高度
 #define kFWHomeTableCellHeaderViewH 128.0
 /// 列表项目数据
-#define kFWHomeItemList @[@{@"type" : @(1), @"imageName" : @"icon_home_itembg", @"title" : NSLocalizedString(@"多人音视频房间", nil), @"describe" : NSLocalizedString(@"适用于视频会议", nil)}]
+#define kFWHomeItemList @[@{@"type" : @(FWHomeFunctionTypeMetting), @"imageName" : @"icon_home_itembg", @"title" : NSLocalizedString(@"多人音视频房间", nil), @"describe" : NSLocalizedString(@"适用于视频会议", nil)}]
 
 @interface FWHomeViewController ()
 
@@ -159,17 +159,18 @@
     /// 获取项目数据
     NSDictionary *itemDic = [kFWHomeItemList objectAtIndex:indexPath.row];
     /// 获取项目类型
-    NSInteger type = [[itemDic objectForKey:@"type"] integerValue];
-    
+    FWHomeFunctionType type = (FWHomeFunctionType)[[itemDic objectForKey:@"type"] integerValue];
+    /// 处理项目点击事件
+    [self handleSelectRowWithType:type];
 }
 
 #pragma mark - 处理项目点击事件
 /// 处理项目点击事件
-/// - Parameter type: 项目类型
-- (void)handleSelectRowWithType:(NSInteger)type {
+/// - Parameter type: 功能类型
+- (void)handleSelectRowWithType:(FWHomeFunctionType)type {
     
     switch (type) {
-        case 1:
+        case FWHomeFunctionTypeMetting:
             /// 跳转房间页面
             [self push:@"FWRoomViewController" block:nil];
             break;

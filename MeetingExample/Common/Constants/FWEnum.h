@@ -24,6 +24,16 @@ typedef enum : NSUInteger {
     FWCertificateStateAppStore
 } FWCertificateState;
 
+#pragma mark - 首页功能类型
+/**
+ 首页功能类型
+
+- FWHomeFunctionTypeMetting: 会议类型
+*/
+typedef enum : NSUInteger {
+    FWHomeFunctionTypeMetting
+} FWHomeFunctionType;
+
 @interface FWEnum : NSObject
 
 @end

@@ -22,15 +22,15 @@ NSString * const RTCTERMINALDESC = @"iOS 移动终端";
 #pragma mark - 默认头像地址
 NSString * const FWDEFAULTAVATAR = @"http://assets.sailorhub.cn/avatar.png";
 #pragma mark - 存储手机号码的KEY
-NSString * const FWMOBILEKEY = @"cn.seastart.meetingkit.freewind.mobile";
+NSString * const FWMOBILEKEY = @"cn.seastart.meetingkit.mobile";
 #pragma mark - 存储用户密码的KEY
-NSString * const FWPASSWORDKEY = @"cn.seastart.meetingkit.freewind.password";
+NSString * const FWPASSWORDKEY = @"cn.seastart.meetingkit.password";
 #pragma mark - 存储用户昵称的KEY
-NSString * const FWNICKNAMEKEY = @"cn.seastart.meetingkit.freewind.nickname";
+NSString * const FWNICKNAMEKEY = @"cn.seastart.meetingkit.nickname";
 #pragma mark - 存储房间编号的KEY
-NSString * const FWROOMNOKEY = @"cn.seastart.meetingkit.freewind.roomno";
+NSString * const FWROOMNOKEY = @"cn.seastart.meetingkit.roomno";
 #pragma mark - 屏幕共享结束提示语的KEY
-NSString * const FWSCREENSHARINGENDKEY = @"cn.seastart.meetingkit.freewind.screenend";
+NSString * const FWSCREENSHARINGENDKEY = @"cn.seastart.meetingkit.screenend";
 
 #pragma mark - Bugly异常上报相关
 /// Bugly异常上报APPID
