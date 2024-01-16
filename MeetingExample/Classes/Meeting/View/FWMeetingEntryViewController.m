@@ -57,14 +57,14 @@
     [[self.createdButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
         @strongify(self);
         /// 跳转创建房间页面
-        [self push:@"FWMeetingCreateViewController"];
+        [self push:@"FWMeetingAttendViewController" info:nil tag:FWMeetingEntryTypeCreate block:nil];
     }];
     
     /// 绑定加入房间按钮事件
     [[self.joinButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
         @strongify(self);
         /// 跳转加入房间页面
-        [self push:@"FWMeetingAttendViewController"];
+        [self push:@"FWMeetingAttendViewController" info:nil tag:FWMeetingEntryTypeJoin block:nil];
     }];
 }
 

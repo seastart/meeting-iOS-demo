@@ -34,9 +34,6 @@
                     <state key="normal" title="创建房间">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
-                    <state key="selected">
-                        <color key="titleColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="4"/>
@@ -53,9 +50,6 @@
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="tintColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="加入房间">
-                        <color key="titleColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <state key="selected">
                         <color key="titleColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <userDefinedRuntimeAttributes>

@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  签名证书类型
 
-- FWCertificateStateDebug: Debug版本
-- FWCertificateStateAdhoc: Adhoc版本
-- FWCertificateStateAppStore: AppStore版本
+ - FWCertificateStateDebug: Debug版本
+ - FWCertificateStateAdhoc: Adhoc版本
+ - FWCertificateStateAppStore: AppStore版本
 */
 typedef enum : NSUInteger {
     FWCertificateStateDebug = 1,
@@ -28,11 +28,23 @@ typedef enum : NSUInteger {
 /**
  首页功能类型
 
-- FWHomeFunctionTypeMetting: 会议类型
+ - FWHomeFunctionTypeMetting: 会议类型
 */
 typedef enum : NSUInteger {
     FWHomeFunctionTypeMetting
 } FWHomeFunctionType;
+
+#pragma mark - 会议入口类型
+/**
+ 会议入口类型
+
+ - FWMeetingEntryTypeCreate: 创建房间
+ - FWMeetingEntryTypeJoin: 加入房间
+*/
+typedef enum : NSUInteger {
+    FWMeetingEntryTypeCreate,
+    FWMeetingEntryTypeJoin
+} FWMeetingEntryType;
 
 @interface FWEnum : NSObject
 
