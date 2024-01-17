@@ -149,26 +149,6 @@
     decisionHandler(WKNavigationResponsePolicyAllow);
 }
 
-#pragma mark 跳转到其它服务器
-/// 跳转到其它服务器
-/// - Parameters:
-///   - webView: 网页视图对象
-///   - navigation: 导航对象
-- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
-    
-    SGLOG(@"跳转到其它服务器");
-}
-
-#pragma mark 网页开始接收网页内容
-/// 网页开始接收网页内容
-/// - Parameters:
-///   - webView: 网页视图对象
-///   - navigation: 导航对象
-- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation {
-    
-    SGLOG(@"网页开始接收网页内容");
-}
-
 #pragma mark 网页开始加载
 /// 网页开始加载
 /// - Parameters:
@@ -213,14 +193,6 @@
     
     /// 恢复加载状态
     self.viewModel.loading = NO;
-}
-
-#pragma mark 网页加载内容进程终止
-/// 网页加载内容进程终止
-/// - Parameter webView: 网页视图对象
-- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
-    
-    SGLOG(@"网页加载内容进程终止");
 }
 
 @end
