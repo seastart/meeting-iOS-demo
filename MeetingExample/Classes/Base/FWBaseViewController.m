@@ -274,8 +274,7 @@
 /// 跳转用户协议
 - (void)presentUserAgreement {
     
-    NSString *webpageUrl = @"http://vcs.anyconf.cn:5000/upgrade/protos/agreement.html";
-    SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:webpageUrl]];
+    SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:FWACCOUNTAGREEMENTHOST]];
     [self presentViewController:safariVC animated:YES completion:nil];
 }
 
@@ -283,8 +282,7 @@
 /// 跳转隐私协议
 - (void)presentPrivacyAgreement {
     
-    NSString *webpageUrl = @"https://www.baidu.com";
-    SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:webpageUrl]];
+    SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:FWACCOUNTPRIVACYHOST]];
     [self presentViewController:safariVC animated:YES completion:nil];
 }
 

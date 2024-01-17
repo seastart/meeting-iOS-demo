@@ -24,6 +24,7 @@ typedef enum : NSUInteger {
     FWCertificateStateAppStore
 } FWCertificateState;
 
+
 #pragma mark - 首页功能类型
 /**
  首页功能类型
@@ -33,6 +34,7 @@ typedef enum : NSUInteger {
 typedef enum : NSUInteger {
     FWHomeFunctionTypeMetting
 } FWHomeFunctionType;
+
 
 #pragma mark - 会议入口类型
 /**
@@ -45,6 +47,25 @@ typedef enum : NSUInteger {
     FWMeetingEntryTypeCreate,
     FWMeetingEntryTypeJoin
 } FWMeetingEntryType;
+
+
+#pragma mark - 网页加载类型
+/**
+ 网页加载类型
+
+ - FWAccountWebTypeAssert: 免责声明
+ - FWAccountWebTypePersonal: 个人信息收集清单
+ - FWAccountWebTypeThirdParty: 第三方信息共享清单
+ - FWAccountWebTypeAgreement: 用户协议
+ - FWAccountWebTypePrivacy: 隐私协议
+*/
+typedef enum : NSUInteger {
+    FWAccountWebTypeAssert,
+    FWAccountWebTypePersonal,
+    FWAccountWebTypeThirdParty,
+    FWAccountWebTypeAgreement,
+    FWAccountWebTypePrivacy,
+} FWAccountWebType;
 
 @interface FWEnum : NSObject
 

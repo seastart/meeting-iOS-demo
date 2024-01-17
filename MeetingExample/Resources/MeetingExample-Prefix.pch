@@ -26,6 +26,8 @@
 #import <MeetingKit/MeetingKit.h>
 /// 数据模型
 #import <YYModel/YYModel.h>
+/// 网页组件
+#import <WebKit/WebKit.h>
 /// 异常捕捉
 #import <Bugly/Bugly.h>
 

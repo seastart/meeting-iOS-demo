@@ -32,6 +32,18 @@ NSString * const FWROOMNOKEY = @"cn.seastart.meetingkit.roomno";
 #pragma mark - 屏幕共享结束提示语的KEY
 NSString * const FWSCREENSHARINGENDKEY = @"cn.seastart.meetingkit.screenend";
 
+#pragma mark - 免责协议等地址
+/// 免责声明地址
+NSString * const FWACCOUNTASSERTHOST = @"https://www.pgyer.com";
+/// 个人信息收集清单地址
+NSString * const FWACCOUNTPERSONALHOST = @"https://www.apple.com";
+/// 第三方信息共享清单地址
+NSString * const FWACCOUNTTHIRDPARTYHOST = @"https://developer.apple.com";
+/// 用户协议地址
+NSString * const FWACCOUNTAGREEMENTHOST = @"https://www.jianshu.com";
+/// 隐私协议地址
+NSString * const FWACCOUNTPRIVACYHOST = @"https://www.baidu.com";
+
 #pragma mark - Bugly异常上报相关
 /// Bugly异常上报APPID
 NSString * const FWBUGLYAPPID = @"21acd998ee";

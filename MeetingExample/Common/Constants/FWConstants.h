@@ -32,6 +32,18 @@ FOUNDATION_EXTERN NSString *__nonnull const FWROOMNOKEY;
 #pragma mark - 屏幕共享结束提示语的KEY
 FOUNDATION_EXTERN NSString *__nonnull const FWSCREENSHARINGENDKEY;
 
+#pragma mark - 免责协议等地址
+/// 免责声明地址
+FOUNDATION_EXTERN NSString *__nonnull const FWACCOUNTASSERTHOST;
+/// 个人信息收集清单地址
+FOUNDATION_EXTERN NSString *__nonnull const FWACCOUNTPERSONALHOST;
+/// 第三方信息共享清单地址
+FOUNDATION_EXTERN NSString *__nonnull const FWACCOUNTTHIRDPARTYHOST;
+/// 用户协议地址
+FOUNDATION_EXTERN NSString *__nonnull const FWACCOUNTAGREEMENTHOST;
+/// 隐私协议地址
+FOUNDATION_EXTERN NSString *__nonnull const FWACCOUNTPRIVACYHOST;
+
 #pragma mark - Bugly异常上报相关
 /// Bugly异常上报AppID
 FOUNDATION_EXTERN NSString *__nonnull const FWBUGLYAPPID;

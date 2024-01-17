@@ -51,7 +51,7 @@ static NSString *FWHomeTableViewCellName = @"FWHomeTableViewCell";
 /// - Parameters:
 ///   - imageName: 图片
 ///   - titleText: 标题
-///   - describeText:  描述
+///   - describeText: 描述
 - (void)setupWithImageName:(NSString *)imageName titleText:(NSString *)titleText describeText:(NSString *)describeText {
     
     [self.thumbnailView setImage:kGetImage(imageName)];

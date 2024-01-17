@@ -1,8 +1,8 @@
 //
-//  FWHomeTableViewCell.h
+//  FWAccountPrivacyTableViewCell.h
 //  MeetingExample
 //
-//  Created by SailorGa on 2024/1/15.
+//  Created by SailorGa on 2024/1/17.
 //  Copyright © 2024 SailorGa. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FWHomeTableViewCell : UITableViewCell
+@interface FWAccountPrivacyTableViewCell : UITableViewCell
 
 /// 创建Table View Cell
 /// - Parameter tableView: Table View
@@ -18,10 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 设置项目内容
 /// - Parameters:
-///   - imageName: 图片
 ///   - titleText: 标题
-///   - describeText: 描述
-- (void)setupWithImageName:(NSString *)imageName titleText:(NSString *)titleText describeText:(NSString *)describeText;
+- (void)setupWithTitleText:(NSString *)titleText;
 
 @end
 

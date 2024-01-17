@@ -13,7 +13,7 @@
 /// 列表头部高度
 #define kFWHomeTableSectionHeaderViewH 10.0
 /// 列表项目高度
-#define kFWHomeTableCellHeaderViewH 128.0
+#define kFWHomeTableCellRowViewH 128.0
 /// 列表项目数据
 #define kFWHomeItemList @[@{@"type" : @(FWHomeFunctionTypeMetting), @"imageName" : @"icon_home_itembg", @"title" : NSLocalizedString(@"多人音视频房间", nil), @"describe" : NSLocalizedString(@"适用于视频会议", nil)}]
 
@@ -131,7 +131,7 @@
 #pragma mark 每个项目高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return kFWHomeTableCellHeaderViewH;
+    return kFWHomeTableCellRowViewH;
 }
 
 #pragma mark 初始化项目

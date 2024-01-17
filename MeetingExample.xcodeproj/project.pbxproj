@@ -108,6 +108,19 @@
 		F49A41372B5666FC0049DF6D /* FWMeetingAttendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A41352B5666FC0049DF6D /* FWMeetingAttendViewController.xib */; };
 		F49A413A2B566CD20049DF6D /* FWMeetingAttendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41392B566CD20049DF6D /* FWMeetingAttendModel.m */; };
 		F49A413D2B566CE20049DF6D /* FWMeetingAttendViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A413C2B566CE20049DF6D /* FWMeetingAttendViewModel.m */; };
+		F49A413F2B568F8D0049DF6D /* Account.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F49A413E2B568F8D0049DF6D /* Account.xcassets */; };
+		F49A41432B5780B10049DF6D /* FWAccountInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41412B5780B10049DF6D /* FWAccountInfoViewController.m */; };
+		F49A41442B5780B10049DF6D /* FWAccountInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A41422B5780B10049DF6D /* FWAccountInfoViewController.xib */; };
+		F49A41472B5781140049DF6D /* FWAccountInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41462B5781140049DF6D /* FWAccountInfoViewModel.m */; };
+		F49A414B2B5785070049DF6D /* FWAccountAboutusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41492B5785070049DF6D /* FWAccountAboutusViewController.m */; };
+		F49A414C2B5785070049DF6D /* FWAccountAboutusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A414A2B5785070049DF6D /* FWAccountAboutusViewController.xib */; };
+		F49A41502B57AAB20049DF6D /* FWAccountPrivacyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A414E2B57AAB20049DF6D /* FWAccountPrivacyViewController.m */; };
+		F49A41512B57AAB20049DF6D /* FWAccountPrivacyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A414F2B57AAB20049DF6D /* FWAccountPrivacyViewController.xib */; };
+		F49A41552B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41532B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.m */; };
+		F49A41562B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A41542B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.xib */; };
+		F49A415A2B57B2FB0049DF6D /* FWAccountWebKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A41582B57B2FB0049DF6D /* FWAccountWebKitViewController.m */; };
+		F49A415B2B57B2FB0049DF6D /* FWAccountWebKitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49A41592B57B2FB0049DF6D /* FWAccountWebKitViewController.xib */; };
+		F49A415E2B57B3E40049DF6D /* FWAccountWebKitViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A415D2B57B3E40049DF6D /* FWAccountWebKitViewModel.m */; };
 		F49B1E56287EB14000D1CA6E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E55287EB14000D1CA6E /* CoreGraphics.framework */; };
 		F49B1E58287EB14900D1CA6E /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E57287EB14900D1CA6E /* CoreML.framework */; };
 		F49B1E5A287EB14F00D1CA6E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49B1E59287EB14F00D1CA6E /* Accelerate.framework */; };
@@ -352,6 +365,26 @@
 		F49A41392B566CD20049DF6D /* FWMeetingAttendModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMeetingAttendModel.m; sourceTree = "<group>"; };
 		F49A413B2B566CE20049DF6D /* FWMeetingAttendViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMeetingAttendViewModel.h; sourceTree = "<group>"; };
 		F49A413C2B566CE20049DF6D /* FWMeetingAttendViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMeetingAttendViewModel.m; sourceTree = "<group>"; };
+		F49A413E2B568F8D0049DF6D /* Account.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Account.xcassets; sourceTree = "<group>"; };
+		F49A41402B5780B10049DF6D /* FWAccountInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWAccountInfoViewController.h; sourceTree = "<group>"; };
+		F49A41412B5780B10049DF6D /* FWAccountInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWAccountInfoViewController.m; sourceTree = "<group>"; };
+		F49A41422B5780B10049DF6D /* FWAccountInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWAccountInfoViewController.xib; sourceTree = "<group>"; };
+		F49A41452B5781140049DF6D /* FWAccountInfoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWAccountInfoViewModel.h; sourceTree = "<group>"; };
+		F49A41462B5781140049DF6D /* FWAccountInfoViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWAccountInfoViewModel.m; sourceTree = "<group>"; };
+		F49A41482B5785070049DF6D /* FWAccountAboutusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWAccountAboutusViewController.h; sourceTree = "<group>"; };
+		F49A41492B5785070049DF6D /* FWAccountAboutusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWAccountAboutusViewController.m; sourceTree = "<group>"; };
+		F49A414A2B5785070049DF6D /* FWAccountAboutusViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWAccountAboutusViewController.xib; sourceTree = "<group>"; };
+		F49A414D2B57AAB20049DF6D /* FWAccountPrivacyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWAccountPrivacyViewController.h; sourceTree = "<group>"; };
+		F49A414E2B57AAB20049DF6D /* FWAccountPrivacyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWAccountPrivacyViewController.m; sourceTree = "<group>"; };
+		F49A414F2B57AAB20049DF6D /* FWAccountPrivacyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWAccountPrivacyViewController.xib; sourceTree = "<group>"; };
+		F49A41522B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWAccountPrivacyTableViewCell.h; sourceTree = "<group>"; };
+		F49A41532B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWAccountPrivacyTableViewCell.m; sourceTree = "<group>"; };
+		F49A41542B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWAccountPrivacyTableViewCell.xib; sourceTree = "<group>"; };
+		F49A41572B57B2FB0049DF6D /* FWAccountWebKitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWAccountWebKitViewController.h; sourceTree = "<group>"; };
+		F49A41582B57B2FB0049DF6D /* FWAccountWebKitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWAccountWebKitViewController.m; sourceTree = "<group>"; };
+		F49A41592B57B2FB0049DF6D /* FWAccountWebKitViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWAccountWebKitViewController.xib; sourceTree = "<group>"; };
+		F49A415C2B57B3E40049DF6D /* FWAccountWebKitViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWAccountWebKitViewModel.h; sourceTree = "<group>"; };
+		F49A415D2B57B3E40049DF6D /* FWAccountWebKitViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWAccountWebKitViewModel.m; sourceTree = "<group>"; };
 		F49B1E55287EB14000D1CA6E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F49B1E57287EB14900D1CA6E /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
 		F49B1E59287EB14F00D1CA6E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -586,6 +619,7 @@
 				F49A41162B55286A0049DF6D /* Tabbar.xcassets */,
 				F43CDA9226C69EEE00FBB94D /* Home.xcassets */,
 				F49A412C2B565EB70049DF6D /* Meeting.xcassets */,
+				F49A413E2B568F8D0049DF6D /* Account.xcassets */,
 				F45C830B27D6F50D008EEA31 /* Room.xcassets */,
 			);
 			path = Assets;
@@ -949,6 +983,10 @@
 			children = (
 				F49A41102B5523840049DF6D /* FWAccountViewModel.h */,
 				F49A41112B5523840049DF6D /* FWAccountViewModel.m */,
+				F49A41452B5781140049DF6D /* FWAccountInfoViewModel.h */,
+				F49A41462B5781140049DF6D /* FWAccountInfoViewModel.m */,
+				F49A415C2B57B3E40049DF6D /* FWAccountWebKitViewModel.h */,
+				F49A415D2B57B3E40049DF6D /* FWAccountWebKitViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -968,6 +1006,21 @@
 				F49A410B2B5523650049DF6D /* FWAccountViewController.h */,
 				F49A410C2B5523650049DF6D /* FWAccountViewController.m */,
 				F49A410D2B5523650049DF6D /* FWAccountViewController.xib */,
+				F49A41402B5780B10049DF6D /* FWAccountInfoViewController.h */,
+				F49A41412B5780B10049DF6D /* FWAccountInfoViewController.m */,
+				F49A41422B5780B10049DF6D /* FWAccountInfoViewController.xib */,
+				F49A414D2B57AAB20049DF6D /* FWAccountPrivacyViewController.h */,
+				F49A414E2B57AAB20049DF6D /* FWAccountPrivacyViewController.m */,
+				F49A414F2B57AAB20049DF6D /* FWAccountPrivacyViewController.xib */,
+				F49A41522B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.h */,
+				F49A41532B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.m */,
+				F49A41542B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.xib */,
+				F49A41482B5785070049DF6D /* FWAccountAboutusViewController.h */,
+				F49A41492B5785070049DF6D /* FWAccountAboutusViewController.m */,
+				F49A414A2B5785070049DF6D /* FWAccountAboutusViewController.xib */,
+				F49A41572B57B2FB0049DF6D /* FWAccountWebKitViewController.h */,
+				F49A41582B57B2FB0049DF6D /* FWAccountWebKitViewController.m */,
+				F49A41592B57B2FB0049DF6D /* FWAccountWebKitViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1190,12 +1243,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				F40B634326C292DB00F42370 /* LaunchScreen.storyboard in Resources */,
+				F49A41442B5780B10049DF6D /* FWAccountInfoViewController.xib in Resources */,
+				F49A41512B57AAB20049DF6D /* FWAccountPrivacyViewController.xib in Resources */,
 				F4219D2229AC88510069483A /* Login.xcassets in Resources */,
 				F4219D6729AEF6A30069483A /* FWRoomViewController.xib in Resources */,
 				F49A41372B5666FC0049DF6D /* FWMeetingAttendViewController.xib in Resources */,
+				F49A414C2B5785070049DF6D /* FWAccountAboutusViewController.xib in Resources */,
 				F49A412D2B565EB70049DF6D /* Meeting.xcassets in Resources */,
 				F4219D7B29AF22650069483A /* FWRoomStatusView.xib in Resources */,
+				F49A413F2B568F8D0049DF6D /* Account.xcassets in Resources */,
 				F40B633F26C2901F00F42370 /* MeetingExample-Info.plist in Resources */,
+				F49A415B2B57B2FB0049DF6D /* FWAccountWebKitViewController.xib in Resources */,
 				F45C830C27D6F50D008EEA31 /* Room.xcassets in Resources */,
 				F43CDA9326C69EEE00FBB94D /* Home.xcassets in Resources */,
 				F49A40F02B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.xib in Resources */,
@@ -1216,6 +1274,7 @@
 				F4219D8829B04C130069483A /* FWRoomMemberCollectionViewCell.xib in Resources */,
 				F4219D3E29ADAFBB0069483A /* FWMessageTableSectionHeaderView.xib in Resources */,
 				F4219D7129AF05DD0069483A /* FWRoomBottomView.xib in Resources */,
+				F49A41562B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.xib in Resources */,
 				F49A41172B55286A0049DF6D /* Tabbar.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1360,6 +1419,7 @@
 				F4219D4729ADB1850069483A /* FWMessageTableViewCell.m in Sources */,
 				F4219D7929AF225E0069483A /* FWRoomStatusView.m in Sources */,
 				F482EEF229B5DA5E00815C9C /* FWRoomCaptureView.m in Sources */,
+				F49A41502B57AAB20049DF6D /* FWAccountPrivacyViewController.m in Sources */,
 				F429AC6B2B47A8EA003D127D /* FWRegisterViewModel.m in Sources */,
 				F4219D4B29ADCE440069483A /* FWMessageChatManager.m in Sources */,
 				F4219D8729B04C130069483A /* FWRoomMemberCollectionViewCell.m in Sources */,
@@ -1386,16 +1446,22 @@
 				F49A411B2B55399F0049DF6D /* FWHomeTableViewCell.m in Sources */,
 				F482EEFB29B6D15200815C9C /* FWNetworkBridge.m in Sources */,
 				F49A41152B5523BE0049DF6D /* FWAccountModel.m in Sources */,
+				F49A415A2B57B2FB0049DF6D /* FWAccountWebKitViewController.m in Sources */,
 				F482EEFE29B6D2D100815C9C /* FWInterfaces.m in Sources */,
 				F49A41282B565DE40049DF6D /* FWMeetingEntryViewModel.m in Sources */,
 				F49A41062B5522760049DF6D /* FWBaseTabBarViewController.m in Sources */,
+				F49A41472B5781140049DF6D /* FWAccountInfoViewModel.m in Sources */,
+				F49A415E2B57B3E40049DF6D /* FWAccountWebKitViewModel.m in Sources */,
 				F47A3B5627D1F0FA00C88F2C /* FWStoreDataBridge.m in Sources */,
 				F482EEF829B6D0F500815C9C /* FWBaseModel.m in Sources */,
 				F4219D6629AEF6A30069483A /* FWRoomViewController.m in Sources */,
 				F482EF2729BEE17C00815C9C /* FWBuglyBridge.m in Sources */,
 				F4C417C029B1A85900A7EBCB /* FWTimerBridge.m in Sources */,
+				F49A41552B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.m in Sources */,
+				F49A414B2B5785070049DF6D /* FWAccountAboutusViewController.m in Sources */,
 				F49A413A2B566CD20049DF6D /* FWMeetingAttendModel.m in Sources */,
 				F482EF3429C4187F00815C9C /* NSString+Extension.m in Sources */,
+				F49A41432B5780B10049DF6D /* FWAccountInfoViewController.m in Sources */,
 				F49A41242B565D8B0049DF6D /* FWMeetingEntryViewController.m in Sources */,
 				F4219D5529ADD78E0069483A /* UIView+Extension.m in Sources */,
 				F4219D5229ADD2530069483A /* FWDateBridge.m in Sources */,
@@ -1566,7 +1632,7 @@
 				GCC_PREFIX_HEADER = "MeetingExample/Resources/MeetingExample-Prefix.pch";
 				INFOPLIST_FILE = "MeetingExample/Resources/MeetingExample-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
@@ -1613,7 +1679,7 @@
 				GCC_PREFIX_HEADER = "MeetingExample/Resources/MeetingExample-Prefix.pch";
 				INFOPLIST_FILE = "MeetingExample/Resources/MeetingExample-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
@@ -1812,7 +1878,7 @@
 				GCC_PREFIX_HEADER = "MeetingExample/Resources/MeetingExample-Prefix.pch";
 				INFOPLIST_FILE = "MeetingExample/Resources/MeetingExample-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
