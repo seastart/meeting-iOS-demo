@@ -26,8 +26,6 @@ def commonPods
     pod 'MLeaksFinder'
     # 数据模型
     pod 'YYModel'
-    # 异常上报
-    pod 'Bugly'
 end
 
 def meetingPods

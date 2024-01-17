@@ -18,7 +18,6 @@
 #import "FWEntryBridge.h"
 #import "FWTimerBridge.h"
 #import "FWToastBridge.h"
-#import "FWBuglyBridge.h"
 #import "FWNetworkBridge.h"
 #import "FWLogTraceBridge.h"
 #import "FWStoreDataBridge.h"

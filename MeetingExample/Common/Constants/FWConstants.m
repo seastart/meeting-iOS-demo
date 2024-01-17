@@ -46,9 +46,9 @@ NSString * const FWACCOUNTPRIVACYHOST = @"https://www.baidu.com";
 
 #pragma mark - Bugly异常上报相关
 /// Bugly异常上报APPID
-NSString * const FWBUGLYAPPID = @"21acd998ee";
+NSString * const FWBUGLYAPPID = @"56aad48acd";
 /// Bugly异常上报APPKey
-NSString * const FWBUGLYAPPKEY = @"928570f4-a493-4e58-b78f-3f856a4c8c31";
+NSString * const FWBUGLYAPPKEY = @"5d1ae98f-32fe-419f-9fa0-6c909d67530f";
 
 /// Application Group Identifier
 NSString * const FWAPPGROUP = @"group.cn.seastart.meetingkit";

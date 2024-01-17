@@ -76,7 +76,6 @@
 		F482EF0529B6E1CC00815C9C /* FWAuthToken.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF0429B6E1CC00815C9C /* FWAuthToken.m */; };
 		F482EF1A29B885D900815C9C /* FWBaseEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF1929B885D900815C9C /* FWBaseEmptyView.m */; };
 		F482EF2329B88C3F00815C9C /* UIView+EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF2229B88C3F00815C9C /* UIView+EmptyView.m */; };
-		F482EF2729BEE17C00815C9C /* FWBuglyBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF2629BEE17C00815C9C /* FWBuglyBridge.m */; };
 		F482EF2A29BEE2D900815C9C /* FWEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF2929BEE2D900815C9C /* FWEnum.m */; };
 		F482EF2E29BF286A00815C9C /* FWLogTraceBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF2D29BF286A00815C9C /* FWLogTraceBridge.m */; };
 		F482EF3129C08EC700815C9C /* FWRoomExtendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF3029C08EC700815C9C /* FWRoomExtendModel.m */; };
@@ -315,8 +314,6 @@
 		F482EF1929B885D900815C9C /* FWBaseEmptyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWBaseEmptyView.m; sourceTree = "<group>"; };
 		F482EF2129B88C3E00815C9C /* UIView+EmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+EmptyView.h"; sourceTree = "<group>"; };
 		F482EF2229B88C3F00815C9C /* UIView+EmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+EmptyView.m"; sourceTree = "<group>"; };
-		F482EF2529BEE17C00815C9C /* FWBuglyBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWBuglyBridge.h; sourceTree = "<group>"; };
-		F482EF2629BEE17C00815C9C /* FWBuglyBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWBuglyBridge.m; sourceTree = "<group>"; };
 		F482EF2829BEE2D900815C9C /* FWEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWEnum.h; sourceTree = "<group>"; };
 		F482EF2929BEE2D900815C9C /* FWEnum.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWEnum.m; sourceTree = "<group>"; };
 		F482EF2C29BF286A00815C9C /* FWLogTraceBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWLogTraceBridge.h; sourceTree = "<group>"; };
@@ -667,7 +664,6 @@
 			isa = PBXGroup;
 			children = (
 				F482EF2B29BF285600815C9C /* LogTraceBridge */,
-				F482EF2429BEE14F00815C9C /* BuglyBridge */,
 				F482EEFF29B6DF8E00815C9C /* ToolBridge */,
 				F482EEF529B6CF1600815C9C /* NetworkBridge */,
 				F4C417BD29B1A83D00A7EBCB /* TimerBridge */,
@@ -948,15 +944,6 @@
 				F482EF0129B6DF9900815C9C /* FWToolBridge.m */,
 			);
 			path = ToolBridge;
-			sourceTree = "<group>";
-		};
-		F482EF2429BEE14F00815C9C /* BuglyBridge */ = {
-			isa = PBXGroup;
-			children = (
-				F482EF2529BEE17C00815C9C /* FWBuglyBridge.h */,
-				F482EF2629BEE17C00815C9C /* FWBuglyBridge.m */,
-			);
-			path = BuglyBridge;
 			sourceTree = "<group>";
 		};
 		F482EF2B29BF285600815C9C /* LogTraceBridge */ = {
@@ -1455,7 +1442,6 @@
 				F47A3B5627D1F0FA00C88F2C /* FWStoreDataBridge.m in Sources */,
 				F482EEF829B6D0F500815C9C /* FWBaseModel.m in Sources */,
 				F4219D6629AEF6A30069483A /* FWRoomViewController.m in Sources */,
-				F482EF2729BEE17C00815C9C /* FWBuglyBridge.m in Sources */,
 				F4C417C029B1A85900A7EBCB /* FWTimerBridge.m in Sources */,
 				F49A41552B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.m in Sources */,
 				F49A414B2B5785070049DF6D /* FWAccountAboutusViewController.m in Sources */,

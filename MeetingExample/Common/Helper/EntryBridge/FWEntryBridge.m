@@ -40,8 +40,6 @@
 /// 部分基础设置
 - (void)setupDefault {
     
-    /// 配置Bugly异常捕捉
-    [[FWBuglyBridge sharedManager] initBugly];
     /// 启用键盘功能
     [[IQKeyboardManager sharedManager] setEnable:YES];
     /// 键盘弹出时点击背景键盘收回
