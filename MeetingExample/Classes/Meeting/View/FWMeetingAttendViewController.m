@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *roomnoTextField;
 /// 用户昵称
 @property (weak, nonatomic) IBOutlet UITextField *nicknameTextField;
+/// 房间号码输入框右边距
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *roomnoRightMargin;
 
 /// 复制房间号码按钮
 @property (weak, nonatomic) IBOutlet UIButton *pasteButton;
@@ -24,6 +26,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 /// 确定按钮
 @property (weak, nonatomic) IBOutlet UIButton *confirmButton;
+
+/// 房间号码输入文本长度
+@property (assign, nonatomic) NSInteger index;
 
 /// ViewModel
 @property (strong, nonatomic) FWMeetingAttendViewModel *viewModel;
@@ -55,8 +60,12 @@
 #pragma mark - 设置默认数据
 - (void)setupDefaultData {
     
+    /// 重置房间号码输入文本长度
+    self.index = 0;
     /// 设置背景色
     self.view.backgroundColor = RGBOF(0xF7F8FA);
+    /// 注册监听文本进行编辑更改时回调
+    [self.roomnoTextField addTarget:self action:@selector(textFieldDidEditing:) forControlEvents:UIControlEventEditingChanged];
 }
 
 #pragma mark - 设置ViewModel
@@ -97,18 +106,21 @@
         @strongify(self);
         NSString *title = nil;
         NSString *roomnoText = nil;
+        CGFloat margin = 50.0;
         BOOL isCreate = YES;
         switch (value.integerValue) {
             case FWMeetingEntryTypeCreate:
                 /// 创建房间
                 title = NSLocalizedString(@"创建房间", nil);
-                roomnoText = @"909 909 909";
+                roomnoText = @"909909909";
+                margin = 50.0;
                 isCreate = YES;
                 break;
             case FWMeetingEntryTypeJoin:
                 /// 加入房间
                 title = NSLocalizedString(@"加入房间", nil);
                 roomnoText = nil;
+                margin = 16.0;
                 isCreate = NO;
                 break;
         }
@@ -117,7 +129,9 @@
         /// 设置房间号码编辑状态
         self.roomnoTextField.userInteractionEnabled = !isCreate;
         /// 设置默认房间号码
-        self.roomnoTextField.text = self.viewModel.roomnoText = roomnoText;
+        self.roomnoTextField.text = self.viewModel.roomnoText = [FWToolBridge roomnoDiversionString:roomnoText];
+        /// 设置房间号码输入框右边距
+        self.roomnoRightMargin.constant = margin;
         /// 设置标题
         self.navigationItem.title = title;
         /// 设置确定按钮标题
@@ -165,6 +179,35 @@
             [FWToastBridge showToastAction:message];
         }
     }];
+}
+
+#pragma mark - 文本进行编辑更改时回调
+/// 文本进行编辑更改时回调
+/// - Parameter textField: 文本框对象
+- (void)textFieldDidEditing:(UITextField *)textField {
+    
+    if (textField == self.roomnoTextField) {
+        if (textField.text.length > self.index) {
+            if (textField.text.length == 4 || textField.text.length == 8) {
+                /// 文本输入
+                NSMutableString *str = [[NSMutableString alloc ] initWithString:textField.text];
+                [str insertString:@" " atIndex:(textField.text.length - 1)];
+                textField.text = str;
+            } if (textField.text.length >= 11) {
+                /// 文本输入完成
+                textField.text = [textField.text substringToIndex:11];
+                /// [textField resignFirstResponder];
+            }
+            self.index = textField.text.length;
+        } else if (textField.text.length < self.index) {
+            /// 文本删除
+            if (textField.text.length == 4 || textField.text.length == 8) {
+                textField.text = [NSString stringWithFormat:@"%@",textField.text];
+                textField.text = [textField.text substringToIndex:(textField.text.length - 1)];
+            }
+            self.index = textField.text.length;
+        }
+    }
 }
 
 @end

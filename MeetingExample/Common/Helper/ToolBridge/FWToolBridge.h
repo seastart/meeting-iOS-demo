@@ -45,6 +45,16 @@ typedef void (^FWPermissionsResultBlock)(BOOL status);
 /// 获取设备名称
 + (NSString *)getDeviceName;
 
+#pragma mark - 房间号码转换字符串
+/// 房间号码转换字符串
+/// - Parameter roomno: 房间号码
++ (NSString *)roomnoDiversionString:(NSString *)roomno;
+
+#pragma mark - 字符串转换房间号码
+/// 字符串转换房间号码
+/// - Parameter string: 目标字符串
++ (NSString *)stringDiversionRoomno:(NSString *)string;
+
 #pragma mark - 移除字符串两侧空格
 /// 移除字符串两侧空格
 /// - Parameter text: 原始串

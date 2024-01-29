@@ -49,7 +49,7 @@
     /// 获取Caches目录路径
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths objectAtIndex:0];
-    self.logsDirectory = [documentDirectory stringByAppendingPathComponent:@"Logs"];
+    self.logsDirectory = [documentDirectory stringByAppendingPathComponent:@"cn.seastart.logs"];
     /// 文件保护等级
     NSDictionary *attribute = [NSDictionary dictionaryWithObject:NSFileProtectionNone forKey:NSFileProtectionKey];
     [[NSFileManager defaultManager] createDirectoryAtPath:self.logsDirectory withIntermediateDirectories:YES attributes:attribute error:nil];
@@ -86,7 +86,7 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths objectAtIndex:0];
     /// 此处使用NSString
-    NSString *fileName = [NSString stringWithFormat:@"SRTCLogs.zip"];
+    NSString *fileName = [NSString stringWithFormat:@"cn.seastart.logs.zip"];
     NSString *logFilePath = [documentDirectory stringByAppendingPathComponent:fileName];
     return logFilePath;
 }

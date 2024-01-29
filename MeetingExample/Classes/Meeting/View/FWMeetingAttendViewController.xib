@@ -15,6 +15,7 @@
                 <outlet property="microphoneButton" destination="4vB-mP-NP0" id="5FS-oq-gfx"/>
                 <outlet property="nicknameTextField" destination="c9U-Ue-2Vh" id="zXT-He-BMn"/>
                 <outlet property="pasteButton" destination="J3v-zQ-yOS" id="XPO-Zo-lCj"/>
+                <outlet property="roomnoRightMargin" destination="7Cq-dQ-JR8" id="Zuq-JR-uSV"/>
                 <outlet property="roomnoTextField" destination="y7w-kI-s0b" id="2Is-Od-umv"/>
                 <outlet property="view" destination="ViD-5P-1Tm" id="eAp-Y9-Dod"/>
             </connections>
@@ -77,9 +78,9 @@
                                         <constraint firstItem="J3v-zQ-yOS" firstAttribute="centerY" secondItem="LDQ-qh-R5f" secondAttribute="centerY" id="2eX-5P-8iR"/>
                                         <constraint firstAttribute="height" constant="50" id="48u-sl-rsz"/>
                                         <constraint firstItem="pAi-oW-chq" firstAttribute="leading" secondItem="9Xm-Km-DNL" secondAttribute="leading" id="6I8-6B-LwX"/>
+                                        <constraint firstAttribute="trailing" secondItem="y7w-kI-s0b" secondAttribute="trailing" constant="50" id="7Cq-dQ-JR8"/>
                                         <constraint firstItem="9Xm-Km-DNL" firstAttribute="centerY" secondItem="LDQ-qh-R5f" secondAttribute="centerY" id="7e0-Wf-7y0"/>
                                         <constraint firstAttribute="trailing" secondItem="J3v-zQ-yOS" secondAttribute="trailing" id="Bpr-wn-sOt"/>
-                                        <constraint firstItem="J3v-zQ-yOS" firstAttribute="leading" secondItem="y7w-kI-s0b" secondAttribute="trailing" id="I1x-tV-QfH"/>
                                         <constraint firstAttribute="bottom" secondItem="pAi-oW-chq" secondAttribute="bottom" id="NKq-7f-Daa"/>
                                         <constraint firstItem="9Xm-Km-DNL" firstAttribute="leading" secondItem="LDQ-qh-R5f" secondAttribute="leading" constant="16" id="PV6-5Q-V3S"/>
                                         <constraint firstItem="y7w-kI-s0b" firstAttribute="leading" secondItem="9Xm-Km-DNL" secondAttribute="trailing" constant="20" id="QKN-nd-Ya3"/>

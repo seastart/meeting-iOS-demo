@@ -39,13 +39,16 @@
 /// 复制房间号码
 - (void)onCopyRoomNo {
     
-    if (kStringIsEmpty(self.roomnoText)) {
+    /// 字符串转换房间号码
+    NSString *roomNo = [FWToolBridge stringDiversionRoomno:self.roomnoText];
+    
+    if (kStringIsEmpty(roomNo)) {
         [self.toastSubject sendNext:NSLocalizedString(@"房间号码为空，不允许复制到剪切板", nil)];
         return;
     }
     
     /// 房间号码复制到剪切板
-    [[UIPasteboard generalPasteboard] setString:self.roomnoText];
+    [[UIPasteboard generalPasteboard] setString:roomNo];
     /// 回调提示信息
     [self.toastSubject sendNext:NSLocalizedString(@"房间号码已复制到剪切板", nil)];
 }
@@ -54,7 +57,10 @@
 /// 请求确定
 - (void)onConfirmEvent {
     
-    if (kStringIsEmpty(self.roomnoText)) {
+    /// 字符串转换房间号码
+    NSString *roomNo = [FWToolBridge stringDiversionRoomno:self.roomnoText];
+    
+    if (kStringIsEmpty(roomNo)) {
         [self.toastSubject sendNext:NSLocalizedString(@"请输入房间ID", nil)];
         return;
     }

@@ -69,6 +69,35 @@
     return [UIDevice currentDevice].name;
 }
 
+#pragma mark - 房间号码转换字符串
+/// 房间号码转换字符串
+/// - Parameter roomno: 房间号码
++ (NSString *)roomnoDiversionString:(NSString *)roomno {
+    
+    NSUInteger chunkSize = 3;
+    NSMutableArray<NSString *> *resultArray = [NSMutableArray array];
+    for (NSUInteger i = 0; i < roomno.length; i += chunkSize) {
+        NSRange range = NSMakeRange(i, MIN(chunkSize, roomno.length - i));
+        NSString *substring = [roomno substringWithRange:range];
+        [resultArray addObject:substring];
+    }
+    /// 数组拼接成字符串
+    NSString *roomnoStr = [resultArray componentsJoinedByString:@" "];
+    /// 返回房间号码
+    return roomnoStr;
+}
+
+#pragma mark - 字符串转换房间号码
+/// 字符串转换房间号码
+/// - Parameter string: 目标字符串
++ (NSString *)stringDiversionRoomno:(NSString *)string {
+    
+    /// 替换显示字符串中的空格字符
+    NSString *roomno = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
+    /// 返回房间号码
+    return roomno;
+}
+
 #pragma mark - 移除字符串两侧空格
 /// 移除字符串两侧空格
 /// - Parameter text: 原始串
