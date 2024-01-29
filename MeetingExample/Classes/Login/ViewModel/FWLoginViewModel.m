@@ -25,7 +25,7 @@
         _passwordText = [[FWStoreDataBridge sharedManager] getPasswordText];
         _versionText = [NSString stringWithFormat:@"当前SDK版本信息 %@", BundleVersion];
         _isVcodeLogin = NO;
-        _isAgreement = NO;
+        _isAgreement = YES;
         _isSecure = YES;
         _loading = NO;
     }

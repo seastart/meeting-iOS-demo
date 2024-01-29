@@ -22,7 +22,7 @@
         _registerSubject = [RACSubject subject];
         _mobileCodeSubject = [RACSubject subject];
         _isSecureCheck = YES;
-        _isAgreement = NO;
+        _isAgreement = YES;
         _isSecure = YES;
         _loading = NO;
     }
