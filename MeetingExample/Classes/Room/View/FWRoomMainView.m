@@ -174,17 +174,6 @@
     }
 }
 
-#pragma mark - 订阅成员视频流
-/// 订阅成员视频流
-/// @param memberModel 成员信息
-/// @param trackId 轨道标识
-/// @param subscribe 订阅状态
-//- (void)subscribeWithMemberModel:(FWRoomMemberModel *)memberModel trackId:(RTCTrackIdentifierFlags)trackId subscribe:(BOOL)subscribe {
-//    
-//    /// 订阅成员视频流
-//    [self.roomMemberView subscribeWithMemberModel:memberModel trackId:trackId subscribe:subscribe];
-//}
-
 #pragma mark - ----- FWRoomTopViewDelegate的代理方法 -----
 #pragma mark 扬声器事件回调
 /// 扬声器事件回调
@@ -195,21 +184,6 @@
     
     /// 切换源按钮选中状态
     source.selected = !source.selected;
-    /// 设置音频播放状态
-//    [[FWEngineBridge sharedManager] enabledAudioSpeaker:!source.selected];
-}
-
-#pragma mark 变更信息事件回调
-/// 变更信息事件回调
-/// - Parameters:
-///   - topView: 工具栏视图
-///   - source: 事件源对象
-- (void)topView:(FWRoomTopView *)topView didSelectChangeButton:(UIButton *)source {
-    
-    /// 回调控制器层处理
-    if (self.delegate && [self.delegate respondsToSelector:@selector(onChangeEventMainView:)]) {
-        [self.delegate onChangeEventMainView:self];
-    }
 }
 
 #pragma mark 摄像头事件回调
@@ -221,6 +195,19 @@
     
     /// 开启摄像头预览
     [self.roomCaptureView switchCamera];
+}
+
+#pragma mark 举报事件回调
+/// 举报事件回调
+/// - Parameters:
+///   - topView: 工具栏视图
+///   - source: 事件源对象
+- (void)topView:(FWRoomTopView *)topView didSelectReportButton:(UIButton *)source {
+    
+    /// 回调控制器层处理
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onReportEventMainView:)]) {
+        [self.delegate onReportEventMainView:self];
+    }
 }
 
 #pragma mark 挂断事件回调
@@ -236,7 +223,7 @@
     }
 }
 
-#pragma mark - ----- FWRoomTopViewDelegate的代理方法 -----
+#pragma mark - ----- FWRoomBottomViewDelegate的代理方法 -----
 #pragma mark 音频控制事件回调
 /// 音频控制事件回调
 /// - Parameters:
@@ -336,6 +323,19 @@
                 [(UIButton *)view sendActionsForControlEvents:UIControlEventTouchDown | UIControlEventTouchUpInside];
             }
         }
+    }
+}
+
+#pragma mark 成员管理事件回调
+/// 成员管理事件回调
+/// - Parameters:
+///   - bottomView: 工具栏视图
+///   - source: 事件源对象
+- (void)bottomView:(FWRoomBottomView *)bottomView didSelectMemberButton:(UIButton *)source {
+    
+    /// 回调控制器层处理
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onMemberEventMainView:)]) {
+        [self.delegate onMemberEventMainView:self];
     }
 }
 

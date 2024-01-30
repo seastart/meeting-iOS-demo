@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,8 +31,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="245" height="326"/>
                     <color key="backgroundColor" red="0.10196078431372549" green="0.10980392156862745" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_common_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="LOo-xa-tiJ">
-                    <rect key="frame" x="97.666666666666671" y="167.66666666666666" width="50.000000000000014" height="50"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_login_avatar2" translatesAutoresizingMaskIntoConstraints="NO" id="LOo-xa-tiJ">
+                    <rect key="frame" x="97.666666666666671" y="150.66666666666666" width="50.000000000000014" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="LOo-xa-tiJ" secondAttribute="height" multiplier="1:1" id="T6X-ub-PeR"/>
                         <constraint firstAttribute="height" constant="50" id="gol-zS-WAP"/>
@@ -45,24 +45,24 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dof-1n-AI1">
-                    <rect key="frame" x="79.333333333333314" y="225.66666666666666" width="86.666666666666686" height="22"/>
+                    <rect key="frame" x="79" y="208.66666666666666" width="87" height="22"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_room_video_state_un" translatesAutoresizingMaskIntoConstraints="NO" id="ez0-C0-iQi">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_room_camera_state_un" translatesAutoresizingMaskIntoConstraints="NO" id="ez0-C0-iQi">
                             <rect key="frame" x="5" y="3" width="16" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="ez0-C0-iQi" secondAttribute="height" multiplier="1:1" id="TDG-yB-Faa"/>
                                 <constraint firstAttribute="height" constant="16" id="UZ0-5j-UmM"/>
                             </constraints>
                         </imageView>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_room_audio_state" translatesAutoresizingMaskIntoConstraints="NO" id="VKW-W0-FCW">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_room_microphone_state_un" translatesAutoresizingMaskIntoConstraints="NO" id="VKW-W0-FCW">
                             <rect key="frame" x="23" y="3" width="16" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="3Fd-tZ-fp3"/>
                                 <constraint firstAttribute="width" secondItem="VKW-W0-FCW" secondAttribute="height" multiplier="1:1" id="ke0-S4-ZDW"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SailorGa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="leI-F2-9wL">
-                            <rect key="frame" x="41" y="5" width="40.666666666666657" height="12"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="少年锦时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="leI-F2-9wL">
+                            <rect key="frame" x="41" y="5" width="41" height="12"/>
                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -81,30 +81,30 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="McI-PC-UmX">
-                    <rect key="frame" x="5" y="299" width="86.666666666666671" height="22"/>
+                    <rect key="frame" x="5" y="265" width="87" height="22"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_room_video_state_un" translatesAutoresizingMaskIntoConstraints="NO" id="udL-cc-Czk">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_room_camera_state_un" translatesAutoresizingMaskIntoConstraints="NO" id="udL-cc-Czk">
                             <rect key="frame" x="5" y="3" width="16" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="PSY-d2-uZ7"/>
                                 <constraint firstAttribute="width" secondItem="udL-cc-Czk" secondAttribute="height" multiplier="1:1" id="r57-Qo-oPp"/>
                             </constraints>
                         </imageView>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_room_audio_state" translatesAutoresizingMaskIntoConstraints="NO" id="Fy1-Cg-bJn">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_room_microphone_state_un" translatesAutoresizingMaskIntoConstraints="NO" id="Fy1-Cg-bJn">
                             <rect key="frame" x="23" y="3" width="16" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="3pI-8G-Y35"/>
                                 <constraint firstAttribute="width" secondItem="Fy1-Cg-bJn" secondAttribute="height" multiplier="1:1" id="gZZ-NR-C5l"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SailorGa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4u9-8v-wc7">
-                            <rect key="frame" x="41" y="5" width="40.666666666666657" height="12"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="少年锦时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4u9-8v-wc7">
+                            <rect key="frame" x="41" y="5" width="41" height="12"/>
                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="4u9-8v-wc7" secondAttribute="trailing" constant="5" id="2ml-5Q-BQ0"/>
                         <constraint firstItem="udL-cc-Czk" firstAttribute="leading" secondItem="McI-PC-UmX" secondAttribute="leading" constant="5" id="73D-sk-Bf6"/>
@@ -145,8 +145,8 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_common_avatar" width="72" height="72"/>
-        <image name="icon_room_audio_state" width="16" height="16"/>
-        <image name="icon_room_video_state_un" width="16" height="16"/>
+        <image name="icon_login_avatar2" width="84" height="84"/>
+        <image name="icon_room_camera_state_un" width="16" height="16"/>
+        <image name="icon_room_microphone_state_un" width="16" height="16"/>
     </resources>
 </document>

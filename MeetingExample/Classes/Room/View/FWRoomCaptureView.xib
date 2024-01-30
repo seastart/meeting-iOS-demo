@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,10 +27,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="393" height="700"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kY-LO-EqF">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kY-LO-EqF">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="700"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_common_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="No8-z9-ytM">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_login_avatar2" translatesAutoresizingMaskIntoConstraints="NO" id="No8-z9-ytM">
                             <rect key="frame" x="156.66666666666666" y="240" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="No8-z9-ytM" secondAttribute="height" multiplier="1:1" id="i41-h3-JOY"/>
@@ -44,24 +44,24 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QXh-cz-GeS">
-                            <rect key="frame" x="153.33333333333334" y="328" width="86.666666666666657" height="22"/>
+                            <rect key="frame" x="153" y="328" width="87" height="22"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_room_video_state_un" translatesAutoresizingMaskIntoConstraints="NO" id="8K4-A5-1iS">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_room_camera_state_un" translatesAutoresizingMaskIntoConstraints="NO" id="8K4-A5-1iS">
                                     <rect key="frame" x="5" y="3" width="16" height="16"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="8K4-A5-1iS" secondAttribute="height" multiplier="1:1" id="4Sl-nx-ISR"/>
                                         <constraint firstAttribute="height" constant="16" id="rh2-0X-oeb"/>
                                     </constraints>
                                 </imageView>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_room_audio_state" translatesAutoresizingMaskIntoConstraints="NO" id="2IA-jm-sdC">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_room_microphone_state_un" translatesAutoresizingMaskIntoConstraints="NO" id="2IA-jm-sdC">
                                     <rect key="frame" x="23" y="3" width="16" height="16"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="2IA-jm-sdC" secondAttribute="height" multiplier="1:1" id="NMP-di-CCL"/>
                                         <constraint firstAttribute="height" constant="16" id="qEs-Gq-yYq"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SailorGa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tma-ZQ-bRI">
-                                    <rect key="frame" x="41" y="5" width="40.666666666666657" height="12"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="少年锦时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tma-ZQ-bRI">
+                                    <rect key="frame" x="41" y="5" width="41" height="12"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -108,8 +108,8 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_common_avatar" width="72" height="72"/>
-        <image name="icon_room_audio_state" width="16" height="16"/>
-        <image name="icon_room_video_state_un" width="16" height="16"/>
+        <image name="icon_login_avatar2" width="84" height="84"/>
+        <image name="icon_room_camera_state_un" width="16" height="16"/>
+        <image name="icon_room_microphone_state_un" width="16" height="16"/>
     </resources>
 </document>

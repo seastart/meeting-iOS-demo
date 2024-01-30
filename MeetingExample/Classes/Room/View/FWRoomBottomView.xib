@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,9 +13,12 @@
                 <outlet property="audioButton" destination="m6R-R7-7JS" id="nI4-3M-dGr"/>
                 <outlet property="audioButtonImage" destination="p0X-KU-gKF" id="cXQ-En-6SN"/>
                 <outlet property="audioButtonLable" destination="mbu-Lm-C0q" id="Z4z-uR-CQY"/>
-                <outlet property="chatButton" destination="1TI-gr-363" id="hLd-9G-UnA"/>
-                <outlet property="chatButtonImage" destination="06M-LF-HQa" id="x1f-Hl-Lee"/>
-                <outlet property="chatButtonLable" destination="XuJ-dd-Djb" id="sQU-FX-1vR"/>
+                <outlet property="chatButton" destination="bIj-hE-uE6" id="XvT-p1-EVr"/>
+                <outlet property="chatButtonImage" destination="F9r-Cq-TYQ" id="zVb-UA-sz8"/>
+                <outlet property="chatButtonLable" destination="1Is-j1-g66" id="zJG-a7-EpK"/>
+                <outlet property="memberButton" destination="1TI-gr-363" id="wev-mD-WC9"/>
+                <outlet property="memberButtonImage" destination="06M-LF-HQa" id="AtC-RJ-M7b"/>
+                <outlet property="memberButtonLable" destination="XuJ-dd-Djb" id="tHD-b5-cJK"/>
                 <outlet property="sharingButton" destination="WwT-Th-PUV" id="pGz-Ay-08d"/>
                 <outlet property="sharingButtonImage" destination="bBP-vy-2hI" id="SSu-vu-m9Y"/>
                 <outlet property="sharingButtonLable" destination="fiN-ty-6gm" id="Z9a-Iq-rP6"/>
@@ -30,20 +33,20 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P4Q-QN-vpy">
-                    <rect key="frame" x="0.0" y="0.0" width="103.66666666666667" height="56"/>
+                    <rect key="frame" x="0.0" y="0.0" width="82.666666666666671" height="56"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0X-KU-gKF">
-                            <rect key="frame" x="36.666666666666664" y="5" width="29.999999999999993" height="30"/>
-                            <state key="normal" image="icon_room_audio"/>
+                            <rect key="frame" x="26.333333333333329" y="5" width="30" height="30"/>
+                            <state key="normal" image="icon_room_microphone"/>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="静音" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbu-Lm-C0q">
-                            <rect key="frame" x="40.333333333333336" y="37.666666666666664" width="22.666666666666664" height="13.333333333333336"/>
+                            <rect key="frame" x="30" y="37.666666666666664" width="22.666666666666671" height="13.333333333333336"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6R-R7-7JS">
-                            <rect key="frame" x="0.0" y="0.0" width="103.66666666666667" height="56"/>
+                            <rect key="frame" x="0.0" y="0.0" width="82.666666666666671" height="56"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal">
                                 <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -64,20 +67,20 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hjU-8b-5qb">
-                    <rect key="frame" x="103.66666666666669" y="0.0" width="103.33333333333331" height="56"/>
+                    <rect key="frame" x="82.666666666666671" y="0.0" width="83.000000000000014" height="56"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQE-UG-wdT">
-                            <rect key="frame" x="36.666666666666671" y="5" width="30" height="30"/>
-                            <state key="normal" image="icon_room_video"/>
+                            <rect key="frame" x="26.666666666666657" y="5" width="30" height="30"/>
+                            <state key="normal" image="icon_room_camera"/>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="关闭视频" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vS-gr-L4I">
-                            <rect key="frame" x="28.999999999999986" y="37.666666666666664" width="45" height="13.333333333333336"/>
+                            <rect key="frame" x="19" y="37.666666666666664" width="45" height="13.333333333333336"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEg-xX-wY3">
-                            <rect key="frame" x="0.0" y="0.0" width="103.33333333333333" height="56"/>
+                            <rect key="frame" x="0.0" y="0.0" width="83" height="56"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal">
                                 <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -95,20 +98,20 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PSq-Wf-AFx">
-                    <rect key="frame" x="206.99999999999997" y="0.0" width="103.66666666666666" height="56"/>
+                    <rect key="frame" x="165.66666666666666" y="0.0" width="82.666666666666657" height="56"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bBP-vy-2hI">
-                            <rect key="frame" x="36.666666666666657" y="5" width="30" height="30"/>
+                            <rect key="frame" x="26.333333333333343" y="5" width="30" height="30"/>
                             <state key="normal" image="icon_room_share"/>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共享屏幕" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiN-ty-6gm">
-                            <rect key="frame" x="29.333333333333343" y="37.666666666666664" width="45" height="13.333333333333336"/>
+                            <rect key="frame" x="19" y="37.666666666666664" width="45" height="13.333333333333336"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WwT-Th-PUV">
-                            <rect key="frame" x="0.0" y="0.0" width="103.66666666666667" height="56"/>
+                            <rect key="frame" x="0.0" y="0.0" width="82.666666666666671" height="56"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal">
                                 <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -126,20 +129,20 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jvb-bc-eLh">
-                    <rect key="frame" x="310.66666666666669" y="0.0" width="103.33333333333331" height="56"/>
+                    <rect key="frame" x="248.33333333333337" y="0.0" width="83" height="56"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="06M-LF-HQa">
-                            <rect key="frame" x="36.666666666666629" y="5" width="30" height="30"/>
-                            <state key="normal" image="icon_room_chat"/>
+                            <rect key="frame" x="26.333333333333343" y="5" width="30" height="30"/>
+                            <state key="normal" image="icon_room_member"/>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="聊天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XuJ-dd-Djb">
-                            <rect key="frame" x="40.333333333333314" y="37.666666666666664" width="22.666666666666671" height="13.333333333333336"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="参会成员" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XuJ-dd-Djb">
+                            <rect key="frame" x="18.999999999999972" y="37.666666666666664" width="45" height="13.333333333333336"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1TI-gr-363">
-                            <rect key="frame" x="0.0" y="0.0" width="103.33333333333333" height="56"/>
+                            <rect key="frame" x="0.0" y="0.0" width="83" height="56"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal">
                                 <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -156,11 +159,44 @@
                         <constraint firstItem="06M-LF-HQa" firstAttribute="centerX" secondItem="Jvb-bc-eLh" secondAttribute="centerX" id="yNi-At-LLM"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6vQ-3H-9c4">
+                    <rect key="frame" x="331.33333333333331" y="0.0" width="82.666666666666686" height="56"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F9r-Cq-TYQ">
+                            <rect key="frame" x="26.333333333333371" y="5" width="30" height="30"/>
+                            <state key="normal" image="icon_room_chat"/>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="聊天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Is-j1-g66">
+                            <rect key="frame" x="30" y="37.666666666666664" width="22.666666666666671" height="13.333333333333336"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bIj-hE-uE6">
+                            <rect key="frame" x="0.0" y="0.0" width="82.666666666666671" height="56"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal">
+                                <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="bIj-hE-uE6" firstAttribute="width" secondItem="6vQ-3H-9c4" secondAttribute="width" id="33c-zj-GRH"/>
+                        <constraint firstItem="bIj-hE-uE6" firstAttribute="centerY" secondItem="6vQ-3H-9c4" secondAttribute="centerY" id="52Q-Kh-Pmu"/>
+                        <constraint firstItem="bIj-hE-uE6" firstAttribute="centerX" secondItem="6vQ-3H-9c4" secondAttribute="centerX" id="ETb-gC-Hsz"/>
+                        <constraint firstItem="F9r-Cq-TYQ" firstAttribute="centerX" secondItem="6vQ-3H-9c4" secondAttribute="centerX" id="NRC-Ru-V9F"/>
+                        <constraint firstItem="bIj-hE-uE6" firstAttribute="height" secondItem="6vQ-3H-9c4" secondAttribute="height" id="ZUW-nS-kdF"/>
+                        <constraint firstItem="1Is-j1-g66" firstAttribute="centerX" secondItem="F9r-Cq-TYQ" secondAttribute="centerX" id="sfH-uJ-WAR"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="a7E-G2-Tp2"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Jvb-bc-eLh" firstAttribute="width" secondItem="PSq-Wf-AFx" secondAttribute="width" id="1R2-ef-NLI"/>
+                <constraint firstItem="F9r-Cq-TYQ" firstAttribute="centerY" secondItem="06M-LF-HQa" secondAttribute="centerY" id="48r-hq-SgO"/>
+                <constraint firstItem="6vQ-3H-9c4" firstAttribute="centerY" secondItem="Jvb-bc-eLh" secondAttribute="centerY" id="5Sp-mG-mez"/>
                 <constraint firstItem="06M-LF-HQa" firstAttribute="centerY" secondItem="bBP-vy-2hI" secondAttribute="centerY" id="7Ay-h3-Xje"/>
                 <constraint firstItem="PSq-Wf-AFx" firstAttribute="width" secondItem="hjU-8b-5qb" secondAttribute="width" id="Adc-ug-A6E"/>
                 <constraint firstItem="fiN-ty-6gm" firstAttribute="centerY" secondItem="8vS-gr-L4I" secondAttribute="centerY" id="Be3-lV-asE"/>
@@ -170,14 +206,18 @@
                 <constraint firstItem="bBP-vy-2hI" firstAttribute="centerY" secondItem="SQE-UG-wdT" secondAttribute="centerY" id="Jam-mS-Q19"/>
                 <constraint firstItem="hjU-8b-5qb" firstAttribute="leading" secondItem="P4Q-QN-vpy" secondAttribute="trailing" id="JyP-rV-gXq"/>
                 <constraint firstItem="XuJ-dd-Djb" firstAttribute="centerY" secondItem="fiN-ty-6gm" secondAttribute="centerY" id="LJ4-P6-bIC"/>
+                <constraint firstItem="1Is-j1-g66" firstAttribute="centerY" secondItem="XuJ-dd-Djb" secondAttribute="centerY" id="MIZ-Qp-Lg4"/>
                 <constraint firstItem="PSq-Wf-AFx" firstAttribute="leading" secondItem="hjU-8b-5qb" secondAttribute="trailing" id="NZK-1S-a7W"/>
+                <constraint firstItem="6vQ-3H-9c4" firstAttribute="height" secondItem="Jvb-bc-eLh" secondAttribute="height" id="OsN-ub-Yt8"/>
+                <constraint firstItem="a7E-G2-Tp2" firstAttribute="trailing" secondItem="6vQ-3H-9c4" secondAttribute="trailing" id="QYm-vx-soj"/>
                 <constraint firstItem="hjU-8b-5qb" firstAttribute="height" secondItem="P4Q-QN-vpy" secondAttribute="height" id="Son-3t-JE1"/>
+                <constraint firstItem="6vQ-3H-9c4" firstAttribute="leading" secondItem="Jvb-bc-eLh" secondAttribute="trailing" id="W5i-TX-vUw"/>
                 <constraint firstItem="P4Q-QN-vpy" firstAttribute="leading" secondItem="a7E-G2-Tp2" secondAttribute="leading" id="Wmg-fj-KS0"/>
                 <constraint firstItem="Jvb-bc-eLh" firstAttribute="height" secondItem="PSq-Wf-AFx" secondAttribute="height" id="arj-8h-EFB"/>
                 <constraint firstItem="Jvb-bc-eLh" firstAttribute="leading" secondItem="PSq-Wf-AFx" secondAttribute="trailing" id="eoD-S8-Y3d"/>
                 <constraint firstItem="PSq-Wf-AFx" firstAttribute="height" secondItem="hjU-8b-5qb" secondAttribute="height" id="f35-ep-Ce3"/>
-                <constraint firstItem="a7E-G2-Tp2" firstAttribute="trailing" secondItem="Jvb-bc-eLh" secondAttribute="trailing" id="iyq-QN-Qf1"/>
                 <constraint firstItem="PSq-Wf-AFx" firstAttribute="centerY" secondItem="hjU-8b-5qb" secondAttribute="centerY" id="kG4-IY-AmS"/>
+                <constraint firstItem="6vQ-3H-9c4" firstAttribute="width" secondItem="Jvb-bc-eLh" secondAttribute="width" id="lUL-t8-EPR"/>
                 <constraint firstItem="SQE-UG-wdT" firstAttribute="centerY" secondItem="p0X-KU-gKF" secondAttribute="centerY" id="orI-GZ-1xo"/>
                 <constraint firstItem="Jvb-bc-eLh" firstAttribute="centerY" secondItem="PSq-Wf-AFx" secondAttribute="centerY" id="v6c-F3-Gph"/>
                 <constraint firstItem="hjU-8b-5qb" firstAttribute="centerY" secondItem="P4Q-QN-vpy" secondAttribute="centerY" id="vuB-EK-LBM"/>
@@ -187,9 +227,10 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_room_audio" width="30" height="30"/>
+        <image name="icon_room_camera" width="30" height="30"/>
         <image name="icon_room_chat" width="30" height="30"/>
+        <image name="icon_room_member" width="30" height="30"/>
+        <image name="icon_room_microphone" width="30" height="30"/>
         <image name="icon_room_share" width="30" height="30"/>
-        <image name="icon_room_video" width="30" height="30"/>
     </resources>
 </document>

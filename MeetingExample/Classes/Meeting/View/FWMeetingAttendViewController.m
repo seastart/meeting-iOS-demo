@@ -45,6 +45,14 @@
     [self buildView];
 }
 
+#pragma mark - 页面出现前
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    /// 显示顶部导航栏
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 #pragma mark - 初始化UI
 /// 初始化UI
 - (void)buildView {
@@ -178,6 +186,13 @@
         if (!kStringIsEmpty(message)) {
             [FWToastBridge showToastAction:message];
         }
+    }];
+    
+    /// 监听入会成功订阅
+    [self.viewModel.succeedSubject subscribeNext:^(NSNumber * _Nullable value) {
+        @strongify(self);
+        /// 跳转房间页面
+        [self push:@"FWRoomViewController" info:[value stringValue] block:nil];
     }];
 }
 

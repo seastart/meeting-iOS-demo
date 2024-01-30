@@ -22,21 +22,10 @@
 		F4124BFF289A5D030075EB82 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AA7796288AA21900EBC0E7 /* ReplayKit.framework */; };
 		F4219D2229AC88510069483A /* Login.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4219D2129AC88510069483A /* Login.xcassets */; };
 		F4219D2C29AD988C0069483A /* CALayer+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D2B29AD988C0069483A /* CALayer+Extension.m */; };
-		F4219D3129AD9E270069483A /* FWMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D2F29AD9E270069483A /* FWMessageViewController.m */; };
-		F4219D3229AD9E270069483A /* FWMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4219D3029AD9E270069483A /* FWMessageViewController.xib */; };
 		F4219D3829ADABAB0069483A /* UIScrollView+AutoHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D3529ADABAB0069483A /* UIScrollView+AutoHeight.m */; };
 		F4219D3929ADABAB0069483A /* UITextView+AutoHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D3629ADABAB0069483A /* UITextView+AutoHeight.m */; };
-		F4219D3C29ADAFB00069483A /* FWMessageTableSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D3B29ADAFB00069483A /* FWMessageTableSectionHeaderView.m */; };
-		F4219D3E29ADAFBB0069483A /* FWMessageTableSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4219D3D29ADAFBB0069483A /* FWMessageTableSectionHeaderView.xib */; };
-		F4219D4229ADB1760069483A /* FWMessageMineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D4029ADB1760069483A /* FWMessageMineTableViewCell.m */; };
-		F4219D4329ADB1760069483A /* FWMessageMineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4219D4129ADB1760069483A /* FWMessageMineTableViewCell.xib */; };
-		F4219D4729ADB1850069483A /* FWMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D4529ADB1850069483A /* FWMessageTableViewCell.m */; };
-		F4219D4829ADB1850069483A /* FWMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4219D4629ADB1850069483A /* FWMessageTableViewCell.xib */; };
-		F4219D4B29ADCE440069483A /* FWMessageChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D4A29ADCE440069483A /* FWMessageChatManager.m */; };
-		F4219D4E29ADCEA90069483A /* FWMessageChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D4D29ADCEA90069483A /* FWMessageChatModel.m */; };
 		F4219D5229ADD2530069483A /* FWDateBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D5129ADD2530069483A /* FWDateBridge.m */; };
 		F4219D5529ADD78E0069483A /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D5429ADD78E0069483A /* UIView+Extension.m */; };
-		F4219D5829ADE8790069483A /* FWMessageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D5729ADE8790069483A /* FWMessageViewModel.m */; };
 		F4219D6129AE00230069483A /* FWHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D6029AE00230069483A /* FWHomeModel.m */; };
 		F4219D6629AEF6A30069483A /* FWRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D6429AEF6A30069483A /* FWRoomViewController.m */; };
 		F4219D6729AEF6A30069483A /* FWRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4219D6529AEF6A30069483A /* FWRoomViewController.xib */; };
@@ -223,32 +212,14 @@
 		F4219D2129AC88510069483A /* Login.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Login.xcassets; sourceTree = "<group>"; };
 		F4219D2A29AD988C0069483A /* CALayer+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+Extension.h"; sourceTree = "<group>"; };
 		F4219D2B29AD988C0069483A /* CALayer+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Extension.m"; sourceTree = "<group>"; };
-		F4219D2E29AD9E270069483A /* FWMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMessageViewController.h; sourceTree = "<group>"; };
-		F4219D2F29AD9E270069483A /* FWMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMessageViewController.m; sourceTree = "<group>"; };
-		F4219D3029AD9E270069483A /* FWMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWMessageViewController.xib; sourceTree = "<group>"; };
 		F4219D3429ADABAB0069483A /* UITextView+AutoHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+AutoHeight.h"; sourceTree = "<group>"; };
 		F4219D3529ADABAB0069483A /* UIScrollView+AutoHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+AutoHeight.m"; sourceTree = "<group>"; };
 		F4219D3629ADABAB0069483A /* UITextView+AutoHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+AutoHeight.m"; sourceTree = "<group>"; };
 		F4219D3729ADABAB0069483A /* UIScrollView+AutoHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+AutoHeight.h"; sourceTree = "<group>"; };
-		F4219D3A29ADAFB00069483A /* FWMessageTableSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMessageTableSectionHeaderView.h; sourceTree = "<group>"; };
-		F4219D3B29ADAFB00069483A /* FWMessageTableSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMessageTableSectionHeaderView.m; sourceTree = "<group>"; };
-		F4219D3D29ADAFBB0069483A /* FWMessageTableSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWMessageTableSectionHeaderView.xib; sourceTree = "<group>"; };
-		F4219D3F29ADB1760069483A /* FWMessageMineTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMessageMineTableViewCell.h; sourceTree = "<group>"; };
-		F4219D4029ADB1760069483A /* FWMessageMineTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMessageMineTableViewCell.m; sourceTree = "<group>"; };
-		F4219D4129ADB1760069483A /* FWMessageMineTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWMessageMineTableViewCell.xib; sourceTree = "<group>"; };
-		F4219D4429ADB1850069483A /* FWMessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMessageTableViewCell.h; sourceTree = "<group>"; };
-		F4219D4529ADB1850069483A /* FWMessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMessageTableViewCell.m; sourceTree = "<group>"; };
-		F4219D4629ADB1850069483A /* FWMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWMessageTableViewCell.xib; sourceTree = "<group>"; };
-		F4219D4929ADCE440069483A /* FWMessageChatManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMessageChatManager.h; sourceTree = "<group>"; };
-		F4219D4A29ADCE440069483A /* FWMessageChatManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMessageChatManager.m; sourceTree = "<group>"; };
-		F4219D4C29ADCEA90069483A /* FWMessageChatModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMessageChatModel.h; sourceTree = "<group>"; };
-		F4219D4D29ADCEA90069483A /* FWMessageChatModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMessageChatModel.m; sourceTree = "<group>"; };
 		F4219D5029ADD2530069483A /* FWDateBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWDateBridge.h; sourceTree = "<group>"; };
 		F4219D5129ADD2530069483A /* FWDateBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWDateBridge.m; sourceTree = "<group>"; };
 		F4219D5329ADD78E0069483A /* UIView+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		F4219D5429ADD78E0069483A /* UIView+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
-		F4219D5629ADE8790069483A /* FWMessageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMessageViewModel.h; sourceTree = "<group>"; };
-		F4219D5729ADE8790069483A /* FWMessageViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMessageViewModel.m; sourceTree = "<group>"; };
 		F4219D5F29AE00230069483A /* FWHomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWHomeModel.h; sourceTree = "<group>"; };
 		F4219D6029AE00230069483A /* FWHomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWHomeModel.m; sourceTree = "<group>"; };
 		F4219D6329AEF6A30069483A /* FWRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRoomViewController.h; sourceTree = "<group>"; };
@@ -616,8 +587,8 @@
 				F49A41162B55286A0049DF6D /* Tabbar.xcassets */,
 				F43CDA9226C69EEE00FBB94D /* Home.xcassets */,
 				F49A412C2B565EB70049DF6D /* Meeting.xcassets */,
-				F49A413E2B568F8D0049DF6D /* Account.xcassets */,
 				F45C830B27D6F50D008EEA31 /* Room.xcassets */,
+				F49A413E2B568F8D0049DF6D /* Account.xcassets */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -691,9 +662,8 @@
 				F43AD8502728EE690056B3EE /* Login */,
 				F40B634426C2933500F42370 /* Home */,
 				F49A411D2B565CBC0049DF6D /* Meeting */,
-				F49A41072B5523350049DF6D /* Account */,
-				F4219D2D29AD9DFA0069483A /* Message */,
 				F4DA7C132726DB78003FDE9B /* Room */,
+				F49A41072B5523350049DF6D /* Account */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -777,17 +747,6 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
-		F4219D2D29AD9DFA0069483A /* Message */ = {
-			isa = PBXGroup;
-			children = (
-				F4219D5C29ADED4D0069483A /* Manager */,
-				F4219D5929ADED070069483A /* Model */,
-				F4219D5A29ADED1D0069483A /* View */,
-				F4219D5B29ADED350069483A /* ViewModel */,
-			);
-			path = Message;
-			sourceTree = "<group>";
-		};
 		F4219D3329ADABAB0069483A /* AutoHeightTextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -806,52 +765,6 @@
 				F4219D5129ADD2530069483A /* FWDateBridge.m */,
 			);
 			path = DateBridge;
-			sourceTree = "<group>";
-		};
-		F4219D5929ADED070069483A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				F4219D4C29ADCEA90069483A /* FWMessageChatModel.h */,
-				F4219D4D29ADCEA90069483A /* FWMessageChatModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		F4219D5A29ADED1D0069483A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				F4219D2E29AD9E270069483A /* FWMessageViewController.h */,
-				F4219D2F29AD9E270069483A /* FWMessageViewController.m */,
-				F4219D3029AD9E270069483A /* FWMessageViewController.xib */,
-				F4219D3A29ADAFB00069483A /* FWMessageTableSectionHeaderView.h */,
-				F4219D3B29ADAFB00069483A /* FWMessageTableSectionHeaderView.m */,
-				F4219D3D29ADAFBB0069483A /* FWMessageTableSectionHeaderView.xib */,
-				F4219D3F29ADB1760069483A /* FWMessageMineTableViewCell.h */,
-				F4219D4029ADB1760069483A /* FWMessageMineTableViewCell.m */,
-				F4219D4129ADB1760069483A /* FWMessageMineTableViewCell.xib */,
-				F4219D4429ADB1850069483A /* FWMessageTableViewCell.h */,
-				F4219D4529ADB1850069483A /* FWMessageTableViewCell.m */,
-				F4219D4629ADB1850069483A /* FWMessageTableViewCell.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		F4219D5B29ADED350069483A /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				F4219D5629ADE8790069483A /* FWMessageViewModel.h */,
-				F4219D5729ADE8790069483A /* FWMessageViewModel.m */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		F4219D5C29ADED4D0069483A /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				F4219D4929ADCE440069483A /* FWMessageChatManager.h */,
-				F4219D4A29ADCE440069483A /* FWMessageChatManager.m */,
-			);
-			path = Manager;
 			sourceTree = "<group>";
 		};
 		F4219D5D29ADF1360069483A /* View */ = {
@@ -1247,19 +1160,15 @@
 				F4DA7C8B27279E62003FDE9B /* Common.xcassets in Resources */,
 				F49A410F2B5523650049DF6D /* FWAccountViewController.xib in Resources */,
 				F40B619D26C27D0C00F42370 /* AppIcon.xcassets in Resources */,
-				F4219D4829ADB1850069483A /* FWMessageTableViewCell.xib in Resources */,
 				F4219D7629AF21B10069483A /* FWRoomMainView.xib in Resources */,
 				F43AD8552728EE8B0056B3EE /* FWLoginViewController.xib in Resources */,
 				F49A41252B565D8B0049DF6D /* FWMeetingEntryViewController.xib in Resources */,
 				F49A411C2B55399F0049DF6D /* FWHomeTableViewCell.xib in Resources */,
 				F4219D6C29AF05C80069483A /* FWRoomTopView.xib in Resources */,
 				F482EEF429B5DA6600815C9C /* FWRoomCaptureView.xib in Resources */,
-				F4219D3229AD9E270069483A /* FWMessageViewController.xib in Resources */,
 				F40B634926C2936C00F42370 /* FWHomeViewController.xib in Resources */,
 				F429AC682B456957003D127D /* FWRegisterViewController.xib in Resources */,
-				F4219D4329ADB1760069483A /* FWMessageMineTableViewCell.xib in Resources */,
 				F4219D8829B04C130069483A /* FWRoomMemberCollectionViewCell.xib in Resources */,
-				F4219D3E29ADAFBB0069483A /* FWMessageTableSectionHeaderView.xib in Resources */,
 				F4219D7129AF05DD0069483A /* FWRoomBottomView.xib in Resources */,
 				F49A41562B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.xib in Resources */,
 				F49A41172B55286A0049DF6D /* Tabbar.xcassets in Resources */,
@@ -1399,16 +1308,13 @@
 			files = (
 				F482EF2329B88C3F00815C9C /* UIView+EmptyView.m in Sources */,
 				F49A40F32B4BF1CE0049DF6D /* FWRegisterUserinfoViewModel.m in Sources */,
-				F4219D4E29ADCEA90069483A /* FWMessageChatModel.m in Sources */,
 				F4219D7429AF21A90069483A /* FWRoomMainView.m in Sources */,
 				F4219D3829ADABAB0069483A /* UIScrollView+AutoHeight.m in Sources */,
 				F40B61CA26C27D0C00F42370 /* FWToastBridge.m in Sources */,
-				F4219D4729ADB1850069483A /* FWMessageTableViewCell.m in Sources */,
 				F4219D7929AF225E0069483A /* FWRoomStatusView.m in Sources */,
 				F482EEF229B5DA5E00815C9C /* FWRoomCaptureView.m in Sources */,
 				F49A41502B57AAB20049DF6D /* FWAccountPrivacyViewController.m in Sources */,
 				F429AC6B2B47A8EA003D127D /* FWRegisterViewModel.m in Sources */,
-				F4219D4B29ADCE440069483A /* FWMessageChatManager.m in Sources */,
 				F4219D8729B04C130069483A /* FWRoomMemberCollectionViewCell.m in Sources */,
 				F4219D2C29AD988C0069483A /* CALayer+Extension.m in Sources */,
 				F49A412B2B565DFD0049DF6D /* FWMeetingEntryModel.m in Sources */,
@@ -1424,9 +1330,7 @@
 				F43AD85C2728F1E70056B3EE /* FWLoginViewModel.m in Sources */,
 				F49A40EF2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.m in Sources */,
 				F482EF1A29B885D900815C9C /* FWBaseEmptyView.m in Sources */,
-				F4219D3129AD9E270069483A /* FWMessageViewController.m in Sources */,
 				F43AD8542728EE8B0056B3EE /* FWLoginViewController.m in Sources */,
-				F4219D3C29ADAFB00069483A /* FWMessageTableSectionHeaderView.m in Sources */,
 				F43AD83D2727F1780056B3EE /* FWHomeViewModel.m in Sources */,
 				F40B634826C2936C00F42370 /* FWHomeViewController.m in Sources */,
 				F4219D8B29B055AD0069483A /* FWRoomMemberModel.m in Sources */,
@@ -1460,10 +1364,8 @@
 				F4219D3929ADABAB0069483A /* UITextView+AutoHeight.m in Sources */,
 				F4219D8329B04B1D0069483A /* FWRoomMemberView.m in Sources */,
 				F482EF0229B6DF9900815C9C /* FWToolBridge.m in Sources */,
-				F4219D4229ADB1760069483A /* FWMessageMineTableViewCell.m in Sources */,
 				F429AC672B456957003D127D /* FWRegisterViewController.m in Sources */,
 				F49A41122B5523840049DF6D /* FWAccountViewModel.m in Sources */,
-				F4219D5829ADE8790069483A /* FWMessageViewModel.m in Sources */,
 				F43AD8592728EF4D0056B3EE /* FWEntryBridge.m in Sources */,
 				F40B61A426C27D0C00F42370 /* main.m in Sources */,
 			);
@@ -1712,7 +1614,7 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MeetingBroadcastUpload/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = SRTC;
+				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 SailorGa. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -1745,7 +1647,7 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MeetingBroadcastUpload/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = SRTC;
+				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 SailorGa. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -1778,7 +1680,7 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MeetingBroadcastUpload/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = SRTC;
+				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 SailorGa. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

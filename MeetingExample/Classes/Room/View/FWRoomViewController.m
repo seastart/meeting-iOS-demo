@@ -40,6 +40,8 @@
     [super viewWillAppear:animated];
     /// 限制锁屏
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    /// 隐藏顶部导航栏
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     /// 更改状态栏颜色为白色
     [self statusBarAppearanceUpdateWithHiden:NO barStyle:UIStatusBarStyleLightContent];
 }
@@ -110,42 +112,9 @@
     
     /// 标记加入房间状态
     self.joinRoomStatus = YES;
-    
-//    /// 创建扩展信息
-//    FWUserExtendModel *extendModel = [[FWUserExtendModel alloc] init];
-//    /// 设置默认视频状态
-//    extendModel.videoState = YES;
-//    /// 设置默认音频状态
-//    extendModel.audioState = YES;
-//    /// 创建账户对象
-//    RTCEngineUserModel *userModel = [[RTCEngineUserModel alloc] init];
-//    /// 设置账户扩展信息
-//    userModel.props = extendModel;
-//    
-//    /// 加入房间
-//    RTCEngineError errorCode = [[FWEngineBridge sharedManager] joinRoomWithRoomNo:roomNo userModel:userModel];
-//    /// 加入房间成功
-//    if (errorCode == RTCEngineErrorOK) {
-//        /// 结束此次操作
-//        return;
-//    }
-//    NSString *toastStr = [NSString stringWithFormat:@"加入房间失败 errorCode = %ld", errorCode];
-//    [FWToastBridge showToastAction:toastStr];
-//    SGLOG(@"%@", toastStr);
-//    /// 加入房间失败，结束并退出当前页面
-//    [self joinRoomFailAlert:errorCode];
 }
 
 #pragma mark - ----- FWRoomMainViewDelegate的代理方法 -----
-#pragma mark 变更信息事件回调
-/// 变更信息事件回调
-/// @param mainView 主窗口视图
-- (void)onChangeEventMainView:(FWRoomMainView *)mainView {
-    
-    /// 修改成员信息弹窗
-    [self changeUserInfoAlert];
-}
-
 #pragma mark 聊天事件回调
 /// 聊天事件回调
 /// @param mainView 主窗口视图
@@ -153,6 +122,22 @@
     
     /// 跳转消息页面
     [self push:@"FWMessageViewController" block:nil];
+}
+
+#pragma mark 成员管理事件回调
+/// 成员管理事件回调
+/// @param mainView 主窗口视图
+- (void)onMemberEventMainView:(FWRoomMainView *)mainView {
+    
+    
+}
+
+#pragma mark 举报事件回调
+/// 举报事件回调
+/// @param mainView 主窗口视图
+- (void)onReportEventMainView:(FWRoomMainView *)mainView {
+    
+    
 }
 
 #pragma mark 挂断事件回调
@@ -184,8 +169,7 @@
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
     }];
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        /// 关闭屏幕录制
-//        [[FWEngineBridge sharedManager] stopScreenRecord];
+        
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];
@@ -200,7 +184,7 @@
 - (void)mainView:(FWRoomMainView *)mainView didSelectItemMemberModel:(FWRoomMemberModel *)memberModel didIndexPath:(NSIndexPath *)indexPath {
     
     /// 订阅成员轨道弹窗
-    [self subscribeMemberAlert:memberModel];
+    /// [self subscribeMemberAlert:memberModel];
 }
 
 #pragma mark - 修改成员信息弹窗
@@ -233,7 +217,6 @@
         textField.returnKeyType = UIReturnKeyDone;
         textField.placeholder = @"请输入新昵称";
         textField.clearButtonMode = UITextFieldViewModeAlways;
-//        textField.text = [[FWStoreDataBridge sharedManager] getUserModel].name;
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
     }];
@@ -253,108 +236,15 @@
             [FWToastBridge showToastAction:@"用户昵称包含无效字符"];
             return;
         }
-        
-//        /// 创建用户信息
-//        RTCEngineUserModel *memberModel = [[RTCEngineUserModel alloc] init];
-//        /// 设置新的昵称
-//        memberModel.name = name;
-//        /// 变更用户信息
-//        RTCEngineError errorCode = [[FWEngineBridge sharedManager] changeWithUserModel:memberModel];
-//        if (errorCode != RTCEngineErrorOK) {
-//            NSString *toastStr = [NSString stringWithFormat:@"变更用户信息失败 errorCode = %ld", errorCode];
-//            [FWToastBridge showToastAction:toastStr];
-//            SGLOG(@"%@", toastStr);
-//        }
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-#pragma mark - 订阅成员轨道弹窗
-/// 订阅成员轨道弹窗
-/// @param memberModel 成员信息
-- (void)subscribeMemberAlert:(FWRoomMemberModel *)memberModel {
-    
-//    /// 获取成员详细信息
-//    RTCEngineUserModel *userModel = [[FWEngineBridge sharedManager] findMemberWithUserId:memberModel.uid];
-//    if (!userModel) {
-//        [FWToastBridge showToastAction:@"该成员已离线"];
-//        return;
-//    }
-//    
-//    /// 创建对话框标题
-//    NSString *title = [NSString stringWithFormat:@"%@ 所有发送流类型", [userModel.name nicknameSuitScanf]];
-//    
-//    @weakify(self);
-//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:isPhone ? UIAlertControllerStyleActionSheet : UIAlertControllerStyleAlert];
-//    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-//    }];
-//    [alert addAction:cancelAction];
-//    
-//    for (RTCEngineStreamModel *streamModel in userModel.streams) {
-//        /// 显示视频类型的轨道列表
-//        if (streamModel.mediaType == RTCMediaTypeVideo) {
-//            NSString *title = @"未知流";
-//            /// 添加轨道列表
-//            switch (streamModel.type) {
-//                case 0:
-//                    title = @"大流";
-//                    break;
-//                case 1:
-//                    title = @"小流";
-//                    break;
-//                case 2:
-//                    title = @"共享流";
-//                    break;
-//                case 3:
-//                    title = @"音频流";
-//                    break;
-//                default:
-//                    title = @"未知流";
-//                    break;
-//            }
-//            UIAlertAction *trackAction = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-//                @strongify(self);
-//                /// 订阅成员视频流
-//                [self.roomMainView subscribeWithMemberModel:memberModel trackId:streamModel.id subscribe:YES];
-//            }];
-//            [alert addAction:trackAction];
-//        }
-//    }
-//    
-//    UIAlertAction *emptyAction = [UIAlertAction actionWithTitle:@"空" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-//        @strongify(self);
-//        /// 取消订阅成员视频流
-//        [self.roomMainView subscribeWithMemberModel:memberModel trackId:memberModel.trackIdentifier subscribe:NO];
-//    }];
-//    [alert addAction:emptyAction];
-//    
-//    [self presentViewController:alert animated:YES completion:nil];
-}
-
-#pragma mark - 加入房间失败
-//- (void)joinRoomFailAlert:(RTCEngineError)errorCode {
-//    
-//    @weakify(self);
-//    
-//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"加入房间失败(%ld)", errorCode] preferredStyle:UIAlertControllerStyleAlert];
-//    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-//        @strongify(self);
-//        /// 离开房间页面
-//        [self pop:1];
-//    }];
-//    [alert addAction:cancelAction];
-//    [self presentViewController:alert animated:YES completion:nil];
-//}
-
 #pragma mark - 资源释放
 - (void)dealloc {
     
-    /// 退出房间
-//    [[FWEngineBridge sharedManager] leaveRoom];
-    /// 清空聊天数据
-    [[FWMessageChatManager sharedManager] cleanChatsCache];
     /// 取消限制锁屏
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
     /// 移除所有监听

@@ -28,6 +28,4 @@
 #import "NSString+Extension.h"
 #import "UITextView+AutoHeight.h"
 
-#import "FWMessageChatManager.h"
-
 #endif /* FWCommons_h */

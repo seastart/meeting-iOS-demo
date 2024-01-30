@@ -76,7 +76,7 @@
     self.loading = NO;
     
     /// 回调请求成功
-    [self.succeedSubject sendNext:nil];
+    [self.succeedSubject sendNext:roomNo];
 }
 
 @end

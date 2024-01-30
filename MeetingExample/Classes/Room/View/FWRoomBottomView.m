@@ -34,6 +34,13 @@
 /// 共享按钮标题
 @property (weak, nonatomic) IBOutlet UILabel *sharingButtonLable;
 
+/// 成员按钮
+@property (weak, nonatomic) IBOutlet UIButton *memberButton;
+/// 成员按钮图标
+@property (weak, nonatomic) IBOutlet UIButton *memberButtonImage;
+/// 成员按钮标题
+@property (weak, nonatomic) IBOutlet UILabel *memberButtonLable;
+
 /// 聊天按钮
 @property (weak, nonatomic) IBOutlet UIButton *chatButton;
 /// 聊天按钮图标
@@ -104,11 +111,11 @@
         @strongify(self);
         if (value.boolValue) {
             /// 音频按钮选中
-            [self.audioButtonImage setImage:kGetImage(@"icon_room_audio_un") forState:UIControlStateNormal];
+            [self.audioButtonImage setImage:kGetImage(@"icon_room_microphone_un") forState:UIControlStateNormal];
             [self.audioButtonLable setText:@"解除静音"];
         } else {
             /// 音频按钮未选中
-            [self.audioButtonImage setImage:kGetImage(@"icon_room_audio") forState:UIControlStateNormal];
+            [self.audioButtonImage setImage:kGetImage(@"icon_room_microphone") forState:UIControlStateNormal];
             [self.audioButtonLable setText:@"静音"];
         }
     }];
@@ -118,11 +125,11 @@
         @strongify(self);
         if (value.boolValue) {
             /// 视频按钮选中
-            [self.videoButtonImage setImage:kGetImage(@"icon_room_video_un") forState:UIControlStateNormal];
+            [self.videoButtonImage setImage:kGetImage(@"icon_room_camera_un") forState:UIControlStateNormal];
             [self.videoButtonLable setText:NSLocalizedString(@"开启视频", nil)];
         } else {
             /// 视频按钮未选中
-            [self.videoButtonImage setImage:kGetImage(@"icon_room_video") forState:UIControlStateNormal];
+            [self.videoButtonImage setImage:kGetImage(@"icon_room_camera") forState:UIControlStateNormal];
             [self.videoButtonLable setText:NSLocalizedString(@"关闭视频", nil)];
         }
     }];
@@ -166,6 +173,21 @@
         if (self.delegate && [self.delegate respondsToSelector:@selector(bottomView:didSelectSharingButton:)]) {
             [self.delegate bottomView:self didSelectSharingButton:control];
         }
+    }];
+    
+    /// 绑定成员按钮事件
+    [[self.memberButton rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        /// 调整按钮激活状态
+        self.memberButton.enabled = NO;
+        /// 回调父组件处理
+        if (self.delegate && [self.delegate respondsToSelector:@selector(bottomView:didSelectMemberButton:)]) {
+            [self.delegate bottomView:self didSelectMemberButton:control];
+        }
+        /// 延迟重置按钮激活状态
+        FWDispatchAfter((int64_t)(1.5 * NSEC_PER_SEC), ^{
+            self.memberButton.enabled = YES;
+        });
     }];
     
     /// 绑定聊天按钮事件

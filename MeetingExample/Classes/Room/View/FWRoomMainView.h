@@ -21,10 +21,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param mainView 主窗口视图
 - (void)onChatEventMainView:(FWRoomMainView *)mainView;
 
-#pragma mark 变更信息事件回调
-/// 变更信息事件回调
+#pragma mark 成员管理事件回调
+/// 成员管理事件回调
 /// @param mainView 主窗口视图
-- (void)onChangeEventMainView:(FWRoomMainView *)mainView;
+- (void)onMemberEventMainView:(FWRoomMainView *)mainView;
+
+#pragma mark 举报事件回调
+/// 举报事件回调
+/// @param mainView 主窗口视图
+- (void)onReportEventMainView:(FWRoomMainView *)mainView;
 
 #pragma mark 挂断事件回调
 /// 挂断事件回调
@@ -51,13 +56,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet id <FWRoomMainViewDelegate> delegate;
 /// 屏幕共享状态
 @property (nonatomic, assign, readonly) BOOL screenShareStatus;
-
-#pragma mark - 订阅成员视频流
-/// 订阅成员视频流
-/// @param memberModel 成员信息
-/// @param trackId 轨道标识
-/// @param subscribe 订阅状态
-//- (void)subscribeWithMemberModel:(FWRoomMemberModel *)memberModel trackId:(RTCTrackIdentifierFlags)trackId subscribe:(BOOL)subscribe;
 
 @end
 

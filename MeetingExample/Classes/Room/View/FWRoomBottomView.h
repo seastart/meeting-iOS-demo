@@ -35,6 +35,13 @@ NS_ASSUME_NONNULL_BEGIN
 ///   - source: 事件源对象
 - (void)bottomView:(FWRoomBottomView *)bottomView didSelectSharingButton:(UIButton *)source;
 
+#pragma mark 成员管理事件回调
+/// 成员管理事件回调
+/// - Parameters:
+///   - bottomView: 工具栏视图
+///   - source: 事件源对象
+- (void)bottomView:(FWRoomBottomView *)bottomView didSelectMemberButton:(UIButton *)source;
+
 #pragma mark 聊天控制事件回调
 /// 聊天控制事件回调
 /// - Parameters:

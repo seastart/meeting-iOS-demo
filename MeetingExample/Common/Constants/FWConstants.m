@@ -15,7 +15,7 @@ NSString * const RTCENGINEUSERSIG = @"n/vspiABgssjSS0GNklnubZWv3RqnHqZlkl59cdgZ9
 #pragma mark - 服务地址
 NSString * const RTCENGINEURI = @"https://localv2.srtc.live:9000";
 #pragma mark - 房间号码
-NSString * const RTCROOMNO = @"90909090";
+NSString * const RTCROOMNO = @"909909909";
 #pragma mark - 平台描述
 NSString * const RTCTERMINALDESC = @"iOS 移动终端";
 

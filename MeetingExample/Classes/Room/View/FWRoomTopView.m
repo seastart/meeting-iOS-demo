@@ -19,12 +19,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *speakerButton;
 /// 摄像头按钮
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
+/// 举报按钮
+@property (weak, nonatomic) IBOutlet UIButton *reportButton;
 /// 时间
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 /// 房间号码
 @property (weak, nonatomic) IBOutlet UILabel *roomNoLabel;
-/// 变更信息按钮
-@property (weak, nonatomic) IBOutlet UIButton *changeButton;
 
 @end
 
@@ -93,21 +93,21 @@
         }
     }];
     
-    /// 绑定变更信息按钮事件
-    [[self.changeButton rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
-        @strongify(self);
-        /// 回调父组件处理
-        if (self.delegate && [self.delegate respondsToSelector:@selector(topView:didSelectChangeButton:)]) {
-            [self.delegate topView:self didSelectChangeButton:control];
-        }
-    }];
-    
     /// 绑定摄像头按钮事件
     [[self.cameraButton rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
         @strongify(self);
         /// 回调父组件处理
         if (self.delegate && [self.delegate respondsToSelector:@selector(topView:didSelectCameraButton:)]) {
             [self.delegate topView:self didSelectCameraButton:control];
+        }
+    }];
+    
+    /// 绑定举报按钮事件
+    [[self.reportButton rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        /// 回调父组件处理
+        if (self.delegate && [self.delegate respondsToSelector:@selector(topView:didSelectReportButton:)]) {
+            [self.delegate topView:self didSelectReportButton:control];
         }
     }];
     
@@ -137,7 +137,7 @@
     /// 设置参会时长
     [self.timeLabel setText:timeStr];
     /// 设置房间号码
-    [self.roomNoLabel setText:roomNoText];
+    [self.roomNoLabel setText:[FWToolBridge roomnoDiversionString:roomNoText]];
 }
 
 #pragma mark - 显示视图
