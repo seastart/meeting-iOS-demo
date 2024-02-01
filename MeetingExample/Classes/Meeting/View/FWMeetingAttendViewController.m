@@ -189,10 +189,11 @@
     }];
     
     /// 监听入会成功订阅
-    [self.viewModel.succeedSubject subscribeNext:^(NSNumber * _Nullable value) {
+    [self.viewModel.succeedSubject subscribeNext:^(id _Nullable value) {
         @strongify(self);
+        
         /// 跳转房间页面
-        [self push:@"FWRoomViewController" info:[value stringValue] block:nil];
+        [self push:@"FWRoomViewController" info:value block:nil];
     }];
 }
 

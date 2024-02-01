@@ -64,8 +64,23 @@ typedef enum : NSUInteger {
     FWAccountWebTypePersonal,
     FWAccountWebTypeThirdParty,
     FWAccountWebTypeAgreement,
-    FWAccountWebTypePrivacy,
+    FWAccountWebTypePrivacy
 } FWAccountWebType;
+
+
+#pragma mark - 会议共享类型
+/**
+ 会议共享类型
+
+ - FWMeetingSharingTypeNormal: 常规类型
+ - FWMeetingSharingTypeScreen: 共享屏幕
+ - FWMeetingSharingTypeWhiteboard: 共享白板
+*/
+typedef enum : NSUInteger {
+    FWMeetingSharingTypeNormal,
+    FWMeetingSharingTypeScreen,
+    FWMeetingSharingTypeWhiteboard
+} FWMeetingSharingType;
 
 @interface FWEnum : NSObject
 

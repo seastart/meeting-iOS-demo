@@ -140,6 +140,54 @@
     
 }
 
+#pragma mark 开启共享事件回调
+/// 开启共享事件回调
+/// @param mainView 主窗口视图
+- (void)onStartScreenMainView:(FWRoomMainView *)mainView {
+    
+    @weakify(self);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:isPhone ? UIAlertControllerStyleActionSheet : UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    UIAlertAction *screenAction = [UIAlertAction actionWithTitle:@"共享屏幕" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 请求开启房间共享(共享屏幕)
+        [self.roomMainView requestStartSharing:FWMeetingSharingTypeScreen];
+    }];
+    UIAlertAction *whiteboardAction = [UIAlertAction actionWithTitle:@"共享白板" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 请求开启房间共享(共享白板)
+        [self.roomMainView requestStartSharing:FWMeetingSharingTypeWhiteboard];
+    }];
+    
+    [alert addAction:cancelAction];
+    [alert addAction:screenAction];
+    [alert addAction:whiteboardAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark 停止共享事件回调
+/// 停止共享事件回调
+/// @param mainView 主窗口视图
+/// @param sharingType 共享类型
+- (void)onStopScreenMainView:(FWRoomMainView *)mainView sharingType:(FWMeetingSharingType)sharingType {
+    
+    @weakify(self);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"确定要停止共享吗？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 请求关闭房间共享
+        [self.roomMainView requestStopSharing:sharingType];
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:ensureAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 #pragma mark 挂断事件回调
 /// 挂断事件回调
 /// @param mainView 主窗口视图
@@ -147,7 +195,7 @@
     
     @weakify(self);
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"确定要离开房间吗？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"确定要离开房间吗？" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
     }];
     UIAlertAction *leaveAction = [UIAlertAction actionWithTitle:@"离开房间" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
@@ -157,22 +205,6 @@
     }];
     [alert addAction:cancelAction];
     [alert addAction:leaveAction];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-#pragma mark 停止共享事件回调
-/// 停止共享事件回调
-/// @param mainView 主窗口视图
-- (void)onStopScreenMainView:(FWRoomMainView *)mainView {
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"确定要停止共享吗？" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-    }];
-    UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        
-    }];
-    [alert addAction:cancelAction];
-    [alert addAction:ensureAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
 

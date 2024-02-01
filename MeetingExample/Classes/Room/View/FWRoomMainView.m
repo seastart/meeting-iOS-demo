@@ -41,6 +41,8 @@
 /// 底部工具栏
 @property (weak, nonatomic) IBOutlet FWRoomBottomView *roomBottomTool;
 
+/// 共享类型
+@property (assign, nonatomic) FWMeetingSharingType sharingType;
 /// 滚动内容偏移量
 @property (assign, nonatomic) NSInteger contentOffset;
 
@@ -127,6 +129,8 @@
 /// 配置属性
 - (void)setupConfig {
     
+    /// 设置默认共享类型
+    self.sharingType = FWMeetingSharingTypeNormal;
     /// 启动计时器
     [self beginTimer];
 }
@@ -172,6 +176,85 @@
         /// 置空计时器
         self.durationTimer = nil;
     }
+}
+
+#pragma mark - 唤醒屏幕录制组件视图
+/// 唤醒屏幕录制组件视图
+- (void)wakeupBroadcastPickerView {
+    
+    /// 将事件传递给屏幕录制组件的开启录制按钮
+    for (UIView *view in self.broadcastPickerView.subviews) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            [(UIButton *)view sendActionsForControlEvents:UIControlEventTouchDown | UIControlEventTouchUpInside];
+        }
+    }
+}
+
+#pragma mark - 唤起电子画板组件视图
+/// 唤起电子画板组件视图
+- (void)wakeupWhiteboardView {
+    
+    
+}
+
+#pragma mark - 请求开启房间共享
+/// 请求开启房间共享
+/// - Parameter sharingType: 共享类型
+- (void)requestStartSharing:(FWMeetingSharingType)sharingType {
+    
+    /// 保存共享类型
+    self.sharingType = sharingType;
+    /// 根据目标共享类型处理请求
+    switch (sharingType) {
+            /// 共享屏幕
+        case FWMeetingSharingTypeScreen: {
+            /// 唤醒屏幕录制组件视图
+            [self wakeupBroadcastPickerView];
+        }
+            break;
+            /// 共享白板
+        case FWMeetingSharingTypeWhiteboard: {
+            /// 唤起电子画板组件视图
+            [self wakeupWhiteboardView];
+        }
+            break;
+        default:
+            break;
+    }
+    /// 设置共享按钮选中状态
+    [self.roomBottomTool setupShareButtonSelected:YES];
+}
+
+#pragma mark - 请求关闭房间共享
+/// 请求关闭房间共享
+/// - Parameter sharingType: 共享类型
+- (void)requestStopSharing:(FWMeetingSharingType)sharingType {
+    
+    /// 重置共享类型
+    self.sharingType = FWMeetingSharingTypeNormal;
+    /// 创建提示信息
+    NSString *toastStr = @"已停止共享屏幕";
+    /// 根据目标共享类型处理请求
+    switch (sharingType) {
+            /// 共享屏幕
+        case FWMeetingSharingTypeScreen: {
+            /// 重置提示信息
+            toastStr = @"已停止共享屏幕";
+        }
+            break;
+            /// 共享白板
+        case FWMeetingSharingTypeWhiteboard: {
+            /// 重置提示信息
+            toastStr = @"已停止共享白板";
+        }
+            break;
+        default:
+            break;
+    }
+    /// 交互提示
+    [FWToastBridge showToastAction:toastStr];
+    /// 设置共享按钮选中状态
+    [self.roomBottomTool setupShareButtonSelected:NO];
 }
 
 #pragma mark - ----- FWRoomTopViewDelegate的代理方法 -----
@@ -270,7 +353,7 @@
     @weakify(self);
     /// 检测摄像头权限
     [FWToolBridge requestAuthorization:FWPermissionsStateVideo superVC:[FWEntryBridge sharedManager].appDelegate.window.rootViewController result:^(BOOL status) {
-        @strongify(self);
+//        @strongify(self);
 //        if (status) {
 //            /// 获取成员信息
 //            RTCEngineUserModel *memberModel = [[FWEngineBridge sharedManager] getMySelf];
@@ -311,17 +394,16 @@
 ///   - source: 事件源对象
 - (void)bottomView:(FWRoomBottomView *)bottomView didSelectSharingButton:(UIButton *)source {
     
-    if (source.selected) {
-        /// 回调控制器层处理
-        if (self.delegate && [self.delegate respondsToSelector:@selector(onStopScreenMainView:)]) {
-            [self.delegate onStopScreenMainView:self];
+    /// 根据当前共享状态处理请求回调
+    if (self.sharingType == FWMeetingSharingTypeNormal) {
+        /// 如果当前共享类型为常规类型(回调请求开启共享)
+        if (self.delegate && [self.delegate respondsToSelector:@selector(onStartScreenMainView:)]) {
+            [self.delegate onStartScreenMainView:self];
         }
     } else {
-        /// 将事件传递给屏幕录制组件的开启录制按钮
-        for (UIView *view in self.broadcastPickerView.subviews) {
-            if ([view isKindOfClass:[UIButton class]]) {
-                [(UIButton *)view sendActionsForControlEvents:UIControlEventTouchDown | UIControlEventTouchUpInside];
-            }
+        /// 如果当前共享类型非常规类型(回调请求关闭共享)
+        if (self.delegate && [self.delegate respondsToSelector:@selector(onStopScreenMainView:sharingType:)]) {
+            [self.delegate onStopScreenMainView:self sharingType:self.sharingType];
         }
     }
 }

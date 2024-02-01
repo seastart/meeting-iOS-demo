@@ -31,15 +31,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param mainView 主窗口视图
 - (void)onReportEventMainView:(FWRoomMainView *)mainView;
 
-#pragma mark 挂断事件回调
-/// 挂断事件回调
+#pragma mark 开启共享事件回调
+/// 开启共享事件回调
 /// @param mainView 主窗口视图
-- (void)onHangupEventMainView:(FWRoomMainView *)mainView;
+- (void)onStartScreenMainView:(FWRoomMainView *)mainView;
 
 #pragma mark 停止共享事件回调
 /// 停止共享事件回调
 /// @param mainView 主窗口视图
-- (void)onStopScreenMainView:(FWRoomMainView *)mainView;
+/// @param sharingType 共享类型
+- (void)onStopScreenMainView:(FWRoomMainView *)mainView sharingType:(FWMeetingSharingType)sharingType;
 
 #pragma mark 成员选择回调
 /// 成员选择回调
@@ -47,6 +48,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param memberModel 成员信息
 /// @param indexPath 选中索引
 - (void)mainView:(FWRoomMainView *)mainView didSelectItemMemberModel:(FWRoomMemberModel *)memberModel didIndexPath:(NSIndexPath *)indexPath;
+
+#pragma mark 挂断事件回调
+/// 挂断事件回调
+/// @param mainView 主窗口视图
+- (void)onHangupEventMainView:(FWRoomMainView *)mainView;
 
 @end
 
@@ -57,6 +63,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// 屏幕共享状态
 @property (nonatomic, assign, readonly) BOOL screenShareStatus;
 
+#pragma mark - 请求开启房间共享
+/// 请求开启房间共享
+/// - Parameter sharingType: 共享类型
+- (void)requestStartSharing:(FWMeetingSharingType)sharingType;
+
+#pragma mark - 请求关闭房间共享
+/// 请求关闭房间共享
+/// - Parameter sharingType: 共享类型
+- (void)requestStopSharing:(FWMeetingSharingType)sharingType;
 @end
 
 NS_ASSUME_NONNULL_END
