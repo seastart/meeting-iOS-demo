@@ -18,6 +18,7 @@
                 <outlet property="roomTopTool" destination="iYx-Xm-sO3" id="rx8-Lk-gYI"/>
                 <outlet property="roomTopView" destination="jdM-ug-aYU" id="1Ec-Dy-w2T"/>
                 <outlet property="scrollView" destination="L1M-2Z-8XR" id="3Xv-se-Vtb"/>
+                <outlet property="whiteboardView" destination="OOU-S8-IUk" id="0Td-no-utG"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -128,6 +129,13 @@
                         <constraint firstItem="fe2-Cg-fxa" firstAttribute="top" secondItem="vcd-gw-WbS" secondAttribute="top" id="vqo-xL-hT8"/>
                     </constraints>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OOU-S8-IUk" customClass="FWRoomWhiteboardView">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="0br-KP-GTT"/>
+                    </connections>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="0.21176470588235294" green="0.23137254901960785" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -139,7 +147,11 @@
                 <constraint firstItem="L1M-2Z-8XR" firstAttribute="top" secondItem="jdM-ug-aYU" secondAttribute="bottom" id="Dve-ze-5rh"/>
                 <constraint firstItem="vcd-gw-WbS" firstAttribute="top" secondItem="L1M-2Z-8XR" secondAttribute="bottom" id="JNh-et-Ezx"/>
                 <constraint firstAttribute="bottom" secondItem="vcd-gw-WbS" secondAttribute="bottom" id="P0z-X0-0o6"/>
+                <constraint firstAttribute="bottom" secondItem="OOU-S8-IUk" secondAttribute="bottom" id="QME-xW-v8l"/>
+                <constraint firstItem="OOU-S8-IUk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Sem-Ya-HC7"/>
+                <constraint firstAttribute="trailing" secondItem="OOU-S8-IUk" secondAttribute="trailing" id="T2f-XN-dDP"/>
                 <constraint firstItem="L1M-2Z-8XR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TIe-qN-4sz"/>
+                <constraint firstItem="OOU-S8-IUk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="d30-6M-OMR"/>
                 <constraint firstItem="yPm-Um-V5l" firstAttribute="top" secondItem="jdM-ug-aYU" secondAttribute="bottom" id="gd7-Pd-MPT"/>
                 <constraint firstItem="jdM-ug-aYU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hvQ-IK-l8Q"/>
                 <constraint firstItem="jdM-ug-aYU" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="vmw-tW-3Xs"/>

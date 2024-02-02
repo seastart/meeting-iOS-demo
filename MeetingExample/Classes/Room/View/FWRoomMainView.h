@@ -49,6 +49,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param indexPath 选中索引
 - (void)mainView:(FWRoomMainView *)mainView didSelectItemMemberModel:(FWRoomMemberModel *)memberModel didIndexPath:(NSIndexPath *)indexPath;
 
+#pragma mark 电子画板退出回调
+/// 电子画板退出回调
+/// @param mainView 主窗口视图
+- (void)onLeaveWhiteboardMainView:(FWRoomMainView *)mainView;
+
 #pragma mark 挂断事件回调
 /// 挂断事件回调
 /// @param mainView 主窗口视图

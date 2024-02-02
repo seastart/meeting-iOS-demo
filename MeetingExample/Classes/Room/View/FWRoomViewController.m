@@ -157,6 +157,8 @@
     }];
     UIAlertAction *whiteboardAction = [UIAlertAction actionWithTitle:@"共享白板" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         @strongify(self);
+        /// 更改状态栏颜色为黑色
+        [self statusBarAppearanceUpdateWithHiden:NO barStyle:UIStatusBarStyleDefault];
         /// 请求开启房间共享(共享白板)
         [self.roomMainView requestStartSharing:FWMeetingSharingTypeWhiteboard];
     }];
@@ -182,6 +184,28 @@
         @strongify(self);
         /// 请求关闭房间共享
         [self.roomMainView requestStopSharing:sharingType];
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:ensureAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark 电子画板退出回调
+/// 电子画板退出回调
+/// @param mainView 主窗口视图
+- (void)onLeaveWhiteboardMainView:(FWRoomMainView *)mainView {
+    
+    @weakify(self);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"确定要退出电子画板吗？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 更改状态栏颜色为白色
+        [self statusBarAppearanceUpdateWithHiden:NO barStyle:UIStatusBarStyleLightContent];
+        /// 关闭房间共享电子画板
+        [self.roomMainView requestStopSharing:FWMeetingSharingTypeWhiteboard];
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];

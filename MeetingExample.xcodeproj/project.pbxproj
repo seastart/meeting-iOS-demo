@@ -46,6 +46,8 @@
 		F429AC672B456957003D127D /* FWRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F429AC652B456957003D127D /* FWRegisterViewController.m */; };
 		F429AC682B456957003D127D /* FWRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F429AC662B456957003D127D /* FWRegisterViewController.xib */; };
 		F429AC6B2B47A8EA003D127D /* FWRegisterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F429AC6A2B47A8EA003D127D /* FWRegisterViewModel.m */; };
+		F42CAFF32B6BA19400D2A3F7 /* FWRoomWhiteboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CAFF22B6BA19400D2A3F7 /* FWRoomWhiteboardView.m */; };
+		F42CAFF52B6BA1A000D2A3F7 /* FWRoomWhiteboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42CAFF42B6BA19F00D2A3F7 /* FWRoomWhiteboardView.xib */; };
 		F43AD83A2727EE670056B3EE /* FWConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD8392727EE670056B3EE /* FWConstants.m */; };
 		F43AD83D2727F1780056B3EE /* FWHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD83C2727F1780056B3EE /* FWHomeViewModel.m */; };
 		F43AD8542728EE8B0056B3EE /* FWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD8522728EE8B0056B3EE /* FWLoginViewController.m */; };
@@ -250,6 +252,9 @@
 		F429AC662B456957003D127D /* FWRegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWRegisterViewController.xib; sourceTree = "<group>"; };
 		F429AC692B47A8EA003D127D /* FWRegisterViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRegisterViewModel.h; sourceTree = "<group>"; };
 		F429AC6A2B47A8EA003D127D /* FWRegisterViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRegisterViewModel.m; sourceTree = "<group>"; };
+		F42CAFF12B6BA19400D2A3F7 /* FWRoomWhiteboardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRoomWhiteboardView.h; sourceTree = "<group>"; };
+		F42CAFF22B6BA19400D2A3F7 /* FWRoomWhiteboardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRoomWhiteboardView.m; sourceTree = "<group>"; };
+		F42CAFF42B6BA19F00D2A3F7 /* FWRoomWhiteboardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWRoomWhiteboardView.xib; sourceTree = "<group>"; };
 		F437E6CD2B32E0A400C76967 /* MeetingExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingExample.entitlements; sourceTree = "<group>"; };
 		F437E6CE2B32E0BA00C76967 /* MeetingBroadcastUpload.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingBroadcastUpload.entitlements; sourceTree = "<group>"; };
 		F43AD8382727EE670056B3EE /* FWConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWConstants.h; sourceTree = "<group>"; };
@@ -1009,6 +1014,9 @@
 				F4219D8429B04C130069483A /* FWRoomMemberCollectionViewCell.h */,
 				F4219D8529B04C130069483A /* FWRoomMemberCollectionViewCell.m */,
 				F4219D8629B04C130069483A /* FWRoomMemberCollectionViewCell.xib */,
+				F42CAFF12B6BA19400D2A3F7 /* FWRoomWhiteboardView.h */,
+				F42CAFF22B6BA19400D2A3F7 /* FWRoomWhiteboardView.m */,
+				F42CAFF42B6BA19F00D2A3F7 /* FWRoomWhiteboardView.xib */,
 				F4219D7729AF225E0069483A /* FWRoomStatusView.h */,
 				F4219D7829AF225E0069483A /* FWRoomStatusView.m */,
 				F4219D7A29AF22650069483A /* FWRoomStatusView.xib */,
@@ -1155,6 +1163,7 @@
 				F40B633F26C2901F00F42370 /* MeetingExample-Info.plist in Resources */,
 				F49A415B2B57B2FB0049DF6D /* FWAccountWebKitViewController.xib in Resources */,
 				F45C830C27D6F50D008EEA31 /* Room.xcassets in Resources */,
+				F42CAFF52B6BA1A000D2A3F7 /* FWRoomWhiteboardView.xib in Resources */,
 				F43CDA9326C69EEE00FBB94D /* Home.xcassets in Resources */,
 				F49A40F02B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.xib in Resources */,
 				F4DA7C8B27279E62003FDE9B /* Common.xcassets in Resources */,
@@ -1355,6 +1364,7 @@
 				F49A41242B565D8B0049DF6D /* FWMeetingEntryViewController.m in Sources */,
 				F4219D5529ADD78E0069483A /* UIView+Extension.m in Sources */,
 				F4219D5229ADD2530069483A /* FWDateBridge.m in Sources */,
+				F42CAFF32B6BA19400D2A3F7 /* FWRoomWhiteboardView.m in Sources */,
 				F482EF0529B6E1CC00815C9C /* FWAuthToken.m in Sources */,
 				F40B633C26C27D0D00F42370 /* FWBaseNavigationViewController.m in Sources */,
 				F4219D6A29AF05C10069483A /* FWRoomTopView.m in Sources */,

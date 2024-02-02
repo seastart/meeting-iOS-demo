@@ -11,6 +11,7 @@
 #import "FWRoomBottomView.h"
 #import "FWRoomMemberView.h"
 #import "FWRoomCaptureView.h"
+#import "FWRoomWhiteboardView.h"
 #import "FWRoomExtendModel.h"
 
 /// 房间持续时长统计周期
@@ -18,7 +19,7 @@
 /// 房间持续时长统计队列
 #define FW_ROOM_DURATION_QUEUE "cn.seastart.meetingkit.duration.queue"
 
-@interface FWRoomMainView() <FWRoomMemberViewDelegate, FWRoomTopViewDelegate, FWRoomBottomViewDelegate>
+@interface FWRoomMainView() <FWRoomMemberViewDelegate, FWRoomTopViewDelegate, FWRoomBottomViewDelegate, FWRoomWhiteboardViewDelegate>
 
 /// 视图容器
 @property (strong, nonatomic) UIView *contentView;
@@ -29,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet FWRoomCaptureView *roomCaptureView;
 /// 成员列表视图
 @property (weak, nonatomic) IBOutlet FWRoomMemberView *roomMemberView;
+/// 电子画板视图
+@property (weak, nonatomic) IBOutlet FWRoomWhiteboardView *whiteboardView;
 
 /// 顶部工具视图
 @property (weak, nonatomic) IBOutlet UIView *roomTopView;
@@ -194,7 +197,8 @@
 /// 唤起电子画板组件视图
 - (void)wakeupWhiteboardView {
     
-    
+    /// 显示画板视图
+    [self.whiteboardView showView:@"https://dev.srtc.live:9000/www/wb" userId:@"9527" roomNo:@"909090" readwrite:YES];
 }
 
 #pragma mark - 请求开启房间共享
@@ -244,6 +248,8 @@
             break;
             /// 共享白板
         case FWMeetingSharingTypeWhiteboard: {
+            /// 隐藏画板视图
+            [self.whiteboardView hiddenView];
             /// 重置提示信息
             toastStr = @"已停止共享白板";
         }
@@ -334,9 +340,9 @@
 //                SGLOG(@"%@", toastStr);
 //                return;
 //            }
-//            
-//            /// 切换源按钮选中状态
-//            source.selected = !source.selected;
+            
+            /// 切换源按钮选中状态
+            source.selected = !source.selected;
 //            /// 音频发送状态
 //            [[FWEngineBridge sharedManager] enabledSendAudio:!source.selected];
 //        }
@@ -372,9 +378,9 @@
 //                SGLOG(@"%@", toastStr);
 //                return;
 //            }
-//            
-//            /// 切换源按钮选中状态
-//            source.selected = !source.selected;
+            
+            /// 切换源按钮选中状态
+            source.selected = !source.selected;
 //            /// 设置采集状态
 //            if (source.selected) {
 //                /// 停止摄像头预览
@@ -434,6 +440,38 @@
     }
 }
 
+#pragma mark - ----- FWRoomWhiteboardViewDelegate的代理方法 -----
+#pragma mark 画板加载开始事件回调
+/// 画板加载开始事件回调
+/// - Parameter whiteboardView: 电子画板视图
+- (void)whiteboardLoadingBegin:(FWRoomWhiteboardView *)whiteboardView {
+    
+    /// 标记加载状态
+    [FWToastBridge showToastAction];
+}
+
+#pragma mark 画板加载完成事件回调
+/// 画板加载完成事件回调
+/// - Parameter whiteboardView: 电子画板视图
+- (void)whiteboardLoadingFinish:(FWRoomWhiteboardView *)whiteboardView {
+    
+    /// 恢复加载状态
+    [FWToastBridge hiddenToastAction];
+}
+
+#pragma mark 离开事件回调
+/// 离开事件回调
+/// - Parameters:
+///   - whiteboardView: 电子画板视图
+///   - source: 事件源对象
+- (void)whiteboardView:(FWRoomWhiteboardView *)whiteboardView didSelectLeaveButton:(UIButton *)source {
+    
+    /// 回调控制器层处理
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onLeaveWhiteboardMainView:)]) {
+        [self.delegate onLeaveWhiteboardMainView:self];
+    }
+}
+
 #pragma mark - ----- FWRoomMemberViewDelegate的代理方法 -----
 #pragma mark 成员选择回调
 /// 成员选择回调
@@ -442,6 +480,7 @@
 /// @param memberModel 成员信息
 - (void)memberView:(FWRoomMemberView *)memberView didSelectItemAtIndexPath:(NSIndexPath *)indexPath memberModel:(FWRoomMemberModel *)memberModel {
     
+    /// 回调控制器层处理
     if (self.delegate && [self.delegate respondsToSelector:@selector(mainView:didSelectItemMemberModel:didIndexPath:)]) {
         [self.delegate mainView:self didSelectItemMemberModel:memberModel didIndexPath:indexPath];
     }
