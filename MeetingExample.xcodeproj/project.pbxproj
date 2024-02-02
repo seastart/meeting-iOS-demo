@@ -48,6 +48,17 @@
 		F429AC6B2B47A8EA003D127D /* FWRegisterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F429AC6A2B47A8EA003D127D /* FWRegisterViewModel.m */; };
 		F42CAFF32B6BA19400D2A3F7 /* FWRoomWhiteboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CAFF22B6BA19400D2A3F7 /* FWRoomWhiteboardView.m */; };
 		F42CAFF52B6BA1A000D2A3F7 /* FWRoomWhiteboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42CAFF42B6BA19F00D2A3F7 /* FWRoomWhiteboardView.xib */; };
+		F42CAFFA2B6CE5D800D2A3F7 /* FWMessageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CAFF92B6CE5D800D2A3F7 /* FWMessageViewModel.m */; };
+		F42CAFFD2B6CEA0E00D2A3F7 /* FWMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CAFFC2B6CEA0E00D2A3F7 /* FWMessageManager.m */; };
+		F42CB0002B6CEA9A00D2A3F7 /* FWMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CAFFF2B6CEA9A00D2A3F7 /* FWMessageModel.m */; };
+		F42CB00D2B6CF51300D2A3F7 /* FWMessageTableSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42CB0022B6CF51300D2A3F7 /* FWMessageTableSectionHeaderView.xib */; };
+		F42CB00E2B6CF51300D2A3F7 /* FWMessageMineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CB0032B6CF51300D2A3F7 /* FWMessageMineTableViewCell.m */; };
+		F42CB00F2B6CF51300D2A3F7 /* FWMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42CB0042B6CF51300D2A3F7 /* FWMessageViewController.xib */; };
+		F42CB0102B6CF51300D2A3F7 /* FWMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CB0062B6CF51300D2A3F7 /* FWMessageViewController.m */; };
+		F42CB0112B6CF51300D2A3F7 /* FWMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42CB0082B6CF51300D2A3F7 /* FWMessageTableViewCell.xib */; };
+		F42CB0122B6CF51300D2A3F7 /* FWMessageTableSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CB00A2B6CF51300D2A3F7 /* FWMessageTableSectionHeaderView.m */; };
+		F42CB0132B6CF51300D2A3F7 /* FWMessageMineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42CB00B2B6CF51300D2A3F7 /* FWMessageMineTableViewCell.xib */; };
+		F42CB0142B6CF51300D2A3F7 /* FWMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CB00C2B6CF51300D2A3F7 /* FWMessageTableViewCell.m */; };
 		F43AD83A2727EE670056B3EE /* FWConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD8392727EE670056B3EE /* FWConstants.m */; };
 		F43AD83D2727F1780056B3EE /* FWHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD83C2727F1780056B3EE /* FWHomeViewModel.m */; };
 		F43AD8542728EE8B0056B3EE /* FWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD8522728EE8B0056B3EE /* FWLoginViewController.m */; };
@@ -255,6 +266,24 @@
 		F42CAFF12B6BA19400D2A3F7 /* FWRoomWhiteboardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRoomWhiteboardView.h; sourceTree = "<group>"; };
 		F42CAFF22B6BA19400D2A3F7 /* FWRoomWhiteboardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRoomWhiteboardView.m; sourceTree = "<group>"; };
 		F42CAFF42B6BA19F00D2A3F7 /* FWRoomWhiteboardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWRoomWhiteboardView.xib; sourceTree = "<group>"; };
+		F42CAFF82B6CE5D800D2A3F7 /* FWMessageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMessageViewModel.h; sourceTree = "<group>"; };
+		F42CAFF92B6CE5D800D2A3F7 /* FWMessageViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMessageViewModel.m; sourceTree = "<group>"; };
+		F42CAFFB2B6CEA0E00D2A3F7 /* FWMessageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMessageManager.h; sourceTree = "<group>"; };
+		F42CAFFC2B6CEA0E00D2A3F7 /* FWMessageManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMessageManager.m; sourceTree = "<group>"; };
+		F42CAFFE2B6CEA9A00D2A3F7 /* FWMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMessageModel.h; sourceTree = "<group>"; };
+		F42CAFFF2B6CEA9A00D2A3F7 /* FWMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMessageModel.m; sourceTree = "<group>"; };
+		F42CB0012B6CF51300D2A3F7 /* FWMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWMessageViewController.h; sourceTree = "<group>"; };
+		F42CB0022B6CF51300D2A3F7 /* FWMessageTableSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FWMessageTableSectionHeaderView.xib; sourceTree = "<group>"; };
+		F42CB0032B6CF51300D2A3F7 /* FWMessageMineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWMessageMineTableViewCell.m; sourceTree = "<group>"; };
+		F42CB0042B6CF51300D2A3F7 /* FWMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FWMessageViewController.xib; sourceTree = "<group>"; };
+		F42CB0052B6CF51300D2A3F7 /* FWMessageMineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWMessageMineTableViewCell.h; sourceTree = "<group>"; };
+		F42CB0062B6CF51300D2A3F7 /* FWMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWMessageViewController.m; sourceTree = "<group>"; };
+		F42CB0072B6CF51300D2A3F7 /* FWMessageTableSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWMessageTableSectionHeaderView.h; sourceTree = "<group>"; };
+		F42CB0082B6CF51300D2A3F7 /* FWMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FWMessageTableViewCell.xib; sourceTree = "<group>"; };
+		F42CB0092B6CF51300D2A3F7 /* FWMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWMessageTableViewCell.h; sourceTree = "<group>"; };
+		F42CB00A2B6CF51300D2A3F7 /* FWMessageTableSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWMessageTableSectionHeaderView.m; sourceTree = "<group>"; };
+		F42CB00B2B6CF51300D2A3F7 /* FWMessageMineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FWMessageMineTableViewCell.xib; sourceTree = "<group>"; };
+		F42CB00C2B6CF51300D2A3F7 /* FWMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWMessageTableViewCell.m; sourceTree = "<group>"; };
 		F437E6CD2B32E0A400C76967 /* MeetingExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingExample.entitlements; sourceTree = "<group>"; };
 		F437E6CE2B32E0BA00C76967 /* MeetingBroadcastUpload.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingBroadcastUpload.entitlements; sourceTree = "<group>"; };
 		F43AD8382727EE670056B3EE /* FWConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWConstants.h; sourceTree = "<group>"; };
@@ -803,6 +832,34 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		F42CAFF62B6CDDA900D2A3F7 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				F42CB0012B6CF51300D2A3F7 /* FWMessageViewController.h */,
+				F42CB0062B6CF51300D2A3F7 /* FWMessageViewController.m */,
+				F42CB0042B6CF51300D2A3F7 /* FWMessageViewController.xib */,
+				F42CB0072B6CF51300D2A3F7 /* FWMessageTableSectionHeaderView.h */,
+				F42CB00A2B6CF51300D2A3F7 /* FWMessageTableSectionHeaderView.m */,
+				F42CB0022B6CF51300D2A3F7 /* FWMessageTableSectionHeaderView.xib */,
+				F42CB0052B6CF51300D2A3F7 /* FWMessageMineTableViewCell.h */,
+				F42CB0032B6CF51300D2A3F7 /* FWMessageMineTableViewCell.m */,
+				F42CB00B2B6CF51300D2A3F7 /* FWMessageMineTableViewCell.xib */,
+				F42CB0092B6CF51300D2A3F7 /* FWMessageTableViewCell.h */,
+				F42CB00C2B6CF51300D2A3F7 /* FWMessageTableViewCell.m */,
+				F42CB0082B6CF51300D2A3F7 /* FWMessageTableViewCell.xib */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		F42CAFF72B6CDDFA00D2A3F7 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F42CAFFB2B6CEA0E00D2A3F7 /* FWMessageManager.h */,
+				F42CAFFC2B6CEA0E00D2A3F7 /* FWMessageManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		F43AD8372727EE440056B3EE /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -993,6 +1050,8 @@
 				F4219D8A29B055AD0069483A /* FWRoomMemberModel.m */,
 				F482EF2F29C08EC700815C9C /* FWRoomExtendModel.h */,
 				F482EF3029C08EC700815C9C /* FWRoomExtendModel.m */,
+				F42CAFFE2B6CEA9A00D2A3F7 /* FWMessageModel.h */,
+				F42CAFFF2B6CEA9A00D2A3F7 /* FWMessageModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1000,6 +1059,7 @@
 		F4C417B829B09E9E00A7EBCB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F42CAFF62B6CDDA900D2A3F7 /* Message */,
 				F4219D6329AEF6A30069483A /* FWRoomViewController.h */,
 				F4219D6429AEF6A30069483A /* FWRoomViewController.m */,
 				F4219D6529AEF6A30069483A /* FWRoomViewController.xib */,
@@ -1035,6 +1095,8 @@
 			children = (
 				F4C417BA29B09EE200A7EBCB /* FWRoomViewModel.h */,
 				F4C417BB29B09EE200A7EBCB /* FWRoomViewModel.m */,
+				F42CAFF82B6CE5D800D2A3F7 /* FWMessageViewModel.h */,
+				F42CAFF92B6CE5D800D2A3F7 /* FWMessageViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1051,6 +1113,7 @@
 		F4DA7C132726DB78003FDE9B /* Room */ = {
 			isa = PBXGroup;
 			children = (
+				F42CAFF72B6CDDFA00D2A3F7 /* Manager */,
 				F4C417B729B09E8B00A7EBCB /* Model */,
 				F4C417B829B09E9E00A7EBCB /* View */,
 				F4C417B929B09EC100A7EBCB /* ViewModel */,
@@ -1162,18 +1225,22 @@
 				F49A413F2B568F8D0049DF6D /* Account.xcassets in Resources */,
 				F40B633F26C2901F00F42370 /* MeetingExample-Info.plist in Resources */,
 				F49A415B2B57B2FB0049DF6D /* FWAccountWebKitViewController.xib in Resources */,
+				F42CB0112B6CF51300D2A3F7 /* FWMessageTableViewCell.xib in Resources */,
 				F45C830C27D6F50D008EEA31 /* Room.xcassets in Resources */,
 				F42CAFF52B6BA1A000D2A3F7 /* FWRoomWhiteboardView.xib in Resources */,
 				F43CDA9326C69EEE00FBB94D /* Home.xcassets in Resources */,
+				F42CB00D2B6CF51300D2A3F7 /* FWMessageTableSectionHeaderView.xib in Resources */,
 				F49A40F02B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.xib in Resources */,
 				F4DA7C8B27279E62003FDE9B /* Common.xcassets in Resources */,
 				F49A410F2B5523650049DF6D /* FWAccountViewController.xib in Resources */,
 				F40B619D26C27D0C00F42370 /* AppIcon.xcassets in Resources */,
 				F4219D7629AF21B10069483A /* FWRoomMainView.xib in Resources */,
 				F43AD8552728EE8B0056B3EE /* FWLoginViewController.xib in Resources */,
+				F42CB00F2B6CF51300D2A3F7 /* FWMessageViewController.xib in Resources */,
 				F49A41252B565D8B0049DF6D /* FWMeetingEntryViewController.xib in Resources */,
 				F49A411C2B55399F0049DF6D /* FWHomeTableViewCell.xib in Resources */,
 				F4219D6C29AF05C80069483A /* FWRoomTopView.xib in Resources */,
+				F42CB0132B6CF51300D2A3F7 /* FWMessageMineTableViewCell.xib in Resources */,
 				F482EEF429B5DA6600815C9C /* FWRoomCaptureView.xib in Resources */,
 				F40B634926C2936C00F42370 /* FWHomeViewController.xib in Resources */,
 				F429AC682B456957003D127D /* FWRegisterViewController.xib in Resources */,
@@ -1316,6 +1383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F482EF2329B88C3F00815C9C /* UIView+EmptyView.m in Sources */,
+				F42CB0122B6CF51300D2A3F7 /* FWMessageTableSectionHeaderView.m in Sources */,
 				F49A40F32B4BF1CE0049DF6D /* FWRegisterUserinfoViewModel.m in Sources */,
 				F4219D7429AF21A90069483A /* FWRoomMainView.m in Sources */,
 				F4219D3829ADABAB0069483A /* UIScrollView+AutoHeight.m in Sources */,
@@ -1327,6 +1395,8 @@
 				F4219D8729B04C130069483A /* FWRoomMemberCollectionViewCell.m in Sources */,
 				F4219D2C29AD988C0069483A /* CALayer+Extension.m in Sources */,
 				F49A412B2B565DFD0049DF6D /* FWMeetingEntryModel.m in Sources */,
+				F42CB0002B6CEA9A00D2A3F7 /* FWMessageModel.m in Sources */,
+				F42CB0102B6CF51300D2A3F7 /* FWMessageViewController.m in Sources */,
 				F40B633B26C27D0D00F42370 /* FWBaseViewController.m in Sources */,
 				F49A41362B5666FC0049DF6D /* FWMeetingAttendViewController.m in Sources */,
 				F482EF3129C08EC700815C9C /* FWRoomExtendModel.m in Sources */,
@@ -1338,12 +1408,15 @@
 				F4219D6129AE00230069483A /* FWHomeModel.m in Sources */,
 				F43AD85C2728F1E70056B3EE /* FWLoginViewModel.m in Sources */,
 				F49A40EF2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.m in Sources */,
+				F42CB00E2B6CF51300D2A3F7 /* FWMessageMineTableViewCell.m in Sources */,
 				F482EF1A29B885D900815C9C /* FWBaseEmptyView.m in Sources */,
 				F43AD8542728EE8B0056B3EE /* FWLoginViewController.m in Sources */,
 				F43AD83D2727F1780056B3EE /* FWHomeViewModel.m in Sources */,
 				F40B634826C2936C00F42370 /* FWHomeViewController.m in Sources */,
 				F4219D8B29B055AD0069483A /* FWRoomMemberModel.m in Sources */,
+				F42CB0142B6CF51300D2A3F7 /* FWMessageTableViewCell.m in Sources */,
 				F49A411B2B55399F0049DF6D /* FWHomeTableViewCell.m in Sources */,
+				F42CAFFA2B6CE5D800D2A3F7 /* FWMessageViewModel.m in Sources */,
 				F482EEFB29B6D15200815C9C /* FWNetworkBridge.m in Sources */,
 				F49A41152B5523BE0049DF6D /* FWAccountModel.m in Sources */,
 				F49A415A2B57B2FB0049DF6D /* FWAccountWebKitViewController.m in Sources */,
@@ -1369,6 +1442,7 @@
 				F40B633C26C27D0D00F42370 /* FWBaseNavigationViewController.m in Sources */,
 				F4219D6A29AF05C10069483A /* FWRoomTopView.m in Sources */,
 				F49A410E2B5523650049DF6D /* FWAccountViewController.m in Sources */,
+				F42CAFFD2B6CEA0E00D2A3F7 /* FWMessageManager.m in Sources */,
 				F40B61A526C27D0C00F42370 /* FWAppDelegate.m in Sources */,
 				F482EF2E29BF286A00815C9C /* FWLogTraceBridge.m in Sources */,
 				F4219D3929ADABAB0069483A /* UITextView+AutoHeight.m in Sources */,
