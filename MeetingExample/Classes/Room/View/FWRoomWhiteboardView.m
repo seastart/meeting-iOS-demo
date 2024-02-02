@@ -131,6 +131,13 @@
     /// SGLOG(@"视图手势事件处理");
 }
 
+#pragma mark - 获取画板显示状态
+/// 获取画板显示状态
+- (BOOL)whiteboardHidden {
+    
+    return !self.hidden;
+}
+
 #pragma mark - 显示视图
 /// 显示视图
 /// - Parameters:

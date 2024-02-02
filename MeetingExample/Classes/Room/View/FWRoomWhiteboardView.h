@@ -38,6 +38,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 回调代理
 @property (nonatomic, weak) IBOutlet id <FWRoomWhiteboardViewDelegate> delegate;
 
+#pragma mark - 获取画板显示状态
+/// 获取画板显示状态
+- (BOOL)whiteboardHidden;
+
 #pragma mark - 显示视图
 /// 显示视图
 /// - Parameters:
