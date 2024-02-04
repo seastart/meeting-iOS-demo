@@ -6,6 +6,7 @@
 //  Copyright © 2023 SailorGa. All rights reserved.
 //
 
+#import "FWReportViewController.h"
 #import "FWRoomViewController.h"
 #import "FWRoomMemberModel.h"
 #import "FWRoomExtendModel.h"
@@ -137,7 +138,10 @@
 /// @param mainView 主窗口视图
 - (void)onReportEventMainView:(FWRoomMainView *)mainView {
     
-    
+    /// 创建举报视图
+    FWReportViewController *reportVC = [FWReportViewController creatReportViewWithTitle:@"举报"];
+    /// 跳转举报视图
+    [self presentViewController:reportVC animated:NO completion:nil];
 }
 
 #pragma mark 开启共享事件回调
@@ -219,10 +223,10 @@
     
     @weakify(self);
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"确定要离开房间吗？" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"您确定离开房间吗？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"再想想" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
     }];
-    UIAlertAction *leaveAction = [UIAlertAction actionWithTitle:@"离开房间" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    UIAlertAction *leaveAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         @strongify(self);
         /// 离开房间页面
         [self pop:1];

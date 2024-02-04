@@ -59,6 +59,11 @@
 		F42CB0122B6CF51300D2A3F7 /* FWMessageTableSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CB00A2B6CF51300D2A3F7 /* FWMessageTableSectionHeaderView.m */; };
 		F42CB0132B6CF51300D2A3F7 /* FWMessageMineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42CB00B2B6CF51300D2A3F7 /* FWMessageMineTableViewCell.xib */; };
 		F42CB0142B6CF51300D2A3F7 /* FWMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CB00C2B6CF51300D2A3F7 /* FWMessageTableViewCell.m */; };
+		F42CB0192B6F2B7D00D2A3F7 /* FWReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CB0172B6F2B7D00D2A3F7 /* FWReportViewController.m */; };
+		F42CB01A2B6F2B7D00D2A3F7 /* FWReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42CB0182B6F2B7D00D2A3F7 /* FWReportViewController.xib */; };
+		F42CB01E2B6F3EE500D2A3F7 /* FWReportCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CB01C2B6F3EE500D2A3F7 /* FWReportCollectionViewCell.m */; };
+		F42CB01F2B6F3EE500D2A3F7 /* FWReportCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42CB01D2B6F3EE500D2A3F7 /* FWReportCollectionViewCell.xib */; };
+		F42CB0222B6F71FF00D2A3F7 /* FWReportViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CB0212B6F71FF00D2A3F7 /* FWReportViewModel.m */; };
 		F43AD83A2727EE670056B3EE /* FWConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD8392727EE670056B3EE /* FWConstants.m */; };
 		F43AD83D2727F1780056B3EE /* FWHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD83C2727F1780056B3EE /* FWHomeViewModel.m */; };
 		F43AD8542728EE8B0056B3EE /* FWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD8522728EE8B0056B3EE /* FWLoginViewController.m */; };
@@ -284,6 +289,14 @@
 		F42CB00A2B6CF51300D2A3F7 /* FWMessageTableSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWMessageTableSectionHeaderView.m; sourceTree = "<group>"; };
 		F42CB00B2B6CF51300D2A3F7 /* FWMessageMineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FWMessageMineTableViewCell.xib; sourceTree = "<group>"; };
 		F42CB00C2B6CF51300D2A3F7 /* FWMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWMessageTableViewCell.m; sourceTree = "<group>"; };
+		F42CB0162B6F2B7D00D2A3F7 /* FWReportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWReportViewController.h; sourceTree = "<group>"; };
+		F42CB0172B6F2B7D00D2A3F7 /* FWReportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWReportViewController.m; sourceTree = "<group>"; };
+		F42CB0182B6F2B7D00D2A3F7 /* FWReportViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWReportViewController.xib; sourceTree = "<group>"; };
+		F42CB01B2B6F3EE500D2A3F7 /* FWReportCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWReportCollectionViewCell.h; sourceTree = "<group>"; };
+		F42CB01C2B6F3EE500D2A3F7 /* FWReportCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWReportCollectionViewCell.m; sourceTree = "<group>"; };
+		F42CB01D2B6F3EE500D2A3F7 /* FWReportCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWReportCollectionViewCell.xib; sourceTree = "<group>"; };
+		F42CB0202B6F71FF00D2A3F7 /* FWReportViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWReportViewModel.h; sourceTree = "<group>"; };
+		F42CB0212B6F71FF00D2A3F7 /* FWReportViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWReportViewModel.m; sourceTree = "<group>"; };
 		F437E6CD2B32E0A400C76967 /* MeetingExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingExample.entitlements; sourceTree = "<group>"; };
 		F437E6CE2B32E0BA00C76967 /* MeetingBroadcastUpload.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingBroadcastUpload.entitlements; sourceTree = "<group>"; };
 		F43AD8382727EE670056B3EE /* FWConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWConstants.h; sourceTree = "<group>"; };
@@ -860,6 +873,19 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		F42CB0152B6F2B5500D2A3F7 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				F42CB0162B6F2B7D00D2A3F7 /* FWReportViewController.h */,
+				F42CB0172B6F2B7D00D2A3F7 /* FWReportViewController.m */,
+				F42CB0182B6F2B7D00D2A3F7 /* FWReportViewController.xib */,
+				F42CB01B2B6F3EE500D2A3F7 /* FWReportCollectionViewCell.h */,
+				F42CB01C2B6F3EE500D2A3F7 /* FWReportCollectionViewCell.m */,
+				F42CB01D2B6F3EE500D2A3F7 /* FWReportCollectionViewCell.xib */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
 		F43AD8372727EE440056B3EE /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -1060,6 +1086,7 @@
 			isa = PBXGroup;
 			children = (
 				F42CAFF62B6CDDA900D2A3F7 /* Message */,
+				F42CB0152B6F2B5500D2A3F7 /* Report */,
 				F4219D6329AEF6A30069483A /* FWRoomViewController.h */,
 				F4219D6429AEF6A30069483A /* FWRoomViewController.m */,
 				F4219D6529AEF6A30069483A /* FWRoomViewController.xib */,
@@ -1095,6 +1122,8 @@
 			children = (
 				F4C417BA29B09EE200A7EBCB /* FWRoomViewModel.h */,
 				F4C417BB29B09EE200A7EBCB /* FWRoomViewModel.m */,
+				F42CB0202B6F71FF00D2A3F7 /* FWReportViewModel.h */,
+				F42CB0212B6F71FF00D2A3F7 /* FWReportViewModel.m */,
 				F42CAFF82B6CE5D800D2A3F7 /* FWMessageViewModel.h */,
 				F42CAFF92B6CE5D800D2A3F7 /* FWMessageViewModel.m */,
 			);
@@ -1220,6 +1249,7 @@
 				F4219D6729AEF6A30069483A /* FWRoomViewController.xib in Resources */,
 				F49A41372B5666FC0049DF6D /* FWMeetingAttendViewController.xib in Resources */,
 				F49A414C2B5785070049DF6D /* FWAccountAboutusViewController.xib in Resources */,
+				F42CB01A2B6F2B7D00D2A3F7 /* FWReportViewController.xib in Resources */,
 				F49A412D2B565EB70049DF6D /* Meeting.xcassets in Resources */,
 				F4219D7B29AF22650069483A /* FWRoomStatusView.xib in Resources */,
 				F49A413F2B568F8D0049DF6D /* Account.xcassets in Resources */,
@@ -1243,6 +1273,7 @@
 				F42CB0132B6CF51300D2A3F7 /* FWMessageMineTableViewCell.xib in Resources */,
 				F482EEF429B5DA6600815C9C /* FWRoomCaptureView.xib in Resources */,
 				F40B634926C2936C00F42370 /* FWHomeViewController.xib in Resources */,
+				F42CB01F2B6F3EE500D2A3F7 /* FWReportCollectionViewCell.xib in Resources */,
 				F429AC682B456957003D127D /* FWRegisterViewController.xib in Resources */,
 				F4219D8829B04C130069483A /* FWRoomMemberCollectionViewCell.xib in Resources */,
 				F4219D7129AF05DD0069483A /* FWRoomBottomView.xib in Resources */,
@@ -1388,7 +1419,9 @@
 				F4219D7429AF21A90069483A /* FWRoomMainView.m in Sources */,
 				F4219D3829ADABAB0069483A /* UIScrollView+AutoHeight.m in Sources */,
 				F40B61CA26C27D0C00F42370 /* FWToastBridge.m in Sources */,
+				F42CB0222B6F71FF00D2A3F7 /* FWReportViewModel.m in Sources */,
 				F4219D7929AF225E0069483A /* FWRoomStatusView.m in Sources */,
+				F42CB01E2B6F3EE500D2A3F7 /* FWReportCollectionViewCell.m in Sources */,
 				F482EEF229B5DA5E00815C9C /* FWRoomCaptureView.m in Sources */,
 				F49A41502B57AAB20049DF6D /* FWAccountPrivacyViewController.m in Sources */,
 				F429AC6B2B47A8EA003D127D /* FWRegisterViewModel.m in Sources */,
@@ -1452,6 +1485,7 @@
 				F49A41122B5523840049DF6D /* FWAccountViewModel.m in Sources */,
 				F43AD8592728EF4D0056B3EE /* FWEntryBridge.m in Sources */,
 				F40B61A426C27D0C00F42370 /* main.m in Sources */,
+				F42CB0192B6F2B7D00D2A3F7 /* FWReportViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
