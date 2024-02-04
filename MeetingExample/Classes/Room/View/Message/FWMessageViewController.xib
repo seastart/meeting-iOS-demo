@@ -11,8 +11,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FWMessageViewController">
             <connections>
                 <outlet property="contentTextView" destination="mcX-IQ-GDi" id="21a-PE-hbS"/>
-                <outlet property="inputView" destination="153-cH-oEB" id="bHk-AC-ews"/>
-                <outlet property="inputViewBottomMargin" destination="NRb-bt-Y3r" id="mci-Tj-KfS"/>
                 <outlet property="sendButton" destination="g8E-Ia-ECz" id="JEn-dN-9QH"/>
                 <outlet property="tableView" destination="ksx-8a-rRu" id="Iio-i4-363"/>
                 <outlet property="view" destination="zeG-VJ-k8r" id="S7o-cI-7HU"/>
@@ -34,10 +32,6 @@
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h86-jf-ULe">
                     <rect key="frame" x="0.0" y="768" width="393" height="84"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="153-cH-oEB">
-                    <rect key="frame" x="0.0" y="768" width="393" height="50"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mcX-IQ-GDi">
                             <rect key="frame" x="16" y="5" width="301" height="40"/>
@@ -80,12 +74,11 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="mcX-IQ-GDi" firstAttribute="leading" secondItem="153-cH-oEB" secondAttribute="leading" constant="16" id="F2Q-US-3GT"/>
-                        <constraint firstAttribute="trailing" secondItem="g8E-Ia-ECz" secondAttribute="trailing" constant="16" id="cV2-ZS-2cy"/>
-                        <constraint firstItem="g8E-Ia-ECz" firstAttribute="centerY" secondItem="mcX-IQ-GDi" secondAttribute="centerY" id="huN-u3-qYs"/>
-                        <constraint firstItem="mcX-IQ-GDi" firstAttribute="top" secondItem="153-cH-oEB" secondAttribute="top" constant="5" id="kBH-fh-laN"/>
-                        <constraint firstItem="g8E-Ia-ECz" firstAttribute="leading" secondItem="mcX-IQ-GDi" secondAttribute="trailing" constant="10" id="n6F-bs-WUj"/>
-                        <constraint firstAttribute="bottom" secondItem="mcX-IQ-GDi" secondAttribute="bottom" constant="5" id="xMX-HV-baf"/>
+                        <constraint firstAttribute="trailing" secondItem="g8E-Ia-ECz" secondAttribute="trailing" constant="16" id="5Si-pJ-5Vs"/>
+                        <constraint firstItem="g8E-Ia-ECz" firstAttribute="centerY" secondItem="mcX-IQ-GDi" secondAttribute="centerY" id="EPu-Er-TO2"/>
+                        <constraint firstItem="g8E-Ia-ECz" firstAttribute="leading" secondItem="mcX-IQ-GDi" secondAttribute="trailing" constant="10" id="TT5-KB-FJp"/>
+                        <constraint firstItem="mcX-IQ-GDi" firstAttribute="leading" secondItem="h86-jf-ULe" secondAttribute="leading" constant="16" id="oQH-Zt-2eO"/>
+                        <constraint firstItem="mcX-IQ-GDi" firstAttribute="top" secondItem="h86-jf-ULe" secondAttribute="top" constant="5" id="tth-rE-WDb"/>
                     </constraints>
                 </view>
             </subviews>
@@ -94,14 +87,11 @@
             <constraints>
                 <constraint firstItem="S08-Eq-SeU" firstAttribute="trailing" secondItem="ksx-8a-rRu" secondAttribute="trailing" id="5Xp-hR-xc8"/>
                 <constraint firstItem="ksx-8a-rRu" firstAttribute="top" secondItem="S08-Eq-SeU" secondAttribute="top" id="EQD-Jf-Hr4"/>
-                <constraint firstItem="h86-jf-ULe" firstAttribute="top" secondItem="ksx-8a-rRu" secondAttribute="bottom" id="HlD-0X-sw6"/>
-                <constraint firstItem="S08-Eq-SeU" firstAttribute="bottom" secondItem="153-cH-oEB" secondAttribute="bottom" id="NRb-bt-Y3r"/>
                 <constraint firstItem="ksx-8a-rRu" firstAttribute="leading" secondItem="S08-Eq-SeU" secondAttribute="leading" id="RdD-xh-Suj"/>
-                <constraint firstItem="153-cH-oEB" firstAttribute="leading" secondItem="h86-jf-ULe" secondAttribute="leading" id="ftZ-a0-dFh"/>
+                <constraint firstItem="h86-jf-ULe" firstAttribute="top" secondItem="ksx-8a-rRu" secondAttribute="bottom" id="fIY-ae-J0J"/>
                 <constraint firstItem="h86-jf-ULe" firstAttribute="leading" secondItem="S08-Eq-SeU" secondAttribute="leading" id="hfd-ih-1gu"/>
                 <constraint firstAttribute="bottom" secondItem="h86-jf-ULe" secondAttribute="bottom" id="inW-tV-Ch3"/>
-                <constraint firstItem="153-cH-oEB" firstAttribute="trailing" secondItem="h86-jf-ULe" secondAttribute="trailing" id="nTg-RN-4Vk"/>
-                <constraint firstItem="153-cH-oEB" firstAttribute="top" secondItem="h86-jf-ULe" secondAttribute="top" id="sgL-sx-CiX"/>
+                <constraint firstItem="S08-Eq-SeU" firstAttribute="bottom" secondItem="mcX-IQ-GDi" secondAttribute="bottom" constant="5" id="lNd-DX-afA"/>
                 <constraint firstItem="S08-Eq-SeU" firstAttribute="trailing" secondItem="h86-jf-ULe" secondAttribute="trailing" id="ufK-D8-jPa"/>
             </constraints>
             <point key="canvasLocation" x="136.64122137404578" y="78.16901408450704"/>

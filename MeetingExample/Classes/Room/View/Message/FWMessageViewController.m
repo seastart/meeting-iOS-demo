@@ -22,8 +22,6 @@ static NSString *FWMessageTableSectionHeaderViewIdentifier = @"FWMessageTableSec
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 /// 输入框组件
 @property (weak, nonatomic) IBOutlet UIView *inputView;
-/// 输入框组件下边距
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *inputViewBottomMargin;
 /// 消息输入框
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
 /// 发送按钮
@@ -94,8 +92,6 @@ static NSString *FWMessageTableSectionHeaderViewIdentifier = @"FWMessageTableSec
     
     /// 监听键盘弹出
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
-    /// 监听键盘收回
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillDisappear:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark - 设置ViewModel
@@ -141,6 +137,7 @@ static NSString *FWMessageTableSectionHeaderViewIdentifier = @"FWMessageTableSec
         /// 置空内容以及输入框数据
         self.contentTextView.text = nil;
         self.viewModel.contentText = nil;
+        [self.contentTextView resignFirstResponder];
     }];
     
     /// 绑定发送按钮事件
@@ -164,31 +161,12 @@ static NSString *FWMessageTableSectionHeaderViewIdentifier = @"FWMessageTableSec
 - (void)keyboardWillAppear:(NSNotification *)notification {
     
     NSDictionary *info = [notification userInfo];
-    /// 获取键盘高度
-    CGFloat height = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
     /// 取得键盘的动画时间，这样可以在视图上移的时候更连贯
     double duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     /// 将视图上移计算好的偏移
     [UIView animateWithDuration:duration animations:^{
-        if (@available(iOS 11.0, *)) {
-            self.inputViewBottomMargin.constant = height - SafeBarMottomHeight;
-        } else {
-            self.inputViewBottomMargin.constant = height;
-        }
         /// 列表滚动到底部
         [self scrollBottomWithAnimated:YES];
-    }];
-}
-
-#pragma mark - 键盘收回通知
-- (void)keyboardWillDisappear:(NSNotification *)notification {
-    
-    NSDictionary *info = [notification userInfo];
-    /// 取得键盘的动画时间，这样可以在视图上移的时候更连贯
-    double duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    /// 将视图下移计算好的偏移
-    [UIView animateWithDuration:duration animations:^{
-        self.inputViewBottomMargin.constant = 0.f;
     }];
 }
 
