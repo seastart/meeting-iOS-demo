@@ -8,6 +8,7 @@
 
 #import "FWBaseNavigationViewController.h"
 #import "FWMessageViewController.h"
+#import "FWMemberViewController.h"
 #import "FWRoomViewController.h"
 
 @interface FWBaseNavigationViewController () <UIGestureRecognizerDelegate, UINavigationControllerDelegate>
@@ -71,7 +72,7 @@
         /// 如果堆栈内的视图控制器数量为1，说明只有根控制器，将当前的视图控制器清空，为了下面的方法禁用侧滑手势
         self.currentViewController = nil;
     } else {
-        if ([[viewController class] isKindOfClass:[FWRoomViewController class]] || [[viewController class] isKindOfClass:[FWMessageViewController class]]) {
+        if ([[viewController class] isKindOfClass:[FWRoomViewController class]] || [[viewController class] isKindOfClass:[FWMessageViewController class]] || [[viewController class] isKindOfClass:[FWMemberViewController class]]) {
             /// 如果当前push的视图为房间室控制器，置空当前试图控制器用来限制侧滑手势
             self.currentViewController = nil;
         }
@@ -86,7 +87,7 @@
     
     /// 首先在这确定是不是我们需要管理的侧滑返回手势
     if (gestureRecognizer == self.interactivePopGestureRecognizer) {
-        if ([self.currentViewController isKindOfClass:[FWRoomViewController class]] || [self.currentViewController isKindOfClass:[FWMessageViewController class]]) {
+        if ([self.currentViewController isKindOfClass:[FWRoomViewController class]] || [self.currentViewController isKindOfClass:[FWMessageViewController class]] || [self.currentViewController isKindOfClass:[FWMemberViewController class]]) {
             /// 如果当前在房间室中，则禁用侧滑手势。
             return NO;
         }

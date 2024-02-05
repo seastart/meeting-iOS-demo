@@ -130,7 +130,8 @@
 /// @param mainView 主窗口视图
 - (void)onMemberEventMainView:(FWRoomMainView *)mainView {
     
-    
+    /// 跳转参会成员页面
+    [self push:@"FWMemberViewController" block:nil];
 }
 
 #pragma mark 举报事件回调
