@@ -17,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否在加载状态
 @property (nonatomic, assign) BOOL loading;
 
-/// 选中索引
-@property (nonatomic, assign) NSInteger selectedIndex;
+/// 选中索引列表
+@property (nonatomic, strong) NSMutableArray *selectedArray;
 /// 描述内容
 @property (nonatomic, copy, nullable) NSString *describeText;
 

@@ -13,7 +13,7 @@
 /// 定义CollectionViewCell重用标识
 static NSString *FWReportCollectionViewCellName = @"FWReportCollectionViewCell";
 /// 列表项目数据
-#define kFWReportItemList @[@{@"type" : @(0), @"title" : NSLocalizedString(@"政治敏感", nil), @"selected" : @(YES)}, @{@"type" : @(0), @"title" : NSLocalizedString(@"低俗色情", nil), @"selected" : @(NO)}, @{@"type" : @(0), @"title" : NSLocalizedString(@"攻击辱骂", nil), @"selected" : @(NO)}, @{@"type" : @(0), @"title" : NSLocalizedString(@"血腥暴力", nil), @"selected" : @(NO)}, @{@"type" : @(0), @"title" : NSLocalizedString(@"不良广告", nil), @"selected" : @(NO)}, @{@"type" : @(0), @"title" : NSLocalizedString(@"涉嫌诈骗", nil), @"selected" : @(NO)}, @{@"type" : @(0), @"title" : NSLocalizedString(@"违法信息", nil), @"selected" : @(NO)}, @{@"type" : @(0), @"title" : NSLocalizedString(@"其他违规", nil), @"selected" : @(NO)}]
+#define kFWReportItemList @[@{@"type" : @(0), @"title" : NSLocalizedString(@"政治敏感", nil), @"selected" : @(YES)}, @{@"type" : @(1), @"title" : NSLocalizedString(@"低俗色情", nil), @"selected" : @(NO)}, @{@"type" : @(2), @"title" : NSLocalizedString(@"攻击辱骂", nil), @"selected" : @(NO)}, @{@"type" : @(3), @"title" : NSLocalizedString(@"血腥暴力", nil), @"selected" : @(NO)}, @{@"type" : @(4), @"title" : NSLocalizedString(@"不良广告", nil), @"selected" : @(NO)}, @{@"type" : @(5), @"title" : NSLocalizedString(@"涉嫌诈骗", nil), @"selected" : @(NO)}, @{@"type" : @(6), @"title" : NSLocalizedString(@"违法信息", nil), @"selected" : @(NO)}, @{@"type" : @(7), @"title" : NSLocalizedString(@"其他违规", nil), @"selected" : @(NO)}]
 
 @interface FWReportViewController () <UIGestureRecognizerDelegate>
 
@@ -231,7 +231,7 @@ static NSString *FWReportCollectionViewCellName = @"FWReportCollectionViewCell";
 - (void)configReportCell:(FWReportCollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     /// 获取选中状态
-    BOOL selected = (self.viewModel.selectedIndex == indexPath.row);
+    BOOL selected = [self.viewModel.selectedArray containsObject:@(indexPath.row)];
     /// 获取项目数据
     NSDictionary *itemDic = [kFWReportItemList objectAtIndex:indexPath.row];
     /// 赋值显示
@@ -241,8 +241,15 @@ static NSString *FWReportCollectionViewCellName = @"FWReportCollectionViewCell";
 #pragma mark Cell点击事件
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    /// 设置选中索引
-    self.viewModel.selectedIndex = indexPath.row;
+    /// 获取选中状态
+    BOOL selected = [self.viewModel.selectedArray containsObject:@(indexPath.row)];
+    if (selected) {
+        /// 移除选中项
+        [self.viewModel.selectedArray removeObject:@(indexPath.row)];
+    } else {
+        /// 添加选中项
+        [self.viewModel.selectedArray addObject:@(indexPath.row)];
+    }
     /// 刷新列表
     [self.collectionView reloadData];
 }

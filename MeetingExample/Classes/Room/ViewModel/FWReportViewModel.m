@@ -15,9 +15,9 @@
 - (instancetype)init {
     
     if (self = [super init]) {
+        _selectedArray = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithInt:0], nil];
         _submitSubject = [RACSubject subject];
         _toastSubject = [RACSubject subject];
-        _selectedIndex = 0;
         _loading = NO;
     }
     return self;
