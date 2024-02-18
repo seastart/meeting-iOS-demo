@@ -27,6 +27,11 @@
 /// 提交举报事件
 - (void)onSubmitEvent {
     
+    if (kArrayIsEmpty(self.selectedArray)) {
+        [self.toastSubject sendNext:NSLocalizedString(@"您至少选择一个举报标签", nil)];
+        return;
+    }
+    
     /// 通知提交成功订阅
     [self.submitSubject sendNext:nil];
 }
