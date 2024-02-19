@@ -150,13 +150,13 @@
     
     for (int index = 0; index < 7; index++) {
         /// 创建成员窗口视图
-        FWRoomMemberWindowView *windowView = [[FWRoomMemberWindowView alloc] init];
+        FWRoomMemberWindowView *windowView = [[FWRoomMemberWindowView alloc] initWithFrame:CGRectMake(0, 0, FW_WINDOW_ITEM_WIDTH, FW_WINDOW_ITEM_HEIGHT)];
         /// 关联用户标识
         windowView.userId = [NSString stringWithFormat:@"%d", index];
         /// 设置代理回调
         windowView.delegate = self;
         /// 设置条目视图的尺寸
-        windowView.mySize = CGSizeMake(FW_WINDOW_ITEM_WIDTH, FW_WINDOW_ITEM_HEIGHT);
+        /// windowView.mySize = CGSizeMake(FW_WINDOW_ITEM_WIDTH, FW_WINDOW_ITEM_HEIGHT);
         /// 将窗口视图添加到流式布局
         [flowLayout addSubview:windowView];
     }
@@ -184,13 +184,13 @@
     /// 不存在该成员
     if (!memberWindowView) {
         /// 创建成员窗口视图
-        FWRoomMemberWindowView *windowView = [[FWRoomMemberWindowView alloc] init];
+        FWRoomMemberWindowView *windowView = [[FWRoomMemberWindowView alloc] initWithFrame:CGRectMake(0, 0, FW_WINDOW_ITEM_WIDTH, FW_WINDOW_ITEM_HEIGHT)];
         /// 关联用户标识
         windowView.userId = userId;
         /// 设置代理回调
         windowView.delegate = self;
         /// 设置条目视图的尺寸
-        windowView.mySize = CGSizeMake(FW_WINDOW_ITEM_WIDTH, FW_WINDOW_ITEM_HEIGHT);
+        /// windowView.mySize = CGSizeMake(FW_WINDOW_ITEM_WIDTH, FW_WINDOW_ITEM_HEIGHT);
         /// 将窗口视图添加到流式布局
         [self.flowLayout addSubview:windowView];
         /// 添加到本地成员列表
