@@ -46,8 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 成员选择回调
 /// @param mainView 主窗口视图
 /// @param memberModel 成员信息
-/// @param indexPath 选中索引
-- (void)mainView:(FWRoomMainView *)mainView didSelectItemMemberModel:(FWRoomMemberModel *)memberModel didIndexPath:(NSIndexPath *)indexPath;
+/// @param userId 成员标识
+- (void)mainView:(FWRoomMainView *)mainView didSelectItemMemberModel:(FWRoomMemberModel *)memberModel didUserId:(NSString *)userId;
 
 #pragma mark 电子画板退出回调
 /// 电子画板退出回调

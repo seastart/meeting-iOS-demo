@@ -37,9 +37,6 @@
 		F4219D7629AF21B10069483A /* FWRoomMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4219D7529AF21B10069483A /* FWRoomMainView.xib */; };
 		F4219D7929AF225E0069483A /* FWRoomStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D7829AF225E0069483A /* FWRoomStatusView.m */; };
 		F4219D7B29AF22650069483A /* FWRoomStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4219D7A29AF22650069483A /* FWRoomStatusView.xib */; };
-		F4219D8329B04B1D0069483A /* FWRoomMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D8229B04B1D0069483A /* FWRoomMemberView.m */; };
-		F4219D8729B04C130069483A /* FWRoomMemberCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D8529B04C130069483A /* FWRoomMemberCollectionViewCell.m */; };
-		F4219D8829B04C130069483A /* FWRoomMemberCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4219D8629B04C130069483A /* FWRoomMemberCollectionViewCell.xib */; };
 		F4219D8B29B055AD0069483A /* FWRoomMemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4219D8A29B055AD0069483A /* FWRoomMemberModel.m */; };
 		F429AC602B3AC5AA003D127D /* MeetingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492D5012B3AB9BE00E55CDE /* MeetingKit.framework */; };
 		F429AC632B455C07003D127D /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F429AC622B455C07003D127D /* SafariServices.framework */; };
@@ -71,6 +68,10 @@
 		F42CB0302B70B9D800D2A3F7 /* FWMemberViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CB02F2B70B9D800D2A3F7 /* FWMemberViewModel.m */; };
 		F42CB0342B70C4A700D2A3F7 /* FWMemberAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CB0322B70C4A700D2A3F7 /* FWMemberAlertViewController.m */; };
 		F42CB0352B70C4A700D2A3F7 /* FWMemberAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42CB0332B70C4A700D2A3F7 /* FWMemberAlertViewController.xib */; };
+		F42CB0382B82EA6000D2A3F7 /* FWRoomMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CB0372B82EA6000D2A3F7 /* FWRoomMemberView.m */; };
+		F42CB03A2B82EA6C00D2A3F7 /* FWRoomMemberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42CB0392B82EA6C00D2A3F7 /* FWRoomMemberView.xib */; };
+		F42CB03D2B82F1C500D2A3F7 /* FWRoomMemberWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = F42CB03C2B82F1C500D2A3F7 /* FWRoomMemberWindowView.m */; };
+		F42CB03F2B82F1CF00D2A3F7 /* FWRoomMemberWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42CB03E2B82F1CF00D2A3F7 /* FWRoomMemberWindowView.xib */; };
 		F43AD83A2727EE670056B3EE /* FWConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD8392727EE670056B3EE /* FWConstants.m */; };
 		F43AD83D2727F1780056B3EE /* FWHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD83C2727F1780056B3EE /* FWHomeViewModel.m */; };
 		F43AD8542728EE8B0056B3EE /* FWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD8522728EE8B0056B3EE /* FWLoginViewController.m */; };
@@ -262,11 +263,6 @@
 		F4219D7729AF225E0069483A /* FWRoomStatusView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRoomStatusView.h; sourceTree = "<group>"; };
 		F4219D7829AF225E0069483A /* FWRoomStatusView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRoomStatusView.m; sourceTree = "<group>"; };
 		F4219D7A29AF22650069483A /* FWRoomStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWRoomStatusView.xib; sourceTree = "<group>"; };
-		F4219D8129B04B1D0069483A /* FWRoomMemberView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRoomMemberView.h; sourceTree = "<group>"; };
-		F4219D8229B04B1D0069483A /* FWRoomMemberView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRoomMemberView.m; sourceTree = "<group>"; };
-		F4219D8429B04C130069483A /* FWRoomMemberCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRoomMemberCollectionViewCell.h; sourceTree = "<group>"; };
-		F4219D8529B04C130069483A /* FWRoomMemberCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRoomMemberCollectionViewCell.m; sourceTree = "<group>"; };
-		F4219D8629B04C130069483A /* FWRoomMemberCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWRoomMemberCollectionViewCell.xib; sourceTree = "<group>"; };
 		F4219D8929B055AD0069483A /* FWRoomMemberModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRoomMemberModel.h; sourceTree = "<group>"; };
 		F4219D8A29B055AD0069483A /* FWRoomMemberModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRoomMemberModel.m; sourceTree = "<group>"; };
 		F429AC622B455C07003D127D /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
@@ -315,6 +311,12 @@
 		F42CB0312B70C4A700D2A3F7 /* FWMemberAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMemberAlertViewController.h; sourceTree = "<group>"; };
 		F42CB0322B70C4A700D2A3F7 /* FWMemberAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMemberAlertViewController.m; sourceTree = "<group>"; };
 		F42CB0332B70C4A700D2A3F7 /* FWMemberAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWMemberAlertViewController.xib; sourceTree = "<group>"; };
+		F42CB0362B82EA6000D2A3F7 /* FWRoomMemberView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRoomMemberView.h; sourceTree = "<group>"; };
+		F42CB0372B82EA6000D2A3F7 /* FWRoomMemberView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRoomMemberView.m; sourceTree = "<group>"; };
+		F42CB0392B82EA6C00D2A3F7 /* FWRoomMemberView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWRoomMemberView.xib; sourceTree = "<group>"; };
+		F42CB03B2B82F1C500D2A3F7 /* FWRoomMemberWindowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRoomMemberWindowView.h; sourceTree = "<group>"; };
+		F42CB03C2B82F1C500D2A3F7 /* FWRoomMemberWindowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRoomMemberWindowView.m; sourceTree = "<group>"; };
+		F42CB03E2B82F1CF00D2A3F7 /* FWRoomMemberWindowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWRoomMemberWindowView.xib; sourceTree = "<group>"; };
 		F437E6CD2B32E0A400C76967 /* MeetingExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingExample.entitlements; sourceTree = "<group>"; };
 		F437E6CE2B32E0BA00C76967 /* MeetingBroadcastUpload.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingBroadcastUpload.entitlements; sourceTree = "<group>"; };
 		F43AD8382727EE670056B3EE /* FWConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWConstants.h; sourceTree = "<group>"; };
@@ -1131,11 +1133,12 @@
 				F482EEF029B5DA5E00815C9C /* FWRoomCaptureView.h */,
 				F482EEF129B5DA5E00815C9C /* FWRoomCaptureView.m */,
 				F482EEF329B5DA6600815C9C /* FWRoomCaptureView.xib */,
-				F4219D8129B04B1D0069483A /* FWRoomMemberView.h */,
-				F4219D8229B04B1D0069483A /* FWRoomMemberView.m */,
-				F4219D8429B04C130069483A /* FWRoomMemberCollectionViewCell.h */,
-				F4219D8529B04C130069483A /* FWRoomMemberCollectionViewCell.m */,
-				F4219D8629B04C130069483A /* FWRoomMemberCollectionViewCell.xib */,
+				F42CB0362B82EA6000D2A3F7 /* FWRoomMemberView.h */,
+				F42CB0372B82EA6000D2A3F7 /* FWRoomMemberView.m */,
+				F42CB0392B82EA6C00D2A3F7 /* FWRoomMemberView.xib */,
+				F42CB03B2B82F1C500D2A3F7 /* FWRoomMemberWindowView.h */,
+				F42CB03C2B82F1C500D2A3F7 /* FWRoomMemberWindowView.m */,
+				F42CB03E2B82F1CF00D2A3F7 /* FWRoomMemberWindowView.xib */,
 				F42CAFF12B6BA19400D2A3F7 /* FWRoomWhiteboardView.h */,
 				F42CAFF22B6BA19400D2A3F7 /* FWRoomWhiteboardView.m */,
 				F42CAFF42B6BA19F00D2A3F7 /* FWRoomWhiteboardView.xib */,
@@ -1303,7 +1306,9 @@
 				F4DA7C8B27279E62003FDE9B /* Common.xcassets in Resources */,
 				F49A410F2B5523650049DF6D /* FWAccountViewController.xib in Resources */,
 				F40B619D26C27D0C00F42370 /* AppIcon.xcassets in Resources */,
+				F42CB03A2B82EA6C00D2A3F7 /* FWRoomMemberView.xib in Resources */,
 				F4219D7629AF21B10069483A /* FWRoomMainView.xib in Resources */,
+				F42CB03F2B82F1CF00D2A3F7 /* FWRoomMemberWindowView.xib in Resources */,
 				F43AD8552728EE8B0056B3EE /* FWLoginViewController.xib in Resources */,
 				F42CB00F2B6CF51300D2A3F7 /* FWMessageViewController.xib in Resources */,
 				F49A41252B565D8B0049DF6D /* FWMeetingEntryViewController.xib in Resources */,
@@ -1315,7 +1320,6 @@
 				F40B634926C2936C00F42370 /* FWHomeViewController.xib in Resources */,
 				F42CB01F2B6F3EE500D2A3F7 /* FWReportCollectionViewCell.xib in Resources */,
 				F429AC682B456957003D127D /* FWRegisterViewController.xib in Resources */,
-				F4219D8829B04C130069483A /* FWRoomMemberCollectionViewCell.xib in Resources */,
 				F4219D7129AF05DD0069483A /* FWRoomBottomView.xib in Resources */,
 				F49A41562B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.xib in Resources */,
 				F49A41172B55286A0049DF6D /* Tabbar.xcassets in Resources */,
@@ -1344,6 +1348,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/LYEmptyView/LYEmptyView.framework",
 				"${BUILT_PRODUCTS_DIR}/MLeaksFinder/MLeaksFinder.framework",
+				"${BUILT_PRODUCTS_DIR}/MyLayout/MyLayout.framework",
 				"${PODS_ROOT}/RTCEngineKit/RTCEngineKit/Depend/FURenderKit.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -1356,6 +1361,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LYEmptyView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLeaksFinder.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MyLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FURenderKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -1465,7 +1471,6 @@
 				F482EEF229B5DA5E00815C9C /* FWRoomCaptureView.m in Sources */,
 				F49A41502B57AAB20049DF6D /* FWAccountPrivacyViewController.m in Sources */,
 				F429AC6B2B47A8EA003D127D /* FWRegisterViewModel.m in Sources */,
-				F4219D8729B04C130069483A /* FWRoomMemberCollectionViewCell.m in Sources */,
 				F42CB0272B6F7D9F00D2A3F7 /* FWMemberViewController.m in Sources */,
 				F4219D2C29AD988C0069483A /* CALayer+Extension.m in Sources */,
 				F49A412B2B565DFD0049DF6D /* FWMeetingEntryModel.m in Sources */,
@@ -1493,6 +1498,7 @@
 				F49A411B2B55399F0049DF6D /* FWHomeTableViewCell.m in Sources */,
 				F42CAFFA2B6CE5D800D2A3F7 /* FWMessageViewModel.m in Sources */,
 				F42CB0302B70B9D800D2A3F7 /* FWMemberViewModel.m in Sources */,
+				F42CB03D2B82F1C500D2A3F7 /* FWRoomMemberWindowView.m in Sources */,
 				F482EEFB29B6D15200815C9C /* FWNetworkBridge.m in Sources */,
 				F49A41152B5523BE0049DF6D /* FWAccountModel.m in Sources */,
 				F49A415A2B57B2FB0049DF6D /* FWAccountWebKitViewController.m in Sources */,
@@ -1523,9 +1529,9 @@
 				F40B61A526C27D0C00F42370 /* FWAppDelegate.m in Sources */,
 				F482EF2E29BF286A00815C9C /* FWLogTraceBridge.m in Sources */,
 				F4219D3929ADABAB0069483A /* UITextView+AutoHeight.m in Sources */,
-				F4219D8329B04B1D0069483A /* FWRoomMemberView.m in Sources */,
 				F482EF0229B6DF9900815C9C /* FWToolBridge.m in Sources */,
 				F429AC672B456957003D127D /* FWRegisterViewController.m in Sources */,
+				F42CB0382B82EA6000D2A3F7 /* FWRoomMemberView.m in Sources */,
 				F49A41122B5523840049DF6D /* FWAccountViewModel.m in Sources */,
 				F43AD8592728EF4D0056B3EE /* FWEntryBridge.m in Sources */,
 				F40B61A426C27D0C00F42370 /* main.m in Sources */,

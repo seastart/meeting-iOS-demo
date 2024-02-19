@@ -33,5 +33,7 @@
 #import "FWAppDelegate.h"
 /// 工程宏定义以及工具类
 #import "FWCommons.h"
+/// 界面布局组件
+#import "MyLayout.h"
 
 #endif

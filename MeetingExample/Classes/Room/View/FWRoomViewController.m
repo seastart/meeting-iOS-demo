@@ -241,8 +241,8 @@
 /// 成员选择回调
 /// @param mainView 主窗口视图
 /// @param memberModel 成员信息
-/// @param indexPath 选中索引
-- (void)mainView:(FWRoomMainView *)mainView didSelectItemMemberModel:(FWRoomMemberModel *)memberModel didIndexPath:(NSIndexPath *)indexPath {
+/// @param userId 成员标识
+- (void)mainView:(FWRoomMainView *)mainView didSelectItemMemberModel:(FWRoomMemberModel *)memberModel didUserId:(NSString *)userId {
     
     /// 订阅成员轨道弹窗
     /// [self subscribeMemberAlert:memberModel];

@@ -24,8 +24,6 @@
 /// 视图容器
 @property (strong, nonatomic) UIView *contentView;
 
-/// 内容滚动视图
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 /// 采集渲染视图
 @property (weak, nonatomic) IBOutlet FWRoomCaptureView *roomCaptureView;
 /// 成员列表视图
@@ -46,8 +44,6 @@
 
 /// 共享类型
 @property (assign, nonatomic) FWMeetingSharingType sharingType;
-/// 滚动内容偏移量
-@property (assign, nonatomic) NSInteger contentOffset;
 
 /// 房间计时器
 @property (strong, nonatomic) FWTimerBridge *durationTimer;
@@ -100,20 +96,6 @@
         [self setupConfig];
     }
     return self;
-}
-
-#pragma mark - 页面重新绘制
-/// 页面重新绘制
-- (void)layoutSubviews {
-    
-    [super layoutSubviews];
-    /// 重置成员列表布局
-    [self.roomMemberView reloadData];
-    /// 设置滚动内容偏移
-    FWDispatchAfter((int64_t)(5.0 * NSEC_PER_MSEC), ^{
-        /// 设置滚动内容偏移
-        [self.scrollView setContentOffset:CGPointMake(self.scrollView.sa_width * self.contentOffset, 0) animated:YES];
-    });
 }
 
 #pragma mark - 懒加载屏幕录制组件
@@ -356,7 +338,7 @@
 ///   - source: 事件源对象
 - (void)bottomView:(FWRoomBottomView *)bottomView didSelectVideoButton:(UIButton *)source {
     
-    @weakify(self);
+    /// @weakify(self);
     /// 检测摄像头权限
     [FWToolBridge requestAuthorization:FWPermissionsStateVideo superVC:[FWEntryBridge sharedManager].appDelegate.window.rootViewController result:^(BOOL status) {
 //        @strongify(self);
@@ -476,22 +458,33 @@
 #pragma mark 成员选择回调
 /// 成员选择回调
 /// @param memberView 成员列表对象
-/// @param indexPath 选中索引
+/// @param userId 成员标识
 /// @param memberModel 成员信息
-- (void)memberView:(FWRoomMemberView *)memberView didSelectItemAtIndexPath:(NSIndexPath *)indexPath memberModel:(FWRoomMemberModel *)memberModel {
+- (void)memberView:(FWRoomMemberView *)memberView didSelectItemAtUserId:(NSString *)userId memberModel:(FWRoomMemberModel *)memberModel {
     
     /// 回调控制器层处理
-    if (self.delegate && [self.delegate respondsToSelector:@selector(mainView:didSelectItemMemberModel:didIndexPath:)]) {
-        [self.delegate mainView:self didSelectItemMemberModel:memberModel didIndexPath:indexPath];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(mainView:didSelectItemMemberModel:didUserId:)]) {
+        [self.delegate mainView:self didSelectItemMemberModel:memberModel didUserId:userId];
     }
 }
 
-#pragma mark - ----- UIScrollViewDelegate的代理方法 -----
-#pragma mark 视图滑动监听事件
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+#pragma mark - ----- 测试方法 -----
+#pragma mark 添加成员
+/// 添加成员
+/// - Parameter sender: 事件源对象
+- (IBAction)appendAction:(UIButton *)sender {
     
-    /// 记录滚动内容偏移量
-    self.contentOffset = scrollView.contentOffset.x / self.scrollView.sa_width;
+    /// 成员更新信息
+    [self.roomMemberView memberUpdateWithUserId:@""];
+}
+
+#pragma mark 移除成员
+/// 移除成员
+/// - Parameter sender: 事件源对象
+- (IBAction)removeAction:(UIButton *)sender {
+    
+    /// 成员离开房间
+    [self.roomMemberView memberExitWithUserId:@""];
 }
 
 #pragma mark - 释放资源

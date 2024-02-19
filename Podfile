@@ -24,6 +24,8 @@ def commonPods
     pod 'ReactiveObjC'
     # 内测泄漏监测
     pod 'MLeaksFinder'
+    # 界面布局组件
+    pod 'MyLayout'
     # 数据模型
     pod 'YYModel'
 end
