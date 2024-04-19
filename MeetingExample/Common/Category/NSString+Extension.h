@@ -24,6 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 检测字符串是否为纯数字
 - (BOOL)deptNumInputShouldNumber;
 
+#pragma mark - 移除结尾的子字符串
+/// 移除结尾的子字符串
+/// - Parameter subString: 子字符串
+- (NSString *)removeLastSubString:(NSString *)subString;
+
 @end
 
 NS_ASSUME_NONNULL_END

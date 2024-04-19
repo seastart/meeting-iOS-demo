@@ -147,7 +147,7 @@
 - (void)handleTimerWithDuration:(NSInteger)duration {
     
     /// 更新进入房间时长与房间号码显示
-    [self.roomTopTool setupDataWithDuration:duration roomNoText:[[FWStoreDataBridge sharedManager] getRoomNo]];
+    [self.roomTopTool setupDataWithDuration:duration roomNoText:@"909090909"];
 }
 
 #pragma mark - 销毁计时器

@@ -69,6 +69,25 @@
     return [UIDevice currentDevice].name;
 }
 
+#pragma mark - HmacSHA256方式加密的字符串
+/// HmacSHA256方式加密的字符串
+/// @param secret 加密密钥
+/// @param data 加密数据
++ (NSString *)HmacSHA256:(NSString *)secret data:(NSString *)data {
+    
+    const char *cKey = [secret cStringUsingEncoding:NSASCIIStringEncoding];
+    const char *cData = [data cStringUsingEncoding:NSUTF8StringEncoding];
+    uint8_t cHMAC[CC_SHA256_DIGEST_LENGTH];
+    CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
+    NSString *hash;
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
+    for (int index = 0; index < CC_SHA256_DIGEST_LENGTH; index++) {
+        [output appendFormat:@"%02x", cHMAC[index]];
+    }
+    hash = output;
+    return hash;
+}
+
 #pragma mark - 房间号码转换字符串
 /// 房间号码转换字符串
 /// - Parameter roomno: 房间号码

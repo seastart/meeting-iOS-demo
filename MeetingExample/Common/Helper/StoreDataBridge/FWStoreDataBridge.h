@@ -12,9 +12,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FWStoreDataBridge : NSObject
 
+/// 鉴权令牌
+@property (nonatomic, copy, readonly) NSString *authToken;
+
 #pragma mark - 初始化方法
 /// 初始化方法
 + (FWStoreDataBridge *)sharedManager;
+
+#pragma mark - 登录用户
+/// @param authToken 鉴权令牌
+- (void)login:(NSString *)authToken;
 
 #pragma mark - 退出登录
 /// 退出登录
@@ -46,15 +53,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置用户昵称
 /// @param nickname 用户昵称
 - (void)setNickname:(NSString *)nickname;
-
-#pragma mark - 获取房间编号
-/// 获取房间编号
-- (NSString *)getRoomNo;
-
-#pragma mark - 设置房间编号
-/// 设置房间编号
-/// @param roomNo 房间编号
-- (void)setRoomNo:(NSString *)roomNo;
 
 @end
 

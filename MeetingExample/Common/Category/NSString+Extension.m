@@ -64,4 +64,17 @@
     return NO;
 }
 
+#pragma mark - 移除结尾的子字符串
+/// 移除结尾的子字符串
+/// - Parameter subString: 子字符串
+- (NSString *)removeLastSubString:(NSString *)subString {
+    
+    NSString *result = self;
+    if ([result hasSuffix:subString]) {
+        result = [result substringToIndex:self.length - subString.length];
+        result = [result removeLastSubString:subString];
+    }
+    return result;
+}
+
 @end

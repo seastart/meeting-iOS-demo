@@ -11,6 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 请求结果回调
 typedef void (^FWNetworkResultBlock)(BOOL result, id _Nullable data, NSString * _Nullable errorMsg);
 
 @interface FWNetworkBridge : NSObject

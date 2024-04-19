@@ -10,8 +10,6 @@
 
 /// 请求成功错误码
 #define VCSNetworkSucceed 0
-/// 测试APPID
-NSString * const FWENGINEAPPID = @"b693d5c11888473ea93321e4dac6502b";
 
 @interface FWNetworkBridge ()
 
@@ -45,18 +43,20 @@ NSString * const FWENGINEAPPID = @"b693d5c11888473ea93321e4dac6502b";
 ///   - resultBlock: 请求回调
 - (void)GET:(NSString *)url params:(nullable NSDictionary *)params className:(nullable NSString *)className resultBlock:(FWNetworkResultBlock)resultBlock {
     
-    /// 构建请求参数
-    NSDictionary *parameters = [self requestParameters:params];
+    /// 获取请求地址
+    NSString *baseurl = [self getBaseURL:url];
+    /// 设置请求头信息
+    NSDictionary *header = [self setRequestHeaderField:params];
     /// 发起请求
-    [self.sessionManager GET:url parameters:parameters headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    [self.sessionManager GET:baseurl parameters:params headers:header progress:^(NSProgress * _Nonnull downloadProgress) {
         /// 请求进度
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         /// 请求成功
-        [self outputlog:YES way:@"GET" api:url params:parameters response:responseObject];
+        [self outputlog:YES way:@"GET" api:url params:params response:responseObject];
         [self result:responseObject className:className resultBlock:resultBlock];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         /// 请求失败
-        [self outputlog:NO way:@"GET" api:url params:parameters response:error];
+        [self outputlog:NO way:@"GET" api:url params:params response:error];
         if (resultBlock) {
             resultBlock(NO, error, [self networkError:error]);
         }
@@ -72,18 +72,20 @@ NSString * const FWENGINEAPPID = @"b693d5c11888473ea93321e4dac6502b";
 ///   - resultBlock: 请求回调
 - (void)POST:(NSString *)url params:(nullable NSDictionary *)params className:(nullable NSString *)className resultBlock:(FWNetworkResultBlock)resultBlock {
     
-    /// 构建请求参数
-    NSDictionary *parameters = [self requestParameters:params];
+    /// 获取请求地址
+    NSString *baseurl = [self getBaseURL:url];
+    /// 设置请求头信息
+    NSDictionary *header = [self setRequestHeaderField:params];
     /// 发起请求
-    [self.sessionManager POST:url parameters:parameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+    [self.sessionManager POST:baseurl parameters:params headers:header progress:^(NSProgress * _Nonnull uploadProgress) {
         /// 请求进度
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         /// 请求成功
-        [self outputlog:YES way:@"POST" api:url params:parameters response:responseObject];
+        [self outputlog:YES way:@"POST" api:url params:params response:responseObject];
         [self result:responseObject className:className resultBlock:resultBlock];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         /// 请求失败
-        [self outputlog:NO way:@"POST" api:url params:parameters response:error];
+        [self outputlog:NO way:@"POST" api:url params:params response:error];
         if (resultBlock) {
             resultBlock(NO, error, [self networkError:error]);
         }
@@ -97,57 +99,91 @@ NSString * const FWENGINEAPPID = @"b693d5c11888473ea93321e4dac6502b";
     
     if (!_sessionManager) {
         /// 创建会话实例
-        _sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:FWSERVICEURI]];
+        _sessionManager = [AFHTTPSessionManager manager];
         /// 设置响应序列化器可接受内容类型
         _sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/plain", @"text/html", nil];
         /// 设置请求实体数据的类型(Content-Type: application/json)
         _sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
         /// 设置请求实体数据类型请求头信息
         [_sessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        /// 设置请求序列化器请求头信息
-        /// [_sessionManager.requestSerializer setValue:RTCENGINEAPPID forHTTPHeaderField:@"app_id"];
-        /// 设置请求序列化器请求头信息
-        /// [_sessionManager.requestSerializer setValue:VCSAPPID forHTTPHeaderField:@"appid"];
-        /// 设置请求序列化器请求头信息
-        /// [_sessionManager.requestSerializer setValue:VCSAPPKEY forHTTPHeaderField:@"appkey"];
-        /// 设置请求序列化器请求头信息
-        /// [_sessionManager.requestSerializer setValue:VCSSIGNATURE forHTTPHeaderField:@"signature"];
         /// 设置请求超时时间
-        [_sessionManager.requestSerializer setTimeoutInterval:10.0f];
+        [_sessionManager.requestSerializer setTimeoutInterval:20.0f];
     }
     return _sessionManager;
 }
 
-#pragma mark 构建请求参数
-/// 构建请求参数
-/// - Parameter params: 请求原始参数
-- (NSDictionary *)requestParameters:(NSDictionary *)params {
+#pragma mark 获取请求地址
+/// 获取请求地址
+/// - Parameter url: 短链接
+- (NSString *)getBaseURL:(NSString *)url {
     
-    /// 组装请求参数
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    /// 添加应用标识
-    [parameters setValue:FWENGINEAPPID forKey:@"app_id"];
-    /// 添加时间戳
-    [parameters setValue:@((NSInteger)[FWDateBridge getNowTimeInterval]) forKey:@"timestamp"];
-    /// 添加请求标识
-    [parameters setValue:[FWToolBridge getUniqueIdentifier] forKey:@"request_id"];
-    /// 添加请求体
-    [parameters setValue:params forKey:@"body"];
-    
-    return parameters;
+    /// 获取主机地址
+    NSString *host = FWSERVICEURI;
+    /// 构建请求地址
+    NSString *baseurl = [NSString stringWithFormat:@"%@%@%@", host, FWSERVICESHORTHEADER, url];
+    /// 请求地址编码处理
+    baseurl = [baseurl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    /// 返回请求地址
+    return baseurl;
 }
 
-#pragma mark 请求失败描述
-/// 请求失败描述
-/// - Parameter error: 错误信息
-- (NSString *)networkError:(NSError *)error {
+#pragma mark 设置请求头信息
+/// 设置请求头信息
+/// - Parameter params: 请求参数
+- (NSDictionary *)setRequestHeaderField:(NSDictionary *)params {
     
-    NSString *errorMsg = @"网络异常，请稍后再试";
-    if (error.code == -1001) {
-        /// 请求超时
-        errorMsg = @"网络请求超时, 服务器内部错误";
+    /// 获取应用标识
+    NSString *appId = FWENGINEAPPID;
+    /// 获取随机标识字符串
+    NSString *nonce = [FWToolBridge getUniqueIdentifier];
+    /// 获取当前秒级时间戳
+    NSString *timestamp = [NSString stringWithFormat:@"%ld", (NSInteger)[FWDateBridge getNowTimeInterval]];
+    
+    /// 声明头信息字典
+    NSMutableDictionary *header = [NSMutableDictionary dictionary];
+    [header setValue:appId forKey:@"app_id"];
+    [header setValue:nonce forKey:@"nonce"];
+    [header setValue:timestamp forKey:@"timestamp"];
+    
+    /// 获取所有头信息键值列表
+    NSArray *allkeys = [header allKeys];
+    /// 对当前头信息键值列表进行排序
+    NSArray<NSString *> *resultArray = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id _Nonnull obj1, id _Nonnull obj2) {
+        return [obj1 compare:obj2];
+    }];
+    
+    /// 遍历头信息键值列表创建签名字符串
+    __block NSMutableString *resultStr = [NSMutableString string];
+    [resultArray enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *itemStr = [NSString stringWithFormat:@"%@=%@&", obj, [header objectForKey:obj]];
+        [resultStr appendString:itemStr];
+    }];
+    
+    /// 如果请求参数不为空时，拼接参数串
+    if (!kDictIsEmpty(params)) {
+        /// 参数字典转换成请求串
+        NSString *paramsStr = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:params options:0 error:0] encoding:NSUTF8StringEncoding];
+        /// 追加参数串到加密串
+        [resultStr appendString:paramsStr];
     }
-    return errorMsg;
+    
+    /// 移除结果串结尾的子字符串'&'并获得可签名字符串
+    NSString *signableStr = [resultStr removeLastSubString:@"&"];
+    /// HmacSHA256方式加密的字符串
+    NSString *hmacSHA256Str = [FWToolBridge HmacSHA256:FWENGINEAPPKEY data:signableStr];
+    /// 获得签名结果
+    NSString *signature = [[hmacSHA256Str stringByReplacingOccurrencesOfString:@"-" withString:@""] lowercaseString];
+    /// 补充签名结果
+    [header setValue:signature forKey:@"signature"];
+    
+    /// 设置请求头信息
+    [self.sessionManager.requestSerializer setValue:appId forHTTPHeaderField:@"app_id"];
+    [self.sessionManager.requestSerializer setValue:nonce forHTTPHeaderField:@"nonce"];
+    [self.sessionManager.requestSerializer setValue:timestamp forHTTPHeaderField:@"timestamp"];
+    [self.sessionManager.requestSerializer setValue:signature forHTTPHeaderField:@"signature"];
+    
+    /// 返回请求头信息
+    return header;
 }
 
 #pragma mark 响应结果处理
@@ -159,9 +195,9 @@ NSString * const FWENGINEAPPID = @"b693d5c11888473ea93321e4dac6502b";
 - (void)result:(id)responseObject className:(NSString *)className resultBlock:(FWNetworkResultBlock)resultBlock {
     
     /// 解析请求结果
-    NSInteger api_code = [[responseObject objectForKey:@"code"] integerValue];
+    NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
     /// 解析请求结果描述
-    NSString *api_msg = (api_code == VCSNetworkSucceed) ? @"数据请求成功" : [responseObject objectForKey:@"message"];
+    NSString *message = (code == VCSNetworkSucceed) ? @"数据请求成功" : [responseObject objectForKey:@"msg"];
     
     /// 创建结果临时变量
     id resp = responseObject;
@@ -179,9 +215,10 @@ NSString * const FWENGINEAPPID = @"b693d5c11888473ea93321e4dac6502b";
             resp = result;
         }
     }
+    
     /// 回调请求结果
     if (resultBlock) {
-        resultBlock((api_code == VCSNetworkSucceed), resp, api_msg);
+        resultBlock((code == VCSNetworkSucceed), resp, message);
     }
 }
 
@@ -196,7 +233,7 @@ NSString * const FWENGINEAPPID = @"b693d5c11888473ea93321e4dac6502b";
     
     NSMutableString *debugStr = [NSMutableString string];
     [debugStr appendString:failure ? @"\n+++++***请求成功***+++++\n" : @"\n+++++***请求失败***+++++\n"];
-    [debugStr appendString:[NSString stringWithFormat:@"+++++%@请求：%@%@ \n", way, self.sessionManager.baseURL.absoluteString, api]];
+    [debugStr appendString:[NSString stringWithFormat:@"+++++%@请求：%@ \n", way, api]];
     [debugStr appendString:[NSString stringWithFormat:@"+++++请求头参数：%@ \n", self.sessionManager.requestSerializer.HTTPRequestHeaders]];
     [debugStr appendString:[NSString stringWithFormat:@"+++++请求参数：%@ \n", params]];
     [debugStr appendString:[NSString stringWithFormat:@"+++++返回数据：%@ \n", [self UTF8Format:responseObject]]];
@@ -218,6 +255,27 @@ NSString * const FWENGINEAPPID = @"b693d5c11888473ea93321e4dac6502b";
         desc = [NSString stringWithCString:[desc cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSNonLossyASCIIStringEncoding];
     }
     return desc;
+}
+
+#pragma mark 请求失败描述
+/// 请求失败描述
+/// - Parameter error: 错误信息
+- (NSString *)networkError:(NSError *)error {
+    
+    /// 声明描述
+    NSString *errorMsg = @"网络请求失败，请稍后再试";
+    /// 根据错误码设置描述
+    if (error.code == -999) {
+        /// 请求取消
+        errorMsg = @"网络请求已取消";
+    } else if (error.code == -1001) {
+        /// 请求超时
+        errorMsg = @"网络请求超时";
+    } else {
+        /// 错误信息
+        errorMsg = error.description;
+    }
+    return errorMsg;
 }
 
 @end

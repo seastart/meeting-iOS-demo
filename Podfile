@@ -33,9 +33,7 @@ end
 def meetingPods
   # 依赖RTC服务引擎
   pod 'RTCEngineKit'
-  # 本地依赖 MeetingKit
-  # pod 'MeetingKit', :path => '../Depend/MeetingKit/'
-  # 远程依赖 MeetingKit
+  # 依赖会议服务引擎
   # pod 'MeetingKit'
 end
 

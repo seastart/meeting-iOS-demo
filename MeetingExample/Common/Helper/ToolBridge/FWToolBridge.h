@@ -6,6 +6,7 @@
 //  Copyright © 2023 SailorGa. All rights reserved.
 //
 
+#import <CommonCrypto/CommonCrypto.h>
 #import <AVFoundation/AVFoundation.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -44,6 +45,12 @@ typedef void (^FWPermissionsResultBlock)(BOOL status);
 #pragma mark - 获取设备名称
 /// 获取设备名称
 + (NSString *)getDeviceName;
+
+#pragma mark - HmacSHA256方式加密的字符串
+/// HmacSHA256方式加密的字符串
+/// @param secret 加密密钥
+/// @param data 加密数据
++ (NSString *)HmacSHA256:(NSString *)secret data:(NSString *)data;
 
 #pragma mark - 房间号码转换字符串
 /// 房间号码转换字符串

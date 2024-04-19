@@ -8,13 +8,10 @@
 
 #import "FWInterfaces.h"
 
-#pragma mark - 默认服务器地址
-/// 默认服务器地址
-NSString * const FWSERVICEURI = @"http://192.168.0.172:5000/test/";
-
-#pragma mark - 获取用户签名
+/// 数据请求短链接头部
+NSString * const FWSERVICESHORTHEADER = @"/server/";
 /// 获取用户签名
-NSString * const FWSIGNATUREINFOFACE = @"auth";
+NSString * const FWSIGNATUREINFOFACE = @"user-auth/grant";
 
 @implementation FWInterfaces
 

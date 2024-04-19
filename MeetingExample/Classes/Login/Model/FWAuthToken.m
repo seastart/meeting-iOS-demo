@@ -11,7 +11,3 @@
 @implementation FWAuthToken
 
 @end
-
-@implementation FWAuthTokenItem
-
-@end

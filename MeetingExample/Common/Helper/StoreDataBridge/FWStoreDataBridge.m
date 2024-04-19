@@ -10,6 +10,9 @@
 
 @interface FWStoreDataBridge ()
 
+/// 鉴权令牌
+@property (nonatomic, copy, readwrite) NSString *authToken;
+
 @end
 
 @implementation FWStoreDataBridge
@@ -27,11 +30,21 @@
     return manager;
 }
 
+#pragma mark - 登录用户
+/// @param authToken 鉴权令牌
+- (void)login:(NSString *)authToken {
+    
+    if (kStringIsEmpty(authToken)) {
+        return;
+    }
+    self.authToken = authToken;
+}
+
 #pragma mark - 退出登录
 /// 退出登录
 - (void)logout {
     
-    /// self.userModel = nil;
+    self.authToken = nil;
 }
 
 #pragma mark - 获取手机号码
@@ -89,25 +102,6 @@
 - (void)setNickname:(NSString *)nickname {
     
     [self storeValue:nickname withKey:FWNICKNAMEKEY];
-}
-
-#pragma mark - 获取房间编号
-/// 获取房间编号
-- (NSString *)getRoomNo {
-    
-    NSString *roomNo = [self valueWithKey:FWROOMNOKEY];
-    if (!kStringIsEmpty(roomNo)) {
-        return roomNo;
-    }
-    return RTCROOMNO;
-}
-
-#pragma mark - 设置房间编号
-/// 设置房间编号
-/// @param roomNo 房间编号
-- (void)setRoomNo:(NSString *)roomNo {
-    
-    [self storeValue:roomNo withKey:FWROOMNOKEY];
 }
 
 #pragma mark - 存储数据

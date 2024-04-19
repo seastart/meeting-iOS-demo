@@ -65,10 +65,19 @@
 /// 设置根视图为主功能模块(登录状态下)
 - (void)setWindowRootHome {
     
-    FWBaseTabBarViewController *tabBar = [[FWBaseTabBarViewController alloc] initTabBarViewController];
-    [UIView transitionWithView:[self appDelegate].window duration:0.5f options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
-        [self appDelegate].window.rootViewController = tabBar;
-    } completion:nil];
+    /// 获取鉴权令牌
+    NSString *authToken = [FWStoreDataBridge sharedManager].authToken;
+    /// 登录组件
+    [[MeetingKit sharedInstance] loginWithToken:authToken appGroup:FWAPPGROUP onSuccess:^{
+        
+    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        
+    }];
+    
+//    FWBaseTabBarViewController *tabBar = [[FWBaseTabBarViewController alloc] initTabBarViewController];
+//    [UIView transitionWithView:[self appDelegate].window duration:0.5f options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
+//        [self appDelegate].window.rootViewController = tabBar;
+//    } completion:nil];
 }
 
 @end

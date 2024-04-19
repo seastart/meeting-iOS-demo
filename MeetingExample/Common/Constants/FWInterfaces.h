@@ -10,11 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#pragma mark - 默认服务器地址
-/// 默认服务器地址
-FOUNDATION_EXTERN NSString *__nonnull const FWSERVICEURI;
-
-#pragma mark - 获取用户签名
+/// 数据请求短链接头部
+FOUNDATION_EXTERN NSString *__nonnull const FWSERVICESHORTHEADER;
 /// 获取用户签名
 FOUNDATION_EXTERN NSString *__nonnull const FWSIGNATUREINFOFACE;
 

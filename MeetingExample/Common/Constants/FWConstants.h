@@ -10,29 +10,26 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#pragma mark - 用户签名
-FOUNDATION_EXTERN NSString *__nonnull const RTCENGINEUSERSIG;
-#pragma mark - 服务地址
-FOUNDATION_EXTERN NSString *__nonnull const RTCENGINEURI;
-#pragma mark - 房间号码
-FOUNDATION_EXTERN NSString *__nonnull const RTCROOMNO;
-#pragma mark - 平台描述
-FOUNDATION_EXTERN NSString *__nonnull const RTCTERMINALDESC;
+/// APPID
+FOUNDATION_EXTERN NSString *__nonnull const FWENGINEAPPID;
+/// APPKEY
+FOUNDATION_EXTERN NSString *__nonnull const FWENGINEAPPKEY;
+/// 服务器地址
+FOUNDATION_EXTERN NSString *__nonnull const FWSERVICEURI;
 
-#pragma mark - 默认头像地址
+/// 默认头像地址
 FOUNDATION_EXTERN NSString *__nonnull const FWDEFAULTAVATAR;
-#pragma mark - 存储手机号码的KEY
+/// 存储手机号码的KEY
 FOUNDATION_EXTERN NSString *__nonnull const FWMOBILEKEY;
-#pragma mark - 存储用户密码的KEY
+/// 存储用户密码的KEY
 FOUNDATION_EXTERN NSString *__nonnull const FWPASSWORDKEY;
-#pragma mark - 存储用户昵称的KEY
+/// 存储用户昵称的KEY
 FOUNDATION_EXTERN NSString *__nonnull const FWNICKNAMEKEY;
-#pragma mark - 存储房间编号的KEY
+/// 存储房间编号的KEY
 FOUNDATION_EXTERN NSString *__nonnull const FWROOMNOKEY;
-#pragma mark - 屏幕共享结束提示语的KEY
+/// 屏幕共享结束提示语的KEY
 FOUNDATION_EXTERN NSString *__nonnull const FWSCREENSHARINGENDKEY;
 
-#pragma mark - 免责协议等地址
 /// 免责声明地址
 FOUNDATION_EXTERN NSString *__nonnull const FWACCOUNTASSERTHOST;
 /// 个人信息收集清单地址
@@ -44,7 +41,6 @@ FOUNDATION_EXTERN NSString *__nonnull const FWACCOUNTAGREEMENTHOST;
 /// 隐私协议地址
 FOUNDATION_EXTERN NSString *__nonnull const FWACCOUNTPRIVACYHOST;
 
-#pragma mark - Bugly异常上报相关
 /// Bugly异常上报AppID
 FOUNDATION_EXTERN NSString *__nonnull const FWBUGLYAPPID;
 /// Bugly异常上报AppKey
