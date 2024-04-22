@@ -155,6 +155,8 @@
     }];
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"退出登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         @strongify(self);
+        /// 组件登出
+        [[MeetingKit sharedInstance] logout:nil onFailed:nil];
         /// 销毁用户信息
         [[FWStoreDataBridge sharedManager] logout];
         /// 退出登录事件

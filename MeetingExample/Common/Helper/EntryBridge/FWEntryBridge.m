@@ -84,7 +84,7 @@
     @weakify(self);
     /// 获取鉴权令牌
     NSString *authToken = [FWStoreDataBridge sharedManager].authToken;
-    /// 登录组件
+    /// 组件登录
     [[MeetingKit sharedInstance] loginWithToken:authToken appGroup:FWAPPGROUP onSuccess:^{
         @strongify(self);
         /// 设置首页根视图
