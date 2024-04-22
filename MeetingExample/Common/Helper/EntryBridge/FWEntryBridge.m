@@ -13,9 +13,25 @@
 
 @interface FWEntryBridge()
 
+/// 后台保活音频播放器
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+
 @end
 
 @implementation FWEntryBridge
+
+#pragma mark - 创建音频播放器
+- (AVAudioPlayer *)audioPlayer {
+    
+    if (!_audioPlayer) {
+        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"audio_background_task" withExtension:@"wav"] error:nil];
+        /// 无限播放
+        _audioPlayer.numberOfLoops = -1;
+        /// 设置音量
+        _audioPlayer.volume = 0;
+    }
+    return _audioPlayer;
+}
 
 #pragma mark - 初始化方法
 /// 初始化方法
@@ -89,6 +105,29 @@
     [UIView transitionWithView:[self appDelegate].window duration:0.5f options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
         [self appDelegate].window.rootViewController = tabBar;
     } completion:nil];
+}
+
+#pragma mark - 开启后台任务
+/// 开启后台任务
+- (void)beginBackgroundTask {
+    
+    /// 停止播放音频
+    [self.audioPlayer stop];
+    
+    /// 设置后台模式和锁屏模式下依然能够播放
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:nil];
+    [[AVAudioSession sharedInstance] setActive:YES error: nil];
+    
+    /// 开始播放音频
+    [self.audioPlayer play];
+}
+
+#pragma mark - 取消后台任务
+/// 取消后台任务
+- (void)cancelBackgroundTask {
+    
+    /// 停止播放音频
+    [self.audioPlayer stop];
 }
 
 @end

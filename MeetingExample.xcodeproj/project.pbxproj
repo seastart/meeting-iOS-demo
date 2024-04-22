@@ -82,6 +82,7 @@
 		F45C830C27D6F50D008EEA31 /* Room.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F45C830B27D6F50D008EEA31 /* Room.xcassets */; };
 		F4644F6028913059007D46ED /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4644F5F28913059007D46ED /* SystemConfiguration.framework */; };
 		F47A3B5627D1F0FA00C88F2C /* FWStoreDataBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F47A3B5527D1F0FA00C88F2C /* FWStoreDataBridge.m */; };
+		F47FD4222BD65F5F006579F2 /* audio_background_task.wav in Resources */ = {isa = PBXBuildFile; fileRef = F47FD4202BD65F5F006579F2 /* audio_background_task.wav */; };
 		F482EEF229B5DA5E00815C9C /* FWRoomCaptureView.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EEF129B5DA5E00815C9C /* FWRoomCaptureView.m */; };
 		F482EEF429B5DA6600815C9C /* FWRoomCaptureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F482EEF329B5DA6600815C9C /* FWRoomCaptureView.xib */; };
 		F482EEF829B6D0F500815C9C /* FWBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EEF729B6D0F500815C9C /* FWBaseModel.m */; };
@@ -335,6 +336,7 @@
 		F4644F5F28913059007D46ED /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F47A3B5427D1F0FA00C88F2C /* FWStoreDataBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWStoreDataBridge.h; sourceTree = "<group>"; };
 		F47A3B5527D1F0FA00C88F2C /* FWStoreDataBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWStoreDataBridge.m; sourceTree = "<group>"; };
+		F47FD4202BD65F5F006579F2 /* audio_background_task.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = audio_background_task.wav; sourceTree = "<group>"; };
 		F482EEF029B5DA5E00815C9C /* FWRoomCaptureView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRoomCaptureView.h; sourceTree = "<group>"; };
 		F482EEF129B5DA5E00815C9C /* FWRoomCaptureView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRoomCaptureView.m; sourceTree = "<group>"; };
 		F482EEF329B5DA6600815C9C /* FWRoomCaptureView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FWRoomCaptureView.xib; sourceTree = "<group>"; };
@@ -636,6 +638,7 @@
 		F40B5D0626C27D0A00F42370 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F47FD4212BD65F5F006579F2 /* Sounds */,
 				F40B5D2526C27D0A00F42370 /* Assets */,
 				F40B633E26C2901F00F42370 /* MeetingExample-Info.plist */,
 				F40B634126C292C000F42370 /* LaunchScreen.storyboard */,
@@ -961,6 +964,14 @@
 				F47A3B5527D1F0FA00C88F2C /* FWStoreDataBridge.m */,
 			);
 			path = StoreDataBridge;
+			sourceTree = "<group>";
+		};
+		F47FD4212BD65F5F006579F2 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				F47FD4202BD65F5F006579F2 /* audio_background_task.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		F482EEF529B6CF1600815C9C /* NetworkBridge */ = {
@@ -1320,6 +1331,7 @@
 				F40B634926C2936C00F42370 /* FWHomeViewController.xib in Resources */,
 				F42CB01F2B6F3EE500D2A3F7 /* FWReportCollectionViewCell.xib in Resources */,
 				F429AC682B456957003D127D /* FWRegisterViewController.xib in Resources */,
+				F47FD4222BD65F5F006579F2 /* audio_background_task.wav in Resources */,
 				F4219D7129AF05DD0069483A /* FWRoomBottomView.xib in Resources */,
 				F49A41562B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.xib in Resources */,
 				F49A41172B55286A0049DF6D /* Tabbar.xcassets in Resources */,
