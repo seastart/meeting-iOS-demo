@@ -65,19 +65,30 @@
 /// 设置根视图为主功能模块(登录状态下)
 - (void)setWindowRootHome {
     
+    @weakify(self);
     /// 获取鉴权令牌
     NSString *authToken = [FWStoreDataBridge sharedManager].authToken;
     /// 登录组件
     [[MeetingKit sharedInstance] loginWithToken:authToken appGroup:FWAPPGROUP onSuccess:^{
-        
+        @strongify(self);
+        /// 设置首页根视图
+        [self _setWindowRootHome];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
-        
+        /// 构造日志信息
+        NSString *logStr = [NSString stringWithFormat:@"组件登录失败 code = %ld, message = %@", code, message];
+        [FWToastBridge showToastAction:logStr];
+        SGLOG(@"%@", logStr);
     }];
+}
+
+#pragma mark - 设置首页根视图
+/// 设置首页根视图
+- (void)_setWindowRootHome {
     
-//    FWBaseTabBarViewController *tabBar = [[FWBaseTabBarViewController alloc] initTabBarViewController];
-//    [UIView transitionWithView:[self appDelegate].window duration:0.5f options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
-//        [self appDelegate].window.rootViewController = tabBar;
-//    } completion:nil];
+    FWBaseTabBarViewController *tabBar = [[FWBaseTabBarViewController alloc] initTabBarViewController];
+    [UIView transitionWithView:[self appDelegate].window duration:0.5f options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
+        [self appDelegate].window.rootViewController = tabBar;
+    } completion:nil];
 }
 
 @end

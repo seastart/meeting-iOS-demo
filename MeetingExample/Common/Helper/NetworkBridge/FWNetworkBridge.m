@@ -52,11 +52,11 @@
         /// 请求进度
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         /// 请求成功
-        [self outputlog:YES way:@"GET" api:url params:params response:responseObject];
+        [self outputlog:YES way:@"GET" api:baseurl params:params response:responseObject];
         [self result:responseObject className:className resultBlock:resultBlock];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         /// 请求失败
-        [self outputlog:NO way:@"GET" api:url params:params response:error];
+        [self outputlog:NO way:@"GET" api:baseurl params:params response:error];
         if (resultBlock) {
             resultBlock(NO, error, [self networkError:error]);
         }
@@ -81,11 +81,11 @@
         /// 请求进度
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         /// 请求成功
-        [self outputlog:YES way:@"POST" api:url params:params response:responseObject];
+        [self outputlog:YES way:@"POST" api:baseurl params:params response:responseObject];
         [self result:responseObject className:className resultBlock:resultBlock];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         /// 请求失败
-        [self outputlog:NO way:@"POST" api:url params:params response:error];
+        [self outputlog:NO way:@"POST" api:baseurl params:params response:error];
         if (resultBlock) {
             resultBlock(NO, error, [self networkError:error]);
         }
