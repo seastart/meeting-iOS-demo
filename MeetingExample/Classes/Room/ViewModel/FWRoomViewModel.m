@@ -16,11 +16,11 @@
 
 #pragma mark - 初始化方法
 /// 初始化方法
-- (instancetype)initWithRoomNo:(NSString * _Nonnull)roomNo {
+- (instancetype)initWithMeetingEnterModel:(FWMeetingEnterModel *)enterModel {
     
     if (self = [super init]) {
         _loading = NO;
-        _roomText = roomNo;
+        _enterModel = enterModel;
         _toastSubject = [RACSubject subject];
     }
     return self;

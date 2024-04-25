@@ -13,7 +13,7 @@
 #import "FWRoomViewModel.h"
 #import "FWRoomMainView.h"
 
-@interface FWRoomViewController () <FWRoomMainViewDelegate>
+@interface FWRoomViewController () <MeetingKitDelegate, FWRoomMainViewDelegate>
 
 /// 房间主窗口视图
 @property (weak, nonatomic) IBOutlet FWRoomMainView *roomMainView;
@@ -54,7 +54,7 @@
     /// 加入房间状态未标记
     if (!self.joinRoomStatus) {
         /// 数据完成设置后加入房间
-        [self onJoinRoomWithRoomNo:self.viewModel.roomText];
+        [self handleJoinRoom];
     }
 }
 
@@ -80,7 +80,7 @@
 - (void)setupViewModel {
     
     /// 初始化ViewModel
-    self.viewModel = [[FWRoomViewModel alloc] initWithRoomNo:self.info];
+    self.viewModel = [[FWRoomViewModel alloc] initWithMeetingEnterModel:self.info];
     /// ViewModel关联Class
     self.viewModel.viewClass = [self class];
 }
@@ -108,12 +108,73 @@
 
 #pragma mark - 加入房间
 /// 加入房间
-/// @param roomNo 房间号码
-- (void)onJoinRoomWithRoomNo:(NSString *)roomNo {
+- (void)handleJoinRoom {
     
-    /// 标记加入房间状态
-    self.joinRoomStatus = YES;
+    @weakify(self);
+    
+    /// 设置事件回调
+    [[MeetingKit sharedInstance] addDelegate:self];
+    /// 标记加载状态
+    self.viewModel.loading = YES;
+    /// 构建加入会议参数
+    SEAMeetingEnterParam *meetingEnterParam = [[SEAMeetingEnterParam alloc] init];
+    meetingEnterParam.roomNo = self.viewModel.enterModel.roomNo;
+    meetingEnterParam.nickname = self.viewModel.enterModel.nickname;
+    /// 加入房间
+    [[MeetingKit sharedInstance] enterRoom:meetingEnterParam onSuccess:^(id  _Nullable data) {
+        @strongify(self);
+        /// 恢复加载状态
+        self.viewModel.loading = NO;
+        /// 获取房间标识
+        NSString *roomId = (NSString *)data;
+        /// 保存加入会议信息
+        [[FWStoreDataBridge sharedManager] enterRoom:self.viewModel.enterModel.roomNo roomId:roomId];
+        /// 设置主窗口显示状态
+        self.roomMainView.hidden = NO;
+        /// 标记加入房间状态
+        self.joinRoomStatus = YES;
+    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        /// 恢复加载状态
+        self.viewModel.loading = NO;
+        /// 构造日志信息
+        NSString *logStr = [NSString stringWithFormat:@"创建房间失败 code = %ld, message = %@", code, message];
+        [FWToastBridge showToastAction:logStr];
+        SGLOG(@"%@", logStr);
+        /// 加入房间失败，结束并退出当前页面
+        [self joinRoomFailAlert:code];
+    }];
 }
+
+
+#pragma mark - ----- MeetingKitDelegate 代理方法 -----
+#pragma mark ----- 错误事件回调 -----
+#pragma mark 错误事件回调
+/// 错误事件回调
+/// - Parameters:
+///   - errCode: 错误码
+///   - errMsg: 错误信息
+- (void)onError:(SEAError)errCode errMsg:(nullable NSString *)errMsg {
+    
+    /// 日志埋点
+    SGLOG(@"发生了错误(%ld)，%@", errCode, errMsg);
+}
+
+
+#pragma mark ----- 房间事件回调 -----
+#pragma mark 进入房间事件回调
+/// 进入房间事件回调
+/// - Parameters:
+///   - roomId: 房间标识
+///   - userId: 用户标识
+- (void)onRoomEnter:(NSString *)roomId userId:(NSString *)userId {
+    
+    /// 日志埋点
+    SGLOG(@"加入房间成功，%@ %@", roomId, userId);
+}
+
+
+
+
 
 #pragma mark - ----- FWRoomMainViewDelegate的代理方法 -----
 #pragma mark 聊天事件回调
@@ -229,8 +290,8 @@
     }];
     UIAlertAction *leaveAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         @strongify(self);
-        /// 离开房间页面
-        [self pop:1];
+        /// 离开房间
+        [self leaveRoom];
     }];
     [alert addAction:cancelAction];
     [alert addAction:leaveAction];
@@ -247,6 +308,7 @@
     /// 订阅成员轨道弹窗
     /// [self subscribeMemberAlert:memberModel];
 }
+
 
 #pragma mark - 修改成员信息弹窗
 /// 修改成员信息弹窗
@@ -300,6 +362,36 @@
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - 离开房间
+/// 离开房间
+- (void)leaveRoom {
+    
+    @weakify(self);
+    /// 离开房间
+    [[MeetingKit sharedInstance] exitRoom:^(id  _Nullable data) {
+        @strongify(self);
+        /// 清空房间信息缓存
+        [[FWStoreDataBridge sharedManager] exitRoom];
+        /// 离开房间页面
+        [self pop:1];
+    }];
+}
+
+#pragma mark - 加入房间失败
+- (void)joinRoomFailAlert:(SEAError)errorCode {
+    
+    @weakify(self);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"加入房间失败(%ld)", errorCode] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 离开房间页面
+        [self pop:1];
+    }];
+    [alert addAction:cancelAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
 

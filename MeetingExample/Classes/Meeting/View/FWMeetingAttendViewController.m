@@ -138,6 +138,8 @@
         self.roomnoTextField.userInteractionEnabled = !isCreate;
         /// 设置默认房间号码
         self.roomnoTextField.text = self.viewModel.roomnoText = [FWToolBridge roomnoDiversionString:roomnoText];
+        /// 设置默认参会昵称
+        self.nicknameTextField.text = self.viewModel.nicknameText = [FWStoreDataBridge sharedManager].userInfo.userId;
         /// 设置房间号码输入框右边距
         self.roomnoRightMargin.constant = margin;
         /// 设置标题
@@ -191,7 +193,6 @@
     /// 监听入会成功订阅
     [self.viewModel.succeedSubject subscribeNext:^(id _Nullable value) {
         @strongify(self);
-        
         /// 跳转房间页面
         [self push:@"FWRoomViewController" info:value block:nil];
     }];

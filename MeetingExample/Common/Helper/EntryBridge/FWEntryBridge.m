@@ -85,8 +85,12 @@
     /// 获取鉴权令牌
     NSString *authToken = [FWStoreDataBridge sharedManager].authToken;
     /// 组件登录
-    [[MeetingKit sharedInstance] loginWithToken:authToken appGroup:FWAPPGROUP onSuccess:^{
+    [[MeetingKit sharedInstance] loginWithToken:authToken appGroup:FWAPPGROUP onSuccess:^(id _Nullable data) {
         @strongify(self);
+        /// 获取用户信息
+        SEAUserInfo *userInfo = (SEAUserInfo *)data;
+        /// 保存用户信息
+        [[FWStoreDataBridge sharedManager] configWithUserInfo:userInfo];
         /// 设置首页根视图
         [self _setWindowRootHome];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {

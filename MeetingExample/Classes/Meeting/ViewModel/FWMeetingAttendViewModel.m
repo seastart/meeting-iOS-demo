@@ -7,6 +7,7 @@
 //
 
 #import "FWMeetingAttendViewModel.h"
+#import "FWMeetingEnterModel.h"
 
 @implementation FWMeetingAttendViewModel
 
@@ -72,11 +73,59 @@
     
     /// 标记加载状态
     self.loading = YES;
+    /// 根据会议入口类型
+    if (self.type == FWMeetingEntryTypeCreate) {
+        /// 首先先创建会议，再加入会议
+        [self createRoom:@"SailorGa 的测试会议" nickname:self.nicknameText];
+    } else {
+        /// 直接加入会议
+        [self enterRoom:roomNo nickname:self.nicknameText];
+    }
+}
+
+#pragma mark - 创建房间
+/// 创建房间
+/// - Parameter title: 房间标题
+/// - Parameter nickname: 参会昵称
+- (void)createRoom:(NSString *)title nickname:(NSString *)nickname {
+    
+    @weakify(self);
+    /// 构建会议参数
+    SEAMeetingParam *meetingParam = [[SEAMeetingParam alloc] init];
+    meetingParam.title = title;
+    /// 创建房间
+    [[MeetingKit sharedInstance] createRoom:meetingParam onSuccess:^(id _Nullable data) {
+        @strongify(self);
+        /// 获取房间号码
+        NSString *roomNo = (NSString *)data;
+        /// 创建房间成功，加入房间
+        [self enterRoom:roomNo nickname:nickname];
+    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        /// 恢复加载状态
+        self.loading = NO;
+        /// 构造日志信息
+        NSString *logStr = [NSString stringWithFormat:@"创建房间失败 code = %ld, message = %@", code, message];
+        [self.toastSubject sendNext:logStr];
+        SGLOG(@"%@", logStr);
+    }];
+}
+
+#pragma mark - 加入房间
+/// 加入房间
+/// - Parameter roomNo: 房间号码
+/// - Parameter nickname: 参会昵称
+- (void)enterRoom:(NSString *)roomNo nickname:(NSString *)nickname {
+    
     /// 恢复加载状态
     self.loading = NO;
-    
+    /// 创建加入房间对象
+    FWMeetingEnterModel *enterModel = [[FWMeetingEnterModel alloc] init];
+    enterModel.roomNo = roomNo;
+    enterModel.nickname = nickname;
+    enterModel.audioState = self.isMicrophone;
+    enterModel.videoState = self.isCamera;
     /// 回调请求成功
-    [self.succeedSubject sendNext:roomNo];
+    [self.succeedSubject sendNext:enterModel];
 }
 
 @end

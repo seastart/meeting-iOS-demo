@@ -12,6 +12,12 @@
 
 /// 鉴权令牌
 @property (nonatomic, copy, readwrite) NSString *authToken;
+/// 用户信息
+@property (nonatomic, strong, readwrite) SEAUserInfo *userInfo;
+/// 房间号码
+@property (nonatomic, copy, readwrite) NSString *roomNo;
+/// 房间标识
+@property (nonatomic, copy, readwrite) NSString *roomId;
 
 @end
 
@@ -30,6 +36,14 @@
     return manager;
 }
 
+#pragma mark - 设置用户信息
+/// 设置用户信息
+/// - Parameter userInfo: 用户信息
+- (void)configWithUserInfo:(SEAUserInfo *)userInfo {
+    
+    self.userInfo = userInfo;
+}
+
 #pragma mark - 登录用户
 /// @param authToken 鉴权令牌
 - (void)login:(NSString *)authToken {
@@ -45,6 +59,26 @@
 - (void)logout {
     
     self.authToken = nil;
+    self.userInfo = nil;
+}
+
+#pragma mark - 加入会议
+/// 加入会议
+/// - Parameters:
+///   - roomNo: 会议号码
+///   - roomId: 会议标识
+- (void)enterRoom:(NSString *)roomNo roomId:(NSString *)roomId {
+    
+    self.roomNo = roomNo;
+    self.roomId = roomId;
+}
+
+#pragma mark - 离开会议
+/// 离开会议
+- (void)exitRoom {
+    
+    self.roomNo = nil;
+    self.roomId = nil;
 }
 
 #pragma mark - 获取手机号码

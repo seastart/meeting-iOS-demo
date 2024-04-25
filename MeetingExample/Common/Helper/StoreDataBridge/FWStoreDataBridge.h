@@ -14,10 +14,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 鉴权令牌
 @property (nonatomic, copy, readonly) NSString *authToken;
+/// 用户信息
+@property (nonatomic, strong, readonly) SEAUserInfo *userInfo;
+/// 房间号码
+@property (nonatomic, copy, readonly) NSString *roomNo;
+/// 房间标识
+@property (nonatomic, copy, readonly) NSString *roomId;
 
 #pragma mark - 初始化方法
 /// 初始化方法
 + (FWStoreDataBridge *)sharedManager;
+
+#pragma mark - 设置用户信息
+/// 设置用户信息
+/// - Parameter userInfo: 用户信息
+- (void)configWithUserInfo:(SEAUserInfo *)userInfo;
 
 #pragma mark - 登录用户
 /// @param authToken 鉴权令牌
@@ -26,6 +37,17 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 退出登录
 /// 退出登录
 - (void)logout;
+
+#pragma mark - 加入会议
+/// 加入会议
+/// - Parameters:
+///   - roomNo: 会议号码
+///   - roomId: 会议标识
+- (void)enterRoom:(NSString *)roomNo roomId:(NSString *)roomId;
+
+#pragma mark - 离开会议
+/// 离开会议
+- (void)exitRoom;
 
 #pragma mark - 获取手机号码
 /// 获取手机号码
