@@ -36,10 +36,44 @@
         return;
     }
     
-    /// 聊天消息本地化
-    [[FWMessageManager sharedManager] sendChatWithContent:self.contentText];
-    /// 通知发送消息订阅
-    [self.sendSubject sendNext:nil];
+    @weakify(self);
+    /// 用户发送聊天消息
+    [[MeetingKit sharedInstance] sendRoomChatMessage:self.contentText messageType:SEAMessageTypeText targetId:nil onSuccess:^(id  _Nullable data) {
+        @strongify(self);
+        /// 获取消息内容
+        NSString *message = (NSString *)data;
+        /// 聊天消息本地化
+        [[FWMessageManager sharedManager] sendChatWithContent:message];
+        /// 通知发送消息订阅
+        [self.sendSubject sendNext:message];
+    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        /// 构造日志信息
+        NSString *toastStr = [NSString stringWithFormat:@"请求发送聊天消息失败 code = %ld, message = %@", code, message];
+        [self.toastSubject sendNext:toastStr];
+        SGLOG(@"%@", toastStr);
+    }];
+}
+
+#pragma mark - 发送自定义消息事件
+/// 发送自定义消息事件
+- (void)onSendCustomEvent {
+    
+    @weakify(self);
+    /// 用户发送自定义消息
+    [[MeetingKit sharedInstance] sendRoomCustomMessage:@"{\"meeting_id\":\"snzm8w\",\"msg_id\":\"svz69z\",\"msg_type\":1,\"msg\":\"\u4e00\u6837\u4e00\u6837\",\"user_id\":\"15606946786\"}" targetId:nil onSuccess:^(id  _Nullable data) {
+        @strongify(self);
+        /// 获取消息内容
+        NSString *message = (NSString *)data;
+        /// 聊天消息本地化
+        [[FWMessageManager sharedManager] sendChatWithContent:message];
+        /// 通知发送消息订阅
+        [self.sendSubject sendNext:message];
+    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        /// 构造日志信息
+        NSString *toastStr = [NSString stringWithFormat:@"请求发送自定义消息失败 code = %ld, message = %@", code, message];
+        [self.toastSubject sendNext:toastStr];
+        SGLOG(@"%@", toastStr);
+    }];
 }
 
 @end

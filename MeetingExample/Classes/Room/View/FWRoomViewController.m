@@ -170,10 +170,111 @@
     
     /// 日志埋点
     SGLOG(@"加入房间成功，%@ %@", roomId, userId);
+    /// 获取默认音频状态
+    BOOL audioState = self.viewModel.enterModel.audioState;
+    /// 获取默认视频状态
+    BOOL videoState = self.viewModel.enterModel.videoState;
+    /// 设置默认音视频状态
+    [self.roomMainView setupDefaultAudioState:audioState videoState:videoState];
+}
+
+#pragma mark 共享开始回调
+/// 共享开始回调
+/// - Parameter userId: 共享成员标识
+/// - Parameter shareType: 共享类型
+/// - Parameter userModel: 发送成员信息
+- (void)onRoomShareStart:(NSString *)userId shareType:(SEAShareType)shareType userModel:(nullable RTCEngineUserModel *)userModel {
+    
+    /// 日志埋点
+    SGLOG(@"共享开始通知，userId = %@ shareType = %ld", userId, shareType);
+}
+
+#pragma mark 共享结束回调
+/// 共享结束回调
+/// - Parameter userId: 成员标识
+- (void)onRoomShareStop:(NSString *)userId userModel:(nullable RTCEngineUserModel *)userModel {
+    
+    /// 日志埋点
+    SGLOG(@"共享结束通知，userId = %@", userId);
+}
+
+#pragma mark 房间举手状态变化回调
+/// 房间举手状态变化回调
+/// - Parameter userId: 成员标识
+/// - Parameter enable: 举手状态，YES-申请举手 NO-取消举手
+/// - Parameter handupType: 举手申请类型
+/// - Parameter userModel: 发送成员信息
+- (void)onRoomHandUpChanged:(NSString *)userId enable:(BOOL)enable handupType:(SEAHandupType)handupType userModel:(nullable RTCEngineUserModel *)userModel {
+    
+    /// 日志埋点
+    SGLOG(@"房间举手状态变化通知，userId = %@ %@ handupType = %ld", userId, enable ? @"申请举手" : @"取消举手", handupType);
 }
 
 
+#pragma mark ----- 用户事件回调 -----
+#pragma mark 用户昵称变化回调
+/// 用户昵称变化回调
+/// - Parameters:
+///   - targetUserId: 目标成员标识
+///   - userModel: 发送成员信息
+///   - nickname: 用户昵称
+- (void)onUserNameChanged:(NSString *)targetUserId userModel:(nullable RTCEngineUserModel *)userModel nickname:(NSString *)nickname {
+    
+    /// 日志埋点
+    SGLOG(@"用户昵称变化，userId = %@ nickname = %@", targetUserId, nickname);
+}
 
+#pragma mark 用户摄像头状态变化回调
+/// 用户摄像头状态变化回调
+/// - Parameters:
+///   - targetUserId: 目标成员标识
+///   - userModel: 发送成员信息
+///   - cameraDisabled: 预留字段
+///   - cameraState: 视频状态
+- (void)onUserCameraStateChanged:(NSString *)targetUserId userModel:(nullable RTCEngineUserModel *)userModel cameraDisabled:(BOOL)cameraDisabled cameraState:(SEADeviceState)cameraState {
+    
+    /// 日志埋点
+    SGLOG(@"用户摄像头状态变化，userId = %@ cameraState = %ld", targetUserId, cameraState);
+}
+
+#pragma mark 用户麦克风状态变化回调
+/// 用户麦克风状态变化回调
+/// - Parameters:
+///   - targetUserId: 目标成员标识
+///   - userModel: 发送成员信息
+///   - micDisabled: 预留字段
+///   - micState: 音频状态
+- (void)onUserMicStateChanged:(NSString *)targetUserId userModel:(nullable RTCEngineUserModel *)userModel micDisabled:(BOOL)micDisabled micState:(SEADeviceState)micState {
+    
+    /// 日志埋点
+    SGLOG(@"用户麦克风状态变化，userId = %@ micState = %ld", targetUserId, micState);
+}
+
+
+#pragma mark ----- 消息事件回调 -----
+#pragma mark 收到聊天消息回调
+/// 收到聊天消息回调
+/// - Parameter senderId: 发送者标识
+/// - Parameter message: 消息内容
+/// - Parameter messageType: 消息类型
+/// - Parameter userModel: 发送成员信息
+- (void)onReceiveChatMessage:(NSString *)senderId message:(NSString *)message messageType:(SEAMessageType)messageType userModel:(nullable RTCEngineUserModel *)userModel {
+    
+    /// 日志埋点
+    SGLOG(@"收到聊天消息，senderId = %@ message = %@ messageType = %ld", senderId, message, messageType);
+}
+
+#pragma mark 收到自定义消息回调
+/// 收到自定义消息回调
+/// - Parameters:
+///   - senderId: 发送者标识
+///   - content: 自定义消息内容
+///   - userModel: 发送成员信息
+- (void)onReceiveCustomMessage:(NSString *)senderId content:(NSString *)content userModel:(nullable RTCEngineUserModel *)userModel {
+    
+    /// 日志埋点
+    SGLOG(@"收到自定义消息，senderId = %@ content = %@", senderId, content);
+}
 
 
 #pragma mark - ----- FWRoomMainViewDelegate的代理方法 -----

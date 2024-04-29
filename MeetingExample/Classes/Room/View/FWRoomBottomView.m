@@ -206,6 +206,36 @@
     }];
 }
 
+#pragma mark - 设置默认音频状态
+/// 设置默认音频状态
+/// - Parameter audioState: 音频状态
+- (void)setupDefaultAudioState:(BOOL)astate {
+    
+    if (!astate) {
+        /// 原本默认即为关闭，如果设置的默认也是关闭，则丢弃此次操作
+        return;
+    }
+    /// 回调父组件处理
+    if (self.delegate && [self.delegate respondsToSelector:@selector(bottomView:didSelectAudioButton:)]) {
+        [self.delegate bottomView:self didSelectAudioButton:self.audioButton];
+    }
+}
+
+#pragma mark - 设置默认视频状态
+/// 设置默认视频状态
+/// - Parameter videoState: 视频状态
+- (void)setupDefaultVideoState:(BOOL)vstate {
+    
+    if (!vstate) {
+        /// 原本默认即为关闭，如果设置的默认也是关闭，则丢弃此次操作
+        return;
+    }
+    /// 回调父组件处理
+    if (self.delegate && [self.delegate respondsToSelector:@selector(bottomView:didSelectVideoButton:)]) {
+        [self.delegate bottomView:self didSelectVideoButton:self.videoButton];
+    }
+}
+
 #pragma mark - 设置音频按钮选中状态
 /// 设置音频按钮选中状态
 /// @param selected 选中状态

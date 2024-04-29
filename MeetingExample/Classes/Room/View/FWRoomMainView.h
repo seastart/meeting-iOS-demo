@@ -68,6 +68,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 屏幕共享状态
 @property (nonatomic, assign, readonly) BOOL screenShareStatus;
 
+#pragma mark - 设置默认音视频状态
+/// 设置默认音视频状态
+/// - Parameters:
+///   - audioState: 音频状态
+///   - videoState: 视频状态
+- (void)setupDefaultAudioState:(BOOL)audioState videoState:(BOOL)videoState;
+
 #pragma mark - 请求开启房间共享
 /// 请求开启房间共享
 /// - Parameter sharingType: 共享类型

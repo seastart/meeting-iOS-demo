@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FWRoomCaptureView : UIView
 
+#pragma mark - 获取预览视图
+/// 获取预览视图
+- (UIView *)getPreview;
+
 #pragma mark - 设置/更新成员信息
 /// 设置/更新成员信息
 - (void)setupMemberInfo;
@@ -27,6 +31,14 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 切换摄像头
 /// 切换摄像头
 - (void)switchCamera;
+
+#pragma mark - 开启音频发送
+/// 开启音频发送
+- (void)startSendAudio;
+
+#pragma mark - 停止音频发送
+/// 停止音频发送
+- (void)stopSendAudio;
 
 @end
 

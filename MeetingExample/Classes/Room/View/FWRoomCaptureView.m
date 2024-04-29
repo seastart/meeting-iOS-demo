@@ -79,6 +79,14 @@
     /// 配置属性
 }
 
+#pragma mark - 获取预览视图
+/// 获取预览视图
+- (UIView *)getPreview {
+    
+    /// 返回播放器窗口
+    return self.playerView;
+}
+
 #pragma mark - 设置/更新成员信息
 /// 设置/更新成员信息
 - (void)setupMemberInfo {
@@ -95,52 +103,29 @@
 //    /// 获取成员扩展信息
 //    FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:memberModel.props];
 //    
-//    /// 设置音频状态
-//    NSString *audioImageName = @"icon_room_audio_state_un";
-//    if (extendModel.audioState) {
-//        /// 开启状态
-//        audioImageName = @"icon_room_audio_state";
-//    }
-//    /// 设置视频状态
-//    [self.videoImageView setImage:kGetImage(audioImageName)];
-//    
-//    /// 设置视频状态
-//    NSString *videoImageName = @"icon_room_video_state_un";
-//    if (extendModel.videoState) {
-//        /// 开启状态
-//        videoImageName = @"icon_room_video_state";
-//    }
-//    /// 设置音频状态
-//    [self.audioImageView setImage:kGetImage(videoImageName)];
-//    
 //    /// 设置成员昵称
 //    NSString *nickname = memberModel.name;
 //    self.nameLabel.text = nickname;
-//    
-//    /// 视频为开启状态
-//    if (extendModel.videoState) {
-//        /// 隐藏中部各个组件
-//        self.statusView.hidden = YES;
-//    } else {
-//        /// 显示中部各个组件
-//        self.statusView.hidden = NO;
-//    }
 }
 
 #pragma mark - 开启摄像头预览
 /// 开启摄像头预览
 - (void)startLocalPreview {
     
-    /// 开启摄像头的预览画面
-//    [[FWEngineBridge sharedManager] startLocalPreview:YES view:self.playerView];
+    /// 隐藏状态视图
+    self.statusView.hidden = YES;
+    /// 设置视频状态图标
+    [self setupVideoImageView:YES];
 }
 
 #pragma mark - 停止摄像头预览
 /// 停止摄像头预览
 - (void)stopLocalPreview {
     
-    /// 停止摄像头预览
-//    [[FWEngineBridge sharedManager] stopLocalPreview];
+    /// 隐藏状态视图
+    self.statusView.hidden = NO;
+    /// 设置视频状态图标
+    [self setupVideoImageView:NO];
 }
 
 #pragma mark - 切换摄像头
@@ -148,7 +133,53 @@
 - (void)switchCamera {
     
     /// 切换摄像头
-//    [[FWEngineBridge sharedManager] switchCamera];
+    [[MeetingKit sharedInstance] switchCamera];
+}
+
+#pragma mark - 开启音频发送
+/// 开启音频发送
+- (void)startSendAudio {
+    
+    /// 设置音频状态图标
+    [self setupAudioImageView:YES];
+}
+
+#pragma mark - 停止音频发送
+/// 停止音频发送
+- (void)stopSendAudio {
+    
+    /// 设置音频状态图标
+    [self setupAudioImageView:NO];
+}
+
+#pragma mark - 设置音频状态图标
+/// 设置音频状态图标
+/// - Parameter audioState: 音频状态
+- (void)setupAudioImageView:(BOOL)audioState {
+    
+    /// 设置音频状态
+    NSString *audioImageName = @"icon_room_microphone_state_un";
+    if (audioState) {
+        /// 开启状态
+        audioImageName = @"icon_room_microphone_state";
+    }
+    /// 设置音频状态
+    [self.audioImageView setImage:kGetImage(audioImageName)];
+}
+
+#pragma mark - 设置视频状态图标
+/// 设置视频状态图标
+/// - Parameter videoState: 视频状态
+- (void)setupVideoImageView:(BOOL)videoState {
+    
+    /// 设置视频状态
+    NSString *videoImageName = @"icon_room_camera_state_un";
+    if (videoState) {
+        /// 开启状态
+        videoImageName = @"icon_room_camera_state";
+    }
+    /// 设置视频状态
+    [self.videoImageView setImage:kGetImage(videoImageName)];
 }
 
 #pragma mark - 释放资源

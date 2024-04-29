@@ -145,6 +145,8 @@ static NSString *FWMessageTableSectionHeaderViewIdentifier = @"FWMessageTableSec
         @strongify(self);
         /// 发送消息事件
         [self.viewModel onSendEvent];
+        /// 发送自定义消息事件
+        /// [self.viewModel onSendCustomEvent];
     }];
     
     /// 绑定刷新数据回调

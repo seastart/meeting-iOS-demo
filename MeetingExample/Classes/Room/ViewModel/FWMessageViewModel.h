@@ -28,6 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 发送消息事件
 - (void)onSendEvent;
 
+/// 发送自定义消息事件
+- (void)onSendCustomEvent;
+
 @end
 
 NS_ASSUME_NONNULL_END

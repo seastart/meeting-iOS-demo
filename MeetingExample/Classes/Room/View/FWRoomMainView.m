@@ -179,8 +179,36 @@
 /// 唤起电子画板组件视图
 - (void)wakeupWhiteboardView {
     
-    /// 显示画板视图
-    [self.whiteboardView showView:@"https://dev.srtc.live:9000/www/wb" userId:@"9527" roomNo:@"909090" readwrite:YES];
+    @weakify(self);
+    /// 用户请求开启共享
+    [[MeetingKit sharedInstance] requestShare:SEAShareTypeDrawing onSuccess:^(id  _Nullable data) {
+        @strongify(self);
+        /// 显示画板视图
+        [self.whiteboardView showView:@"https://dev.srtc.live:9000/www/wb" userId:[FWStoreDataBridge sharedManager].userInfo.userId roomNo:[FWStoreDataBridge sharedManager].roomNo readwrite:YES];
+    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        /// 构造日志信息
+        NSString *toastStr = [NSString stringWithFormat:@"请求开启共享失败 code = %ld, message = %@", code, message];
+        [FWToastBridge showToastAction:toastStr];;
+        SGLOG(@"%@", toastStr);
+    }];
+}
+
+#pragma mark - 隐藏电子画板组件视图
+/// 隐藏电子画板组件视图
+- (void)hiddenWhiteboardView {
+    
+    @weakify(self);
+    /// 用户关闭共享
+    [[MeetingKit sharedInstance] stopShare:^(id  _Nullable data) {
+        @strongify(self);
+        /// 隐藏画板视图
+        [self.whiteboardView hiddenView];
+    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        /// 构造日志信息
+        NSString *toastStr = [NSString stringWithFormat:@"请求关闭共享失败 code = %ld, message = %@", code, message];
+        [FWToastBridge showToastAction:toastStr];;
+        SGLOG(@"%@", toastStr);
+    }];
 }
 
 #pragma mark - 请求开启房间共享
@@ -230,8 +258,8 @@
             break;
             /// 共享白板
         case FWMeetingSharingTypeWhiteboard: {
-            /// 隐藏画板视图
-            [self.whiteboardView hiddenView];
+            /// 隐藏电子画板组件视图
+            [self hiddenWhiteboardView];
             /// 重置提示信息
             toastStr = @"已停止共享白板";
         }
@@ -245,6 +273,104 @@
     [self.roomBottomTool setupShareButtonSelected:NO];
 }
 
+#pragma mark - 设置默认音视频状态
+/// 设置默认音视频状态
+/// - Parameters:
+///   - audioState: 音频状态
+///   - videoState: 视频状态
+- (void)setupDefaultAudioState:(BOOL)audioState videoState:(BOOL)videoState {
+    
+    /// 设置默认音频状态
+    [self.roomBottomTool setupDefaultAudioState:audioState];
+    /// 设置默认视频状态
+    [self.roomBottomTool setupDefaultVideoState:videoState];
+}
+
+#pragma mark - 请求开启视频
+/// 请求开启视频
+/// - Parameter source: 事件源对象
+- (void)requestOpenVideo:(UIButton *)source {
+    
+    @weakify(self);
+    /// 用户请求打开摄像头
+    [[MeetingKit sharedInstance] requestOpenCamera:YES view:[self.roomCaptureView getPreview] onSuccess:^(id  _Nullable data) {
+        @strongify(self);
+        /// 开启摄像头预览
+        [self.roomCaptureView startLocalPreview];
+        /// 切换源按钮选中状态
+        source.selected = !source.selected;
+    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        /// 构造日志信息
+        NSString *toastStr = [NSString stringWithFormat:@"请求开启视频失败 code = %ld, message = %@", code, message];
+        [FWToastBridge showToastAction:toastStr];;
+        SGLOG(@"%@", toastStr);
+    }];
+}
+
+#pragma mark - 请求关闭视频
+/// 请求关闭视频
+/// - Parameter source: 事件源对象
+- (void)requestCloseVideo:(UIButton *)source {
+    
+    @weakify(self);
+    /// 用户关闭摄像头
+    [[MeetingKit sharedInstance] closeCamera:^(id  _Nullable data) {
+        @strongify(self);
+        /// 停止摄像头预览
+        [self.roomCaptureView stopLocalPreview];
+        /// 切换源按钮选中状态
+        source.selected = !source.selected;
+    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        /// 构造日志信息
+        NSString *toastStr = [NSString stringWithFormat:@"请求关闭视频失败 code = %ld, message = %@", code, message];
+        [FWToastBridge showToastAction:toastStr];;
+        SGLOG(@"%@", toastStr);
+    }];
+}
+
+#pragma mark - 请求开启音频
+/// 请求开启音频
+/// - Parameter source: 事件源对象
+- (void)requestOpenAudio:(UIButton *)source {
+    
+    @weakify(self);
+    /// 用户请求打开麦克风
+    [[MeetingKit sharedInstance] requestOpenMic:^(id  _Nullable data) {
+        @strongify(self);
+        /// 开启音频发送
+        [self.roomCaptureView startSendAudio];
+        /// 切换源按钮选中状态
+        source.selected = !source.selected;
+    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        /// 构造日志信息
+        NSString *toastStr = [NSString stringWithFormat:@"请求开启音频失败 code = %ld, message = %@", code, message];
+        [FWToastBridge showToastAction:toastStr];;
+        SGLOG(@"%@", toastStr);
+    }];
+}
+
+#pragma mark - 请求关闭音频
+/// 请求关闭音频
+/// - Parameter source: 事件源对象
+- (void)requestCloseAudio:(UIButton *)source {
+    
+    @weakify(self);
+    /// 用户关闭麦克风
+    [[MeetingKit sharedInstance] closeMic:^(id  _Nullable data) {
+        @strongify(self);
+        /// 停止音频发送
+        [self.roomCaptureView stopSendAudio];
+        /// 切换源按钮选中状态
+        source.selected = !source.selected;
+    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        /// 构造日志信息
+        NSString *toastStr = [NSString stringWithFormat:@"请求关闭音频失败 code = %ld, message = %@", code, message];
+        [FWToastBridge showToastAction:toastStr];;
+        SGLOG(@"%@", toastStr);
+    }];
+}
+
+
 #pragma mark - ----- FWRoomTopViewDelegate的代理方法 -----
 #pragma mark 扬声器事件回调
 /// 扬声器事件回调
@@ -253,6 +379,8 @@
 ///   - source: 事件源对象
 - (void)topView:(FWRoomTopView *)topView didSelectSpeakerButton:(UIButton *)source {
     
+    /// 设置扬声器状态
+    [[MeetingKit sharedInstance] switchSpeaker:source.selected];
     /// 切换源按钮选中状态
     source.selected = !source.selected;
 }
@@ -302,32 +430,20 @@
 ///   - source: 事件源对象
 - (void)bottomView:(FWRoomBottomView *)bottomView didSelectAudioButton:(UIButton *)source {
     
+    @weakify(self);
     /// 检测麦克风权限
     [FWToolBridge requestAuthorization:FWPermissionsStateAudio superVC:[FWEntryBridge sharedManager].appDelegate.window.rootViewController result:^(BOOL status) {
-//        if (status) {
-//            /// 获取成员信息
-//            RTCEngineUserModel *memberModel = [[FWEngineBridge sharedManager] getMySelf];
-//            /// 获取成员扩展信息
-//            FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:memberModel.props];
-//            /// 变更自己的音频状态
-//            extendModel.audioState = source.selected;
-//            /// 设置账户扩展信息
-//            memberModel.props = extendModel;
-//            
-//            /// 变更用户信息
-//            RTCEngineError errorCode = [[FWEngineBridge sharedManager] changeWithUserModel:memberModel];
-//            if (errorCode != RTCEngineErrorOK) {
-//                NSString *toastStr = [NSString stringWithFormat:@"变更用户信息失败 errorCode = %ld", errorCode];
-//                [FWToastBridge showToastAction:toastStr];
-//                SGLOG(@"%@", toastStr);
-//                return;
-//            }
-            
-            /// 切换源按钮选中状态
-            source.selected = !source.selected;
-//            /// 音频发送状态
-//            [[FWEngineBridge sharedManager] enabledSendAudio:!source.selected];
-//        }
+        @strongify(self);
+        if (status) {
+            /// 分辨请求开启还是关闭音频
+            if (source.selected) {
+                /// 请求开启音频
+                [self requestOpenAudio:source];
+            } else {
+                /// 请求关闭音频
+                [self requestCloseAudio:source];
+            }
+        }
     }];
 }
 
@@ -338,40 +454,20 @@
 ///   - source: 事件源对象
 - (void)bottomView:(FWRoomBottomView *)bottomView didSelectVideoButton:(UIButton *)source {
     
-    /// @weakify(self);
+    @weakify(self);
     /// 检测摄像头权限
     [FWToolBridge requestAuthorization:FWPermissionsStateVideo superVC:[FWEntryBridge sharedManager].appDelegate.window.rootViewController result:^(BOOL status) {
-//        @strongify(self);
-//        if (status) {
-//            /// 获取成员信息
-//            RTCEngineUserModel *memberModel = [[FWEngineBridge sharedManager] getMySelf];
-//            /// 获取成员扩展信息
-//            FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:memberModel.props];
-//            /// 变更自己的视频状态
-//            extendModel.videoState = source.selected;
-//            /// 设置账户扩展信息
-//            memberModel.props = extendModel;
-//            
-//            /// 变更用户信息
-//            RTCEngineError errorCode = [[FWEngineBridge sharedManager] changeWithUserModel:memberModel];
-//            if (errorCode != RTCEngineErrorOK) {
-//                NSString *toastStr = [NSString stringWithFormat:@"变更用户信息失败 errorCode = %ld", errorCode];
-//                [FWToastBridge showToastAction:toastStr];
-//                SGLOG(@"%@", toastStr);
-//                return;
-//            }
-            
-            /// 切换源按钮选中状态
-            source.selected = !source.selected;
-//            /// 设置采集状态
-//            if (source.selected) {
-//                /// 停止摄像头预览
-//                [self.roomCaptureView stopLocalPreview];
-//            } else {
-//                /// 开启摄像头预览
-//                [self.roomCaptureView startLocalPreview];
-//            }
-//        }
+        @strongify(self);
+        if (status) {
+            /// 分辨请求开启还是关闭视频
+            if (source.selected) {
+                /// 请求开启视频
+                [self requestOpenVideo:source];
+            } else {
+                /// 请求关闭视频
+                [self requestCloseVideo:source];
+            }
+        }
     }];
 }
 

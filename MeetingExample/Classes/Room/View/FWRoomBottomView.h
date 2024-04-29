@@ -56,6 +56,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// 回调代理
 @property (nonatomic, weak) IBOutlet id <FWRoomBottomViewDelegate> delegate;
 
+#pragma mark - 设置默认音频状态
+/// 设置默认音频状态
+/// - Parameter audioState: 音频状态
+- (void)setupDefaultAudioState:(BOOL)astate;
+
+#pragma mark - 设置默认视频状态
+/// 设置默认视频状态
+/// - Parameter videoState: 视频状态
+- (void)setupDefaultVideoState:(BOOL)vstate;
+
 #pragma mark - 设置音频按钮选中状态
 /// 设置音频按钮选中状态
 /// @param selected 选中状态
