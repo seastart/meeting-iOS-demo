@@ -62,7 +62,7 @@
     NSString *roomNo = [FWToolBridge stringDiversionRoomno:self.roomnoText];
     
     if (kStringIsEmpty(roomNo)) {
-        [self.toastSubject sendNext:NSLocalizedString(@"请输入房间ID", nil)];
+        [self.toastSubject sendNext:NSLocalizedString(@"请输入房间号码", nil)];
         return;
     }
     
