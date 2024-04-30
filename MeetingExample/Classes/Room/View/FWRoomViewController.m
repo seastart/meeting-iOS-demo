@@ -160,6 +160,24 @@
 }
 
 
+#pragma mark ----- 连接事件回调 -----
+#pragma mark 连接成功回调
+/// 连接成功回调
+- (void)onConnected {
+    
+    /// 日志埋点
+    SGLOG(@"%@", @"服务已经连接");
+}
+
+#pragma mark 连接断开回调
+/// 连接断开回调
+- (void)onDisconnected {
+    
+    /// 日志埋点
+    SGLOG(@"%@", @"服务已经断开");
+}
+
+
 #pragma mark ----- 房间事件回调 -----
 #pragma mark 进入房间事件回调
 /// 进入房间事件回调
@@ -192,6 +210,7 @@
 #pragma mark 共享结束回调
 /// 共享结束回调
 /// - Parameter userId: 成员标识
+/// - Parameter userModel: 发送成员信息
 - (void)onRoomShareStop:(NSString *)userId userModel:(nullable RTCEngineUserModel *)userModel {
     
     /// 日志埋点
@@ -210,8 +229,120 @@
     SGLOG(@"房间举手状态变化通知，userId = %@ %@ handupType = %ld", userId, enable ? @"申请举手" : @"取消举手", handupType);
 }
 
+#pragma mark 房间被解散回调
+/// 房间被解散回调
+/// - Parameter userModel: 发送成员信息
+- (void)onRoomDestroy:(nullable RTCEngineUserModel *)userModel {
+    
+    /// 日志埋点
+    SGLOG(@"房间被解散通知");
+}
+
+#pragma mark 房间摄像头禁用状态变更回调
+/// 房间摄像头禁用状态变更回调
+/// - Parameter cameraDisabled: 进入房间是否关闭视频，YES-关闭 NO-不关闭
+/// - Parameter selfUnmuteCameraDisabled: 是否允许自我解除，YES-允许 NO-不允许
+/// - Parameter userModel: 发送成员信息
+- (void)onRoomCameraStateChanged:(BOOL)cameraDisabled selfUnmuteCameraDisabled:(BOOL)selfUnmuteCameraDisabled userModel:(nullable RTCEngineUserModel *)userModel {
+    
+    /// 日志埋点
+    SGLOG(@"房间摄像头禁用状态变更通知，cameraDisabled = %d selfUnmuteCameraDisabled = %d", cameraDisabled, selfUnmuteCameraDisabled);
+}
+
+#pragma mark 房间麦克风禁用状态变更回调
+/// 房间麦克风禁用状态变更回调
+/// - Parameter micDisabled: 进入房间是否关闭音频，YES-关闭 NO-不关闭
+/// - Parameter selfUnmuteMicDisabled: 是否允许自我解除，YES-允许 NO-不允许
+/// - Parameter userModel: 发送成员信息
+- (void)onRoomMicStateChanged:(BOOL)micDisabled selfUnmuteMicDisabled:(BOOL)selfUnmuteMicDisabled userModel:(nullable RTCEngineUserModel *)userModelm {
+    
+    /// 日志埋点
+    SGLOG(@"房间麦克风禁用状态变更通知，micDisabled = %d selfUnmuteMicDisabled = %d", micDisabled, selfUnmuteMicDisabled);
+}
+
+#pragma mark 房间聊天禁用状态变更回调
+/// 房间聊天禁用状态变更回调
+/// - Parameter chatDisabled: 禁用状态，YES-禁用 NO-不禁用
+/// - Parameter userModel: 发送成员信息
+- (void)onRoomChatDisabledChanged:(BOOL)chatDisabled userModel:(nullable RTCEngineUserModel *)userModel {
+    
+    /// 日志埋点
+    SGLOG(@"房间聊天禁用状态变更通知，chatDisabled = %d", chatDisabled);
+}
+
+#pragma mark 房间截图禁用状态变更回调
+/// 房间截图禁用状态变更回调
+/// - Parameter screenshotDisabled: 禁用状态，YES-禁用 NO-不禁用
+/// - Parameter userModel: 发送成员信息
+- (void)onRoomScreenshotDisabledChanged:(BOOL)screenshotDisabled userModel:(nullable RTCEngineUserModel *)userModel {
+    
+    /// 日志埋点
+    SGLOG(@"房间截图禁用状态变更通知，screenshotDisabled = %d", screenshotDisabled);
+}
+
+#pragma mark 房间水印禁用状态变更回调
+/// 房间水印禁用状态变更回调
+/// - Parameter watermarkDisabled: 水印状态，YES-开启 NO-关闭
+/// - Parameter userModel: 发送成员信息
+- (void)onRoomWatermarkDisabledChanged:(BOOL)watermarkDisabled userModel:(nullable RTCEngineUserModel *)userModel {
+    
+    /// 日志埋点
+    SGLOG(@"房间水印禁用状态变更通知，watermarkDisabled = %d", watermarkDisabled);
+}
+
+#pragma mark 房间锁定状态变化回调
+/// 房间锁定状态变化回调
+/// - Parameter locked: 锁定状态，YES-开启 NO-关闭
+/// - Parameter userModel: 发送成员信息
+- (void)onRoomLockedChanged:(BOOL)locked userModel:(nullable RTCEngineUserModel *)userModel {
+    
+    /// 日志埋点
+    SGLOG(@"房间锁定状态变化通知，locked = %d", locked);
+}
+
+#pragma mark 房间转移主持人回调
+/// 房间转移主持人回调
+/// - Parameters:
+///   - userId: 新主持人用户标识
+///   - sourceUserId: 原主持人用户标识
+///   - userModel: 发送成员信息
+- (void)onRoomMoveHost:(NSString *)userId sourceUserId:(NSString *)sourceUserId userModel:(nullable RTCEngineUserModel *)userModel {
+    
+    /// 日志埋点
+    SGLOG(@"房间转移主持人通知，userId = %@ sourceUserId = %@", userId, sourceUserId);
+}
+
+#pragma mark 房间踢出成员回调
+/// 房间踢出成员回调
+/// - Parameters:
+///   - userId: 成员标识
+///   - userModel: 发送成员信息
+- (void)onRoomKickedOut:(NSString *)userId userModel:(nullable RTCEngineUserModel *)userModel {
+    
+    /// 日志埋点
+    SGLOG(@"房间踢出成员通知，userId = %@", userId);
+}
+
 
 #pragma mark ----- 用户事件回调 -----
+#pragma mark 远端用户加入房间回调
+/// 远端用户加入房间回调
+/// - Parameter userId: 成员标识
+- (void)onUserEnter:(NSString *)userId {
+    
+    /// 日志埋点
+    SGLOG(@"远端用户加入房间通知，userId = %@", userId);
+}
+
+#pragma mark 远端用户离开房间回调
+/// 远端用户离开房间回调
+/// - Parameter userId: 成员标识
+- (void)onUserExit:(NSString *)userId {
+    
+    /// 日志埋点
+    SGLOG(@"远端用户离开房间通知，userId = %@", userId);
+}
+
 #pragma mark 用户昵称变化回调
 /// 用户昵称变化回调
 /// - Parameters:
@@ -222,6 +353,18 @@
     
     /// 日志埋点
     SGLOG(@"用户昵称变化，userId = %@ nickname = %@", targetUserId, nickname);
+}
+
+#pragma mark 用户角色变化回调
+/// 用户角色变化回调
+/// - Parameters:
+///   - targetUserId: 目标成员标识
+///   - userModel: 发送成员信息
+///   - userRole: 用户角色
+- (void)onUserRoleChanged:(NSString *)targetUserId userModel:(nullable RTCEngineUserModel *)userModel userRole:(SEAUserRole)userRole {
+    
+    /// 日志埋点
+    SGLOG(@"用户角色变化，userId = %@ userRole = %ld", targetUserId, userRole);
 }
 
 #pragma mark 用户摄像头状态变化回调
@@ -250,6 +393,29 @@
     SGLOG(@"用户麦克风状态变化，userId = %@ micState = %ld", targetUserId, micState);
 }
 
+#pragma mark 用户聊天能力禁用状态变化回调
+/// 用户聊天能力禁用状态变化回调
+/// - Parameter targetUserId: 目标成员标识
+/// - Parameter chatDisabled: 禁用状态，YES-禁用 NO-不禁用
+/// - Parameter userModel: 发送成员信息
+- (void)onUserChatDisabledChanged:(NSString *)targetUserId chatDisabled:(BOOL)chatDisabled userModel:(nullable RTCEngineUserModel *)userModel {
+    
+    /// 日志埋点
+    SGLOG(@"用户聊天能力禁用状态变化，userId = %@ chatDisabled = %d", targetUserId, chatDisabled);
+}
+
+#pragma mark 举手处理结果回调
+/// 举手处理结果回调
+/// - Parameter targetUserId: 目标成员标识
+/// - Parameter handupType: 申请类型
+/// - Parameter approve: 处理结果
+/// - Parameter userModel: 发送成员信息
+- (void)onHandupConfirm:(NSString *)targetUserId handupType:(SEAHandupType)handupType approve:(BOOL)approve userModel:(nullable RTCEngineUserModel *)userModel {
+    
+    /// 日志埋点
+    SGLOG(@"举手处理结果通知，userId = %@ handupType = %ld approve = %d", targetUserId, handupType, approve);
+}
+
 
 #pragma mark ----- 消息事件回调 -----
 #pragma mark 收到聊天消息回调
@@ -274,6 +440,99 @@
     
     /// 日志埋点
     SGLOG(@"收到自定义消息，senderId = %@ content = %@", senderId, content);
+}
+
+
+#pragma mark ----- 屏幕采集事件回调 -----
+#pragma mark 屏幕共享状态回调
+/// 屏幕共享状态回调
+/// @param status 状态码
+- (void)onScreenRecordStatus:(RTCScreenRecordStatus)status {
+    
+    /// 日志埋点
+    SGLOG(@"屏幕共享状态通知，status = %ld", status);
+}
+
+
+#pragma mark ----- 音频事件回调 -----
+#pragma mark 音频路由变更回调
+/// 音频路由变更回调
+/// @param route 音频路由
+/// @param previousRoute 变更前的音频路由
+- (void)onAudioRouteChange:(RTCAudioRoute)route previousRoute:(RTCAudioRoute)previousRoute {
+    
+    /// 日志埋点
+    SGLOG(@"音频路由变更通知，route = %ld previousRoute = %ld", route, previousRoute);
+}
+
+#pragma mark 远程成员音频状态回调
+/// 远程成员音频状态回调
+/// @param audioArray 成员音频列表
+- (void)onRemoteMemberAudioStatus:(NSArray<RTCStreamAudioModel *> *)audioArray {
+    
+    /// 暂不做处理
+}
+
+
+#pragma mark ----- 音频事件回调 -----
+#pragma mark 下行码率自适应状态回调
+/// 下行码率自适应状态回调
+/// @param userId 用户标识
+/// @param state 下行码率自适应状态
+- (void)onDownBitrateAdaptiveUserId:(NSString *)userId state:(RTCDownBitrateAdaptiveState)state {
+    
+    /// 暂不做处理
+}
+
+#pragma mark 上行码率自适应状态回调
+/// 上行码率自适应状态回调
+/// @param state 上行码率自适应状态
+- (void)onUploadBitrateAdaptiveState:(RTCUploadBitrateAdaptiveState)state {
+    
+    /// 暂不做处理
+}
+
+#pragma mark 下行平均丢包档位变化回调
+/// 下行平均丢包档位变化回调
+/// @param state 下行平均丢包档位
+- (void)onDownLossLevelChangeState:(RTCDownLossLevelState)state {
+    
+    /// 暂不做处理
+}
+
+#pragma mark 下行平均丢包率回调
+/// 下行平均丢包率回调
+/// @param average 下行平均丢包率
+- (void)onDownLossRateAverage:(CGFloat)average {
+    
+    /// 暂不做处理
+}
+
+#pragma mark 流媒体发送状态数据回调
+/// 流媒体发送状态数据回调
+/// @param sendModel 流媒体发送状态数据
+- (void)onSendStreamModel:(RTCStreamSendModel *)sendModel {
+    
+    /// 暂不做处理
+}
+
+#pragma mark 流媒体接收状态数据回调
+/// 流媒体接收状态数据回调
+/// @param receiveModel 流媒体接收状态数据
+- (void)onReceiveStreamModel:(RTCStreamReceiveModel *)receiveModel {
+    
+    /// 暂不做处理
+}
+
+
+#pragma mark ----- 音频事件回调 -----
+#pragma mark 应用性能使用情况回调
+/// 应用性能使用情况回调
+/// @param memory 内存占用
+/// @param cpuUsage CUP使用率
+- (void)onApplicationPerformance:(CGFloat)memory cpuUsage:(CGFloat)cpuUsage {
+    
+    /// 暂不做处理
 }
 
 
@@ -469,6 +728,21 @@
 #pragma mark - 离开房间
 /// 离开房间
 - (void)leaveRoom {
+    
+//    @weakify(self);
+//    /// 主持人解散房间
+//    [[MeetingKit sharedInstance] adminDestroyRoom:^(id  _Nullable data) {
+//        @strongify(self);
+//        /// 清空房间信息缓存
+//        [[FWStoreDataBridge sharedManager] exitRoom];
+//        /// 离开房间页面
+//        [self pop:1];
+//    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+//        /// 构造日志信息
+//        NSString *toastStr = [NSString stringWithFormat:@"请求结束会议失败 code = %ld, message = %@", code, message];
+//        [FWToastBridge showToastAction:toastStr];;
+//        SGLOG(@"%@", toastStr);
+//    }];
     
     @weakify(self);
     /// 离开房间
