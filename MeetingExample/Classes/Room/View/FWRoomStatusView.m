@@ -135,7 +135,34 @@
 //    self.bottomNameLabel.text = nickname;
     
     /// 根据对该成员的视频订阅情况显示或隐藏背影幕布
-    if (userModel.subscribe) {
+//    if (userModel.subscribe) {
+//        /// 隐藏中部各个组件
+//        self.screenView.hidden = YES;
+//        self.avatarImageView.hidden = YES;
+//    } else {
+//        /// 显示中部各个组件
+//        self.screenView.hidden = NO;
+//        self.avatarImageView.hidden = NO;
+//    }
+}
+
+#pragma mark - 用户摄像头状态变化
+/// 用户摄像头状态变化
+/// @param cameraState 视频状态
+- (void)userCameraStateChanged:(SEADeviceState)cameraState {
+    
+    /// 设置音频状态
+    NSString *videoImageName = @"icon_room_camera_state_un";
+    if (cameraState == SEADeviceStateOpen) {
+        /// 开启状态
+        videoImageName = @"icon_room_camera_state";
+    }
+    /// 设置视频状态
+    [self.centerVideoImageView setImage:kGetImage(videoImageName)];
+    [self.bottomVideoImageView setImage:kGetImage(videoImageName)];
+    
+    /// 如果当前摄像头状态为开启
+    if (cameraState == SEADeviceStateOpen) {
         /// 隐藏中部各个组件
         self.screenView.hidden = YES;
         self.avatarImageView.hidden = YES;
@@ -144,6 +171,22 @@
         self.screenView.hidden = NO;
         self.avatarImageView.hidden = NO;
     }
+}
+
+#pragma mark - 用户麦克风状态变化
+/// 用户麦克风状态变化
+/// @param micState 音频状态
+- (void)userMicStateChanged:(SEADeviceState)micState {
+    
+    /// 设置视频状态
+    NSString *audioImageName = @"icon_room_microphone_state_un";
+    if (micState == SEADeviceStateOpen) {
+        /// 开启状态
+        audioImageName = @"icon_room_microphone_state";
+    }
+    /// 设置音频状态
+    [self.centerAudioImageView setImage:kGetImage(audioImageName)];
+    [self.bottomAudioImageView setImage:kGetImage(audioImageName)];
 }
 
 #pragma mark - 释放资源

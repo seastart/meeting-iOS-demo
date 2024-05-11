@@ -33,6 +33,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// 窗口关联成员标识
 @property (nonatomic, strong, nullable) NSString *userId;
 
+/// 用户摄像头状态变化
+/// @param cameraState 视频状态
+- (void)userCameraStateChanged:(SEADeviceState)cameraState;
+
+/// 用户麦克风状态变化
+/// @param micState 音频状态
+- (void)userMicStateChanged:(SEADeviceState)micState;
+
 @end
 
 NS_ASSUME_NONNULL_END

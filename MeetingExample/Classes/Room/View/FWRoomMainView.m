@@ -12,7 +12,6 @@
 #import "FWRoomMemberView.h"
 #import "FWRoomCaptureView.h"
 #import "FWRoomWhiteboardView.h"
-#import "FWRoomExtendModel.h"
 
 /// 房间持续时长统计周期
 #define FW_ROOM_DURATION_TIMER_CYCLE 1.0
@@ -284,6 +283,69 @@
     [self.roomBottomTool setupDefaultAudioState:audioState];
     /// 设置默认视频状态
     [self.roomBottomTool setupDefaultVideoState:videoState];
+}
+
+#pragma mark - 成员加入房间
+/// 成员加入房间
+/// - Parameter userId: 成员标识
+- (void)memberUserEnter:(NSString *)userId {
+    
+    /// 获取成员数
+    NSInteger membersCount = [FWRoomMemberManager sharedManager].getAllMembers.count;
+    /// 当前成员数大于等于 2 时，显示宫格列表视图
+    if (membersCount >= 2) {
+        /// 隐藏采集渲染视图
+        self.roomCaptureView.hidden = YES;
+        /// 显示成员列表视图
+        self.roomMemberView.hidden = NO;
+        /// 该成员进入之前，房间内只有当前成员
+        if (membersCount == 2) {
+            /// 获取当前账户信息
+            RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+            /// 先将自己加入到成员列表视图
+            [self.roomMemberView memberUpdateWithUserId:userModel.uid];
+        }
+    }
+    /// 成员更新信息
+    [self.roomMemberView memberUpdateWithUserId:userId];
+}
+
+#pragma mark - 成员离开房间
+/// 成员离开房间
+/// - Parameter userId: 成员标识
+- (void)memberUserExit:(NSString *)userId {
+    
+    /// 获取成员数
+    NSInteger membersCount = [FWRoomMemberManager sharedManager].getAllMembers.count;
+    /// 当前成员数小于等于 1 时，显示采集渲染视图
+    if (membersCount <= 1) {
+        /// 显示采集渲染视图
+        self.roomCaptureView.hidden = NO;
+        /// 隐藏成员列表视图
+        self.roomMemberView.hidden = YES;
+    }
+    /// 成员离开房间
+    [self.roomMemberView memberExitWithUserId:userId];
+}
+
+#pragma mark - 用户摄像头状态变化
+/// 用户摄像头状态变化
+/// @param userId 成员标识
+/// @param cameraState 视频状态
+- (void)userCameraStateChanged:(NSString *)userId cameraState:(SEADeviceState)cameraState {
+    
+    /// 用户摄像头状态变化
+    [self.roomMemberView userCameraStateChanged:userId cameraState:cameraState];
+}
+
+#pragma mark - 用户麦克风状态变化
+/// 用户麦克风状态变化
+/// @param userId 成员标识
+/// @param micState 音频状态
+- (void)userMicStateChanged:(NSString *)userId micState:(SEADeviceState)micState {
+    
+    /// 用户麦克风状态变化
+    [self.roomMemberView userMicStateChanged:userId micState:micState];
 }
 
 #pragma mark - 请求开启视频

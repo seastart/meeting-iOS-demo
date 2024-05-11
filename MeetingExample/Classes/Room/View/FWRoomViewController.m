@@ -9,7 +9,6 @@
 #import "FWReportViewController.h"
 #import "FWRoomViewController.h"
 #import "FWRoomMemberModel.h"
-#import "FWRoomExtendModel.h"
 #import "FWRoomViewModel.h"
 #import "FWRoomMainView.h"
 
@@ -188,6 +187,8 @@
     
     /// 日志埋点
     SGLOG(@"加入房间成功，%@ %@", roomId, userId);
+    /// 成员进入房间
+    [[FWRoomMemberManager sharedManager] onMemberEnterRoom:userId isMine:YES];
     /// 获取默认音频状态
     BOOL audioState = self.viewModel.enterModel.audioState;
     /// 获取默认视频状态
@@ -332,6 +333,10 @@
     
     /// 日志埋点
     SGLOG(@"远端用户加入房间通知，userId = %@", userId);
+    /// 成员进入房间
+    [[FWRoomMemberManager sharedManager] onMemberEnterRoom:userId isMine:NO];
+    /// 成员加入房间
+    [self.roomMainView memberUserEnter:userId];
 }
 
 #pragma mark 远端用户离开房间回调
@@ -341,6 +346,10 @@
     
     /// 日志埋点
     SGLOG(@"远端用户离开房间通知，userId = %@", userId);
+    /// 成员离开房间
+    [[FWRoomMemberManager sharedManager] onMemberExitRoom:userId];
+    /// 成员离开房间
+    [self.roomMainView memberUserExit:userId];
 }
 
 #pragma mark 用户昵称变化回调
@@ -378,6 +387,8 @@
     
     /// 日志埋点
     SGLOG(@"用户摄像头状态变化，userId = %@ cameraState = %ld", targetUserId, cameraState);
+    /// 用户摄像头状态变化
+    [self.roomMainView userCameraStateChanged:targetUserId cameraState:cameraState];
 }
 
 #pragma mark 用户麦克风状态变化回调
@@ -391,6 +402,8 @@
     
     /// 日志埋点
     SGLOG(@"用户麦克风状态变化，userId = %@ micState = %ld", targetUserId, micState);
+    /// 用户麦克风状态变化
+    [self.roomMainView userMicStateChanged:targetUserId micState:micState];
 }
 
 #pragma mark 用户聊天能力禁用状态变化回调
@@ -426,6 +439,8 @@
 /// - Parameter userModel: 发送成员信息
 - (void)onReceiveChatMessage:(NSString *)senderId message:(NSString *)message messageType:(SEAMessageType)messageType userModel:(nullable RTCEngineUserModel *)userModel {
     
+    /// 设置接收聊天消息
+    [[FWMessageManager sharedManager] receiveChatWithAccountModel:userModel content:message messageType:messageType];
     /// 日志埋点
     SGLOG(@"收到聊天消息，senderId = %@ message = %@ messageType = %ld", senderId, message, messageType);
 }
@@ -748,6 +763,10 @@
     /// 离开房间
     [[MeetingKit sharedInstance] exitRoom:^(id  _Nullable data) {
         @strongify(self);
+        /// 清空成员列表
+        [[FWRoomMemberManager sharedManager] cleanMembers];
+        /// 清空聊天列表数据
+        [[FWMessageManager sharedManager] cleanChatsCache];
         /// 清空房间信息缓存
         [[FWStoreDataBridge sharedManager] exitRoom];
         /// 离开房间页面

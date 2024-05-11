@@ -28,6 +28,9 @@
 /// ViewModel
 @property (strong, nonatomic) FWMemberViewModel *viewModel;
 
+/// 成员列表数据
+@property (nonatomic, strong) NSMutableArray <FWRoomMemberModel *> *listDataSource;
+
 @end
 
 @implementation FWMemberViewController
@@ -46,6 +49,16 @@
     [super viewWillDisappear:animated];
     /// 隐藏顶部导航栏
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+#pragma mark - 创建成员列表数据
+/// 创建成员列表数据
+- (NSMutableArray *)listDataSource {
+    
+    if (!_listDataSource) {
+        _listDataSource = [NSMutableArray arrayWithArray:[FWRoomMemberManager sharedManager].getAllMembers];
+    }
+    return _listDataSource;
 }
 
 #pragma mark - 页面开始加载

@@ -19,6 +19,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter userModel: 成员信息
 - (void)setupMemberInfoWithUserModel:(FWRoomMemberModel *)userModel;
 
+#pragma mark - 用户摄像头状态变化
+/// 用户摄像头状态变化
+/// @param cameraState 视频状态
+- (void)userCameraStateChanged:(SEADeviceState)cameraState;
+
+#pragma mark - 用户麦克风状态变化
+/// 用户麦克风状态变化
+/// @param micState 音频状态
+- (void)userMicStateChanged:(SEADeviceState)micState;
+
 @end
 
 NS_ASSUME_NONNULL_END

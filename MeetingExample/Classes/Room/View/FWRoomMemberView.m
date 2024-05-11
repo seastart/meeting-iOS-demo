@@ -167,20 +167,8 @@
 /// @param userId 成员标识
 - (void)memberUpdateWithUserId:(NSString *)userId {
     
-    /// 构建测试成员标识
-    userId = [NSString stringWithFormat:@"%ld", [self.displayItems count]];
-    /// 默认此成员不存在
-    __block FWRoomMemberWindowView *memberWindowView = nil;
-    /// 遍历成员窗口列表，检测是否存在该成员
-    [self.displayItems enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, FWRoomMemberWindowView * _Nonnull obj, BOOL * _Nonnull stop) {
-        if ([userId isEqualToString:key]) {
-            /// 检测已经存在该成员
-            memberWindowView = obj;
-            /// 结束遍历
-            *stop = YES;
-        }
-    }];
-    
+    /// 获取成员视图
+    FWRoomMemberWindowView *memberWindowView = [self.displayItems objectForKey:userId];
     /// 不存在该成员
     if (!memberWindowView) {
         /// 创建成员窗口视图
@@ -205,26 +193,44 @@
 /// @param userId 成员标识
 - (void)memberExitWithUserId:(NSString *)userId {
     
-    /// 构建测试成员标识
-    userId = [NSString stringWithFormat:@"%ld", [self.displayItems count] - 1];
-    /// 默认此成员不存在
-    __block FWRoomMemberWindowView *memberWindowView = nil;
-    /// 遍历成员窗口列表，检测是否存在该成员
-    [self.displayItems enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, FWRoomMemberWindowView * _Nonnull obj, BOOL * _Nonnull stop) {
-        if ([userId isEqualToString:key]) {
-            /// 检测已经存在该成员
-            memberWindowView = obj;
-            /// 结束遍历
-            *stop = YES;
-        }
-    }];
-    
+    /// 获取成员视图
+    FWRoomMemberWindowView *memberWindowView = [self.displayItems objectForKey:userId];
     /// 存在该成员
     if (memberWindowView) {
         /// 移除本地成员列表
         [self.displayItems removeObjectForKey:userId];
         /// 释放成员窗口视图
         [memberWindowView removeFromSuperview];
+    }
+}
+
+#pragma mark - 用户摄像头状态变化
+/// 用户摄像头状态变化
+/// @param userId 成员标识
+/// @param cameraState 视频状态
+- (void)userCameraStateChanged:(NSString *)userId cameraState:(SEADeviceState)cameraState {
+    
+    /// 获取成员视图
+    FWRoomMemberWindowView *windowView = [self.displayItems objectForKey:userId];
+    /// 存在该成员
+    if (windowView) {
+        /// 用户摄像头状态变化
+        [windowView userCameraStateChanged:cameraState];
+    }
+}
+
+#pragma mark - 用户麦克风状态变化
+/// 用户麦克风状态变化
+/// @param userId 成员标识
+/// @param micState 音频状态
+- (void)userMicStateChanged:(NSString *)userId micState:(SEADeviceState)micState {
+    
+    /// 获取成员视图
+    FWRoomMemberWindowView *windowView = [self.displayItems objectForKey:userId];
+    /// 存在该成员
+    if (windowView) {
+        /// 用户麦克风状态变化
+        [windowView userMicStateChanged:micState];
     }
 }
 

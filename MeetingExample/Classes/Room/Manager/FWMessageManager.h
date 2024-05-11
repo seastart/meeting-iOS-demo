@@ -48,12 +48,12 @@ typedef void(^FWMessageManagerReloadDataBlock)(void);
 /// - Parameters:
 ///   - accountModel: 发送成员信息
 ///   - content: 消息内容
-///   - action: 消息标识
-- (void)receiveChatWithAccountModel:(NSString *)accountModel content:(NSString *)content action:(nullable NSString *)action;
+///   - messageType: 消息类型
+- (void)receiveChatWithAccountModel:(nullable RTCEngineUserModel *)accountModel content:(NSString *)content messageType:(SEAMessageType)messageType;
 
 /// 发送聊天消息
 /// - Parameter content: 消息内容
-- (void)sendChatWithContent:(NSString *)content;
+/// - (void)sendChatWithContent:(NSString *)content;
 
 /// 刷新数据回调
 /// @param reloadDataBlock 刷新数据回调

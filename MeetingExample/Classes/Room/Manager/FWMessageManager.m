@@ -131,17 +131,19 @@
 /// - Parameters:
 ///   - accountModel: 发送成员信息
 ///   - content: 消息内容
-///   - action: 消息标识
-- (void)receiveChatWithAccountModel:(NSString *)accountModel content:(NSString *)content action:(nullable NSString *)action {
+///   - messageType: 消息类型
+- (void)receiveChatWithAccountModel:(nullable RTCEngineUserModel *)accountModel content:(NSString *)content messageType:(SEAMessageType)messageType {
     
+    /// 获取当前账户信息
+    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
     /// 构建自定义聊天信息
     FWMessageItemModel *itemModel = [[FWMessageItemModel alloc] init];
-    itemModel.uid = @"9527";
-    itemModel.name = @"周大福福";
-    itemModel.avatar = @"";
+    itemModel.uid = accountModel.uid;
+    itemModel.name = accountModel.name;
+    itemModel.avatar = accountModel.avatar;
     itemModel.content = content;
-    itemModel.action = action;
-    itemModel.isMine = NO;
+    itemModel.messageType = messageType;
+    itemModel.isMine = [userModel.uid isEqualToString:accountModel.uid];
     
     /// 将自定义聊天信息对象添加到数据源
     [self appendlistDataWithItemModel:itemModel];
@@ -152,13 +154,15 @@
 /// - Parameter content: 消息内容
 - (void)sendChatWithContent:(NSString *)content {
     
+    /// 获取当前账户信息
+    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
     /// 构建自定义聊天信息
     FWMessageItemModel *itemModel = [[FWMessageItemModel alloc] init];
-    itemModel.uid = @"9527";
-    itemModel.name = @"周大福福";
-    itemModel.avatar = @"";
+    itemModel.uid = userModel.uid;
+    itemModel.name = userModel.name;
+    itemModel.avatar = userModel.avatar;
     itemModel.content = content;
-    itemModel.action = @"default";
+    itemModel.messageType = SEAMessageTypeText;
     itemModel.isMine = YES;
     
     /// 将自定义聊天信息对象添加到数据源

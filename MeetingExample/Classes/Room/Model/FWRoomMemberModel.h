@@ -14,10 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 用户标识
 @property (nonatomic, copy) NSString *uid;
-/// 对该成员视频流的订阅状态(YES-订阅 NO-未订阅)
+/// 是否为自己
+@property (nonatomic, assign) BOOL isMine;
+/// 是否在共享
+@property (nonatomic, assign) BOOL isSharing;
+/// 是否订阅
 @property (nonatomic, assign) BOOL subscribe;
-/// 订阅的轨道标识
-//@property (nonatomic, assign) RTCTrackIdentifierFlags trackIdentifier;
+/// 进入时间
+@property (nonatomic, strong) NSDate *enterDate;
 
 @end
 

@@ -26,7 +26,7 @@
 #pragma mark - 初始化视图
 /// 初始化视图
 - (instancetype)init {
-
+    
     self = [super init];
     if (self) {
         /// 配置属性
@@ -108,6 +108,24 @@
     _memberModel = memberModel;
     /// 设置显示内容
     [self.statusView setupMemberInfoWithUserModel:memberModel];
+}
+
+#pragma mark - 用户摄像头状态变化
+/// 用户摄像头状态变化
+/// @param cameraState 视频状态
+- (void)userCameraStateChanged:(SEADeviceState)cameraState {
+    
+    /// 用户摄像头状态变化
+    [self.statusView userCameraStateChanged:cameraState];
+}
+
+#pragma mark - 用户麦克风状态变化
+/// 用户麦克风状态变化
+/// @param micState 音频状态
+- (void)userMicStateChanged:(SEADeviceState)micState {
+    
+    /// 用户麦克风状态变化
+    [self.statusView userMicStateChanged:micState];
 }
 
 #pragma mark ------- UIGestureRecognizerDelegate代理实现 -------

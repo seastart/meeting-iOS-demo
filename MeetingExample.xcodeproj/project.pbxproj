@@ -94,9 +94,9 @@
 		F482EF2329B88C3F00815C9C /* UIView+EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF2229B88C3F00815C9C /* UIView+EmptyView.m */; };
 		F482EF2A29BEE2D900815C9C /* FWEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF2929BEE2D900815C9C /* FWEnum.m */; };
 		F482EF2E29BF286A00815C9C /* FWLogTraceBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF2D29BF286A00815C9C /* FWLogTraceBridge.m */; };
-		F482EF3129C08EC700815C9C /* FWRoomExtendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF3029C08EC700815C9C /* FWRoomExtendModel.m */; };
 		F482EF3429C4187F00815C9C /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF3329C4187F00815C9C /* NSString+Extension.m */; };
 		F48690B32BDA3C710065A91E /* FWMeetingEnterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F48690B22BDA3C710065A91E /* FWMeetingEnterModel.m */; };
+		F48690BF2BEF1DB30065A91E /* FWRoomMemberManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F48690BE2BEF1DB30065A91E /* FWRoomMemberManager.m */; };
 		F492A8E027EAF4F80014C3CB /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492A8DF27EAF4F80014C3CB /* CoreMedia.framework */; };
 		F492A8E427EAFCDA0014C3CB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492A8E327EAFCDA0014C3CB /* AVFoundation.framework */; };
 		F492A8E827EB1A040014C3CB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F492A8E727EB1A040014C3CB /* AudioToolbox.framework */; };
@@ -359,12 +359,12 @@
 		F482EF2929BEE2D900815C9C /* FWEnum.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWEnum.m; sourceTree = "<group>"; };
 		F482EF2C29BF286A00815C9C /* FWLogTraceBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWLogTraceBridge.h; sourceTree = "<group>"; };
 		F482EF2D29BF286A00815C9C /* FWLogTraceBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWLogTraceBridge.m; sourceTree = "<group>"; };
-		F482EF2F29C08EC700815C9C /* FWRoomExtendModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRoomExtendModel.h; sourceTree = "<group>"; };
-		F482EF3029C08EC700815C9C /* FWRoomExtendModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRoomExtendModel.m; sourceTree = "<group>"; };
 		F482EF3229C4187F00815C9C /* NSString+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
 		F482EF3329C4187F00815C9C /* NSString+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		F48690B12BDA3C710065A91E /* FWMeetingEnterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMeetingEnterModel.h; sourceTree = "<group>"; };
 		F48690B22BDA3C710065A91E /* FWMeetingEnterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMeetingEnterModel.m; sourceTree = "<group>"; };
+		F48690BD2BEF1DB30065A91E /* FWRoomMemberManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWRoomMemberManager.h; sourceTree = "<group>"; };
+		F48690BE2BEF1DB30065A91E /* FWRoomMemberManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRoomMemberManager.m; sourceTree = "<group>"; };
 		F492A8DF27EAF4F80014C3CB /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		F492A8E327EAFCDA0014C3CB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		F492A8E727EB1A040014C3CB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -895,6 +895,8 @@
 			children = (
 				F42CAFFB2B6CEA0E00D2A3F7 /* FWMessageManager.h */,
 				F42CAFFC2B6CEA0E00D2A3F7 /* FWMessageManager.m */,
+				F48690BD2BEF1DB30065A91E /* FWRoomMemberManager.h */,
+				F48690BE2BEF1DB30065A91E /* FWRoomMemberManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1126,8 +1128,6 @@
 			children = (
 				F4219D8929B055AD0069483A /* FWRoomMemberModel.h */,
 				F4219D8A29B055AD0069483A /* FWRoomMemberModel.m */,
-				F482EF2F29C08EC700815C9C /* FWRoomExtendModel.h */,
-				F482EF3029C08EC700815C9C /* FWRoomExtendModel.m */,
 				F42CAFFE2B6CEA9A00D2A3F7 /* FWMessageModel.h */,
 				F42CAFFF2B6CEA9A00D2A3F7 /* FWMessageModel.m */,
 			);
@@ -1499,7 +1499,6 @@
 				F42CB0102B6CF51300D2A3F7 /* FWMessageViewController.m in Sources */,
 				F40B633B26C27D0D00F42370 /* FWBaseViewController.m in Sources */,
 				F49A41362B5666FC0049DF6D /* FWMeetingAttendViewController.m in Sources */,
-				F482EF3129C08EC700815C9C /* FWRoomExtendModel.m in Sources */,
 				F43AD83A2727EE670056B3EE /* FWConstants.m in Sources */,
 				F4219D6F29AF05D70069483A /* FWRoomBottomView.m in Sources */,
 				F49A413D2B566CE20049DF6D /* FWMeetingAttendViewModel.m in Sources */,
@@ -1534,6 +1533,7 @@
 				F49A41552B57ABC50049DF6D /* FWAccountPrivacyTableViewCell.m in Sources */,
 				F49A414B2B5785070049DF6D /* FWAccountAboutusViewController.m in Sources */,
 				F49A413A2B566CD20049DF6D /* FWMeetingAttendModel.m in Sources */,
+				F48690BF2BEF1DB30065A91E /* FWRoomMemberManager.m in Sources */,
 				F482EF3429C4187F00815C9C /* NSString+Extension.m in Sources */,
 				F49A41432B5780B10049DF6D /* FWAccountInfoViewController.m in Sources */,
 				F49A41242B565D8B0049DF6D /* FWMeetingEntryViewController.m in Sources */,

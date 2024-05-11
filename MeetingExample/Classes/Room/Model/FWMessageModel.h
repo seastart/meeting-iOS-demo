@@ -34,8 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSString *avatar;
 /// 消息内容
 @property (nonatomic, copy) NSString *content;
-/// 消息标识
-@property (nonatomic, copy) NSString *action;
+/// 消息类型
+@property (nonatomic, assign) SEAMessageType messageType;
 /// 是否为自己发送的信息
 @property (nonatomic, assign) BOOL isMine;
 

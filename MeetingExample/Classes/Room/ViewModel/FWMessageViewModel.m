@@ -42,8 +42,6 @@
         @strongify(self);
         /// 获取消息内容
         NSString *message = (NSString *)data;
-        /// 聊天消息本地化
-        [[FWMessageManager sharedManager] sendChatWithContent:message];
         /// 通知发送消息订阅
         [self.sendSubject sendNext:message];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
@@ -64,8 +62,6 @@
         @strongify(self);
         /// 获取消息内容
         NSString *message = (NSString *)data;
-        /// 聊天消息本地化
-        [[FWMessageManager sharedManager] sendChatWithContent:message];
         /// 通知发送消息订阅
         [self.sendSubject sendNext:message];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {

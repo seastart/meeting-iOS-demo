@@ -75,6 +75,28 @@ NS_ASSUME_NONNULL_BEGIN
 ///   - videoState: 视频状态
 - (void)setupDefaultAudioState:(BOOL)audioState videoState:(BOOL)videoState;
 
+#pragma mark - 成员加入房间
+/// 成员加入房间
+/// - Parameter userId: 成员标识
+- (void)memberUserEnter:(NSString *)userId;
+
+#pragma mark - 成员离开房间
+/// 成员离开房间
+/// - Parameter userId: 成员标识
+- (void)memberUserExit:(NSString *)userId;
+
+#pragma mark - 用户摄像头状态变化
+/// 用户摄像头状态变化
+/// @param userId 成员标识
+/// @param cameraState 视频状态
+- (void)userCameraStateChanged:(NSString *)userId cameraState:(SEADeviceState)cameraState;
+
+#pragma mark - 用户麦克风状态变化
+/// 用户麦克风状态变化
+/// @param userId 成员标识
+/// @param micState 音频状态
+- (void)userMicStateChanged:(NSString *)userId micState:(SEADeviceState)micState;
+
 #pragma mark - 请求开启房间共享
 /// 请求开启房间共享
 /// - Parameter sharingType: 共享类型

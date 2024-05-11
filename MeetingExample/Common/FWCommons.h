@@ -28,6 +28,7 @@
 #import "NSString+Extension.h"
 #import "UITextView+AutoHeight.h"
 
+#import "FWRoomMemberManager.h"
 #import "FWMessageManager.h"
 
 #endif /* FWCommons_h */
