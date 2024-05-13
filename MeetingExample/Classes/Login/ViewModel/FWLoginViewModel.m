@@ -24,7 +24,7 @@
         _mobileCodeSubject = [RACSubject subject];
         _mobileText = [[FWStoreDataBridge sharedManager] getMobileText];
         _passwordText = [[FWStoreDataBridge sharedManager] getPasswordText];
-        _versionText = [NSString stringWithFormat:@"当前SDK版本信息 %@", BundleVersion];
+        _versionText = [NSString stringWithFormat:@"当前SDK版本信息 %@", [[MeetingKit sharedInstance] version]];
         _isVcodeLogin = NO;
         _isAgreement = YES;
         _isSecure = YES;
