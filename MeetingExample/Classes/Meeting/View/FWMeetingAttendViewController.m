@@ -119,8 +119,8 @@
         switch (value.integerValue) {
             case FWMeetingEntryTypeCreate:
                 /// 创建房间
-                title = NSLocalizedString(@"创建房间", nil);
-                roomnoText = @"909909909";
+                title = NSLocalizedString(@"加入房间", nil);
+                roomnoText = self.info;
                 margin = 50.0;
                 isCreate = YES;
                 break;
@@ -139,7 +139,7 @@
         /// 设置默认房间号码
         self.roomnoTextField.text = self.viewModel.roomnoText = [FWToolBridge roomnoDiversionString:roomnoText];
         /// 设置默认参会昵称
-        self.nicknameTextField.text = self.viewModel.nicknameText = [FWStoreDataBridge sharedManager].userInfo.userId;
+        self.nicknameTextField.text = self.viewModel.nicknameText = [[FWStoreDataBridge sharedManager] getNickname];
         /// 设置房间号码输入框右边距
         self.roomnoRightMargin.constant = margin;
         /// 设置标题
@@ -210,7 +210,12 @@
                 NSMutableString *str = [[NSMutableString alloc ] initWithString:textField.text];
                 [str insertString:@" " atIndex:(textField.text.length - 1)];
                 textField.text = str;
-            } if (textField.text.length >= 11) {
+            } 
+            if (textField.text.length >= 9 && ![textField.text containsString:@" "]) {
+                /// 房间号码转换字符串
+                textField.text = [FWToolBridge roomnoDiversionString:textField.text];
+            }
+            if (textField.text.length >= 11) {
                 /// 文本输入完成
                 textField.text = [textField.text substringToIndex:11];
                 /// [textField resignFirstResponder];

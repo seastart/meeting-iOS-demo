@@ -12,6 +12,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FWMeetingEntryViewModel : NSObject
 
+/// 关联Class
+@property (nonatomic, assign) Class viewClass;
+/// 是否在加载状态
+@property (nonatomic, assign) BOOL loading;
+
+/// 提示框订阅
+@property (nonatomic, strong, readonly) RACSubject *toastSubject;
+/// 成功订阅
+@property (nonatomic, strong, readonly) RACSubject *succeedSubject;
+
+/// 创建房间
+/// - Parameter title: 房间标题
+- (void)createRoom:(NSString *)title;
+
 @end
 
 NS_ASSUME_NONNULL_END
