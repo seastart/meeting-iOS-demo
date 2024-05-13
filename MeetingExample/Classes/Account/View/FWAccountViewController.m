@@ -50,14 +50,14 @@
     [super viewWillAppear:animated];
     /// 显示顶部导航栏
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    /// 设置默认数据
+    [self setupDefaultData];
 }
 
 #pragma mark - 初始化UI
 /// 初始化UI
 - (void)buildView {
     
-    /// 设置默认数据
-    [self setupDefaultData];
     /// 设置ViewModel
     [self setupViewModel];
     /// 绑定动态响应信号
@@ -69,6 +69,16 @@
     
     /// 设置标题
     self.titleLabel.text = NSLocalizedString(@"我的", nil);
+    /// 获取当前头像
+    UIImage *image = kGetImage([[FWStoreDataBridge sharedManager] getAvatar]);
+    /// 设置用户头像
+    [self.avatarButton setImage:image forState:UIControlStateNormal];
+    /// 设置用户昵称
+    [self.namenickLabel setText:[[FWStoreDataBridge sharedManager] getNickname]];
+    /// 获取用户标识
+    NSString *userId = [NSString stringWithFormat:@"ID:%@", [FWStoreDataBridge sharedManager].userInfo.userId];
+    /// 设置用户标识
+    [self.accountidLabel setText:userId];
 }
 
 #pragma mark - 设置ViewModel
@@ -155,10 +165,6 @@
     }];
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"退出登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         @strongify(self);
-        /// 组件登出
-        [[MeetingKit sharedInstance] logout:nil onFailed:nil];
-        /// 销毁用户信息
-        [[FWStoreDataBridge sharedManager] logout];
         /// 退出登录事件
         [self.viewModel onLogoutEvent];
     }];

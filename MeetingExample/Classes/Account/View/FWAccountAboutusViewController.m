@@ -49,9 +49,9 @@
     /// 设置标题
     self.navigationItem.title = NSLocalizedString(@"关于我们", nil);
     /// 设置SDK版本
-    self.moduleLabel.text = NSLocalizedString(@"0.1.1-alpha.1+20240117", nil);
-    /// 设置引用版本
-    self.applicationLabel.text = NSLocalizedString(@"1.0.0(202401171410)", nil);
+    self.moduleLabel.text = [[MeetingKit sharedInstance] version];
+    /// 设置应用版本
+    self.applicationLabel.text = [NSString stringWithFormat:@"%@(%@)", BundleShortVersion, BundleVersion];
 }
 
 @end

@@ -123,11 +123,15 @@
 /// 获取用户昵称
 - (NSString *)getNickname {
     
-    NSString *nickname = [self valueWithKey:FWNICKNAMEKEY];
+    /// 构建存储KEY
+    NSString *key = [NSString stringWithFormat:@"%@-%@", self.userInfo.userId, FWNICKNAMEKEY];
+    /// 获取保存的昵称
+    NSString *nickname = [self valueWithKey:key];
     if (!kStringIsEmpty(nickname)) {
         return nickname;
     }
-    return [FWToolBridge getDeviceName];
+    /// [FWToolBridge getDeviceName]
+    return self.userInfo.userId;
 }
 
 #pragma mark - 设置用户昵称
@@ -135,7 +139,35 @@
 /// @param nickname 用户昵称
 - (void)setNickname:(NSString *)nickname {
     
-    [self storeValue:nickname withKey:FWNICKNAMEKEY];
+    /// 构建存储KEY
+    NSString *key = [NSString stringWithFormat:@"%@-%@", self.userInfo.userId, FWNICKNAMEKEY];
+    /// 保存用户昵称
+    [self storeValue:nickname withKey:key];
+}
+
+#pragma mark - 设置用户头像
+/// 设置用户头像
+- (NSString *)getAvatar {
+    
+    /// 构建存储KEY
+    NSString *key = [NSString stringWithFormat:@"%@-%@", self.userInfo.userId, FWUSERAVATARKEY];
+    /// 获取保存的头像
+    NSString *avatar = [self valueWithKey:key];
+    if (!kStringIsEmpty(avatar)) {
+        return avatar;
+    }
+    return FWDEFAULTAVATAR;
+}
+
+#pragma mark - 设置用户头像
+/// 设置用户头像
+/// - Parameter avatar: 用户头像
+- (void)setAvatar:(NSString *)avatar {
+    
+    /// 构建存储KEY
+    NSString *key = [NSString stringWithFormat:@"%@-%@", self.userInfo.userId, FWUSERAVATARKEY];
+    /// 保存用户头像
+    [self storeValue:avatar withKey:key];
 }
 
 #pragma mark - 存储数据

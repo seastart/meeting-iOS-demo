@@ -40,8 +40,21 @@
     /// 恢复加载状态
     self.loading = NO;
     
-    /// 缓存登录用户信息
-    /// [[FWStoreDataBridge sharedManager] login:userModel];
+    /// 设置用户昵称
+    [[FWStoreDataBridge sharedManager] setNickname:self.namenickText];
+    /// 声明用户头像
+    NSString *imageName = @"icon_login_avatar2";
+    /// 根据性别标识设置头像
+    if (self.isSexState) {
+        /// 标识男性
+        imageName = @"icon_login_avatar1";
+    } else {
+        /// 标识女性
+        imageName = @"icon_login_avatar2";
+    }
+    /// 设置用户头像
+    [[FWStoreDataBridge sharedManager] setAvatar:imageName];
+    
     /// 提示信息
     [self.toastSubject sendNext:@"个人信息已更新"];
     /// 回调确定成功订阅

@@ -112,6 +112,8 @@
         if (@available(iOS 13.0, *)) {
             /// 创建返回按钮
             UIButton *buttonItem = [UIButton systemButtonWithImage:[kGetImage(@"icon_common_goback") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] target:self action:@selector(baseGoBack)];
+            buttonItem.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+            buttonItem.sa_size = CGSizeMake(44, 44);
             /// 设置返回按钮
             viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:buttonItem];
         } else {

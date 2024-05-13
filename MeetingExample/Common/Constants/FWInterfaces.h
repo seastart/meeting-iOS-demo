@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 FOUNDATION_EXTERN NSString *__nonnull const FWSERVICESHORTHEADER;
 /// 获取用户签名
 FOUNDATION_EXTERN NSString *__nonnull const FWSIGNATUREINFOFACE;
+/// 退出签名用户
+FOUNDATION_EXTERN NSString *__nonnull const FWUSERLOGOUT;
 
 @interface FWInterfaces : NSObject
 

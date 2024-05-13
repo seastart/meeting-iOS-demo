@@ -76,6 +76,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param nickname 用户昵称
 - (void)setNickname:(NSString *)nickname;
 
+#pragma mark - 设置用户头像
+/// 设置用户头像
+- (NSString *)getAvatar;
+
+#pragma mark - 设置用户头像
+/// 设置用户头像
+/// - Parameter avatar: 用户头像
+- (void)setAvatar:(NSString *)avatar;
+
 @end
 
 NS_ASSUME_NONNULL_END
