@@ -31,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置根视图为首页模块(登录状态下)
 - (void)setWindowRootHome;
 
+#pragma mark - 设置首页根视图
+/// 设置首页根视图
+- (void)_setWindowRootHome;
+
 #pragma mark - 开启后台任务
 /// 开启后台任务
 - (void)beginBackgroundTask;

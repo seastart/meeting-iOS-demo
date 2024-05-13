@@ -40,6 +40,14 @@
     [self buildView];
 }
 
+#pragma mark - 页面出现前
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    /// 显示顶部导航栏
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
 #pragma mark - 初始化UI
 /// 初始化UI
 - (void)buildView {
@@ -117,7 +125,7 @@
     /// 监听确定成功订阅
     [self.viewModel.confirmSubject subscribeNext:^(NSNumber * _Nullable value) {
         /// 设置根视图为首页模块
-        [[FWEntryBridge sharedManager] setWindowRootHome];
+        [[FWEntryBridge sharedManager] _setWindowRootHome];
     }];
 }
 

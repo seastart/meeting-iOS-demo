@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,19 +28,19 @@
                     <rect key="frame" x="0.0" y="59" width="393" height="695"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LQJ-Of-aHk">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="269"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="314"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dp2-3k-sUk">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="195"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="240"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请设置您的基本信息" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSb-6j-Rt3">
-                                            <rect key="frame" x="104.66666666666667" y="20" width="183.66666666666663" height="24"/>
+                                            <rect key="frame" x="104.66666666666667" y="65" width="183.66666666666663" height="24"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pH8-hM-NeM">
-                                            <rect key="frame" x="96.666666666666686" y="64" width="82" height="82"/>
+                                            <rect key="frame" x="96.666666666666686" y="109" width="82" height="82"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="82" id="2OX-q1-d48"/>
                                                 <constraint firstAttribute="width" secondItem="pH8-hM-NeM" secondAttribute="height" multiplier="1:1" id="O46-v6-PqV"/>
@@ -61,7 +61,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </button>
                                         <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3V-tN-rDl">
-                                            <rect key="frame" x="214.33333333333334" y="64" width="82.000000000000028" height="82"/>
+                                            <rect key="frame" x="214.33333333333334" y="109" width="82.000000000000028" height="82"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="B3V-tN-rDl" secondAttribute="height" multiplier="1:1" id="goq-uT-pGr"/>
                                                 <constraint firstAttribute="height" constant="82" id="js9-OB-M4l"/>
@@ -82,7 +82,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </button>
                                         <button hidden="YES" opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kWE-bb-Y56">
-                                            <rect key="frame" x="272.33333333333331" y="126" width="16" height="20"/>
+                                            <rect key="frame" x="272.33333333333331" y="171" width="16" height="20"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="tintColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" image="icon_login_avatar_checkbox">
@@ -93,13 +93,13 @@
                                             </state>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择头像" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G2r-20-eQy">
-                                            <rect key="frame" x="163.33333333333334" y="156" width="66.333333333333343" height="15.666666666666657"/>
+                                            <rect key="frame" x="163.33333333333334" y="201" width="66.333333333333343" height="15.666666666666657"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button hidden="YES" opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="otM-Z6-QH6">
-                                            <rect key="frame" x="154.66666666666666" y="126" width="16" height="20"/>
+                                            <rect key="frame" x="154.66666666666666" y="171" width="16" height="20"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="tintColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" image="icon_login_avatar_checkbox">
@@ -119,16 +119,16 @@
                                         <constraint firstItem="pH8-hM-NeM" firstAttribute="centerX" secondItem="Dp2-3k-sUk" secondAttribute="centerX" multiplier="0.7" id="I9m-yE-heo"/>
                                         <constraint firstItem="B3V-tN-rDl" firstAttribute="centerY" secondItem="pH8-hM-NeM" secondAttribute="centerY" id="J7l-O0-4gS"/>
                                         <constraint firstItem="otM-Z6-QH6" firstAttribute="bottom" secondItem="pH8-hM-NeM" secondAttribute="bottom" id="MOa-qn-ZQM"/>
-                                        <constraint firstItem="wSb-6j-Rt3" firstAttribute="top" secondItem="Dp2-3k-sUk" secondAttribute="top" constant="20" id="cq1-Bk-VtG"/>
+                                        <constraint firstItem="wSb-6j-Rt3" firstAttribute="top" secondItem="Dp2-3k-sUk" secondAttribute="top" constant="65" id="cq1-Bk-VtG"/>
                                         <constraint firstItem="G2r-20-eQy" firstAttribute="centerX" secondItem="Dp2-3k-sUk" secondAttribute="centerX" id="jn0-mK-BKz"/>
                                         <constraint firstItem="kWE-bb-Y56" firstAttribute="trailing" secondItem="B3V-tN-rDl" secondAttribute="trailing" constant="-8" id="kpd-5u-fgI"/>
                                         <constraint firstItem="G2r-20-eQy" firstAttribute="top" secondItem="pH8-hM-NeM" secondAttribute="bottom" constant="10" id="mH7-Jq-6kC"/>
-                                        <constraint firstAttribute="height" constant="195" id="oKQ-6U-1XB"/>
+                                        <constraint firstAttribute="height" constant="240" id="oKQ-6U-1XB"/>
                                         <constraint firstItem="wSb-6j-Rt3" firstAttribute="centerX" secondItem="Dp2-3k-sUk" secondAttribute="centerX" id="sFP-xf-TYn"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OVY-3M-RVT">
-                                    <rect key="frame" x="0.0" y="195" width="393" height="64"/>
+                                    <rect key="frame" x="0.0" y="240" width="393" height="64"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LM7-2s-k7q">
                                             <rect key="frame" x="16" y="10" width="361" height="44"/>

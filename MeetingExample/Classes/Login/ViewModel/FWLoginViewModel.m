@@ -82,17 +82,30 @@
     
     /// 标记加载状态
     self.loading = YES;
-    /// 恢复加载状态
-    self.loading = NO;
-    
-    /// 缓存用户输入信息
-    [[FWStoreDataBridge sharedManager] setMobileText:self.mobileText];
-    /// 缓存登录用户信息
-    /// [[FWStoreDataBridge sharedManager] login:userModel];
-    /// 提示信息
-    /// [self.toastSubject sendNext:errorMsg];
-    /// 回调登录成功
-    [self.loginSubject sendNext:nil];
+    /// 创建请求参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    /// 用户标识
+    [params setValue:self.mobileText forKey:@"user_id"];
+    /// 发起请求
+    [[FWNetworkBridge sharedManager] POST:FWSIGNATUREINFOFACE params:params className:@"FWAuthToken" resultBlock:^(BOOL result, id  _Nullable data, NSString * _Nullable errorMsg) {
+        /// 恢复加载状态
+        self.loading = NO;
+        /// 请求成功处理
+        if (result) {
+            /// 获取请求结果对象
+            FWAuthToken *authToken = (FWAuthToken *)data;
+            /// 缓存用户输入信息
+            [[FWStoreDataBridge sharedManager] setMobileText:self.mobileText];
+            [[FWStoreDataBridge sharedManager] setPasswordText:self.passwordText];
+            /// 缓存登录用户信息
+            [[FWStoreDataBridge sharedManager] login:authToken.data];
+            /// 回调登录成功
+            [self.loginSubject sendNext:nil];
+        } else {
+            /// 提示信息
+            [self.toastSubject sendNext:errorMsg];
+        }
+    }];
 }
 
 #pragma mark - 密码登录
