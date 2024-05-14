@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FWMessageViewController">
             <connections>
-                <outlet property="contentTextView" destination="mcX-IQ-GDi" id="21a-PE-hbS"/>
-                <outlet property="sendButton" destination="g8E-Ia-ECz" id="JEn-dN-9QH"/>
+                <outlet property="contentTextView" destination="TTL-hP-W08" id="uPR-es-KYQ"/>
+                <outlet property="inputView" destination="asr-Zl-2Mu" id="izr-P2-Mam"/>
+                <outlet property="inputViewBottomMargin" destination="7zB-W1-nsf" id="5ic-hD-6hz"/>
+                <outlet property="sendButton" destination="DlS-fa-Oj2" id="YHI-8G-ofa"/>
                 <outlet property="tableView" destination="ksx-8a-rRu" id="Iio-i4-363"/>
                 <outlet property="view" destination="zeG-VJ-k8r" id="S7o-cI-7HU"/>
             </connections>
@@ -32,12 +35,16 @@
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h86-jf-ULe">
                     <rect key="frame" x="0.0" y="768" width="393" height="84"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asr-Zl-2Mu">
+                    <rect key="frame" x="0.0" y="768" width="393" height="50"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mcX-IQ-GDi">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TTL-hP-W08">
                             <rect key="frame" x="16" y="5" width="301" height="40"/>
-                            <color key="backgroundColor" red="0.96862745098039216" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.96862745100000003" green="0.97254901959999995" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="A2v-2c-oG1"/>
+                                <constraint firstAttribute="height" constant="40" id="Muu-da-KKa"/>
                             </constraints>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -53,12 +60,12 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </textView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8E-Ia-ECz">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DlS-fa-Oj2">
                             <rect key="frame" x="327" y="11" width="50" height="28"/>
-                            <color key="backgroundColor" red="0.0" green="0.22352941176470587" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="28" id="Ajm-zs-D6c"/>
-                                <constraint firstAttribute="width" constant="50" id="UuL-8O-ko9"/>
+                                <constraint firstAttribute="width" constant="50" id="41c-s2-6gJ"/>
+                                <constraint firstAttribute="height" constant="28" id="Ngs-yv-srW"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="发送">
@@ -72,13 +79,14 @@
                             </userDefinedRuntimeAttributes>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="g8E-Ia-ECz" secondAttribute="trailing" constant="16" id="5Si-pJ-5Vs"/>
-                        <constraint firstItem="g8E-Ia-ECz" firstAttribute="centerY" secondItem="mcX-IQ-GDi" secondAttribute="centerY" id="EPu-Er-TO2"/>
-                        <constraint firstItem="g8E-Ia-ECz" firstAttribute="leading" secondItem="mcX-IQ-GDi" secondAttribute="trailing" constant="10" id="TT5-KB-FJp"/>
-                        <constraint firstItem="mcX-IQ-GDi" firstAttribute="leading" secondItem="h86-jf-ULe" secondAttribute="leading" constant="16" id="oQH-Zt-2eO"/>
-                        <constraint firstItem="mcX-IQ-GDi" firstAttribute="top" secondItem="h86-jf-ULe" secondAttribute="top" constant="5" id="tth-rE-WDb"/>
+                        <constraint firstItem="DlS-fa-Oj2" firstAttribute="leading" secondItem="TTL-hP-W08" secondAttribute="trailing" constant="10" id="TqW-R3-3xa"/>
+                        <constraint firstItem="TTL-hP-W08" firstAttribute="top" secondItem="asr-Zl-2Mu" secondAttribute="top" constant="5" id="UZX-YS-Nz3"/>
+                        <constraint firstAttribute="bottom" secondItem="TTL-hP-W08" secondAttribute="bottom" constant="5" id="XSa-Gn-oe5"/>
+                        <constraint firstAttribute="trailing" secondItem="DlS-fa-Oj2" secondAttribute="trailing" constant="16" id="a1I-pk-2HR"/>
+                        <constraint firstItem="TTL-hP-W08" firstAttribute="leading" secondItem="asr-Zl-2Mu" secondAttribute="leading" constant="16" id="hNa-8k-rLS"/>
+                        <constraint firstItem="DlS-fa-Oj2" firstAttribute="centerY" secondItem="TTL-hP-W08" secondAttribute="centerY" id="hWQ-Rs-shK"/>
                     </constraints>
                 </view>
             </subviews>
@@ -86,15 +94,23 @@
             <color key="backgroundColor" red="0.96862745098039216" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="S08-Eq-SeU" firstAttribute="trailing" secondItem="ksx-8a-rRu" secondAttribute="trailing" id="5Xp-hR-xc8"/>
+                <constraint firstItem="S08-Eq-SeU" firstAttribute="bottom" secondItem="asr-Zl-2Mu" secondAttribute="bottom" id="7zB-W1-nsf"/>
                 <constraint firstItem="ksx-8a-rRu" firstAttribute="top" secondItem="S08-Eq-SeU" secondAttribute="top" id="EQD-Jf-Hr4"/>
+                <constraint firstItem="asr-Zl-2Mu" firstAttribute="leading" secondItem="h86-jf-ULe" secondAttribute="leading" id="IhM-Ms-t5f"/>
                 <constraint firstItem="ksx-8a-rRu" firstAttribute="leading" secondItem="S08-Eq-SeU" secondAttribute="leading" id="RdD-xh-Suj"/>
+                <constraint firstItem="asr-Zl-2Mu" firstAttribute="trailing" secondItem="h86-jf-ULe" secondAttribute="trailing" id="elH-GT-4j9"/>
                 <constraint firstItem="h86-jf-ULe" firstAttribute="top" secondItem="ksx-8a-rRu" secondAttribute="bottom" id="fIY-ae-J0J"/>
                 <constraint firstItem="h86-jf-ULe" firstAttribute="leading" secondItem="S08-Eq-SeU" secondAttribute="leading" id="hfd-ih-1gu"/>
                 <constraint firstAttribute="bottom" secondItem="h86-jf-ULe" secondAttribute="bottom" id="inW-tV-Ch3"/>
-                <constraint firstItem="S08-Eq-SeU" firstAttribute="bottom" secondItem="mcX-IQ-GDi" secondAttribute="bottom" constant="5" id="lNd-DX-afA"/>
                 <constraint firstItem="S08-Eq-SeU" firstAttribute="trailing" secondItem="h86-jf-ULe" secondAttribute="trailing" id="ufK-D8-jPa"/>
+                <constraint firstItem="asr-Zl-2Mu" firstAttribute="top" secondItem="h86-jf-ULe" secondAttribute="top" id="xEw-HM-R92"/>
             </constraints>
             <point key="canvasLocation" x="136.64122137404578" y="78.16901408450704"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

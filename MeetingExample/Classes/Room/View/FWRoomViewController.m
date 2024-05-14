@@ -38,10 +38,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    /// 限制锁屏
-    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     /// 隐藏顶部导航栏
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    /// 限制锁屏
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    /// 禁用IQKeyboard
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+    /// 禁用IQKeyboard的Toolbar
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     /// 更改状态栏颜色为白色
     [self statusBarAppearanceUpdateWithHiden:NO barStyle:UIStatusBarStyleLightContent];
 }
@@ -792,6 +796,10 @@
 #pragma mark - 资源释放
 - (void)dealloc {
     
+    /// 启用IQKeyboard
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    /// 启用IQKeyboard的Toolbar
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
     /// 取消限制锁屏
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
     /// 移除所有监听

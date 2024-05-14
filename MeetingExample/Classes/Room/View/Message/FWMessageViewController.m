@@ -22,6 +22,8 @@ static NSString *FWMessageTableSectionHeaderViewIdentifier = @"FWMessageTableSec
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 /// 输入框组件
 @property (weak, nonatomic) IBOutlet UIView *inputView;
+/// 输入框组件底部距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *inputViewBottomMargin;
 /// 消息输入框
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
 /// 发送按钮
@@ -92,6 +94,8 @@ static NSString *FWMessageTableSectionHeaderViewIdentifier = @"FWMessageTableSec
     
     /// 监听键盘弹出
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
+    /// 监听键盘收回
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillDisappear:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark - 设置ViewModel
@@ -137,7 +141,7 @@ static NSString *FWMessageTableSectionHeaderViewIdentifier = @"FWMessageTableSec
         /// 置空内容以及输入框数据
         self.contentTextView.text = nil;
         self.viewModel.contentText = nil;
-        [self.contentTextView resignFirstResponder];
+        /// [self.contentTextView resignFirstResponder];
     }];
     
     /// 绑定发送按钮事件
@@ -160,15 +164,32 @@ static NSString *FWMessageTableSectionHeaderViewIdentifier = @"FWMessageTableSec
 }
 
 #pragma mark - 键盘弹出通知
+/// 键盘弹出通知
+/// - Parameter notification: 通知对象
 - (void)keyboardWillAppear:(NSNotification *)notification {
     
     NSDictionary *info = [notification userInfo];
+    /// 取得键盘的尺寸
+    CGSize size = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     /// 取得键盘的动画时间，这样可以在视图上移的时候更连贯
-    double duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    /// double duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     /// 将视图上移计算好的偏移
-    [UIView animateWithDuration:duration animations:^{
+    [UIView animateWithDuration:0.25 animations:^{
+        /// 设置底部边距
+        self.inputViewBottomMargin.constant = size.height - SafeBarMottomHeight;
         /// 列表滚动到底部
         [self scrollBottomWithAnimated:YES];
+    }];
+}
+
+#pragma mark - 键盘收回通知
+/// 键盘收回通知
+/// - Parameter notification: 通知对象
+- (void)keyboardWillDisappear:(NSNotification *)notification {
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        /// 设置底部边距
+        self.inputViewBottomMargin.constant = 0.f;
     }];
 }
 

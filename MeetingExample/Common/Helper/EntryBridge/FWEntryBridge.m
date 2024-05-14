@@ -61,7 +61,7 @@
     /// 键盘弹出时点击背景键盘收回
     [[IQKeyboardManager sharedManager] setShouldResignOnTouchOutside:YES];
     /// 禁用IQKeyboard的Toolbar
-    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
     /// 添加内存监测白名单
     [NSObject addClassNamesToWhitelist:@[@"UIAlertController", @"UITextField", @"UITextView", @"RPSystemBroadcastPickerView", @"RPBroadcastPickerStandaloneViewController"]];
 }
