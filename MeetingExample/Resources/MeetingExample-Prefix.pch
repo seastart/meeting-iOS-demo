@@ -16,6 +16,8 @@
 #import <SDWebImage/SDWebImage-umbrella.h>
 /// 列表展位图
 #import <LYEmptyView/LYEmptyViewHeader.h>
+/// 通用集控引擎
+#import <RTCControlLink/RTCControlLink.h>
 /// 动态响应链
 #import <ReactiveObjC/ReactiveObjC.h>
 /// 网络请求

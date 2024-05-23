@@ -28,6 +28,8 @@ def commonPods
     pod 'MyLayout'
     # 数据模型
     pod 'YYModel'
+    # 集控引擎
+    pod 'RTCControlLink'
 end
 
 def meetingPods

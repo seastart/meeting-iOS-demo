@@ -22,6 +22,8 @@ PODS:
     - FBRetainCycleDetector
   - MyLayout (1.9.10)
   - ReactiveObjC (3.1.1)
+  - RTCControlLink (0.1.0):
+    - CocoaAsyncSocket
   - RTCEngineKit (1.0.7):
     - CocoaAsyncSocket
   - SDWebImage (5.15.0):
@@ -36,6 +38,7 @@ DEPENDENCIES:
   - MLeaksFinder
   - MyLayout
   - ReactiveObjC
+  - RTCControlLink
   - RTCEngineKit
   - SDWebImage
   - YYModel
@@ -50,6 +53,7 @@ SPEC REPOS:
     - MLeaksFinder
     - MyLayout
     - ReactiveObjC
+    - RTCControlLink
     - RTCEngineKit
     - SDWebImage
     - YYModel
@@ -63,10 +67,11 @@ SPEC CHECKSUMS:
   MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
   MyLayout: 39ee012bd780936c973bdc5d8ce0f84e3de489d7
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
+  RTCControlLink: 8ac29968cb76be7b14a92d6b36c29a92a58b3769
   RTCEngineKit: 1459502afecd10bab9ef07e77b315b88067e699c
   SDWebImage: 9bec4c5cdd9579e1f57104735ee0c37df274d593
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: e7a2171a9ddc5c3955bf4099052dab166f4932e0
+PODFILE CHECKSUM: 45520ad0822e09504c6e5f0806b43a34a011e618
 
 COCOAPODS: 1.12.1
