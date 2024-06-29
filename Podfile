@@ -33,8 +33,8 @@ def commonPods
 end
 
 def meetingPods
-  # 依赖RTC服务引擎
-  pod 'RTCEngineKit'
+  # 实时音视频服务引擎
+  pod 'RTCEngineKit', '1.0.8-alpha.1+20240629'
   # 依赖会议服务引擎
   # pod 'MeetingKit'
 end

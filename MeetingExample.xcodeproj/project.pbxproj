@@ -1219,7 +1219,7 @@
 				F40B5CE826C27A6C00F42370 /* Resources */,
 				2426EB1F6C9FE17EB83EA535 /* [CP] Embed Pods Frameworks */,
 				F4AA77B0288AA21900EBC0E7 /* Embed App Extensions */,
-				C938A77749DDB023D554C659 /* [CP] Copy Pods Resources */,
+				26CD117E942528CD247ECB62 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1239,7 +1239,7 @@
 				F4AA7791288AA21900EBC0E7 /* Sources */,
 				F4AA7792288AA21900EBC0E7 /* Frameworks */,
 				F4AA7793288AA21900EBC0E7 /* Resources */,
-				7ED5FC076CF4C6C5153A5975 /* [CP] Copy Pods Resources */,
+				A2915BC45E2F6B24E96A024C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1391,6 +1391,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MeetingExample/Pods-MeetingExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		26CD117E942528CD247ECB62 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MeetingExample/Pods-MeetingExample-resources.sh",
+				"${PODS_ROOT}/RTCEngineKit/RTCEngineKit/Resources/RTCEngineKit.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RTCEngineKit.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MeetingExample/Pods-MeetingExample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3300B47587C8F0CC1EF8C45B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1413,7 +1431,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7ED5FC076CF4C6C5153A5975 /* [CP] Copy Pods Resources */ = {
+		A2915BC45E2F6B24E96A024C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1451,24 +1469,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C938A77749DDB023D554C659 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MeetingExample/Pods-MeetingExample-resources.sh",
-				"${PODS_ROOT}/RTCEngineKit/RTCEngineKit/Resources/RTCEngineKit.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RTCEngineKit.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MeetingExample/Pods-MeetingExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
