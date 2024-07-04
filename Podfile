@@ -34,7 +34,7 @@ end
 
 def meetingPods
   # 实时音视频服务引擎
-  pod 'RTCEngineKit', '1.0.8-alpha.1+20240629'
+  pod 'RTCEngineKit', '1.0.8-alpha.2+20240704'
   # 依赖会议服务引擎
   # pod 'MeetingKit'
 end
