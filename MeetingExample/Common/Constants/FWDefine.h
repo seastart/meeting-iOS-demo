@@ -1,9 +1,9 @@
 //
-//  FWEnum.h
+//  FWDefine.h
 //  MeetingExample
 //
-//  Created by SailorGa on 2023/3/13.
-//  Copyright © 2023 SailorGa. All rights reserved.
+//  Created by SailorGa on 2024/7/5.
+//  Copyright © 2024 SailorGa. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -81,9 +81,5 @@ typedef enum : NSUInteger {
     FWMeetingSharingTypeScreen,
     FWMeetingSharingTypeWhiteboard
 } FWMeetingSharingType;
-
-@interface FWEnum : NSObject
-
-@end
 
 NS_ASSUME_NONNULL_END

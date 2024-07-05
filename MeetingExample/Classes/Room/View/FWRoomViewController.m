@@ -95,16 +95,16 @@
     /// 监听订阅加载状态
     [RACObserve(self.viewModel, loading) subscribeNext:^(NSNumber * _Nullable value) {
         if(value.boolValue) {
-            [FWToastBridge showToastAction];
+            [SVProgressHUD show];
         } else {
-            [FWToastBridge hiddenToastAction];
+            [SVProgressHUD dismiss];
         }
     }];
     
     /// 提示框订阅
     [self.viewModel.toastSubject subscribeNext:^(id _Nullable message) {
         if (!kStringIsEmpty(message)) {
-            [FWToastBridge showToastAction:message];
+            [SVProgressHUD showInfoWithStatus:message];
         }
     }];
 }
@@ -137,15 +137,110 @@
         /// 标记加入房间状态
         self.joinRoomStatus = YES;
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        @strongify(self);
         /// 恢复加载状态
         self.viewModel.loading = NO;
         /// 构造日志信息
-        NSString *logStr = [NSString stringWithFormat:@"创建房间失败 code = %ld, message = %@", code, message];
-        [FWToastBridge showToastAction:logStr];
+        NSString *logStr = [NSString stringWithFormat:@"加入房间失败 code = %ld, message = %@", code, message];
+        [SVProgressHUD showInfoWithStatus:logStr];
         SGLOG(@"%@", logStr);
         /// 加入房间失败，结束并退出当前页面
-        [self joinRoomFailAlert:code];
+        [self exitRoom:SEALeaveReasonNormal error:code describe:message];
     }];
+}
+
+#pragma mark - 离开房间
+/// 离开房间
+/// - Parameter reason: 离开原因
+/// - Parameter error: 错误码
+/// - Parameter describe: 错误描述
+- (void)exitRoom:(SEALeaveReason)reason error:(SEAError)error describe:(nullable NSString *)describe {
+    
+    @weakify(self);
+    /// 离开房间
+    [[MeetingKit sharedInstance] exitRoom:^(id  _Nullable data) {
+        @strongify(self);
+        /// 离开房间页面
+        [self pop:1];
+        /// 清空成员列表
+        [[FWRoomMemberManager sharedManager] cleanMembers];
+        /// 清空聊天列表数据
+        [[FWMessageManager sharedManager] cleanChatsCache];
+        /// 清空房间信息缓存
+        [[FWStoreDataBridge sharedManager] exitRoom];
+        /// 离开房间时的警告提示弹窗
+        [self exitWarnAlert:reason];
+        /// 离开房间时的错误提示弹窗
+        [self exitErrorAlert:error describe:describe];
+    }];
+}
+
+#pragma mark - 离开房间时的警告提示弹窗
+/// 离开房间时的警告提示弹窗
+/// - Parameter reason: 离开原因
+- (void)exitWarnAlert:(SEALeaveReason)reason {
+    
+    /// 如果是主动离开频道，无需做任何提示处理
+    if (reason == SEALeaveReasonNormal) {
+        /// 丢弃此次回调处理
+        return;
+    }
+    
+    /// 声明提示信息
+    NSString *message = @"您已经主动离开频道";
+    switch (reason) {
+        case SEALeaveReasonNormal:
+            message = @"您已经主动离开频道";
+            break;
+        case SEALeaveReasonKickout:
+            message = @"您已被管理员踢出频道";
+            break;
+        case SEALeaveReasonReplaced:
+            message = @"您已在其它设备登录，请用新设备重新加入频道";
+            break;
+        case SEALeaveReasonTimeout:
+            message = @"您已超时离线";
+            break;
+        case SEALeaveReasonDestroy:
+            message = @"频道已经解散";
+            break;
+        default:
+            break;
+    }
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - 离开房间时的错误提示弹窗
+/// 离开房间时的错误提示弹窗
+/// - Parameters:
+///   - error: 错误码
+///   - describe: 错误描述
+- (void)exitErrorAlert:(SEAError)error describe:(nullable NSString *)describe {
+    
+    /// 如果没有发生错误，无需做任何提示处理
+    if (error == SEAErrorOK) {
+        /// 丢弃此次回调处理
+        return;
+    }
+    
+    /// 声明提示信息
+    NSString *message = describe;
+    if (kStringIsEmpty(describe)) {
+        message = [NSString stringWithFormat:@"发生不可恢复的错误，需要您重新登录(%ld)", error];
+    } else {
+        message = [NSString stringWithFormat:@"%@(%ld)", describe, error];
+    }
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 
@@ -160,37 +255,49 @@
     
     /// 日志埋点
     SGLOG(@"发生了错误(%ld)，%@", errCode, errMsg);
+    /// 离开房间
+    [self exitRoom:SEALeaveReasonNormal error:errCode describe:errMsg];
 }
 
 
 #pragma mark ----- 连接事件回调 -----
-#pragma mark 连接成功回调
-/// 连接成功回调
-- (void)onConnected {
+#pragma mark 开始重连事件回调
+/// 开始重连事件回调
+- (void)onReconnecting {
     
+    /// 提示操作信息
+    NSString *toastStr = [NSString stringWithFormat:@"服务正在重连..."];
+    /// 显示加载动画
+    [SVProgressHUD showWithStatus:toastStr];
     /// 日志埋点
-    SGLOG(@"%@", @"服务已经连接");
+    SGLOG(@"%@", @"服务开始重连");
 }
 
-#pragma mark 连接断开回调
-/// 连接断开回调
-- (void)onDisconnected {
+#pragma mark 重连成功事件回调
+/// 重连成功事件回调
+- (void)onReconnected {
     
+    /// 提示操作信息
+    NSString *toastStr = [NSString stringWithFormat:@"服务重连成功"];
+    /// 改变显示内容
+    [SVProgressHUD setStatus:toastStr];
+    /// 隐藏加载动画
+    [SVProgressHUD dismissWithDelay:2.f];
     /// 日志埋点
-    SGLOG(@"%@", @"服务已经断开");
+    SGLOG(@"%@", @"服务重连成功");
 }
 
 
-#pragma mark ----- 房间事件回调 -----
+#pragma mark ----- 我的相关回调 -----
 #pragma mark 进入房间事件回调
 /// 进入房间事件回调
 /// - Parameters:
-///   - roomId: 房间标识
+///   - meetingId: 会议标识
 ///   - userId: 用户标识
-- (void)onRoomEnter:(NSString *)roomId userId:(NSString *)userId {
+- (void)onEnterRoom:(NSString *)meetingId userId:(NSString *)userId {
     
     /// 日志埋点
-    SGLOG(@"加入房间成功，%@ %@", roomId, userId);
+    SGLOG(@"加入房间成功，%@ %@", meetingId, userId);
     /// 成员进入房间
     [[FWRoomMemberManager sharedManager] onMemberEnterRoom:userId isMine:YES];
     /// 获取默认音频状态
@@ -201,54 +308,25 @@
     [self.roomMainView setupDefaultAudioState:audioState videoState:videoState];
 }
 
-#pragma mark 共享开始回调
-/// 共享开始回调
-/// - Parameter userId: 共享成员标识
-/// - Parameter shareType: 共享类型
-/// - Parameter userModel: 发送成员信息
-- (void)onRoomShareStart:(NSString *)userId shareType:(SEAShareType)shareType userModel:(nullable RTCEngineUserModel *)userModel {
+#pragma mark 离开房间事件回调
+/// 离开房间事件回调
+/// - Parameter reason: 离开原因
+- (void)onExitRoom:(SEALeaveReason)reason {
     
+    /// 离开房间
+    [self exitRoom:reason error:SEAErrorOK describe:nil];
     /// 日志埋点
-    SGLOG(@"共享开始通知，userId = %@ shareType = %ld", userId, shareType);
+    SGLOG(@"%@", @"您已经离开房间");
 }
 
-#pragma mark 共享结束回调
-/// 共享结束回调
-/// - Parameter userId: 成员标识
-/// - Parameter userModel: 发送成员信息
-- (void)onRoomShareStop:(NSString *)userId userModel:(nullable RTCEngineUserModel *)userModel {
-    
-    /// 日志埋点
-    SGLOG(@"共享结束通知，userId = %@", userId);
-}
 
-#pragma mark 房间举手状态变化回调
-/// 房间举手状态变化回调
-/// - Parameter userId: 成员标识
-/// - Parameter enable: 举手状态，YES-申请举手 NO-取消举手
-/// - Parameter handupType: 举手申请类型
-/// - Parameter userModel: 发送成员信息
-- (void)onRoomHandUpChanged:(NSString *)userId enable:(BOOL)enable handupType:(SEAHandupType)handupType userModel:(nullable RTCEngineUserModel *)userModel {
-    
-    /// 日志埋点
-    SGLOG(@"房间举手状态变化通知，userId = %@ %@ handupType = %ld", userId, enable ? @"申请举手" : @"取消举手", handupType);
-}
-
-#pragma mark 房间被解散回调
-/// 房间被解散回调
-/// - Parameter userModel: 发送成员信息
-- (void)onRoomDestroy:(nullable RTCEngineUserModel *)userModel {
-    
-    /// 日志埋点
-    SGLOG(@"房间被解散通知");
-}
-
+#pragma mark ----- 房间事件回调 -----
 #pragma mark 房间摄像头禁用状态变更回调
 /// 房间摄像头禁用状态变更回调
 /// - Parameter cameraDisabled: 进入房间是否关闭视频，YES-关闭 NO-不关闭
 /// - Parameter selfUnmuteCameraDisabled: 是否允许自我解除，YES-允许 NO-不允许
-/// - Parameter userModel: 发送成员信息
-- (void)onRoomCameraStateChanged:(BOOL)cameraDisabled selfUnmuteCameraDisabled:(BOOL)selfUnmuteCameraDisabled userModel:(nullable RTCEngineUserModel *)userModel {
+/// - Parameter userId: 发送成员标识
+- (void)onRoomCameraStateChanged:(BOOL)cameraDisabled selfUnmuteCameraDisabled:(BOOL)selfUnmuteCameraDisabled userId:(nullable NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"房间摄像头禁用状态变更通知，cameraDisabled = %d selfUnmuteCameraDisabled = %d", cameraDisabled, selfUnmuteCameraDisabled);
@@ -258,8 +336,8 @@
 /// 房间麦克风禁用状态变更回调
 /// - Parameter micDisabled: 进入房间是否关闭音频，YES-关闭 NO-不关闭
 /// - Parameter selfUnmuteMicDisabled: 是否允许自我解除，YES-允许 NO-不允许
-/// - Parameter userModel: 发送成员信息
-- (void)onRoomMicStateChanged:(BOOL)micDisabled selfUnmuteMicDisabled:(BOOL)selfUnmuteMicDisabled userModel:(nullable RTCEngineUserModel *)userModelm {
+/// - Parameter userId: 发送成员标识
+- (void)onRoomMicStateChanged:(BOOL)micDisabled selfUnmuteMicDisabled:(BOOL)selfUnmuteMicDisabled userId:(nullable NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"房间麦克风禁用状态变更通知，micDisabled = %d selfUnmuteMicDisabled = %d", micDisabled, selfUnmuteMicDisabled);
@@ -268,8 +346,8 @@
 #pragma mark 房间聊天禁用状态变更回调
 /// 房间聊天禁用状态变更回调
 /// - Parameter chatDisabled: 禁用状态，YES-禁用 NO-不禁用
-/// - Parameter userModel: 发送成员信息
-- (void)onRoomChatDisabledChanged:(BOOL)chatDisabled userModel:(nullable RTCEngineUserModel *)userModel {
+/// - Parameter userId: 发送成员标识
+- (void)onRoomChatDisabledChanged:(BOOL)chatDisabled userId:(nullable NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"房间聊天禁用状态变更通知，chatDisabled = %d", chatDisabled);
@@ -278,8 +356,8 @@
 #pragma mark 房间截图禁用状态变更回调
 /// 房间截图禁用状态变更回调
 /// - Parameter screenshotDisabled: 禁用状态，YES-禁用 NO-不禁用
-/// - Parameter userModel: 发送成员信息
-- (void)onRoomScreenshotDisabledChanged:(BOOL)screenshotDisabled userModel:(nullable RTCEngineUserModel *)userModel {
+/// - Parameter userId: 发送成员标识
+- (void)onRoomScreenshotDisabledChanged:(BOOL)screenshotDisabled userId:(nullable NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"房间截图禁用状态变更通知，screenshotDisabled = %d", screenshotDisabled);
@@ -288,8 +366,8 @@
 #pragma mark 房间水印禁用状态变更回调
 /// 房间水印禁用状态变更回调
 /// - Parameter watermarkDisabled: 水印状态，YES-开启 NO-关闭
-/// - Parameter userModel: 发送成员信息
-- (void)onRoomWatermarkDisabledChanged:(BOOL)watermarkDisabled userModel:(nullable RTCEngineUserModel *)userModel {
+/// - Parameter userId: 发送成员标识
+- (void)onRoomWatermarkDisabledChanged:(BOOL)watermarkDisabled userId:(nullable NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"房间水印禁用状态变更通知，watermarkDisabled = %d", watermarkDisabled);
@@ -298,8 +376,8 @@
 #pragma mark 房间锁定状态变化回调
 /// 房间锁定状态变化回调
 /// - Parameter locked: 锁定状态，YES-开启 NO-关闭
-/// - Parameter userModel: 发送成员信息
-- (void)onRoomLockedChanged:(BOOL)locked userModel:(nullable RTCEngineUserModel *)userModel {
+/// - Parameter userId: 发送成员标识
+- (void)onRoomLockedChanged:(BOOL)locked userId:(nullable NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"房间锁定状态变化通知，locked = %d", locked);
@@ -310,22 +388,59 @@
 /// - Parameters:
 ///   - userId: 新主持人用户标识
 ///   - sourceUserId: 原主持人用户标识
-///   - userModel: 发送成员信息
-- (void)onRoomMoveHost:(NSString *)userId sourceUserId:(NSString *)sourceUserId userModel:(nullable RTCEngineUserModel *)userModel {
+- (void)onRoomMoveHost:(NSString *)userId sourceUserId:(NSString *)sourceUserId {
     
     /// 日志埋点
     SGLOG(@"房间转移主持人通知，userId = %@ sourceUserId = %@", userId, sourceUserId);
 }
 
+#pragma mark 房间被解散回调
+/// 房间被解散回调
+/// - Parameter userId: 发送成员标识
+- (void)onRoomDestroy:(nullable NSString *)userId {
+    
+    /// 日志埋点
+    SGLOG(@"房间被解散通知");
+}
+
 #pragma mark 房间踢出成员回调
 /// 房间踢出成员回调
 /// - Parameters:
-///   - userId: 成员标识
-///   - userModel: 发送成员信息
-- (void)onRoomKickedOut:(NSString *)userId userModel:(nullable RTCEngineUserModel *)userModel {
+///   - userId: 发送成员标识
+- (void)onRoomKickedOut:(nullable NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"房间踢出成员通知，userId = %@", userId);
+}
+
+#pragma mark 共享开始回调
+/// 共享开始回调
+/// - Parameter userId: 共享成员标识
+/// - Parameter shareType: 共享类型
+- (void)onRoomShareStart:(NSString *)userId shareType:(SEAShareType)shareType {
+    
+    /// 日志埋点
+    SGLOG(@"共享开始通知，userId = %@ shareType = %ld", userId, shareType);
+}
+
+#pragma mark 共享结束回调
+/// 共享结束回调
+/// - Parameter userId: 发送成员标识
+- (void)onRoomShareStop:(nullable NSString *)userId {
+    
+    /// 日志埋点
+    SGLOG(@"共享结束通知，userId = %@", userId);
+}
+
+#pragma mark 房间举手状态变化回调
+/// 房间举手状态变化回调
+/// - Parameter userId: 成员标识
+/// - Parameter enable: 举手状态，YES-申请举手 NO-取消举手
+/// - Parameter handupType: 举手申请类型
+- (void)onRoomHandUpChanged:(NSString *)userId enable:(BOOL)enable handupType:(SEAHandupType)handupType {
+    
+    /// 日志埋点
+    SGLOG(@"房间举手状态变化通知，userId = %@ %@ handupType = %ld", userId, enable ? @"申请举手" : @"取消举手", handupType);
 }
 
 
@@ -360,9 +475,9 @@
 /// 用户昵称变化回调
 /// - Parameters:
 ///   - targetUserId: 目标成员标识
-///   - userModel: 发送成员信息
+///   - userId: 发送成员标识
 ///   - nickname: 用户昵称
-- (void)onUserNameChanged:(NSString *)targetUserId userModel:(nullable RTCEngineUserModel *)userModel nickname:(NSString *)nickname {
+- (void)onUserNameChanged:(NSString *)targetUserId userId:(nullable NSString *)userId nickname:(NSString *)nickname {
     
     /// 日志埋点
     SGLOG(@"用户昵称变化，userId = %@ nickname = %@", targetUserId, nickname);
@@ -372,9 +487,9 @@
 /// 用户角色变化回调
 /// - Parameters:
 ///   - targetUserId: 目标成员标识
-///   - userModel: 发送成员信息
+///   - userId: 发送成员标识
 ///   - userRole: 用户角色
-- (void)onUserRoleChanged:(NSString *)targetUserId userModel:(nullable RTCEngineUserModel *)userModel userRole:(SEAUserRole)userRole {
+- (void)onUserRoleChanged:(NSString *)targetUserId userId:(nullable NSString *)userId userRole:(SEAUserRole)userRole {
     
     /// 日志埋点
     SGLOG(@"用户角色变化，userId = %@ userRole = %ld", targetUserId, userRole);
@@ -384,10 +499,10 @@
 /// 用户摄像头状态变化回调
 /// - Parameters:
 ///   - targetUserId: 目标成员标识
-///   - userModel: 发送成员信息
+///   - userId: 发送成员标识
 ///   - cameraDisabled: 预留字段
 ///   - cameraState: 视频状态
-- (void)onUserCameraStateChanged:(NSString *)targetUserId userModel:(nullable RTCEngineUserModel *)userModel cameraDisabled:(BOOL)cameraDisabled cameraState:(SEADeviceState)cameraState {
+- (void)onUserCameraStateChanged:(NSString *)targetUserId userId:(nullable NSString *)userId cameraDisabled:(BOOL)cameraDisabled cameraState:(SEADeviceState)cameraState {
     
     /// 日志埋点
     SGLOG(@"用户摄像头状态变化，userId = %@ cameraState = %ld", targetUserId, cameraState);
@@ -399,10 +514,10 @@
 /// 用户麦克风状态变化回调
 /// - Parameters:
 ///   - targetUserId: 目标成员标识
-///   - userModel: 发送成员信息
+///   - userId: 发送成员标识
 ///   - micDisabled: 预留字段
 ///   - micState: 音频状态
-- (void)onUserMicStateChanged:(NSString *)targetUserId userModel:(nullable RTCEngineUserModel *)userModel micDisabled:(BOOL)micDisabled micState:(SEADeviceState)micState {
+- (void)onUserMicStateChanged:(NSString *)targetUserId userId:(nullable NSString *)userId micDisabled:(BOOL)micDisabled micState:(SEADeviceState)micState {
     
     /// 日志埋点
     SGLOG(@"用户麦克风状态变化，userId = %@ micState = %ld", targetUserId, micState);
@@ -414,8 +529,8 @@
 /// 用户聊天能力禁用状态变化回调
 /// - Parameter targetUserId: 目标成员标识
 /// - Parameter chatDisabled: 禁用状态，YES-禁用 NO-不禁用
-/// - Parameter userModel: 发送成员信息
-- (void)onUserChatDisabledChanged:(NSString *)targetUserId chatDisabled:(BOOL)chatDisabled userModel:(nullable RTCEngineUserModel *)userModel {
+/// - Parameter userId: 发送成员标识
+- (void)onUserChatDisabledChanged:(NSString *)targetUserId chatDisabled:(BOOL)chatDisabled userId:(nullable NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"用户聊天能力禁用状态变化，userId = %@ chatDisabled = %d", targetUserId, chatDisabled);
@@ -426,8 +541,8 @@
 /// - Parameter targetUserId: 目标成员标识
 /// - Parameter handupType: 申请类型
 /// - Parameter approve: 处理结果
-/// - Parameter userModel: 发送成员信息
-- (void)onHandupConfirm:(NSString *)targetUserId handupType:(SEAHandupType)handupType approve:(BOOL)approve userModel:(nullable RTCEngineUserModel *)userModel {
+/// - Parameter userId: 发送成员标识
+- (void)onHandupConfirm:(NSString *)targetUserId handupType:(SEAHandupType)handupType approve:(BOOL)approve userId:(nullable NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"举手处理结果通知，userId = %@ handupType = %ld approve = %d", targetUserId, handupType, approve);
@@ -440,11 +555,10 @@
 /// - Parameter senderId: 发送者标识
 /// - Parameter message: 消息内容
 /// - Parameter messageType: 消息类型
-/// - Parameter userModel: 发送成员信息
-- (void)onReceiveChatMessage:(NSString *)senderId message:(NSString *)message messageType:(SEAMessageType)messageType userModel:(nullable RTCEngineUserModel *)userModel {
+- (void)onReceiveChatMessage:(NSString *)senderId message:(NSString *)message messageType:(SEAMessageType)messageType {
     
     /// 设置接收聊天消息
-    [[FWMessageManager sharedManager] receiveChatWithAccountModel:userModel content:message messageType:messageType];
+    [[FWMessageManager sharedManager] receiveChatWithSenderId:senderId content:message messageType:messageType];
     /// 日志埋点
     SGLOG(@"收到聊天消息，senderId = %@ message = %@ messageType = %ld", senderId, message, messageType);
 }
@@ -454,8 +568,7 @@
 /// - Parameters:
 ///   - senderId: 发送者标识
 ///   - content: 自定义消息内容
-///   - userModel: 发送成员信息
-- (void)onReceiveCustomMessage:(NSString *)senderId content:(NSString *)content userModel:(nullable RTCEngineUserModel *)userModel {
+- (void)onReceiveCustomMessage:(NSString *)senderId content:(NSString *)content {
     
     /// 日志埋点
     SGLOG(@"收到自定义消息，senderId = %@ content = %@", senderId, content);
@@ -670,7 +783,7 @@
     UIAlertAction *leaveAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         @strongify(self);
         /// 离开房间
-        [self leaveRoom];
+        [self exitRoom:SEALeaveReasonNormal error:SEAErrorOK describe:nil];
     }];
     [alert addAction:cancelAction];
     [alert addAction:leaveAction];
@@ -729,67 +842,18 @@
         name = [FWToolBridge clearMarginsBlank:name];
         if (kStringIsEmpty(name)) {
             /// 提示操作信息
-            [FWToastBridge showToastAction:@"用户昵称不能为空"];
+            [SVProgressHUD showInfoWithStatus:@"用户昵称不能为空"];
             return;
         }
         
         if (![name isContentEffective]) {
             /// 提示操作信息
-            [FWToastBridge showToastAction:@"用户昵称包含无效字符"];
+            [SVProgressHUD showInfoWithStatus:@"用户昵称包含无效字符"];
             return;
         }
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-#pragma mark - 离开房间
-/// 离开房间
-- (void)leaveRoom {
-    
-//    @weakify(self);
-//    /// 主持人解散房间
-//    [[MeetingKit sharedInstance] adminDestroyRoom:^(id  _Nullable data) {
-//        @strongify(self);
-//        /// 清空房间信息缓存
-//        [[FWStoreDataBridge sharedManager] exitRoom];
-//        /// 离开房间页面
-//        [self pop:1];
-//    } onFailed:^(SEAError code, NSString * _Nonnull message) {
-//        /// 构造日志信息
-//        NSString *toastStr = [NSString stringWithFormat:@"请求结束会议失败 code = %ld, message = %@", code, message];
-//        [FWToastBridge showToastAction:toastStr];;
-//        SGLOG(@"%@", toastStr);
-//    }];
-    
-    @weakify(self);
-    /// 离开房间
-    [[MeetingKit sharedInstance] exitRoom:^(id  _Nullable data) {
-        @strongify(self);
-        /// 清空成员列表
-        [[FWRoomMemberManager sharedManager] cleanMembers];
-        /// 清空聊天列表数据
-        [[FWMessageManager sharedManager] cleanChatsCache];
-        /// 清空房间信息缓存
-        [[FWStoreDataBridge sharedManager] exitRoom];
-        /// 离开房间页面
-        [self pop:1];
-    }];
-}
-
-#pragma mark - 加入房间失败
-- (void)joinRoomFailAlert:(SEAError)errorCode {
-    
-    @weakify(self);
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"加入房间失败(%ld)", errorCode] preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-        @strongify(self);
-        /// 离开房间页面
-        [self pop:1];
-    }];
-    [alert addAction:cancelAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
 

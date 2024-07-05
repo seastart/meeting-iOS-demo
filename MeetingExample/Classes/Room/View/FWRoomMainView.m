@@ -187,7 +187,7 @@
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求开启共享失败 code = %ld, message = %@", code, message];
-        [FWToastBridge showToastAction:toastStr];;
+        [SVProgressHUD showInfoWithStatus:toastStr];;
         SGLOG(@"%@", toastStr);
     }];
 }
@@ -205,7 +205,7 @@
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求关闭共享失败 code = %ld, message = %@", code, message];
-        [FWToastBridge showToastAction:toastStr];;
+        [SVProgressHUD showInfoWithStatus:toastStr];;
         SGLOG(@"%@", toastStr);
     }];
 }
@@ -267,7 +267,7 @@
             break;
     }
     /// 交互提示
-    [FWToastBridge showToastAction:toastStr];
+    [SVProgressHUD showInfoWithStatus:toastStr];
     /// 设置共享按钮选中状态
     [self.roomBottomTool setupShareButtonSelected:NO];
 }
@@ -303,7 +303,7 @@
             /// 获取当前账户信息
             RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
             /// 先将自己加入到成员列表视图
-            [self.roomMemberView memberUpdateWithUserId:userModel.uid];
+            [self.roomMemberView memberUpdateWithUserId:userModel.userId];
         }
     }
     /// 成员更新信息
@@ -364,7 +364,7 @@
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求开启视频失败 code = %ld, message = %@", code, message];
-        [FWToastBridge showToastAction:toastStr];;
+        [SVProgressHUD showInfoWithStatus:toastStr];;
         SGLOG(@"%@", toastStr);
     }];
 }
@@ -385,7 +385,7 @@
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求关闭视频失败 code = %ld, message = %@", code, message];
-        [FWToastBridge showToastAction:toastStr];;
+        [SVProgressHUD showInfoWithStatus:toastStr];;
         SGLOG(@"%@", toastStr);
     }];
 }
@@ -406,7 +406,7 @@
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求开启音频失败 code = %ld, message = %@", code, message];
-        [FWToastBridge showToastAction:toastStr];;
+        [SVProgressHUD showInfoWithStatus:toastStr];;
         SGLOG(@"%@", toastStr);
     }];
 }
@@ -427,7 +427,7 @@
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求关闭音频失败 code = %ld, message = %@", code, message];
-        [FWToastBridge showToastAction:toastStr];;
+        [SVProgressHUD showInfoWithStatus:toastStr];;
         SGLOG(@"%@", toastStr);
     }];
 }
@@ -587,7 +587,7 @@
 - (void)whiteboardLoadingBegin:(FWRoomWhiteboardView *)whiteboardView {
     
     /// 标记加载状态
-    [FWToastBridge showToastAction];
+    [SVProgressHUD show];
 }
 
 #pragma mark 画板加载完成事件回调
@@ -596,7 +596,7 @@
 - (void)whiteboardLoadingFinish:(FWRoomWhiteboardView *)whiteboardView {
     
     /// 恢复加载状态
-    [FWToastBridge hiddenToastAction];
+    [SVProgressHUD dismiss];
 }
 
 #pragma mark 离开事件回调

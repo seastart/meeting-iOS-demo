@@ -36,17 +36,9 @@
 #pragma mark - 相关基础的设置
 - (void)baseSet:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-#ifdef DEBUG
-    /// DEBUG模式日志说明
-    SGLOG(@"DEBUG模式下，不开启日志重定向文件，日志统一输出到控制台");
-#else
-    /// 非DEBUG模式下开启日志重定向文件
-    [[FWLogTraceBridge sharedManager] enableFileLogSystem];
-#endif
-    
     /// 基础设置
     [[FWEntryBridge sharedManager] setupDefault];
-    /// 设置根视图为登录模块
+    /// 设置根视图
     [[FWEntryBridge sharedManager] setWindowRootEntry];
 }
 

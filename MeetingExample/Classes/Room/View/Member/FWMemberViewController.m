@@ -158,16 +158,16 @@
     /// 监听订阅加载状态
     [RACObserve(self.viewModel, loading) subscribeNext:^(NSNumber * _Nullable value) {
         if(value.boolValue) {
-            [FWToastBridge showToastAction];
+            [SVProgressHUD show];
         } else {
-            [FWToastBridge hiddenToastAction];
+            [SVProgressHUD dismiss];
         }
     }];
     
     /// 提示框订阅
     [self.viewModel.toastSubject subscribeNext:^(id _Nullable message) {
         if (!kStringIsEmpty(message)) {
-            [FWToastBridge showToastAction:message];
+            [SVProgressHUD showInfoWithStatus:message];
         }
     }];
 }
@@ -207,7 +207,7 @@
         /// 设置状态
         self.viewModel.frequencyAllEnabled = YES;
         /// 弹出提示信息
-        [FWToastBridge showToastAction:[NSString stringWithFormat:@"已开启全体静音，%@", selected ? @"允许成员自行解除" : @"不允许成员自行解除"]];
+        [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"已开启全体静音，%@", selected ? @"允许成员自行解除" : @"不允许成员自行解除"]];
     }];
     [self presentViewController:alertVC animated:NO completion:nil];
 }
@@ -242,7 +242,7 @@
         /// 设置状态
         self.viewModel.framesAllEnabled = YES;
         /// 弹出提示信息
-        [FWToastBridge showToastAction:[NSString stringWithFormat:@"已开启全体禁画，%@", selected ? @"允许成员自行解除" : @"不允许成员自行解除"]];
+        [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"已开启全体禁画，%@", selected ? @"允许成员自行解除" : @"不允许成员自行解除"]];
     }];
     [self presentViewController:alertVC animated:NO completion:nil];
 }
@@ -374,7 +374,7 @@
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         @strongify(self);
         /// 弹出提示信息
-        [FWToastBridge showToastAction:@"移除成员成功"];
+        [SVProgressHUD showInfoWithStatus:@"移除成员成功"];
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];

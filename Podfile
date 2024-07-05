@@ -2,7 +2,7 @@
 source 'https://cdn.cocoapods.org'
 
 # 说明平台和版本
-platform :ios, '10.0'
+platform :ios, '12.0'
 
 # 忽略引入库的所有警告
 inhibit_all_warnings!
@@ -30,11 +30,13 @@ def commonPods
     pod 'YYModel'
     # 集控引擎
     pod 'RTCControlLink'
+    # 轻量级加载框
+    pod 'SVProgressHUD', :git => "https://github.com/SilenceLove/SVProgressHUD"
 end
 
 def meetingPods
   # 实时音视频服务引擎
-  pod 'RTCEngineKit', '1.0.8-alpha.2+20240704'
+  pod 'RTCEngineKit', :git => "https://github.com/seastart/rtc-ios-cocoapods.git"
   # 依赖会议服务引擎
   # pod 'MeetingKit'
 end

@@ -14,8 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 FOUNDATION_EXTERN NSString *__nonnull const FWENGINEAPPID;
 /// APPKEY
 FOUNDATION_EXTERN NSString *__nonnull const FWENGINEAPPKEY;
-/// 服务器地址
-FOUNDATION_EXTERN NSString *__nonnull const FWSERVICEURI;
+
+/// Application Group Identifier
+FOUNDATION_EXTERN NSString *__nonnull const FWAPPGROUP;
 
 /// 默认头像地址
 FOUNDATION_EXTERN NSString *__nonnull const FWDEFAULTAVATAR;
@@ -39,8 +40,14 @@ FOUNDATION_EXTERN NSString *__nonnull const FWACCOUNTAGREEMENTHOST;
 /// 隐私协议地址
 FOUNDATION_EXTERN NSString *__nonnull const FWACCOUNTPRIVACYHOST;
 
-/// Application Group Identifier
-FOUNDATION_EXTERN NSString *__nonnull const FWAPPGROUP;
+/// 服务器地址
+FOUNDATION_EXTERN NSString *__nonnull const FWSERVICEURI;
+/// 数据请求短链接头部
+FOUNDATION_EXTERN NSString *__nonnull const FWSERVICESHORTHEADER;
+/// 获取用户签名
+FOUNDATION_EXTERN NSString *__nonnull const FWSIGNATUREINFOFACE;
+/// 退出签名用户
+FOUNDATION_EXTERN NSString *__nonnull const FWUSERLOGOUT;
 
 @interface FWConstants : NSObject
 

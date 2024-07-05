@@ -212,16 +212,16 @@
     /// 监听订阅加载状态
     [RACObserve(self.viewModel, loading) subscribeNext:^(NSNumber * _Nullable value) {
         if(value.boolValue) {
-            [FWToastBridge showToastAction];
+            [SVProgressHUD show];
         } else {
-            [FWToastBridge hiddenToastAction];
+            [SVProgressHUD dismiss];
         }
     }];
     
     /// 监听提示框订阅
     [self.viewModel.toastSubject subscribeNext:^(NSString * _Nullable message) {
         if (!kStringIsEmpty(message)) {
-            [FWToastBridge showToastAction:message];
+            [SVProgressHUD showInfoWithStatus:message];
         }
     }];
     
@@ -229,7 +229,7 @@
     [self.viewModel.mobileCodeSubject subscribeNext:^(NSString * _Nullable value) {
         @strongify(self);
         if (!kStringIsEmpty(value)) {
-            [FWToastBridge showToastAction:value];
+            [SVProgressHUD showInfoWithStatus:value];
         }
         /// 获取验证码成功处理
         [self countdownAction];

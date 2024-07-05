@@ -9,11 +9,12 @@
 #import "FWConstants.h"
 
 /// APPID
-NSString * const FWENGINEAPPID = @"c797babfc9f54f78957d96e35dbf5d22";
+NSString * const FWENGINEAPPID = @"68b3ft51smhz0x5glscw9whm78bw57uu";
 /// APPKEY
-NSString * const FWENGINEAPPKEY = @"c797babfc9f54f78957d96e35dbf5d22";
-/// 服务器地址
-NSString * const FWSERVICEURI = @"http://localv2.srtc.live:8087";
+NSString * const FWENGINEAPPKEY = @"s1hf8my7v9js210xp5r6o6uefwgxd6il";
+
+/// Application Group Identifier
+NSString * const FWAPPGROUP = @"group.cn.seastart.meetingkit";
 
 /// 默认头像地址
 NSString * const FWDEFAULTAVATAR = @"icon_login_avatar2";
@@ -37,8 +38,14 @@ NSString * const FWACCOUNTAGREEMENTHOST = @"https://www.jianshu.com";
 /// 隐私协议地址
 NSString * const FWACCOUNTPRIVACYHOST = @"https://www.baidu.com";
 
-/// Application Group Identifier
-NSString * const FWAPPGROUP = @"group.cn.seastart.meetingkit";
+/// 服务器地址
+NSString * const FWSERVICEURI = @"http://localv2.srtc.live:8087";
+/// 数据请求短链接头部
+NSString * const FWSERVICESHORTHEADER = @"/server/";
+/// 获取用户签名
+NSString * const FWSIGNATUREINFOFACE = @"user-auth/grant";
+/// 退出签名用户
+NSString * const FWUSERLOGOUT = @"user-auth/kickout";
 
 @implementation FWConstants
 

@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FWMessageItemModel : NSObject
 
 /// 成员标识
-@property (nonatomic, copy) NSString *uid;
+@property (nonatomic, copy) NSString *userId;
 /// 成员昵称
 @property (nonatomic, copy) NSString *name;
 /// 成员头像

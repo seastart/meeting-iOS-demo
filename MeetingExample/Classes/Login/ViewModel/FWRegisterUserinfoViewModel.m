@@ -67,10 +67,10 @@
         [self.confirmSubject sendNext:nil];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 隐藏加载状态
-        [FWToastBridge hiddenToastAction];
+        [SVProgressHUD dismiss];
         /// 构造日志信息
         NSString *logStr = [NSString stringWithFormat:@"组件登录失败 code = %ld, message = %@", code, message];
-        [FWToastBridge showToastAction:logStr];
+        [SVProgressHUD showInfoWithStatus:logStr];
         SGLOG(@"%@", logStr);
     }];
 }

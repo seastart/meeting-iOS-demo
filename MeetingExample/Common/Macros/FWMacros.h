@@ -9,56 +9,56 @@
 #ifndef FWMacros_h
 #define FWMacros_h
 
-#pragma mark - 自定义输出
+/// 自定义输出
 #define SGLOG(format,...) NSLog((@"[SGLOG][%@][%d] " format), [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__,##__VA_ARGS__)
 /// #define SGLOG(str, args...) ((void)0)
 
-#pragma mark - 是否是iPad
+/// 检测是否是iPad
 #define isPad [[UIDevice currentDevice].model isEqualToString:@"iPad"]
-#pragma mark - 是否是iPhone
+/// 是否是iPhone
 #define isPhone [[UIDevice currentDevice].model isEqualToString:@"iPhone"]
 
-#pragma mark - 获取设备屏幕宽度/高度
+/// 获取设备屏幕宽度/高度
 #define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 
-#pragma mark - 顶部安全区高度
+/// 顶部安全区高度
 #define SafeBarTopHeight ([UIApplication sharedApplication].delegate.window.safeAreaInsets.top)
-#pragma mark - 底部安全区高度
+/// 底部安全区高度
 #define SafeBarMottomHeight ([UIApplication sharedApplication].delegate.window.safeAreaInsets.bottom)
 
-#pragma mark - App名字
+/// 应用名字
 #define BundleDisplayName [(__bridge NSDictionary *)CFBundleGetInfoDictionary(CFBundleGetMainBundle())objectForKey:@"CFBundleDisplayName"]
-#pragma mark - App构建版本
+/// 应用构建版本
 #define BundleVersion [(__bridge NSDictionary *)CFBundleGetInfoDictionary(CFBundleGetMainBundle())objectForKey:@"CFBundleVersion"]
-#pragma mark - AppBundleIdentifier
+/// 应用包标识
 #define BundleIdentifier [(__bridge NSDictionary *)CFBundleGetInfoDictionary(CFBundleGetMainBundle())objectForKey:@"CFBundleIdentifier"]
-#pragma mark - App版本号
+/// 应用版本号
 #define BundleShortVersion [(__bridge NSDictionary *)CFBundleGetInfoDictionary(CFBundleGetMainBundle())objectForKey:@"CFBundleShortVersionString"]
 
-#pragma mark - 根据名字获取图片
+/// 根据名字获取图片
 #define kGetImage(imageName) [UIImage imageNamed:imageName]
 
-#pragma mark - 字符串是否为空
+/// 字符串是否为空
 #define kStringIsEmpty(str) ([str isKindOfClass:[NSNull class]] || str == nil || [str length] < 1 ? YES : NO )
-#pragma mark - 数组是否为空
+/// 数组是否为空
 #define kArrayIsEmpty(array) (array == nil || [array isKindOfClass:[NSNull class]] || array.count == 0)
-#pragma mark - 字典是否为空
+/// 字典是否为空
 #define kDictIsEmpty(dic) (dic == nil || [dic isKindOfClass:[NSNull class]] || dic.allKeys == 0)
-#pragma mark - 是否是空对象
+/// 是否是空对象
 #define kObjectIsEmpty(_object) (_object == nil \
 || [_object isKindOfClass:[NSNull class]] \
 || ([_object respondsToSelector:@selector(length)] && [(NSData *)_object length] == 0) \
 || ([_object respondsToSelector:@selector(count)] && [(NSArray *)_object count] == 0))
 
-#pragma mark - WeakSelf
+/// 弱引用
 #define WeakSelf() __weak typeof(self) weakSelf = self
 #define StrongSelf(weakSelf) __strong typeof(self) strongSelf = weakSelf
 
-#pragma mark - 类名转换成字符串
+/// 类名转换成字符串
 #define kStringFromClass(className) NSStringFromClass([className class])
 
-#pragma mark - 取色值相关的方法
+/// 取色值相关的方法
 #define RGB(r,g,b) [UIColor colorWithRed:(r)/255.f \
                                             green:(g)/255.f \
                                              blue:(b)/255.f \

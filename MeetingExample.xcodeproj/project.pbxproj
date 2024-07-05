@@ -12,7 +12,6 @@
 		F40B619D26C27D0C00F42370 /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F40B5D2A26C27D0A00F42370 /* AppIcon.xcassets */; };
 		F40B61A426C27D0C00F42370 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B5D3426C27D0A00F42370 /* main.m */; };
 		F40B61A526C27D0C00F42370 /* FWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B5D3726C27D0A00F42370 /* FWAppDelegate.m */; };
-		F40B61CA26C27D0C00F42370 /* FWToastBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B5DA026C27D0B00F42370 /* FWToastBridge.m */; };
 		F40B633B26C27D0D00F42370 /* FWBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B618626C27D0C00F42370 /* FWBaseViewController.m */; };
 		F40B633C26C27D0D00F42370 /* FWBaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F40B618726C27D0C00F42370 /* FWBaseNavigationViewController.m */; };
 		F40B633F26C2901F00F42370 /* MeetingExample-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F40B633E26C2901F00F42370 /* MeetingExample-Info.plist */; };
@@ -87,13 +86,10 @@
 		F482EEF429B5DA6600815C9C /* FWRoomCaptureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F482EEF329B5DA6600815C9C /* FWRoomCaptureView.xib */; };
 		F482EEF829B6D0F500815C9C /* FWBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EEF729B6D0F500815C9C /* FWBaseModel.m */; };
 		F482EEFB29B6D15200815C9C /* FWNetworkBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EEFA29B6D15200815C9C /* FWNetworkBridge.m */; };
-		F482EEFE29B6D2D100815C9C /* FWInterfaces.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EEFD29B6D2D100815C9C /* FWInterfaces.m */; };
 		F482EF0229B6DF9900815C9C /* FWToolBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF0129B6DF9900815C9C /* FWToolBridge.m */; };
 		F482EF0529B6E1CC00815C9C /* FWAuthToken.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF0429B6E1CC00815C9C /* FWAuthToken.m */; };
 		F482EF1A29B885D900815C9C /* FWBaseEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF1929B885D900815C9C /* FWBaseEmptyView.m */; };
 		F482EF2329B88C3F00815C9C /* UIView+EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF2229B88C3F00815C9C /* UIView+EmptyView.m */; };
-		F482EF2A29BEE2D900815C9C /* FWEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF2929BEE2D900815C9C /* FWEnum.m */; };
-		F482EF2E29BF286A00815C9C /* FWLogTraceBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF2D29BF286A00815C9C /* FWLogTraceBridge.m */; };
 		F482EF3429C4187F00815C9C /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F482EF3329C4187F00815C9C /* NSString+Extension.m */; };
 		F48690B32BDA3C710065A91E /* FWMeetingEnterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F48690B22BDA3C710065A91E /* FWMeetingEnterModel.m */; };
 		F48690BF2BEF1DB30065A91E /* FWRoomMemberManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F48690BE2BEF1DB30065A91E /* FWRoomMemberManager.m */; };
@@ -150,6 +146,7 @@
 		F4AA77AF288AA21900EBC0E7 /* MeetingBroadcastUpload.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F4AA7795288AA21900EBC0E7 /* MeetingBroadcastUpload.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F4C417BC29B09EE200A7EBCB /* FWRoomViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C417BB29B09EE200A7EBCB /* FWRoomViewModel.m */; };
 		F4C417C029B1A85900A7EBCB /* FWTimerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C417BF29B1A85900A7EBCB /* FWTimerBridge.m */; };
+		F4CAE8C62C37C7D70032E8ED /* FWExtendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CAE8C52C37C7D70032E8ED /* FWExtendModel.m */; };
 		F4DA7C8127279C35003FDE9B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F4DA7C8027279C35003FDE9B /* libc++.tbd */; };
 		F4DA7C8627279D4E003FDE9B /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4DA7C8427279D4E003FDE9B /* CoreFoundation.framework */; };
 		F4DA7C8727279D4E003FDE9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4DA7C8527279D4E003FDE9B /* Foundation.framework */; };
@@ -225,8 +222,6 @@
 		F40B5D3726C27D0A00F42370 /* FWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWAppDelegate.m; sourceTree = "<group>"; };
 		F40B5D4026C27D0A00F42370 /* FWCommons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWCommons.h; sourceTree = "<group>"; };
 		F40B5D4226C27D0A00F42370 /* FWMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWMacros.h; sourceTree = "<group>"; };
-		F40B5D9F26C27D0B00F42370 /* FWToastBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWToastBridge.h; sourceTree = "<group>"; };
-		F40B5DA026C27D0B00F42370 /* FWToastBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWToastBridge.m; sourceTree = "<group>"; };
 		F40B618626C27D0C00F42370 /* FWBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWBaseViewController.m; sourceTree = "<group>"; };
 		F40B618726C27D0C00F42370 /* FWBaseNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWBaseNavigationViewController.m; sourceTree = "<group>"; };
 		F40B618826C27D0C00F42370 /* FWBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWBaseViewController.h; sourceTree = "<group>"; };
@@ -345,8 +340,6 @@
 		F482EEF729B6D0F500815C9C /* FWBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWBaseModel.m; sourceTree = "<group>"; };
 		F482EEF929B6D15200815C9C /* FWNetworkBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWNetworkBridge.h; sourceTree = "<group>"; };
 		F482EEFA29B6D15200815C9C /* FWNetworkBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWNetworkBridge.m; sourceTree = "<group>"; };
-		F482EEFC29B6D2D100815C9C /* FWInterfaces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWInterfaces.h; sourceTree = "<group>"; };
-		F482EEFD29B6D2D100815C9C /* FWInterfaces.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWInterfaces.m; sourceTree = "<group>"; };
 		F482EF0029B6DF9900815C9C /* FWToolBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWToolBridge.h; sourceTree = "<group>"; };
 		F482EF0129B6DF9900815C9C /* FWToolBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWToolBridge.m; sourceTree = "<group>"; };
 		F482EF0329B6E1CC00815C9C /* FWAuthToken.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWAuthToken.h; sourceTree = "<group>"; };
@@ -355,10 +348,6 @@
 		F482EF1929B885D900815C9C /* FWBaseEmptyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWBaseEmptyView.m; sourceTree = "<group>"; };
 		F482EF2129B88C3E00815C9C /* UIView+EmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+EmptyView.h"; sourceTree = "<group>"; };
 		F482EF2229B88C3F00815C9C /* UIView+EmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+EmptyView.m"; sourceTree = "<group>"; };
-		F482EF2829BEE2D900815C9C /* FWEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWEnum.h; sourceTree = "<group>"; };
-		F482EF2929BEE2D900815C9C /* FWEnum.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWEnum.m; sourceTree = "<group>"; };
-		F482EF2C29BF286A00815C9C /* FWLogTraceBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWLogTraceBridge.h; sourceTree = "<group>"; };
-		F482EF2D29BF286A00815C9C /* FWLogTraceBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWLogTraceBridge.m; sourceTree = "<group>"; };
 		F482EF3229C4187F00815C9C /* NSString+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
 		F482EF3329C4187F00815C9C /* NSString+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		F48690B12BDA3C710065A91E /* FWMeetingEnterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMeetingEnterModel.h; sourceTree = "<group>"; };
@@ -443,6 +432,9 @@
 		F4C417BB29B09EE200A7EBCB /* FWRoomViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWRoomViewModel.m; sourceTree = "<group>"; };
 		F4C417BE29B1A85900A7EBCB /* FWTimerBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWTimerBridge.h; sourceTree = "<group>"; };
 		F4C417BF29B1A85900A7EBCB /* FWTimerBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWTimerBridge.m; sourceTree = "<group>"; };
+		F4CAE8C42C37C7D70032E8ED /* FWExtendModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWExtendModel.h; sourceTree = "<group>"; };
+		F4CAE8C52C37C7D70032E8ED /* FWExtendModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWExtendModel.m; sourceTree = "<group>"; };
+		F4CAE8C72C37E2F50032E8ED /* FWDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWDefine.h; sourceTree = "<group>"; };
 		F4DA7C6F2726E41F003FDE9B /* RTCEngineKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RTCEngineKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4DA7C8027279C35003FDE9B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		F4DA7C8427279D4E003FDE9B /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -707,25 +699,14 @@
 		F40B5D5326C27D0A00F42370 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				F482EF2B29BF285600815C9C /* LogTraceBridge */,
 				F482EEFF29B6DF8E00815C9C /* ToolBridge */,
 				F482EEF529B6CF1600815C9C /* NetworkBridge */,
 				F4C417BD29B1A83D00A7EBCB /* TimerBridge */,
 				F4219D4F29ADD2440069483A /* DateBridge */,
 				F47A3B5327D1F0EC00C88F2C /* StoreDataBridge */,
-				F40B5D9E26C27D0B00F42370 /* ToastBridge */,
 				F43AD8562728EEA20056B3EE /* EntryBridge */,
 			);
 			path = Helper;
-			sourceTree = "<group>";
-		};
-		F40B5D9E26C27D0B00F42370 /* ToastBridge */ = {
-			isa = PBXGroup;
-			children = (
-				F40B5D9F26C27D0B00F42370 /* FWToastBridge.h */,
-				F40B5DA026C27D0B00F42370 /* FWToastBridge.m */,
-			);
-			path = ToastBridge;
 			sourceTree = "<group>";
 		};
 		F40B5DA126C27D0B00F42370 /* Classes */ = {
@@ -933,12 +914,9 @@
 		F43AD8372727EE440056B3EE /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				F482EF2829BEE2D900815C9C /* FWEnum.h */,
-				F482EF2929BEE2D900815C9C /* FWEnum.m */,
+				F4CAE8C72C37E2F50032E8ED /* FWDefine.h */,
 				F43AD8382727EE670056B3EE /* FWConstants.h */,
 				F43AD8392727EE670056B3EE /* FWConstants.m */,
-				F482EEFC29B6D2D100815C9C /* FWInterfaces.h */,
-				F482EEFD29B6D2D100815C9C /* FWInterfaces.m */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -997,15 +975,6 @@
 				F482EF0129B6DF9900815C9C /* FWToolBridge.m */,
 			);
 			path = ToolBridge;
-			sourceTree = "<group>";
-		};
-		F482EF2B29BF285600815C9C /* LogTraceBridge */ = {
-			isa = PBXGroup;
-			children = (
-				F482EF2C29BF286A00815C9C /* FWLogTraceBridge.h */,
-				F482EF2D29BF286A00815C9C /* FWLogTraceBridge.m */,
-			);
-			path = LogTraceBridge;
 			sourceTree = "<group>";
 		};
 		F49A41072B5523350049DF6D /* Account */ = {
@@ -1130,6 +1099,8 @@
 				F4219D8A29B055AD0069483A /* FWRoomMemberModel.m */,
 				F42CAFFE2B6CEA9A00D2A3F7 /* FWMessageModel.h */,
 				F42CAFFF2B6CEA9A00D2A3F7 /* FWMessageModel.m */,
+				F4CAE8C42C37C7D70032E8ED /* FWExtendModel.h */,
+				F4CAE8C52C37C7D70032E8ED /* FWExtendModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1370,6 +1341,7 @@
 				"${PODS_ROOT}/RTCEngineKit/RTCEngineKit/Depend/FURenderKit.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1384,6 +1356,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FURenderKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1483,7 +1456,6 @@
 				F49A40F32B4BF1CE0049DF6D /* FWRegisterUserinfoViewModel.m in Sources */,
 				F4219D7429AF21A90069483A /* FWRoomMainView.m in Sources */,
 				F4219D3829ADABAB0069483A /* UIScrollView+AutoHeight.m in Sources */,
-				F40B61CA26C27D0C00F42370 /* FWToastBridge.m in Sources */,
 				F42CB0222B6F71FF00D2A3F7 /* FWReportViewModel.m in Sources */,
 				F4219D7929AF225E0069483A /* FWRoomStatusView.m in Sources */,
 				F42CB01E2B6F3EE500D2A3F7 /* FWReportCollectionViewCell.m in Sources */,
@@ -1503,7 +1475,6 @@
 				F4219D6F29AF05D70069483A /* FWRoomBottomView.m in Sources */,
 				F49A413D2B566CE20049DF6D /* FWMeetingAttendViewModel.m in Sources */,
 				F4C417BC29B09EE200A7EBCB /* FWRoomViewModel.m in Sources */,
-				F482EF2A29BEE2D900815C9C /* FWEnum.m in Sources */,
 				F4219D6129AE00230069483A /* FWHomeModel.m in Sources */,
 				F43AD85C2728F1E70056B3EE /* FWLoginViewModel.m in Sources */,
 				F49A40EF2B4BF0CB0049DF6D /* FWRegisterUserinfoViewController.m in Sources */,
@@ -1521,7 +1492,6 @@
 				F482EEFB29B6D15200815C9C /* FWNetworkBridge.m in Sources */,
 				F49A41152B5523BE0049DF6D /* FWAccountModel.m in Sources */,
 				F49A415A2B57B2FB0049DF6D /* FWAccountWebKitViewController.m in Sources */,
-				F482EEFE29B6D2D100815C9C /* FWInterfaces.m in Sources */,
 				F49A41282B565DE40049DF6D /* FWMeetingEntryViewModel.m in Sources */,
 				F49A41062B5522760049DF6D /* FWBaseTabBarViewController.m in Sources */,
 				F49A41472B5781140049DF6D /* FWAccountInfoViewModel.m in Sources */,
@@ -1541,13 +1511,13 @@
 				F4219D5229ADD2530069483A /* FWDateBridge.m in Sources */,
 				F42CAFF32B6BA19400D2A3F7 /* FWRoomWhiteboardView.m in Sources */,
 				F482EF0529B6E1CC00815C9C /* FWAuthToken.m in Sources */,
+				F4CAE8C62C37C7D70032E8ED /* FWExtendModel.m in Sources */,
 				F42CB0342B70C4A700D2A3F7 /* FWMemberAlertViewController.m in Sources */,
 				F40B633C26C27D0D00F42370 /* FWBaseNavigationViewController.m in Sources */,
 				F4219D6A29AF05C10069483A /* FWRoomTopView.m in Sources */,
 				F49A410E2B5523650049DF6D /* FWAccountViewController.m in Sources */,
 				F42CAFFD2B6CEA0E00D2A3F7 /* FWMessageManager.m in Sources */,
 				F40B61A526C27D0C00F42370 /* FWAppDelegate.m in Sources */,
-				F482EF2E29BF286A00815C9C /* FWLogTraceBridge.m in Sources */,
 				F4219D3929ADABAB0069483A /* UITextView+AutoHeight.m in Sources */,
 				F482EF0229B6DF9900815C9C /* FWToolBridge.m in Sources */,
 				F429AC672B456957003D127D /* FWRegisterViewController.m in Sources */,
@@ -1629,7 +1599,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1682,7 +1652,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1708,7 +1678,7 @@
 				GCC_PREFIX_HEADER = "MeetingExample/Resources/MeetingExample-Prefix.pch";
 				INFOPLIST_FILE = "MeetingExample/Resources/MeetingExample-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
@@ -1755,7 +1725,7 @@
 				GCC_PREFIX_HEADER = "MeetingExample/Resources/MeetingExample-Prefix.pch";
 				INFOPLIST_FILE = "MeetingExample/Resources/MeetingExample-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
@@ -1804,7 +1774,7 @@
 				INFOPLIST_FILE = MeetingBroadcastUpload/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 SailorGa. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.seastart.meetingkit.replayBroadcastUpload;
@@ -1837,7 +1807,7 @@
 				INFOPLIST_FILE = MeetingBroadcastUpload/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 SailorGa. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.seastart.meetingkit.replayBroadcastUpload;
@@ -1870,7 +1840,7 @@
 				INFOPLIST_FILE = MeetingBroadcastUpload/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 SailorGa. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.seastart.meetingkit.replayBroadcastUpload;
@@ -1928,7 +1898,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1954,7 +1924,7 @@
 				GCC_PREFIX_HEADER = "MeetingExample/Resources/MeetingExample-Prefix.pch";
 				INFOPLIST_FILE = "MeetingExample/Resources/MeetingExample-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (

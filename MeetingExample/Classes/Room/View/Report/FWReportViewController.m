@@ -155,16 +155,16 @@ static NSString *FWReportCollectionViewCellName = @"FWReportCollectionViewCell";
     /// 监听订阅加载状态
     [RACObserve(self.viewModel, loading) subscribeNext:^(NSNumber * _Nullable value) {
         if(value.boolValue) {
-            [FWToastBridge showToastAction];
+            [SVProgressHUD show];
         } else {
-            [FWToastBridge hiddenToastAction];
+            [SVProgressHUD dismiss];
         }
     }];
     
     /// 提示框订阅
     [self.viewModel.toastSubject subscribeNext:^(id _Nullable message) {
         if (!kStringIsEmpty(message)) {
-            [FWToastBridge showToastAction:message];
+            [SVProgressHUD showInfoWithStatus:message];
         }
     }];
     
@@ -174,7 +174,7 @@ static NSString *FWReportCollectionViewCellName = @"FWReportCollectionViewCell";
         /// 置空描述以及输入框数据
         self.textView.text = nil;
         self.viewModel.describeText = nil;
-        [FWToastBridge showToastAction:@"提交成功"];
+        [SVProgressHUD showInfoWithStatus:@"提交成功"];
         /// 返回上一层
         [self dismissViewControllerAnimated:NO completion:nil];
     }];

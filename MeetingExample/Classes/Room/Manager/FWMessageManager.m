@@ -68,7 +68,7 @@
             /// 遍历消息列表数据
             [obj.listData enumerateObjectsUsingBlock:^(FWMessageItemModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 /// 寻找对应发送者
-                if ([uid isEqualToString:obj.uid]) {
+                if ([uid isEqualToString:obj.userId]) {
                     /// 更改成员昵称
                     obj.name = @"";
                     /// 更改成员头像
@@ -129,41 +129,24 @@
 #pragma mark - 接收聊天消息
 /// 接收聊天消息
 /// - Parameters:
-///   - accountModel: 发送成员信息
+///   - senderId: 发送者标识
 ///   - content: 消息内容
 ///   - messageType: 消息类型
-- (void)receiveChatWithAccountModel:(nullable RTCEngineUserModel *)accountModel content:(NSString *)content messageType:(SEAMessageType)messageType {
+- (void)receiveChatWithSenderId:(nullable NSString *)senderId content:(NSString *)content messageType:(SEAMessageType)messageType {
     
-    /// 获取当前账户信息
+    /// 获取发送者数据
+    RTCEngineUserModel *senderModel = [[MeetingKit sharedInstance] findMemberWithUserId:senderId];
+    /// 获取当前账户数据
     RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    
     /// 构建自定义聊天信息
     FWMessageItemModel *itemModel = [[FWMessageItemModel alloc] init];
-    itemModel.uid = accountModel.uid;
-    itemModel.name = accountModel.name;
-    itemModel.avatar = accountModel.avatar;
+    itemModel.userId = senderModel.userId;
+    itemModel.name = senderModel.name;
+    itemModel.avatar = @"";
     itemModel.content = content;
     itemModel.messageType = messageType;
-    itemModel.isMine = [userModel.uid isEqualToString:accountModel.uid];
-    
-    /// 将自定义聊天信息对象添加到数据源
-    [self appendlistDataWithItemModel:itemModel];
-}
-
-#pragma mark - 发送聊天消息
-/// 发送聊天消息
-/// - Parameter content: 消息内容
-- (void)sendChatWithContent:(NSString *)content {
-    
-    /// 获取当前账户信息
-    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
-    /// 构建自定义聊天信息
-    FWMessageItemModel *itemModel = [[FWMessageItemModel alloc] init];
-    itemModel.uid = userModel.uid;
-    itemModel.name = userModel.name;
-    itemModel.avatar = userModel.avatar;
-    itemModel.content = content;
-    itemModel.messageType = SEAMessageTypeText;
-    itemModel.isMine = YES;
+    itemModel.isMine = [userModel.userId isEqualToString:senderId];
     
     /// 将自定义聊天信息对象添加到数据源
     [self appendlistDataWithItemModel:itemModel];

@@ -29,7 +29,7 @@
     /// 创建请求参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     /// 设备类型
-    [params setValue:@(SEATerminalTypeiOS) forKey:@"device_type"];
+    [params setValue:@(SEADeviceTypeIOS) forKey:@"device_type"];
     /// 用户标识
     [params setValue:[FWStoreDataBridge sharedManager].userInfo.userId forKey:@"user_id"];
     /// 发起请求

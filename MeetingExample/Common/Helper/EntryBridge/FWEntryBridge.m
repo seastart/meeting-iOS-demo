@@ -83,14 +83,14 @@
     
     @weakify(self);
     /// 设置加载状态
-    [FWToastBridge showToastAction];
+    [SVProgressHUD show];
     /// 获取鉴权令牌
     NSString *authToken = [FWStoreDataBridge sharedManager].authToken;
     /// 组件登录
     [[MeetingKit sharedInstance] loginWithToken:authToken appGroup:FWAPPGROUP onSuccess:^(id _Nullable data) {
         @strongify(self);
         /// 隐藏加载状态
-        [FWToastBridge hiddenToastAction];
+        [SVProgressHUD dismiss];
         /// 获取用户信息
         SEAUserInfo *userInfo = (SEAUserInfo *)data;
         /// 保存用户信息
@@ -99,10 +99,10 @@
         [self _setWindowRootHome];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 隐藏加载状态
-        [FWToastBridge hiddenToastAction];
+        [SVProgressHUD dismiss];
         /// 构造日志信息
         NSString *logStr = [NSString stringWithFormat:@"组件登录失败 code = %ld, message = %@", code, message];
-        [FWToastBridge showToastAction:logStr];
+        [SVProgressHUD showInfoWithStatus:logStr];
         SGLOG(@"%@", logStr);
     }];
 }

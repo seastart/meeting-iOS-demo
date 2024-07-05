@@ -18,6 +18,8 @@
 #import <LYEmptyView/LYEmptyViewHeader.h>
 /// 通用集控引擎
 #import <RTCControlLink/RTCControlLink.h>
+/// 轻量级加载框
+#import <SVProgressHUD/SVProgressHUD.h>
 /// 动态响应链
 #import <ReactiveObjC/ReactiveObjC.h>
 /// 网络请求
