@@ -55,7 +55,7 @@ static NSString *FWMessageMineTableViewCellIdentifier = @"FWMessageMineTableView
     
     self.nameLabel.text = nameText;
     self.messageLabel.text = messageText;
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[avatarUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(@"icon_login_avatar1")];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[avatarUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(FWDEFAULTAVATAR)];
 }
 
 @end

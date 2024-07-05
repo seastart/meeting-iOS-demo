@@ -102,7 +102,7 @@ static NSString *FWMemberTableViewCellName = @"FWMemberTableViewCell";
     self.nickname = nicknameText;
     
     /// 设置头像
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[avatarUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(@"icon_login_avatar1")];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[avatarUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(FWDEFAULTAVATAR)];
     /// 设置昵称
     [self.nicknameLabel setText:nicknameText];
     [self.centreNicknameLabel setText:nicknameText];

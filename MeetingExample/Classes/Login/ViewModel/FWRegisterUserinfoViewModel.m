@@ -52,7 +52,7 @@
         /// 设置用户昵称
         [[FWStoreDataBridge sharedManager] setNickname:self.namenickText];
         /// 声明用户头像
-        NSString *imageName = @"icon_login_avatar2";
+        NSString *imageName = FWDEFAULTAVATAR;
         /// 根据性别标识设置头像
         if (self.isSexState) {
             /// 标识男性

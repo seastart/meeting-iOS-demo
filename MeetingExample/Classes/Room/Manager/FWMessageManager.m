@@ -143,7 +143,7 @@
     FWMessageItemModel *itemModel = [[FWMessageItemModel alloc] init];
     itemModel.userId = senderModel.userId;
     itemModel.name = senderModel.name;
-    itemModel.avatar = @"";
+    itemModel.avatar = nil;
     itemModel.content = content;
     itemModel.messageType = messageType;
     itemModel.isMine = [userModel.userId isEqualToString:senderId];
