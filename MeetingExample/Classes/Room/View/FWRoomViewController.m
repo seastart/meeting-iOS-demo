@@ -319,14 +319,32 @@
     SGLOG(@"%@", @"您已经离开房间");
 }
 
+#pragma mark 请求开启摄像头回调
+/// 请求开启摄像头回调
+/// - Parameter userId: 请求者标识
+- (void)onRequestOpenCamera:(NSString *)userId {
+    
+    /// 日志埋点
+    SGLOG(@"%@", @"主持人请求你开启摄像头");
+}
+
+#pragma mark 请求开启麦克风回调
+/// 请求开启麦克风回调
+/// - Parameter userId: 请求者标识
+- (void)onRequestOpenMic:(NSString *)userId {
+    
+    /// 日志埋点
+    SGLOG(@"%@", @"主持人请求你开启麦克风");
+}
+
 
 #pragma mark ----- 房间事件回调 -----
 #pragma mark 房间摄像头禁用状态变更回调
 /// 房间摄像头禁用状态变更回调
 /// - Parameter cameraDisabled: 进入房间是否关闭视频，YES-关闭 NO-不关闭
 /// - Parameter selfUnmuteCameraDisabled: 是否允许自我解除，YES-允许 NO-不允许
-/// - Parameter userId: 发送成员标识
-- (void)onRoomCameraStateChanged:(BOOL)cameraDisabled selfUnmuteCameraDisabled:(BOOL)selfUnmuteCameraDisabled userId:(nullable NSString *)userId {
+/// - Parameter userId: 操作者标识
+- (void)onRoomCameraStateChanged:(BOOL)cameraDisabled selfUnmuteCameraDisabled:(BOOL)selfUnmuteCameraDisabled userId:(NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"房间摄像头禁用状态变更通知，cameraDisabled = %d selfUnmuteCameraDisabled = %d", cameraDisabled, selfUnmuteCameraDisabled);
@@ -336,8 +354,8 @@
 /// 房间麦克风禁用状态变更回调
 /// - Parameter micDisabled: 进入房间是否关闭音频，YES-关闭 NO-不关闭
 /// - Parameter selfUnmuteMicDisabled: 是否允许自我解除，YES-允许 NO-不允许
-/// - Parameter userId: 发送成员标识
-- (void)onRoomMicStateChanged:(BOOL)micDisabled selfUnmuteMicDisabled:(BOOL)selfUnmuteMicDisabled userId:(nullable NSString *)userId {
+/// - Parameter userId: 操作者标识
+- (void)onRoomMicStateChanged:(BOOL)micDisabled selfUnmuteMicDisabled:(BOOL)selfUnmuteMicDisabled userId:(NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"房间麦克风禁用状态变更通知，micDisabled = %d selfUnmuteMicDisabled = %d", micDisabled, selfUnmuteMicDisabled);
@@ -346,8 +364,8 @@
 #pragma mark 房间聊天禁用状态变更回调
 /// 房间聊天禁用状态变更回调
 /// - Parameter chatDisabled: 禁用状态，YES-禁用 NO-不禁用
-/// - Parameter userId: 发送成员标识
-- (void)onRoomChatDisabledChanged:(BOOL)chatDisabled userId:(nullable NSString *)userId {
+/// - Parameter userId: 操作者标识
+- (void)onRoomChatDisabledChanged:(BOOL)chatDisabled userId:(NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"房间聊天禁用状态变更通知，chatDisabled = %d", chatDisabled);
@@ -356,8 +374,8 @@
 #pragma mark 房间截图禁用状态变更回调
 /// 房间截图禁用状态变更回调
 /// - Parameter screenshotDisabled: 禁用状态，YES-禁用 NO-不禁用
-/// - Parameter userId: 发送成员标识
-- (void)onRoomScreenshotDisabledChanged:(BOOL)screenshotDisabled userId:(nullable NSString *)userId {
+/// - Parameter userId: 操作者标识
+- (void)onRoomScreenshotDisabledChanged:(BOOL)screenshotDisabled userId:(NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"房间截图禁用状态变更通知，screenshotDisabled = %d", screenshotDisabled);
@@ -365,9 +383,9 @@
 
 #pragma mark 房间水印禁用状态变更回调
 /// 房间水印禁用状态变更回调
-/// - Parameter watermarkDisabled: 水印状态，YES-开启 NO-关闭
-/// - Parameter userId: 发送成员标识
-- (void)onRoomWatermarkDisabledChanged:(BOOL)watermarkDisabled userId:(nullable NSString *)userId {
+/// - Parameter watermarkDisabled: 禁用状态，YES-禁用 NO-不禁用
+/// - Parameter userId: 操作者标识
+- (void)onRoomWatermarkDisabledChanged:(BOOL)watermarkDisabled userId:(NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"房间水印禁用状态变更通知，watermarkDisabled = %d", watermarkDisabled);
@@ -376,8 +394,8 @@
 #pragma mark 房间锁定状态变化回调
 /// 房间锁定状态变化回调
 /// - Parameter locked: 锁定状态，YES-开启 NO-关闭
-/// - Parameter userId: 发送成员标识
-- (void)onRoomLockedChanged:(BOOL)locked userId:(nullable NSString *)userId {
+/// - Parameter userId: 操作者标识
+- (void)onRoomLockedChanged:(BOOL)locked userId:(NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"房间锁定状态变化通知，locked = %d", locked);
@@ -394,25 +412,6 @@
     SGLOG(@"房间转移主持人通知，userId = %@ sourceUserId = %@", userId, sourceUserId);
 }
 
-#pragma mark 房间被解散回调
-/// 房间被解散回调
-/// - Parameter userId: 发送成员标识
-- (void)onRoomDestroy:(nullable NSString *)userId {
-    
-    /// 日志埋点
-    SGLOG(@"房间被解散通知");
-}
-
-#pragma mark 房间踢出成员回调
-/// 房间踢出成员回调
-/// - Parameters:
-///   - userId: 发送成员标识
-- (void)onRoomKickedOut:(nullable NSString *)userId {
-    
-    /// 日志埋点
-    SGLOG(@"房间踢出成员通知，userId = %@", userId);
-}
-
 #pragma mark 共享开始回调
 /// 共享开始回调
 /// - Parameter userId: 共享成员标识
@@ -425,8 +424,8 @@
 
 #pragma mark 共享结束回调
 /// 共享结束回调
-/// - Parameter userId: 发送成员标识
-- (void)onRoomShareStop:(nullable NSString *)userId {
+/// - Parameter userId: 共享成员标识
+- (void)onRoomShareStop:(NSString *)userId {
     
     /// 日志埋点
     SGLOG(@"共享结束通知，userId = %@", userId);
@@ -475,9 +474,8 @@
 /// 用户昵称变化回调
 /// - Parameters:
 ///   - targetUserId: 目标成员标识
-///   - userId: 发送成员标识
 ///   - nickname: 用户昵称
-- (void)onUserNameChanged:(NSString *)targetUserId userId:(nullable NSString *)userId nickname:(NSString *)nickname {
+- (void)onUserNameChanged:(NSString *)targetUserId nickname:(NSString *)nickname {
     
     /// 日志埋点
     SGLOG(@"用户昵称变化，userId = %@ nickname = %@", targetUserId, nickname);
@@ -487,9 +485,8 @@
 /// 用户角色变化回调
 /// - Parameters:
 ///   - targetUserId: 目标成员标识
-///   - userId: 发送成员标识
 ///   - userRole: 用户角色
-- (void)onUserRoleChanged:(NSString *)targetUserId userId:(nullable NSString *)userId userRole:(SEAUserRole)userRole {
+- (void)onUserRoleChanged:(NSString *)targetUserId userRole:(SEAUserRole)userRole {
     
     /// 日志埋点
     SGLOG(@"用户角色变化，userId = %@ userRole = %ld", targetUserId, userRole);
@@ -499,10 +496,8 @@
 /// 用户摄像头状态变化回调
 /// - Parameters:
 ///   - targetUserId: 目标成员标识
-///   - userId: 发送成员标识
-///   - cameraDisabled: 预留字段
 ///   - cameraState: 视频状态
-- (void)onUserCameraStateChanged:(NSString *)targetUserId userId:(nullable NSString *)userId cameraDisabled:(BOOL)cameraDisabled cameraState:(SEADeviceState)cameraState {
+- (void)onUserCameraStateChanged:(NSString *)targetUserId cameraState:(SEADeviceState)cameraState {
     
     /// 日志埋点
     SGLOG(@"用户摄像头状态变化，userId = %@ cameraState = %ld", targetUserId, cameraState);
@@ -514,10 +509,8 @@
 /// 用户麦克风状态变化回调
 /// - Parameters:
 ///   - targetUserId: 目标成员标识
-///   - userId: 发送成员标识
-///   - micDisabled: 预留字段
 ///   - micState: 音频状态
-- (void)onUserMicStateChanged:(NSString *)targetUserId userId:(nullable NSString *)userId micDisabled:(BOOL)micDisabled micState:(SEADeviceState)micState {
+- (void)onUserMicStateChanged:(NSString *)targetUserId micState:(SEADeviceState)micState {
     
     /// 日志埋点
     SGLOG(@"用户麦克风状态变化，userId = %@ micState = %ld", targetUserId, micState);
@@ -527,25 +520,23 @@
 
 #pragma mark 用户聊天能力禁用状态变化回调
 /// 用户聊天能力禁用状态变化回调
-/// - Parameter targetUserId: 目标成员标识
 /// - Parameter chatDisabled: 禁用状态，YES-禁用 NO-不禁用
-/// - Parameter userId: 发送成员标识
-- (void)onUserChatDisabledChanged:(NSString *)targetUserId chatDisabled:(BOOL)chatDisabled userId:(nullable NSString *)userId {
+/// - Parameter userId: 操作者标识
+- (void)onUserChatDisabledChanged:(BOOL)chatDisabled userId:(NSString *)userId {
     
     /// 日志埋点
-    SGLOG(@"用户聊天能力禁用状态变化，userId = %@ chatDisabled = %d", targetUserId, chatDisabled);
+    SGLOG(@"用户聊天能力禁用状态变化，chatDisabled = %d", chatDisabled);
 }
 
 #pragma mark 举手处理结果回调
 /// 举手处理结果回调
-/// - Parameter targetUserId: 目标成员标识
 /// - Parameter handupType: 申请类型
 /// - Parameter approve: 处理结果
-/// - Parameter userId: 发送成员标识
-- (void)onHandupConfirm:(NSString *)targetUserId handupType:(SEAHandupType)handupType approve:(BOOL)approve userId:(nullable NSString *)userId {
+/// - Parameter userId: 处理人标识
+- (void)onHandupConfirm:(SEAHandupType)handupType approve:(BOOL)approve userId:(NSString *)userId {
     
     /// 日志埋点
-    SGLOG(@"举手处理结果通知，userId = %@ handupType = %ld approve = %d", targetUserId, handupType, approve);
+    SGLOG(@"举手处理结果通知，handupType = %ld approve = %d", handupType, approve);
 }
 
 
@@ -572,6 +563,17 @@
     
     /// 日志埋点
     SGLOG(@"收到自定义消息，senderId = %@ content = %@", senderId, content);
+}
+
+#pragma mark 收到系统消息回调
+/// 收到系统消息回调
+/// - Parameters:
+///   - message: 消息内容
+///   - messageType: 消息类型
+- (void)onReceiveSystemMessage:(NSString *)message messageType:(SEAMessageType)messageType {
+    
+    /// 日志埋点
+    SGLOG(@"收到系统消息，message = %@ messageType = %ld", message, messageType);
 }
 
 
