@@ -32,9 +32,9 @@
 /// 底部状态
 @property (weak, nonatomic) IBOutlet UIView *bottomStatusView;
 /// 视频状态
-@property (weak, nonatomic) IBOutlet UIImageView *bottomAudioImageView;
-/// 音频状态
 @property (weak, nonatomic) IBOutlet UIImageView *bottomVideoImageView;
+/// 音频状态
+@property (weak, nonatomic) IBOutlet UIImageView *bottomAudioImageView;
 /// 成员昵称
 @property (weak, nonatomic) IBOutlet UILabel *bottomNameLabel;
 

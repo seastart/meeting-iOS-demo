@@ -7,6 +7,7 @@
 //
 
 #import <ReplayKit/ReplayKit.h>
+#import "FWMeetingEnterModel.h"
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -68,12 +69,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 屏幕共享状态
 @property (nonatomic, assign, readonly) BOOL screenShareStatus;
 
-#pragma mark - 设置默认音视频状态
-/// 设置默认音视频状态
-/// - Parameters:
-///   - audioState: 音频状态
-///   - videoState: 视频状态
-- (void)setupDefaultAudioState:(BOOL)audioState videoState:(BOOL)videoState;
+#pragma mark - 进入房间
+/// 进入房间
+/// - Parameter userId: 用户标识
+/// - Parameter enterModel: 加入房间信息
+- (void)enterRoom:(NSString *)userId enterModel:(FWMeetingEnterModel *)enterModel;
 
 #pragma mark - 成员加入房间
 /// 成员加入房间

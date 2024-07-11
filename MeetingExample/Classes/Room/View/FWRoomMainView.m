@@ -50,6 +50,8 @@
 @property (nonatomic, assign, readwrite) BOOL screenShareStatus;
 /// 屏幕录制组件
 @property (strong, nonatomic) RPSystemBroadcastPickerView *broadcastPickerView;
+/// 是否进入宫格模式，YES-宫格 NO-非宫格
+@property (assign, nonatomic) BOOL palaceMode;
 
 @end
 
@@ -272,6 +274,22 @@
     [self.roomBottomTool setupShareButtonSelected:NO];
 }
 
+#pragma mark - 进入房间
+/// 进入房间
+/// - Parameter userId: 用户标识
+/// - Parameter enterModel: 加入房间信息
+- (void)enterRoom:(NSString *)userId enterModel:(FWMeetingEnterModel *)enterModel {
+    
+    /// 获取默认音频状态
+    BOOL audioState = enterModel.audioState;
+    /// 获取默认视频状态
+    BOOL videoState = enterModel.videoState;
+    /// 设置默认音视频状态
+    [self setupDefaultAudioState:audioState videoState:videoState];
+    /// 进入房间成功
+    [self.roomMemberView enterRoom:userId];
+}
+
 #pragma mark - 设置默认音视频状态
 /// 设置默认音视频状态
 /// - Parameters:
@@ -300,10 +318,10 @@
         self.roomMemberView.hidden = NO;
         /// 该成员进入之前，房间内只有当前成员
         if (membersCount == 2) {
-            /// 获取当前账户信息
-            RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
-            /// 先将自己加入到成员列表视图
-            [self.roomMemberView memberUpdateWithUserId:userModel.userId];
+            /// 标记当前为宫格模式
+            self.palaceMode = YES;
+            /// 更新本地摄像头的预览画面
+            [[MeetingKit sharedInstance] updateLocalView:[self.roomMemberView.mineWindowView getPlayerWindow]];
         }
     }
     /// 成员更新信息
@@ -319,10 +337,14 @@
     NSInteger membersCount = [FWRoomMemberManager sharedManager].getAllMembers.count;
     /// 当前成员数小于等于 1 时，显示采集渲染视图
     if (membersCount <= 1) {
+        /// 标记当前为非宫格模式
+        self.palaceMode = NO;
         /// 显示采集渲染视图
         self.roomCaptureView.hidden = NO;
         /// 隐藏成员列表视图
         self.roomMemberView.hidden = YES;
+        /// 更新本地摄像头的预览画面
+        [[MeetingKit sharedInstance] updateLocalView:[self.roomCaptureView getPreview]];
     }
     /// 成员离开房间
     [self.roomMemberView memberExitWithUserId:userId];
@@ -354,8 +376,10 @@
 - (void)requestOpenVideo:(UIButton *)source {
     
     @weakify(self);
+    /// 获取预览视图
+    UIView *preview = self.palaceMode ? [self.roomMemberView.mineWindowView getPlayerWindow] : [self.roomCaptureView getPreview];
     /// 用户请求打开摄像头
-    [[MeetingKit sharedInstance] requestOpenCamera:YES view:[self.roomCaptureView getPreview] onSuccess:^(id  _Nullable data) {
+    [[MeetingKit sharedInstance] requestOpenCamera:YES view:preview onSuccess:^(id  _Nullable data) {
         @strongify(self);
         /// 开启摄像头预览
         [self.roomCaptureView startLocalPreview];
@@ -624,25 +648,6 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(mainView:didSelectItemMemberModel:didUserId:)]) {
         [self.delegate mainView:self didSelectItemMemberModel:memberModel didUserId:userId];
     }
-}
-
-#pragma mark - ----- 测试方法 -----
-#pragma mark 添加成员
-/// 添加成员
-/// - Parameter sender: 事件源对象
-- (IBAction)appendAction:(UIButton *)sender {
-    
-    /// 成员更新信息
-    [self.roomMemberView memberUpdateWithUserId:@""];
-}
-
-#pragma mark 移除成员
-/// 移除成员
-/// - Parameter sender: 事件源对象
-- (IBAction)removeAction:(UIButton *)sender {
-    
-    /// 成员离开房间
-    [self.roomMemberView memberExitWithUserId:@""];
 }
 
 #pragma mark - 释放资源

@@ -7,7 +7,6 @@
 //
 
 #import "FWRoomMemberView.h"
-#import "FWRoomMemberWindowView.h"
 
 /// 成员窗口视图宽度
 #define FW_WINDOW_ITEM_WIDTH (self.scrollView.sa_width - 5) / 2
@@ -16,6 +15,8 @@
 
 @interface FWRoomMemberView() <FWRoomMemberWindowViewDelegate>
 
+/// 自己的预览视图
+@property (strong, nonatomic, readwrite) FWRoomMemberWindowView *mineWindowView;
 /// 视图容器
 @property (strong, nonatomic) UIView *contentView;
 /// 垂直流式布局
@@ -159,6 +160,30 @@
         /// windowView.mySize = CGSizeMake(FW_WINDOW_ITEM_WIDTH, FW_WINDOW_ITEM_HEIGHT);
         /// 将窗口视图添加到流式布局
         [flowLayout addSubview:windowView];
+    }
+}
+
+#pragma mark - 进入房间成功
+/// 进入房间成功
+/// - Parameter userId: 用户标识
+- (void)enterRoom:(NSString *)userId {
+    
+    /// 获取成员视图
+    FWRoomMemberWindowView *memberWindowView = [self.displayItems objectForKey:userId];
+    /// 不存在该成员
+    if (!memberWindowView) {
+        /// 创建成员窗口视图
+        self.mineWindowView = [[FWRoomMemberWindowView alloc] initWithFrame:CGRectMake(0, 0, FW_WINDOW_ITEM_WIDTH, FW_WINDOW_ITEM_HEIGHT)];
+        /// 关联用户标识
+        self.mineWindowView.userId = userId;
+        /// 设置代理回调
+        self.mineWindowView.delegate = self;
+        /// 设置条目视图的尺寸
+        /// windowView.mySize = CGSizeMake(FW_WINDOW_ITEM_WIDTH, FW_WINDOW_ITEM_HEIGHT);
+        /// 将窗口视图添加到流式布局
+        [self.flowLayout addSubview:self.mineWindowView];
+        /// 添加到本地成员列表
+        [self.displayItems setValue:self.mineWindowView forKey:userId];
     }
 }
 

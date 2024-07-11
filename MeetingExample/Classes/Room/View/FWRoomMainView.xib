@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -95,60 +95,6 @@
                         <outlet property="delegate" destination="-1" id="0br-KP-GTT"/>
                     </connections>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JYL-0t-4Lm">
-                    <rect key="frame" x="298" y="676" width="90" height="81"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spW-PT-adm">
-                            <rect key="frame" x="0.0" y="0.0" width="90" height="38"/>
-                            <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="38" id="din-zR-EZw"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <color key="tintColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="加个人">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="4"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="appendAction:" destination="-1" eventType="touchUpInside" id="ObD-QN-2D8"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="woU-Kn-Ryz">
-                            <rect key="frame" x="0.0" y="43" width="90" height="38"/>
-                            <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <color key="tintColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="减个人">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="4"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="removeAction:" destination="-1" eventType="touchUpInside" id="VBj-EH-ND5"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="woU-Kn-Ryz" firstAttribute="height" secondItem="spW-PT-adm" secondAttribute="height" id="6JR-zt-ael"/>
-                        <constraint firstAttribute="width" constant="90" id="dzm-69-1lZ"/>
-                    </constraints>
-                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="0.21176470588235294" green="0.23137254901960785" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -160,13 +106,11 @@
                 <constraint firstItem="ynN-wf-baX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="7aG-HL-bI0"/>
                 <constraint firstItem="vcd-gw-WbS" firstAttribute="top" secondItem="ynN-wf-baX" secondAttribute="bottom" id="BbJ-zl-45e"/>
                 <constraint firstAttribute="leading" secondItem="jdM-ug-aYU" secondAttribute="leading" id="CDD-sm-rQC"/>
-                <constraint firstItem="vcd-gw-WbS" firstAttribute="top" secondItem="JYL-0t-4Lm" secondAttribute="bottom" constant="5" id="CR6-1K-XxA"/>
                 <constraint firstAttribute="trailing" secondItem="ynN-wf-baX" secondAttribute="trailing" id="EPk-7W-6TY"/>
                 <constraint firstAttribute="bottom" secondItem="vcd-gw-WbS" secondAttribute="bottom" id="P0z-X0-0o6"/>
                 <constraint firstAttribute="bottom" secondItem="OOU-S8-IUk" secondAttribute="bottom" id="QME-xW-v8l"/>
                 <constraint firstItem="OOU-S8-IUk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Sem-Ya-HC7"/>
                 <constraint firstAttribute="trailing" secondItem="OOU-S8-IUk" secondAttribute="trailing" id="T2f-XN-dDP"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="JYL-0t-4Lm" secondAttribute="trailing" constant="5" id="bzk-9X-GVO"/>
                 <constraint firstItem="OOU-S8-IUk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="d30-6M-OMR"/>
                 <constraint firstItem="ynN-wf-baX" firstAttribute="top" secondItem="jdM-ug-aYU" secondAttribute="bottom" id="fEm-Yb-P3n"/>
                 <constraint firstItem="yPm-Um-V5l" firstAttribute="top" secondItem="jdM-ug-aYU" secondAttribute="bottom" id="gd7-Pd-MPT"/>

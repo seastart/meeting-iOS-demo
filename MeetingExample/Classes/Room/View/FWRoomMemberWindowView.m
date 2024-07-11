@@ -110,6 +110,14 @@
     [self.statusView setupMemberInfoWithUserModel:memberModel];
 }
 
+#pragma mark - 获取播放窗口视图
+/// 获取播放窗口视图
+- (UIView *)getPlayerWindow {
+    
+    /// 返回播放器窗口
+    return self.playerView;
+}
+
 #pragma mark - 用户摄像头状态变化
 /// 用户摄像头状态变化
 /// @param cameraState 视频状态

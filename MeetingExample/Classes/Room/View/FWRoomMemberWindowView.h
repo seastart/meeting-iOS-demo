@@ -33,6 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 窗口关联成员标识
 @property (nonatomic, strong, nullable) NSString *userId;
 
+/// 获取播放窗口视图
+- (UIView *)getPlayerWindow;
+
 /// 用户摄像头状态变化
 /// @param cameraState 视频状态
 - (void)userCameraStateChanged:(SEADeviceState)cameraState;

@@ -300,12 +300,8 @@
     SGLOG(@"加入房间成功，%@ %@", meetingId, userId);
     /// 成员进入房间
     [[FWRoomMemberManager sharedManager] onMemberEnterRoom:userId isMine:YES];
-    /// 获取默认音频状态
-    BOOL audioState = self.viewModel.enterModel.audioState;
-    /// 获取默认视频状态
-    BOOL videoState = self.viewModel.enterModel.videoState;
-    /// 设置默认音视频状态
-    [self.roomMainView setupDefaultAudioState:audioState videoState:videoState];
+    /// 进入房间
+    [self.roomMainView enterRoom:userId enterModel:self.viewModel.enterModel];
 }
 
 #pragma mark 离开房间事件回调

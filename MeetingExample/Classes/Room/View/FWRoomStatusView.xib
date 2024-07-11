@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,10 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FWRoomStatusView">
             <connections>
                 <outlet property="avatarImageView" destination="LOo-xa-tiJ" id="QzD-kq-3Hc"/>
-                <outlet property="bottomAudioImageView" destination="udL-cc-Czk" id="Zdk-FI-yZn"/>
+                <outlet property="bottomAudioImageView" destination="Fy1-Cg-bJn" id="vjz-vk-fAC"/>
                 <outlet property="bottomNameLabel" destination="4u9-8v-wc7" id="CIw-jG-nKh"/>
                 <outlet property="bottomStatusView" destination="McI-PC-UmX" id="2pQ-l1-14b"/>
-                <outlet property="bottomVideoImageView" destination="Fy1-Cg-bJn" id="zqV-Ff-sJH"/>
+                <outlet property="bottomVideoImageView" destination="udL-cc-Czk" id="hxC-FS-Pjz"/>
                 <outlet property="centerAudioImageView" destination="VKW-W0-FCW" id="MP5-zb-LCo"/>
                 <outlet property="centerNameLabel" destination="leI-F2-9wL" id="mZj-7R-CHk"/>
                 <outlet property="centerStatusView" destination="dof-1n-AI1" id="gP5-37-EJM"/>

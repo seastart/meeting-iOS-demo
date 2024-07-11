@@ -6,6 +6,7 @@
 //  Copyright © 2024 SailorGa. All rights reserved.
 //
 
+#import "FWRoomMemberWindowView.h"
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -28,6 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 回调代理
 @property (nonatomic, weak) IBOutlet id <FWRoomMemberViewDelegate> delegate;
+/// 自己的预览视图
+@property (strong, nonatomic, readonly) FWRoomMemberWindowView *mineWindowView;
+
+#pragma mark - 进入房间成功
+/// 进入房间成功
+/// - Parameter userId: 用户标识
+- (void)enterRoom:(NSString *)userId;
 
 #pragma mark - 成员更新信息
 /// 成员更新信息
