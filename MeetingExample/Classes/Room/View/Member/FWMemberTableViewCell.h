@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 成员移除事件回调
-typedef void(^FWMemberTableViewCellRemoveBlock)(NSString *nickname);
+typedef void(^FWMemberTableViewCellRemoveBlock)(NSString *userId, NSString *nickname);
 
 @interface FWMemberTableViewCell : UITableViewCell
 
@@ -21,6 +21,7 @@ typedef void(^FWMemberTableViewCellRemoveBlock)(NSString *nickname);
 
 /// 设置项目内容
 /// - Parameters:
+///   - userId: 用户标识
 ///   - avatarUrl: 头像地址
 ///   - nicknameText: 昵称
 ///   - isOwner: 是否是主持人
@@ -28,7 +29,7 @@ typedef void(^FWMemberTableViewCellRemoveBlock)(NSString *nickname);
 ///   - videoState: 视频状态
 ///   - audioState: 音频状态
 ///   - removeBlock: 成员移除事件回调
-- (void)setupWithAvatarUrl:(NSString *)avatarUrl nicknameText:(NSString *)nicknameText isOwner:(BOOL)isOwner oneself:(BOOL)oneself videoState:(BOOL)videoState audioState:(BOOL)audioState removeBlock:(FWMemberTableViewCellRemoveBlock)removeBlock;
+- (void)setupWithUserId:(NSString *)userId avatarUrl:(NSString *)avatarUrl nicknameText:(NSString *)nicknameText isOwner:(BOOL)isOwner oneself:(BOOL)oneself videoState:(BOOL)videoState audioState:(BOOL)audioState removeBlock:(FWMemberTableViewCellRemoveBlock)removeBlock;
 
 @end
 

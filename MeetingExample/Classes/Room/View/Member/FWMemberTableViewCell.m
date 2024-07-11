@@ -32,6 +32,8 @@ static NSString *FWMemberTableViewCellName = @"FWMemberTableViewCell";
 
 /// 成员移除事件回调
 @property (copy, nonatomic) FWMemberTableViewCellRemoveBlock removeBlock;
+/// 成员标识
+@property (copy, nonatomic) NSString *userId;
 /// 成员昵称
 @property (copy, nonatomic) NSString *nickname;
 
@@ -80,13 +82,15 @@ static NSString *FWMemberTableViewCellName = @"FWMemberTableViewCell";
     [[self.removeButton rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
         @strongify(self);
         if (self.removeBlock) {
-            self.removeBlock(self.nickname);
+            self.removeBlock(self.userId, self.nickname);
         }
     }];
 }
 
+#pragma mark - 设置项目内容
 /// 设置项目内容
 /// - Parameters:
+///   - userId: 用户标识
 ///   - avatarUrl: 头像地址
 ///   - nicknameText: 昵称
 ///   - isOwner: 是否是主持人
@@ -94,12 +98,14 @@ static NSString *FWMemberTableViewCellName = @"FWMemberTableViewCell";
 ///   - videoState: 视频状态
 ///   - audioState: 音频状态
 ///   - removeBlock: 成员移除事件回调
-- (void)setupWithAvatarUrl:(NSString *)avatarUrl nicknameText:(NSString *)nicknameText isOwner:(BOOL)isOwner oneself:(BOOL)oneself videoState:(BOOL)videoState audioState:(BOOL)audioState removeBlock:(FWMemberTableViewCellRemoveBlock)removeBlock {
+- (void)setupWithUserId:(NSString *)userId avatarUrl:(NSString *)avatarUrl nicknameText:(NSString *)nicknameText isOwner:(BOOL)isOwner oneself:(BOOL)oneself videoState:(BOOL)videoState audioState:(BOOL)audioState removeBlock:(FWMemberTableViewCellRemoveBlock)removeBlock {
     
     /// 保存移除事件回调
     self.removeBlock = removeBlock;
     /// 保存成员昵称
     self.nickname = nicknameText;
+    /// 保存成员标识
+    self.userId = userId;
     
     /// 设置头像
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[avatarUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(FWDEFAULTAVATAR)];
@@ -142,7 +148,7 @@ static NSString *FWMemberTableViewCellName = @"FWMemberTableViewCell";
         self.centreNicknameLabel.hidden = YES;
     }
     
-    if (!oneself && YES) {
+    if (!oneself && !isOwner) {
         /// 该成员是自己且当前登录成员为主持人
         self.removeButton.hidden = NO;
         /// 设置视频状态按钮右边距

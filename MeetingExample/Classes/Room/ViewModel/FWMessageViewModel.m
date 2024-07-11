@@ -45,6 +45,7 @@
         /// 通知发送消息订阅
         [self.sendSubject sendNext:message];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        @strongify(self);
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求发送聊天消息失败 code = %ld, message = %@", code, message];
         [self.toastSubject sendNext:toastStr];
@@ -65,6 +66,7 @@
         /// 通知发送消息订阅
         [self.sendSubject sendNext:message];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        @strongify(self);
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求发送自定义消息失败 code = %ld, message = %@", code, message];
         [self.toastSubject sendNext:toastStr];

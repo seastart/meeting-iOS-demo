@@ -17,13 +17,25 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否在加载状态
 @property (nonatomic, assign) BOOL loading;
 
-/// 全员静音状态，YES-全体静音 NO-取消全体静音
-@property (nonatomic, assign) BOOL frequencyAllEnabled;
-/// 全员禁画状态，YES-全体禁画 NO-取消全体禁画
-@property (nonatomic, assign) BOOL framesAllEnabled;
-
 /// 提示框订阅
 @property (nonatomic, strong, readonly) RACSubject *toastSubject;
+/// 操作成功订阅
+@property (nonatomic, strong, readonly) RACSubject *succeedSubject;
+
+/// 设置全体静音状态
+/// - Parameter micDisabled: 全体音频禁用状态，YES-禁用 NO-不禁用
+/// - Parameter selfUnmuteCameraDisabled: 是否允许自我解除，YES-允许 NO-不允许
+- (void)setRoomFrequencyState:(BOOL)micDisabled selfUnmuteMicDisabled:(BOOL)selfUnmuteCameraDisabled;
+
+/// 设置全体禁画状态
+/// - Parameters:
+///   - cameraDisabled: 全体视频禁用状态，YES-禁用 NO-不禁用
+///   - selfUnmuteCameraDisabled: 是否允许自我解除，YES-允许 NO-不允许
+- (void)setRoomFramesState:(BOOL)cameraDisabled selfUnmuteCameraDisabled:(BOOL)selfUnmuteCameraDisabled;
+
+/// 请求踢出成员
+/// - Parameter userId: 成员标识
+- (void)queryRoomKickoutWithUserId:(NSString *)userId;
 
 @end
 

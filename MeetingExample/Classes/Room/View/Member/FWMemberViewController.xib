@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,9 +11,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FWMemberViewController">
             <connections>
-                <outlet property="framesAllButton" destination="Ube-Iu-sHt" id="9LM-CO-62n"/>
+                <outlet property="framesAllButton" destination="zxf-2C-knK" id="vpn-Yw-O1H"/>
                 <outlet property="frequencyAllButton" destination="JrQ-tc-4my" id="LYW-V6-IuI"/>
                 <outlet property="tableView" destination="RMe-i6-dtc" id="MKQ-aQ-6Ai"/>
+                <outlet property="toolBottomConstraint" destination="EYd-h1-UgW" id="FJ1-q8-ST8"/>
+                <outlet property="toolView" destination="Vul-9w-EUk" id="q70-sB-VKj"/>
+                <outlet property="unchainFramesAllButton" destination="Ube-Iu-sHt" id="BWJ-hr-Vbx"/>
+                <outlet property="unchainFrequencyAllButton" destination="rCx-vQ-Muq" id="2C0-oj-0yo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -35,12 +39,12 @@
                     <rect key="frame" x="0.0" y="758" width="393" height="94"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JrQ-tc-4my">
-                            <rect key="frame" x="16" y="10" width="175.66666666666666" height="40"/>
+                            <rect key="frame" x="16" y="10" width="70.333333333333329" height="40"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="mKZ-ra-SLS"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="全体静音">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
@@ -51,11 +55,39 @@
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ube-Iu-sHt">
-                            <rect key="frame" x="201.66666666666663" y="10" width="175.33333333333337" height="40"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rCx-vQ-Muq">
+                            <rect key="frame" x="94.333333333333343" y="10" width="98.333333333333343" height="40"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="解除全体禁画">
+                                <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zxf-2C-knK">
+                            <rect key="frame" x="200.66666666666666" y="10" width="69.999999999999972" height="40"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="全体禁画">
+                                <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ube-Iu-sHt">
+                            <rect key="frame" x="278.66666666666669" y="10" width="98.333333333333314" height="40"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="解除全体禁画">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -68,12 +100,20 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
+                        <constraint firstItem="Ube-Iu-sHt" firstAttribute="leading" secondItem="zxf-2C-knK" secondAttribute="trailing" constant="8" id="0Q3-nr-0aX"/>
                         <constraint firstAttribute="trailing" secondItem="Ube-Iu-sHt" secondAttribute="trailing" constant="16" id="4Jf-tP-nhv"/>
                         <constraint firstItem="JrQ-tc-4my" firstAttribute="leading" secondItem="Vul-9w-EUk" secondAttribute="leading" constant="16" id="8hL-Oc-ov7"/>
                         <constraint firstItem="Ube-Iu-sHt" firstAttribute="height" secondItem="JrQ-tc-4my" secondAttribute="height" id="BDH-Zg-ol1"/>
+                        <constraint firstItem="zxf-2C-knK" firstAttribute="centerY" secondItem="JrQ-tc-4my" secondAttribute="centerY" id="Hyd-ES-Pko"/>
+                        <constraint firstItem="zxf-2C-knK" firstAttribute="leading" secondItem="rCx-vQ-Muq" secondAttribute="trailing" constant="8" id="ZNA-TK-Cm8"/>
+                        <constraint firstItem="rCx-vQ-Muq" firstAttribute="centerY" secondItem="JrQ-tc-4my" secondAttribute="centerY" id="dA0-vG-KW8"/>
+                        <constraint firstItem="zxf-2C-knK" firstAttribute="width" secondItem="JrQ-tc-4my" secondAttribute="width" id="ggz-aP-Uvn"/>
                         <constraint firstItem="Ube-Iu-sHt" firstAttribute="centerY" secondItem="JrQ-tc-4my" secondAttribute="centerY" id="gm1-js-IGK"/>
-                        <constraint firstItem="Ube-Iu-sHt" firstAttribute="width" secondItem="JrQ-tc-4my" secondAttribute="width" id="pGd-jI-gjH"/>
-                        <constraint firstItem="Ube-Iu-sHt" firstAttribute="leading" secondItem="JrQ-tc-4my" secondAttribute="trailing" constant="10" id="rA8-lc-puD"/>
+                        <constraint firstItem="rCx-vQ-Muq" firstAttribute="height" secondItem="JrQ-tc-4my" secondAttribute="height" id="kaY-g7-Yjc"/>
+                        <constraint firstItem="rCx-vQ-Muq" firstAttribute="leading" secondItem="JrQ-tc-4my" secondAttribute="trailing" constant="8" id="qVe-dl-zSp"/>
+                        <constraint firstItem="zxf-2C-knK" firstAttribute="height" secondItem="JrQ-tc-4my" secondAttribute="height" id="sTa-xz-t1W"/>
+                        <constraint firstItem="Ube-Iu-sHt" firstAttribute="width" secondItem="rCx-vQ-Muq" secondAttribute="width" id="tKy-gc-TXo"/>
+                        <constraint firstItem="rCx-vQ-Muq" firstAttribute="width" secondItem="JrQ-tc-4my" secondAttribute="width" multiplier="1.4" id="woL-dS-wHr"/>
                         <constraint firstItem="JrQ-tc-4my" firstAttribute="top" secondItem="Vul-9w-EUk" secondAttribute="top" constant="10" id="yWX-ex-vuh"/>
                     </constraints>
                 </view>
@@ -82,11 +122,11 @@
             <color key="backgroundColor" red="0.96862745098039216" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="JrQ-tc-4my" secondAttribute="bottom" constant="10" id="DIg-u5-hqn"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="RMe-i6-dtc" secondAttribute="bottom" constant="60" id="EYd-h1-UgW"/>
                 <constraint firstItem="RMe-i6-dtc" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="JHR-A2-B9D"/>
                 <constraint firstItem="RMe-i6-dtc" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Nkf-8J-9Ti"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Vul-9w-EUk" secondAttribute="trailing" id="bTu-if-ZrS"/>
                 <constraint firstItem="Vul-9w-EUk" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="eKg-yu-1QO"/>
-                <constraint firstItem="Vul-9w-EUk" firstAttribute="top" secondItem="RMe-i6-dtc" secondAttribute="bottom" id="hbm-WL-hdr"/>
                 <constraint firstAttribute="bottom" secondItem="Vul-9w-EUk" secondAttribute="bottom" id="l0P-nV-pf8"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="RMe-i6-dtc" secondAttribute="trailing" id="vC7-Ab-A6m"/>
             </constraints>

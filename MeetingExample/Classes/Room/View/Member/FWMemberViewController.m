@@ -10,6 +10,7 @@
 #import "FWMemberViewController.h"
 #import "FWMemberTableViewCell.h"
 #import "FWMemberViewModel.h"
+#import "FWExtendModel.h"
 
 /// 列表头部高度
 #define kFWMemberTableSectionHeaderViewH 10.0
@@ -20,10 +21,18 @@
 
 /// tableView
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+/// 底部工具栏
+@property (weak, nonatomic) IBOutlet UIView *toolView;
+/// 底部工具边距
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolBottomConstraint;
 /// 全体音频操作按钮
 @property (weak, nonatomic) IBOutlet UIButton *frequencyAllButton;
+/// 解除全体音频操作按钮
+@property (weak, nonatomic) IBOutlet UIButton *unchainFrequencyAllButton;
 /// 全体画面操作按钮
 @property (weak, nonatomic) IBOutlet UIButton *framesAllButton;
+/// 解除全体画面操作按钮
+@property (weak, nonatomic) IBOutlet UIButton *unchainFramesAllButton;
 
 /// ViewModel
 @property (strong, nonatomic) FWMemberViewModel *viewModel;
@@ -53,7 +62,7 @@
 
 #pragma mark - 创建成员列表数据
 /// 创建成员列表数据
-- (NSMutableArray *)listDataSource {
+- (NSMutableArray <FWRoomMemberModel *> *)listDataSource {
     
     if (!_listDataSource) {
         _listDataSource = [NSMutableArray arrayWithArray:[FWRoomMemberManager sharedManager].getAllMembers];
@@ -88,7 +97,25 @@
     self.navigationItem.title = @"参会成员";
     /// 设置按钮常规样式
     [self normalModality:self.framesAllButton title:@"全体禁画"];
+    [self normalModality:self.unchainFramesAllButton title:@"解除全体禁画"];
     [self normalModality:self.frequencyAllButton title:@"全体静音"];
+    [self normalModality:self.unchainFrequencyAllButton title:@"解除全体静音"];
+    /// 声明底部边距
+    CGFloat bottomMargin = 0.0;
+    /// 声明显示状态
+    BOOL hidden = YES;
+    /// 根据当前用户角色设置边距以及显示状态
+    if ([FWRoomMemberManager sharedManager].role == SEAUserRoleNormal) {
+        hidden = YES;
+        bottomMargin = 0.0;
+    } else {
+        hidden = NO;
+        bottomMargin = 60.0;
+    }
+    /// 设置底部工具条显示状态
+    self.toolView.hidden = hidden;
+    /// 设置底部工具条底部边距
+    self.toolBottomConstraint.constant = bottomMargin;
 }
 
 #pragma mark - 设置ViewModel
@@ -107,52 +134,32 @@
     
     @weakify(self);
     
-    /// 监听订阅全员静音状态
-    [RACObserve(self.viewModel, frequencyAllEnabled) subscribeNext:^(NSNumber * _Nullable value) {
-        @strongify(self);
-        if (value.boolValue) {
-            /// 按钮选中样式
-            [self selectedModality:self.frequencyAllButton title:@"解除全体静音"];
-        } else {
-            /// 按钮常规样式
-            [self normalModality:self.frequencyAllButton title:@"全体静音"];
-        }
-    }];
-    
-    /// 监听订阅全员禁画状态
-    [RACObserve(self.viewModel, framesAllEnabled) subscribeNext:^(NSNumber * _Nullable value) {
-        @strongify(self);
-        if (value.boolValue) {
-            /// 按钮选中样式
-            [self selectedModality:self.framesAllButton title:@"解除全体禁画"];
-        } else {
-            /// 按钮常规样式
-            [self normalModality:self.framesAllButton title:@"全体禁画"];
-        }
-    }];
-    
     /// 绑定全体音频操作按钮事件
     [[self.frequencyAllButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
         @strongify(self);
-        if (self.viewModel.frequencyAllEnabled) {
-            /// 解除房间全体禁音
-            [self presentUnchainRoomFrequencyAlert];
-        } else {
-            /// 房间全体禁音
-            [self presentRoomFrequencyAlert];
-        }
+        /// 房间全体禁音
+        [self presentRoomFrequencyAlert];
+    }];
+    
+    /// 绑定解除全体音频操作按钮事件
+    [[self.unchainFrequencyAllButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        /// 解除房间全体禁音
+        [self presentUnchainRoomFrequencyAlert];
     }];
     
     /// 绑定全体画面操作按钮事件
     [[self.framesAllButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
         @strongify(self);
-        if (self.viewModel.framesAllEnabled) {
-            /// 解除房间全体禁画
-            [self presentUnchainRoomFramesAlert];
-        } else {
-            /// 房间全体禁画
-            [self presentRoomFramesAlert];
-        }
+        /// 房间全体禁画
+        [self presentRoomFramesAlert];
+    }];
+    
+    /// 绑定解除全体画面操作按钮事件
+    [[self.unchainFramesAllButton rac_signalForControlEvents :UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        /// 解除房间全体禁画
+        [self presentUnchainRoomFramesAlert];
     }];
     
     /// 监听订阅加载状态
@@ -169,6 +176,20 @@
         if (!kStringIsEmpty(message)) {
             [SVProgressHUD showInfoWithStatus:message];
         }
+    }];
+    
+    /// 创建房间成功订阅
+    [self.viewModel.succeedSubject subscribeNext:^(id _Nullable message) {
+        if (!kStringIsEmpty(message)) {
+            [SVProgressHUD showInfoWithStatus:message];
+        }
+    }];
+    
+    /// 刷新成员列表回调
+    [[FWRoomMemberManager sharedManager] reloadBlock:^{
+        @strongify(self);
+        /// 刷新成员列表
+        [self reloadMemberLists];
     }];
 }
 
@@ -204,10 +225,8 @@
     
     FWMemberAlertViewController *alertVC = [FWMemberAlertViewController alertControllerWithTitle:@"所有以及新加入的成员将被静音" message:@"允许成员自我解除静音" cancelTitle:@"取消" ensureTitle:@"全体静音" cancelBlock:nil ensureBlock:^(BOOL selected) {
         @strongify(self);
-        /// 设置状态
-        self.viewModel.frequencyAllEnabled = YES;
-        /// 弹出提示信息
-        [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"已开启全体静音，%@", selected ? @"允许成员自行解除" : @"不允许成员自行解除"]];
+        /// 设置全体静音状态
+        [self.viewModel setRoomFrequencyState:YES selfUnmuteMicDisabled:selected];
     }];
     [self presentViewController:alertVC animated:NO completion:nil];
 }
@@ -223,8 +242,8 @@
     }];
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         @strongify(self);
-        /// 设置状态
-        self.viewModel.frequencyAllEnabled = NO;
+        /// 设置全体静音状态
+        [self.viewModel setRoomFrequencyState:NO selfUnmuteMicDisabled:YES];
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];
@@ -239,10 +258,8 @@
     
     FWMemberAlertViewController *alertVC = [FWMemberAlertViewController alertControllerWithTitle:@"所有以及新加入的成员将被禁画" message:@"允许成员自我开启视频" cancelTitle:@"取消" ensureTitle:@"全体禁画" cancelBlock:nil ensureBlock:^(BOOL selected) {
         @strongify(self);
-        /// 设置状态
-        self.viewModel.framesAllEnabled = YES;
-        /// 弹出提示信息
-        [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"已开启全体禁画，%@", selected ? @"允许成员自行解除" : @"不允许成员自行解除"]];
+        /// 设置全体禁画状态
+        [self.viewModel setRoomFramesState:YES selfUnmuteCameraDisabled:selected];
     }];
     [self presentViewController:alertVC animated:NO completion:nil];
 }
@@ -258,12 +275,21 @@
     }];
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         @strongify(self);
-        /// 设置状态
-        self.viewModel.framesAllEnabled = NO;
+        /// 设置全体禁画状态
+        [self.viewModel setRoomFramesState:NO selfUnmuteCameraDisabled:YES];
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - 刷新成员列表
+/// 刷新成员列表
+- (void)reloadMemberLists {
+    
+    [self.listDataSource removeAllObjects];
+    [self.listDataSource addObjectsFromArray:[FWRoomMemberManager sharedManager].getAllMembers];
+    [self.tableView reloadData];
 }
 
 #pragma mark ------- TableView的代理方法 -------
@@ -276,7 +302,7 @@
 #pragma mark 行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    return self.listDataSource.count;
 }
 
 #pragma mark 菜单头部高度
@@ -315,43 +341,29 @@
 - (void)configHMemberCell:(FWMemberTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    NSString *nickname = @"抹茶玛奇哚";
-    BOOL isOwner = YES;
-    BOOL oneself = YES;
-    BOOL videoState = YES;
-    BOOL audioState = YES;
-    if (indexPath.row == 0) {
-        nickname = @"抹茶玛奇哚";
-        isOwner = YES;
-        oneself = YES;
-        videoState = YES;
-        audioState = YES;
-    } else if (indexPath.row == 1) {
-        nickname = @"蜡笔小生";
-        isOwner = YES;
-        oneself = NO;
-        videoState = NO;
-        audioState = NO;
-    } else if (indexPath.row == 2) {
-        nickname = @"可可西里没有海";
-        isOwner = NO;
-        oneself = NO;
-        videoState = NO;
-        audioState = YES;
-    } else {
-        nickname = @"加德满都";
-        isOwner = NO;
-        oneself = NO;
-        videoState = YES;
-        audioState = NO;
-    }
-    
+    /// 获取目标成员
+    FWRoomMemberModel *memberModel = [self.listDataSource objectAtIndex:indexPath.row];
+    /// 获取用户数据
+    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:memberModel.uid];
+    /// 获取用户扩展属性
+    FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:userModel.props];
+    /// 获取用户昵称
+    NSString *nickname = userModel.name;
+    /// 获取用户是否为主持人
+    BOOL isOwner = (extendModel.role == SEAUserRoleHost);
+    /// 获取用户是否为当前成员
+    BOOL oneself = memberModel.isMine;
+    /// 获取用户视频状态
+    BOOL videoState = (extendModel.cameraState == SEADeviceStateOpen);
+    /// 获取用户音频状态
+    BOOL audioState = (extendModel.micState == SEADeviceStateOpen);
+    /// 声明弱引用
     @weakify(self);
     /// 设置项目内容
-    [cell setupWithAvatarUrl:@"" nicknameText:nickname isOwner:isOwner oneself:oneself videoState:videoState audioState:audioState removeBlock:^(NSString * _Nonnull nickname) {
+    [cell setupWithUserId:userModel.userId avatarUrl:extendModel.avatarUrl nicknameText:nickname isOwner:isOwner oneself:oneself videoState:videoState audioState:audioState removeBlock:^(NSString * _Nonnull userId, NSString * _Nonnull nickname) {
         @strongify(self);
         /// 移除成员确认弹窗
-        [self presentRoomKickoutAlert:nickname];
+        [self presentRoomKickoutAlert:userId nickname:nickname];
     }];
 }
 
@@ -363,8 +375,9 @@
 
 #pragma mark - 移除成员确认弹窗
 /// 移除成员确认弹窗
+/// @param userId 成员标识
 /// @param nickname 成员昵称
-- (void)presentRoomKickoutAlert:(NSString *)nickname {
+- (void)presentRoomKickoutAlert:(NSString *)userId nickname:(NSString *)nickname {
     
     @weakify(self);
     
@@ -373,8 +386,8 @@
     }];
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         @strongify(self);
-        /// 弹出提示信息
-        [SVProgressHUD showInfoWithStatus:@"移除成员成功"];
+        /// 请求踢出成员
+        [self.viewModel queryRoomKickoutWithUserId:userId];
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];

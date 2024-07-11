@@ -24,6 +24,7 @@
 /// 退出登录事件
 - (void)onLogoutEvent {
     
+    @weakify(self);
     /// 标记加载状态
     self.loading = YES;
     /// 创建请求参数
@@ -34,6 +35,7 @@
     [params setValue:[FWStoreDataBridge sharedManager].userInfo.userId forKey:@"user_id"];
     /// 发起请求
     [[FWNetworkBridge sharedManager] POST:FWUSERLOGOUT params:params className:@"FWBaseModel" resultBlock:^(BOOL result, id  _Nullable data, NSString * _Nullable errorMsg) {
+        @strongify(self);
         /// 恢复加载状态
         self.loading = NO;
         /// 组件登出

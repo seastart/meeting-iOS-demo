@@ -212,7 +212,7 @@
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
     }];
     [alert addAction:cancelAction];
-    [self presentViewController:alert animated:YES completion:nil];
+    [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - 离开房间时的错误提示弹窗
@@ -240,7 +240,7 @@
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
     }];
     [alert addAction:cancelAction];
-    [self presentViewController:alert animated:YES completion:nil];
+    [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 
@@ -453,6 +453,8 @@
     SGLOG(@"远端用户加入房间通知，userId = %@", userId);
     /// 成员进入房间
     [[FWRoomMemberManager sharedManager] onMemberEnterRoom:userId isMine:NO];
+    /// 刷新成员列表
+    [[FWRoomMemberManager sharedManager] reloadMemberLists];
     /// 成员加入房间
     [self.roomMainView memberUserEnter:userId];
 }
@@ -466,6 +468,8 @@
     SGLOG(@"远端用户离开房间通知，userId = %@", userId);
     /// 成员离开房间
     [[FWRoomMemberManager sharedManager] onMemberExitRoom:userId];
+    /// 刷新成员列表
+    [[FWRoomMemberManager sharedManager] reloadMemberLists];
     /// 成员离开房间
     [self.roomMainView memberUserExit:userId];
 }
@@ -479,6 +483,8 @@
     
     /// 日志埋点
     SGLOG(@"用户昵称变化，userId = %@ nickname = %@", targetUserId, nickname);
+    /// 刷新成员列表
+    [[FWRoomMemberManager sharedManager] reloadMemberLists];
 }
 
 #pragma mark 用户角色变化回调
@@ -490,6 +496,8 @@
     
     /// 日志埋点
     SGLOG(@"用户角色变化，userId = %@ userRole = %ld", targetUserId, userRole);
+    /// 刷新成员列表
+    [[FWRoomMemberManager sharedManager] reloadMemberLists];
 }
 
 #pragma mark 用户摄像头状态变化回调
@@ -501,6 +509,8 @@
     
     /// 日志埋点
     SGLOG(@"用户摄像头状态变化，userId = %@ cameraState = %ld", targetUserId, cameraState);
+    /// 刷新成员列表
+    [[FWRoomMemberManager sharedManager] reloadMemberLists];
     /// 用户摄像头状态变化
     [self.roomMainView userCameraStateChanged:targetUserId cameraState:cameraState];
 }
@@ -514,6 +524,8 @@
     
     /// 日志埋点
     SGLOG(@"用户麦克风状态变化，userId = %@ micState = %ld", targetUserId, micState);
+    /// 刷新成员列表
+    [[FWRoomMemberManager sharedManager] reloadMemberLists];
     /// 用户麦克风状态变化
     [self.roomMainView userMicStateChanged:targetUserId micState:micState];
 }

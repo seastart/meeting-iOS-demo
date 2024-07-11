@@ -40,6 +40,7 @@
         /// 回调请求成功
         [self.succeedSubject sendNext:roomNo];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        @strongify(self);
         /// 恢复加载状态
         self.loading = NO;
         /// 构造日志信息

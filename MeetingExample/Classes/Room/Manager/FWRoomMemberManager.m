@@ -7,11 +7,17 @@
 //
 
 #import "FWRoomMemberManager.h"
+#import "FWExtendModel.h"
 
 @interface FWRoomMemberManager()
 
+/// 当前用户角色
+@property (nonatomic, assign, readwrite) SEAUserRole role;
 /// 房间内成员列表
 @property (nonatomic, strong) NSMutableArray<FWRoomMemberModel *> *roomMemberArray;
+
+/// 刷新成员列表回调
+@property (nonatomic, copy) FWRoomMemberManagerReloadBlock reloadBlock;
 
 @end
 
@@ -46,6 +52,15 @@
     
     /// 成员列表数据清空
     [self.roomMemberArray removeAllObjects];
+}
+
+#pragma mark - 刷新成员列表
+/// 刷新成员列表
+- (void)reloadMemberLists {
+    
+    if (self.reloadBlock) {
+        self.reloadBlock();
+    }
 }
 
 #pragma mark - 获取当前所有成员
@@ -128,8 +143,14 @@
         memberModel.subscribe = NO;
         memberModel.enterDate = [NSDate date];
         if (isMine) {
+            /// 获取成员扩展信息
+            FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:[[MeetingKit sharedInstance] getMySelf].props];
+            /// 保存用户角色
+            self.role = extendModel.role;
+            /// 插入到成员列表
             [self.roomMemberArray insertObject:memberModel atIndex:0];
         } else {
+            /// 添加到成员列表
             [self.roomMemberArray addObject:memberModel];
         }
     }
@@ -161,6 +182,14 @@
     }
     /// 返回成员信息
     return memberModel;
+}
+
+#pragma mark - 刷新成员列表回调
+/// 刷新成员列表回调
+/// @param reloadBlock 刷新成员列表回调
+- (void)reloadBlock:(nullable FWRoomMemberManagerReloadBlock)reloadBlock {
+    
+    self.reloadBlock = reloadBlock;
 }
 
 @end

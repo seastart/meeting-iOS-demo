@@ -20,11 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 摄像头状态
 @property (nonatomic, assign) SEADeviceState cameraState;
 /// 共享状态
-@property (nonatomic, assign) SEADeviceState shareState;
+@property (nonatomic, assign) SEAShareType shareState;
 /// 是否被踢出
 @property (nonatomic, assign) BOOL isKickout;
 /// 聊天能力禁用状态，YES-禁用 NO-不禁用
 @property (nonatomic, assign) BOOL chatDisabled;
+/// 用户头像
+@property (nonatomic, copy) NSString *avatarUrl;
 /// 扩展信息
 @property (nonatomic, copy) NSString *extendInfo;
 

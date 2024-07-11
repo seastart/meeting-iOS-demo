@@ -11,7 +11,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 刷新成员列表回调
+typedef void(^FWRoomMemberManagerReloadBlock)(void);
+
 @interface FWRoomMemberManager : NSObject
+
+/// 当前用户角色
+@property (nonatomic, assign, readonly) SEAUserRole role;
 
 /// 获取成员管理实例
 + (FWRoomMemberManager *)sharedManager;
@@ -19,6 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 清空成员列表
 /// 清空成员列表
 - (void)cleanMembers;
+
+#pragma mark - 刷新成员列表
+/// 刷新成员列表
+- (void)reloadMemberLists;
 
 #pragma mark - 获取当前所有成员
 /// 获取当前所有成员
@@ -45,6 +55,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 成员离开房间
 /// - Parameter userId: 成员标识
 - (FWRoomMemberModel *)onMemberExitRoom:(NSString *)userId;
+
+
+/// 刷新成员列表回调
+/// @param reloadBlock 刷新成员列表回调
+- (void)reloadBlock:(nullable FWRoomMemberManagerReloadBlock)reloadBlock;
 
 @end
 
