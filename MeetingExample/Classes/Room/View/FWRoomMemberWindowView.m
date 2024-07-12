@@ -71,8 +71,8 @@
 - (void)handleGestureRecognizer:(UITapGestureRecognizer *)sender {
     
     /// 回调上层成员选择
-    if (self.delegate && [self.delegate respondsToSelector:@selector(windowView:didSelectItemAtUserId:memberModel:)]) {
-        [self.delegate windowView:self didSelectItemAtUserId:self.userId memberModel:self.memberModel];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(windowView:didSelectItemAtMemberModel:)]) {
+        [self.delegate windowView:self didSelectItemAtMemberModel:self.memberModel];
     }
 }
 
@@ -81,33 +81,10 @@
 /// @param memberModel 成员信息
 - (void)setMemberModel:(nullable FWRoomMemberModel *)memberModel {
     
-    /// 如果当前订阅了该成员
-//    if (memberModel.subscribe) {
-//        /// 获取成员详细信息
-//        RTCEngineUserModel *userModel = [[FWEngineBridge sharedManager] findMemberWithUserId:memberModel.uid];
-//        /// 声明目标流是否存在
-//        BOOL isExist = NO;
-//        /// 查找当前订阅的视频流
-//        for (RTCEngineStreamModel *streamModel in userModel.streams) {
-//            /// 查找对应码流
-//            if (streamModel.id == memberModel.trackIdentifier) {
-//                /// 设置标记该流存在
-//                isExist = YES;
-//                break;
-//            }
-//        }
-//        /// 如果订阅了该轨道，但是该轨道已经不在推流
-//        if (!isExist) {
-//            /// 标记未订阅
-//            memberModel.subscribe = NO;
-//            /// 重新订阅轨道
-//            [self reloadSubscribe];
-//        }
-//    }
-    /// 缓存成员信息
+    /// 保存成员信息
     _memberModel = memberModel;
     /// 设置显示内容
-    [self.statusView setupMemberInfoWithUserModel:memberModel];
+    [self.statusView setupMemberInfoWithMemberModel:memberModel];
 }
 
 #pragma mark - 获取播放窗口视图
@@ -125,6 +102,8 @@
     
     /// 用户摄像头状态变化
     [self.statusView userCameraStateChanged:cameraState];
+    /// 订阅成员视频流
+    [self subscribeWithtTackId:RTCTrackIdentifierFlags1 subscribe:(cameraState == SEADeviceStateOpen)];
 }
 
 #pragma mark - 用户麦克风状态变化
@@ -134,6 +113,43 @@
     
     /// 用户麦克风状态变化
     [self.statusView userMicStateChanged:micState];
+}
+
+#pragma mark - 用户共享状态变化
+/// 用户共享状态变化
+/// @param enabled YES-开启 NO-关闭
+/// @param shareType 共享类型
+- (void)userShareStateChanged:(BOOL)enabled shareType:(SEAShareType)shareType {
+    
+    /// 成员共享类型非屏幕
+    if (shareType != SEAShareTypeScreen) {
+        /// 丢弃此次调用
+        return;
+    }
+    
+    /// 订阅成员视频流
+    [self subscribeWithtTackId:RTCTrackIdentifierFlags1 subscribe:enabled];
+}
+
+#pragma mark - 订阅成员视频流
+/// 订阅成员视频流
+/// @param trackId 轨道标识
+/// @param subscribe 订阅状态，YES-订阅 NO-取消订阅
+- (void)subscribeWithtTackId:(RTCTrackIdentifierFlags)trackId subscribe:(BOOL)subscribe {
+    
+    /// 如果关联成员数据为当前参会账号
+    if (self.memberModel.isMine) {
+        /// 丢弃此次调用
+        return;
+    }
+    
+    if (subscribe) {
+        /// 订阅远端用户的视频流
+        [[MeetingKit sharedInstance] startRemoteView:self.userId trackId:trackId view:self.playerView];
+    } else {
+        /// 停止订阅远端用户的视频流
+        [[MeetingKit sharedInstance] stopRemoteView:self.userId trackId:trackId];
+    }
 }
 
 #pragma mark ------- UIGestureRecognizerDelegate代理实现 -------

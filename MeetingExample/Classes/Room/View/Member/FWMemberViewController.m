@@ -344,7 +344,7 @@
     /// 获取目标成员
     FWRoomMemberModel *memberModel = [self.listDataSource objectAtIndex:indexPath.row];
     /// 获取用户数据
-    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:memberModel.uid];
+    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:memberModel.userId];
     /// 获取用户扩展属性
     FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:userModel.props];
     /// 获取用户昵称

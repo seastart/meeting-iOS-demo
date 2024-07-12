@@ -14,10 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FWRoomStatusView : UIView
 
-#pragma mark - 设置/更新成员信息
-/// 设置/更新成员信息
-/// - Parameter userModel: 成员信息
-- (void)setupMemberInfoWithUserModel:(FWRoomMemberModel *)userModel;
+/// 当前成员数据
+@property (strong, nonatomic, readonly) FWRoomMemberModel *memberModel;
+
+#pragma mark - 设置/更新成员数据
+/// 设置/更新成员数据
+/// - Parameter memberModel: 成员数据
+- (void)setupMemberInfoWithMemberModel:(FWRoomMemberModel *)memberModel;
 
 #pragma mark - 用户摄像头状态变化
 /// 用户摄像头状态变化

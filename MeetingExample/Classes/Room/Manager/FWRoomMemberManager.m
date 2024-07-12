@@ -80,7 +80,7 @@
     /// 遍历成员列表，查找对应成员
     [self.roomMemberArray enumerateObjectsUsingBlock:^(FWRoomMemberModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         /// 匹配列表成员
-        if ([userId isEqualToString:obj.uid]) {
+        if ([userId isEqualToString:obj.userId]) {
             /// 保存成员信息
             memberModel = obj;
             /// 结束遍历
@@ -103,7 +103,7 @@
         /// 恢复其它成员共享状态
         obj.isSharing = NO;
         /// 匹配列表成员
-        if ([userId isEqualToString:obj.uid]) {
+        if ([userId isEqualToString:obj.userId]) {
             /// 修改成员共享状态
             obj.isSharing = YES;
             /// 保存成员信息
@@ -126,7 +126,7 @@
     /// 遍历成员列表，查找对应成员
     [self.roomMemberArray enumerateObjectsUsingBlock:^(FWRoomMemberModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         /// 匹配列表成员
-        if ([userId isEqualToString:obj.uid]) {
+        if ([userId isEqualToString:obj.userId]) {
             /// 保存成员信息
             memberModel = obj;
             /// 结束遍历
@@ -137,7 +137,7 @@
     if (!memberModel) {
         /// 创建成员信息
         memberModel = [[FWRoomMemberModel alloc] init];
-        memberModel.uid = userId;
+        memberModel.userId = userId;
         memberModel.isMine = isMine;
         memberModel.isSharing = NO;
         memberModel.subscribe = NO;
@@ -168,7 +168,7 @@
     /// 遍历成员列表，查找对应成员
     [self.roomMemberArray enumerateObjectsUsingBlock:^(FWRoomMemberModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         /// 匹配列表成员
-        if ([userId isEqualToString:obj.uid]) {
+        if ([userId isEqualToString:obj.userId]) {
             /// 保存成员信息
             memberModel = obj;
             /// 结束遍历

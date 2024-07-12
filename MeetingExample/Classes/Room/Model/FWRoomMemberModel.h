@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FWRoomMemberModel : NSObject
 
 /// 用户标识
-@property (nonatomic, copy) NSString *uid;
+@property (nonatomic, copy) NSString *userId;
 /// 是否为自己
 @property (nonatomic, assign) BOOL isMine;
 /// 是否在共享

@@ -19,9 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark 成员选择回调
 /// 成员选择回调
 /// @param memberView 成员列表对象
-/// @param userId 成员标识
-/// @param memberModel 成员信息
-- (void)memberView:(FWRoomMemberView *)memberView didSelectItemAtUserId:(NSString *)userId memberModel:(FWRoomMemberModel *)memberModel;
+/// @param memberModel 成员数据
+- (void)memberView:(FWRoomMemberView *)memberView didSelectItemAtMemberModel:(FWRoomMemberModel *)memberModel;
 
 @end
 
@@ -59,12 +58,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param micState 音频状态
 - (void)userMicStateChanged:(NSString *)userId micState:(SEADeviceState)micState;
 
-#pragma mark - 订阅成员视频流
-/// 订阅成员视频流
-/// @param memberModel 成员信息
-/// @param trackId 轨道标识
-/// @param subscribe 订阅状态
-- (void)subscribeWithMemberModel:(FWRoomMemberModel *)memberModel trackId:(RTCTrackIdentifierFlags)trackId subscribe:(BOOL)subscribe;
+#pragma mark - 用户共享状态变化
+/// 用户共享状态变化
+/// @param userId 成员标识
+/// @param enabled 变更状态，YES-开启 NO-关闭
+/// @param shareType 共享类型
+- (void)userShareStateChanged:(NSString *)userId enabled:(BOOL)enabled shareType:(SEAShareType)shareType;
 
 @end
 

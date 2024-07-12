@@ -46,9 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark 成员选择回调
 /// 成员选择回调
 /// @param mainView 主窗口视图
-/// @param memberModel 成员信息
-/// @param userId 成员标识
-- (void)mainView:(FWRoomMainView *)mainView didSelectItemMemberModel:(FWRoomMemberModel *)memberModel didUserId:(NSString *)userId;
+/// @param memberModel 成员数据
+- (void)mainView:(FWRoomMainView *)mainView didSelectItemAtMemberModel:(FWRoomMemberModel *)memberModel;
 
 #pragma mark 电子画板退出回调
 /// 电子画板退出回调
@@ -96,6 +95,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param userId 成员标识
 /// @param micState 音频状态
 - (void)userMicStateChanged:(NSString *)userId micState:(SEADeviceState)micState;
+
+#pragma mark - 用户共享状态变化
+/// 用户共享状态变化
+/// @param userId 成员标识
+/// @param enabled 变更状态，YES-开启 NO-关闭
+/// @param shareType 共享类型
+- (void)userShareStateChanged:(NSString *)userId enabled:(BOOL)enabled shareType:(SEAShareType)shareType;
 
 #pragma mark - 请求开启房间共享
 /// 请求开启房间共享

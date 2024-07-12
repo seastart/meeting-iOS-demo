@@ -370,6 +370,17 @@
     [self.roomMemberView userMicStateChanged:userId micState:micState];
 }
 
+#pragma mark - 用户共享状态变化
+/// 用户共享状态变化
+/// @param userId 成员标识
+/// @param enabled 变更状态，YES-开启 NO-关闭
+/// @param shareType 共享类型
+- (void)userShareStateChanged:(NSString *)userId enabled:(BOOL)enabled shareType:(SEAShareType)shareType {
+    
+    /// 用户共享状态变化
+    [self.roomMemberView userShareStateChanged:userId enabled:enabled shareType:shareType];
+}
+
 #pragma mark - 请求开启视频
 /// 请求开启视频
 /// - Parameter source: 事件源对象
@@ -640,13 +651,12 @@
 #pragma mark 成员选择回调
 /// 成员选择回调
 /// @param memberView 成员列表对象
-/// @param userId 成员标识
 /// @param memberModel 成员信息
-- (void)memberView:(FWRoomMemberView *)memberView didSelectItemAtUserId:(NSString *)userId memberModel:(FWRoomMemberModel *)memberModel {
+- (void)memberView:(FWRoomMemberView *)memberView didSelectItemAtMemberModel:(FWRoomMemberModel *)memberModel {
     
     /// 回调控制器层处理
-    if (self.delegate && [self.delegate respondsToSelector:@selector(mainView:didSelectItemMemberModel:didUserId:)]) {
-        [self.delegate mainView:self didSelectItemMemberModel:memberModel didUserId:userId];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(mainView:didSelectItemAtMemberModel:)]) {
+        [self.delegate mainView:self didSelectItemAtMemberModel:memberModel];
     }
 }
 

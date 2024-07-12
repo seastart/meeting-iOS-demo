@@ -101,6 +101,24 @@
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[extendModel.avatar stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(FWDEFAULTAVATAR)];
     /// 设置用户昵称
     self.nameLabel.text = userModel.name;
+    
+    /// 设置音频状态
+    NSString *audioImageName = @"icon_room_microphone_state_un";
+    if (extendModel.micState == SEADeviceStateOpen) {
+        /// 开启状态
+        audioImageName = @"icon_room_microphone_state";
+    }
+    /// 设置音频状态
+    [self.audioImageView setImage:kGetImage(audioImageName)];
+    
+    /// 设置视频状态
+    NSString *videoImageName = @"icon_room_camera_state_un";
+    if (extendModel.cameraState == SEADeviceStateOpen) {
+        /// 开启状态
+        videoImageName = @"icon_room_camera_state";
+    }
+    /// 设置视频状态
+    [self.videoImageView setImage:kGetImage(videoImageName)];
 }
 
 #pragma mark - 开启摄像头预览

@@ -11,6 +11,7 @@
 #import "FWRoomMemberModel.h"
 #import "FWRoomViewModel.h"
 #import "FWRoomMainView.h"
+#import "FWExtendModel.h"
 
 @interface FWRoomViewController () <MeetingKitDelegate, FWRoomMainViewDelegate>
 
@@ -416,6 +417,8 @@
     
     /// 日志埋点
     SGLOG(@"共享开始通知，userId = %@ shareType = %ld", userId, shareType);
+    /// 用户共享状态变化
+    [self.roomMainView userShareStateChanged:userId enabled:YES shareType:shareType];
 }
 
 #pragma mark 共享结束回调
@@ -425,6 +428,12 @@
     
     /// 日志埋点
     SGLOG(@"共享结束通知，userId = %@", userId);
+    /// 获取用户数据
+    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:userId];
+    /// 获取用户扩展属性
+    FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:userModel.props];
+    /// 用户共享状态变化
+    [self.roomMainView userShareStateChanged:userId enabled:NO shareType:extendModel.shareState];
 }
 
 #pragma mark 房间举手状态变化回调
@@ -803,9 +812,8 @@
 #pragma mark 成员选择回调
 /// 成员选择回调
 /// @param mainView 主窗口视图
-/// @param memberModel 成员信息
-/// @param userId 成员标识
-- (void)mainView:(FWRoomMainView *)mainView didSelectItemMemberModel:(FWRoomMemberModel *)memberModel didUserId:(NSString *)userId {
+/// @param memberModel 成员数据
+- (void)mainView:(FWRoomMainView *)mainView didSelectItemAtMemberModel:(FWRoomMemberModel *)memberModel {
     
     /// TODO...
 }

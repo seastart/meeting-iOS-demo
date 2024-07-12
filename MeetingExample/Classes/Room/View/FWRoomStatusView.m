@@ -8,6 +8,7 @@
 
 #import "FWRoomStatusView.h"
 #import "FWRoomMemberModel.h"
+#import "FWExtendModel.h"
 
 @interface FWRoomStatusView()
 
@@ -38,8 +39,8 @@
 /// 成员昵称
 @property (weak, nonatomic) IBOutlet UILabel *bottomNameLabel;
 
-/// 当前绑定成员
-@property (strong, nonatomic) FWRoomMemberModel *userModel;
+/// 当前成员数据
+@property (strong, nonatomic, readwrite) FWRoomMemberModel *memberModel;
 
 @end
 
@@ -93,57 +94,57 @@
     /// 配置属性
 }
 
-#pragma mark - 设置/更新成员信息
-/// 设置/更新成员信息
-/// - Parameter userModel: 成员信息
-- (void)setupMemberInfoWithUserModel:(FWRoomMemberModel *)userModel {
+#pragma mark - 设置/更新成员数据
+/// 设置/更新成员数据
+/// - Parameter memberModel: 成员数据
+- (void)setupMemberInfoWithMemberModel:(FWRoomMemberModel *)memberModel {
     
-    /// 缓存当前绑定成员
-    self.userModel = userModel;
-    /// 获取成员详细信息
-//    RTCEngineUserModel *memberModel = [[FWEngineBridge sharedManager] findMemberWithUserId:userModel.uid];
-//    
-//    /// 设置头像
-//    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[memberModel.avatar stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(@"icon_common_avatar")];
-//    
-//    /// 获取成员扩展信息
-//    FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:memberModel.props];
-//    
-//    /// 设置视频状态
-//    NSString *audioImageName = @"icon_room_audio_state_un";
-//    if (extendModel.audioState) {
-//        /// 开启状态
-//        audioImageName = @"icon_room_audio_state";
-//    }
-//    /// 设置音频状态
-//    [self.centerAudioImageView setImage:kGetImage(audioImageName)];
-//    [self.bottomAudioImageView setImage:kGetImage(audioImageName)];
-//    
-//    /// 设置音频状态
-//    NSString *videoImageName = @"icon_room_video_state_un";
-//    if (extendModel.videoState) {
-//        /// 开启状态
-//        videoImageName = @"icon_room_video_state";
-//    }
-//    /// 设置视频状态
-//    [self.centerVideoImageView setImage:kGetImage(videoImageName)];
-//    [self.bottomVideoImageView setImage:kGetImage(videoImageName)];
-//    
-//    /// 设置成员昵称
-//    NSString *nickname = memberModel.name;
-//    self.centerNameLabel.text = nickname;
-//    self.bottomNameLabel.text = nickname;
+    /// 保存当前绑定成员数据
+    self.memberModel = memberModel;
     
-    /// 根据对该成员的视频订阅情况显示或隐藏背影幕布
-//    if (userModel.subscribe) {
-//        /// 隐藏中部各个组件
-//        self.screenView.hidden = YES;
-//        self.avatarImageView.hidden = YES;
-//    } else {
-//        /// 显示中部各个组件
-//        self.screenView.hidden = NO;
-//        self.avatarImageView.hidden = NO;
-//    }
+    /// 获取用户数据
+    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:memberModel.userId];
+    /// 获取用户扩展属性
+    FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:userModel.props];
+    
+    /// 设置头像
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[extendModel.avatar stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(FWDEFAULTAVATAR)];
+    
+    /// 设置音频状态
+    NSString *audioImageName = @"icon_room_microphone_state_un";
+    if (extendModel.micState == SEADeviceStateOpen) {
+        /// 开启状态
+        audioImageName = @"icon_room_microphone_state";
+    }
+    /// 设置音频状态
+    [self.centerAudioImageView setImage:kGetImage(audioImageName)];
+    [self.bottomAudioImageView setImage:kGetImage(audioImageName)];
+    
+    /// 设置视频状态
+    NSString *videoImageName = @"icon_room_camera_state_un";
+    if (extendModel.cameraState == SEADeviceStateOpen) {
+        /// 开启状态
+        videoImageName = @"icon_room_camera_state";
+    }
+    /// 设置视频状态
+    [self.centerVideoImageView setImage:kGetImage(videoImageName)];
+    [self.bottomVideoImageView setImage:kGetImage(videoImageName)];
+    
+    /// 设置成员昵称
+    NSString *nickname = userModel.name;
+    self.centerNameLabel.text = nickname;
+    self.bottomNameLabel.text = nickname;
+    
+    /// 如果当前摄像头状态为开启
+    if (extendModel.cameraState == SEADeviceStateOpen) {
+        /// 隐藏中部各个组件
+        self.screenView.hidden = YES;
+        self.avatarImageView.hidden = YES;
+    } else {
+        /// 显示中部各个组件
+        self.screenView.hidden = NO;
+        self.avatarImageView.hidden = NO;
+    }
 }
 
 #pragma mark - 用户摄像头状态变化

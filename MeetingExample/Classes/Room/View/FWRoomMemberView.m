@@ -157,6 +157,8 @@
         self.mineWindowView.userId = userId;
         /// 设置代理回调
         self.mineWindowView.delegate = self;
+        /// 关联用户数据
+        self.mineWindowView.memberModel = [[FWRoomMemberManager sharedManager] findMemberWithUserId:userId];
         /// 设置条目视图的尺寸
         /// windowView.mySize = CGSizeMake(FW_WINDOW_ITEM_WIDTH, FW_WINDOW_ITEM_HEIGHT);
         /// 将窗口视图添加到流式布局
@@ -181,6 +183,8 @@
         windowView.userId = userId;
         /// 设置代理回调
         windowView.delegate = self;
+        /// 关联用户数据
+        windowView.memberModel = [[FWRoomMemberManager sharedManager] findMemberWithUserId:userId];
         /// 设置条目视图的尺寸
         /// windowView.mySize = CGSizeMake(FW_WINDOW_ITEM_WIDTH, FW_WINDOW_ITEM_HEIGHT);
         /// 将窗口视图添加到流式布局
@@ -238,27 +242,33 @@
     }
 }
 
-#pragma mark - 订阅成员视频流
-/// 订阅成员视频流
-/// @param memberModel 成员信息
-/// @param trackId 轨道标识
-/// @param subscribe 订阅状态
-- (void)subscribeWithMemberModel:(FWRoomMemberModel *)memberModel trackId:(RTCTrackIdentifierFlags)trackId subscribe:(BOOL)subscribe {
+#pragma mark - 用户共享状态变化
+/// 用户共享状态变化
+/// @param userId 成员标识
+/// @param enabled 变更状态，YES-开启 NO-关闭
+/// @param shareType 共享类型
+- (void)userShareStateChanged:(NSString *)userId enabled:(BOOL)enabled shareType:(SEAShareType)shareType {
     
-    
+    /// 获取成员视图
+    FWRoomMemberWindowView *windowView = [self.displayItems objectForKey:userId];
+    /// 存在该成员
+    if (windowView) {
+        /// 用户共享状态变化
+        [windowView userShareStateChanged:enabled shareType:shareType];
+    }
 }
+
 
 #pragma mark - ----- FWRoomMemberWindowViewDelegate的代理方法 -----
 #pragma mark 成员选择回调
 /// 成员选择回调
 /// @param windowView 成员视图对象
-/// @param userId 成员标识
-/// @param memberModel 成员信息
-- (void)windowView:(FWRoomMemberWindowView *)windowView didSelectItemAtUserId:(NSString *)userId memberModel:(FWRoomMemberModel *)memberModel {
+/// @param memberModel 成员数据
+- (void)windowView:(FWRoomMemberWindowView *)windowView didSelectItemAtMemberModel:(FWRoomMemberModel *)memberModel {
     
     /// 回调上层成员选择
-    if (self.delegate && [self.delegate respondsToSelector:@selector(memberView:didSelectItemAtUserId:memberModel:)]) {
-        [self.delegate memberView:self didSelectItemAtUserId:userId memberModel:memberModel];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(memberView:didSelectItemAtMemberModel:)]) {
+        [self.delegate memberView:self didSelectItemAtMemberModel:memberModel];
     }
 }
 
