@@ -807,8 +807,7 @@
 /// @param userId 成员标识
 - (void)mainView:(FWRoomMainView *)mainView didSelectItemMemberModel:(FWRoomMemberModel *)memberModel didUserId:(NSString *)userId {
     
-    /// 订阅成员轨道弹窗
-    /// [self subscribeMemberAlert:memberModel];
+    /// TODO...
 }
 
 

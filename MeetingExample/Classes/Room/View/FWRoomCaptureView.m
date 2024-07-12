@@ -9,6 +9,7 @@
 #import "FWRoomCaptureView.h"
 #import "FWRoomStatusView.h"
 #import "FWRoomMemberModel.h"
+#import "FWExtendModel.h"
 
 @interface FWRoomCaptureView()
 
@@ -91,21 +92,15 @@
 /// 设置/更新成员信息
 - (void)setupMemberInfo {
     
-//    /// 获取成员详细信息
-//    RTCEngineUserModel *memberModel = [[FWEngineBridge sharedManager] getMySelf];
-//    
-//    /// 替换本地成员数据
-//    [[FWStoreDataBridge sharedManager] updateUserModel:memberModel];
-//    
-//    /// 设置头像
-//    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[memberModel.avatar stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(@"icon_common_avatar")];
-//    
-//    /// 获取成员扩展信息
-//    FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:memberModel.props];
-//    
-//    /// 设置成员昵称
-//    NSString *nickname = memberModel.name;
-//    self.nameLabel.text = nickname;
+    /// 获取用户数据
+    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    /// 获取用户扩展属性
+    FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:userModel.props];
+    
+    /// 设置用户头像
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[extendModel.avatar stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(FWDEFAULTAVATAR)];
+    /// 设置用户昵称
+    self.nameLabel.text = userModel.name;
 }
 
 #pragma mark - 开启摄像头预览

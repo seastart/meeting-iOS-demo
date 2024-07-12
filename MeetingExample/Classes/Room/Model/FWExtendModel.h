@@ -25,10 +25,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isKickout;
 /// 聊天能力禁用状态，YES-禁用 NO-不禁用
 @property (nonatomic, assign) BOOL chatDisabled;
-/// 用户头像
-@property (nonatomic, copy) NSString *avatarUrl;
+/// 音频能力禁用状态，YES-禁用 NO-不禁用
+@property (nonatomic, assign) BOOL micDisabled;
+/// 视频能力禁用状态，YES-禁用 NO-不禁用
+@property (nonatomic, assign) BOOL cameraDisabled;
 /// 扩展信息
 @property (nonatomic, copy) NSString *extendInfo;
+/// 用户头像
+@property (nonatomic, copy) NSString *avatar;
 
 @end
 
@@ -40,8 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *meetingId;
 /// 房间号码
 @property (nonatomic, copy) NSString *roomNo;
-/// 房间标识
-@property (nonatomic, copy) NSString *roomId;
 /// 会议标题
 @property (nonatomic, copy) NSString *title;
 /// 会议说明

@@ -140,27 +140,6 @@
     self.flowLayout.subviewVSpace = 5;
     /// 将流式布局添加到滚动视图
     [scrollView addSubview:self.flowLayout];
-    /// 添加测试成员窗口视图
-    /// [self appendItemSubviews:self.flowLayout];
-}
-
-#pragma mark - 添加测试成员窗口视图
-/// 添加测试成员窗口视图
-/// - Parameter flowLayout: 流式布局
-- (void)appendItemSubviews:(MyFlowLayout *)flowLayout {
-    
-    for (int index = 0; index < 7; index++) {
-        /// 创建成员窗口视图
-        FWRoomMemberWindowView *windowView = [[FWRoomMemberWindowView alloc] initWithFrame:CGRectMake(0, 0, FW_WINDOW_ITEM_WIDTH, FW_WINDOW_ITEM_HEIGHT)];
-        /// 关联用户标识
-        windowView.userId = [NSString stringWithFormat:@"%d", index];
-        /// 设置代理回调
-        windowView.delegate = self;
-        /// 设置条目视图的尺寸
-        /// windowView.mySize = CGSizeMake(FW_WINDOW_ITEM_WIDTH, FW_WINDOW_ITEM_HEIGHT);
-        /// 将窗口视图添加到流式布局
-        [flowLayout addSubview:windowView];
-    }
 }
 
 #pragma mark - 进入房间成功
@@ -265,6 +244,7 @@
 /// @param trackId 轨道标识
 /// @param subscribe 订阅状态
 - (void)subscribeWithMemberModel:(FWRoomMemberModel *)memberModel trackId:(RTCTrackIdentifierFlags)trackId subscribe:(BOOL)subscribe {
+    
     
 }
 

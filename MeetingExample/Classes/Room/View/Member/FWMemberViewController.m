@@ -360,7 +360,7 @@
     /// 声明弱引用
     @weakify(self);
     /// 设置项目内容
-    [cell setupWithUserId:userModel.userId avatarUrl:extendModel.avatarUrl nicknameText:nickname isOwner:isOwner oneself:oneself videoState:videoState audioState:audioState removeBlock:^(NSString * _Nonnull userId, NSString * _Nonnull nickname) {
+    [cell setupWithUserId:userModel.userId avatarUrl:extendModel.avatar nicknameText:nickname isOwner:isOwner oneself:oneself videoState:videoState audioState:audioState removeBlock:^(NSString * _Nonnull userId, NSString * _Nonnull nickname) {
         @strongify(self);
         /// 移除成员确认弹窗
         [self presentRoomKickoutAlert:userId nickname:nickname];
