@@ -42,7 +42,7 @@
     
     [super viewWillDisappear:animated];
     /// 恢复加载状态
-    self.viewModel.loading = NO;
+    /// self.viewModel.loading = NO;
 }
 
 #pragma mark - 初始化UI
@@ -165,7 +165,7 @@
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
     
     /// 标记加载状态
-    self.viewModel.loading = YES;
+    /// self.viewModel.loading = YES;
 }
 
 #pragma mark 网页加载失败
@@ -177,7 +177,7 @@
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
     
     /// 恢复加载状态
-    self.viewModel.loading = NO;
+    /// self.viewModel.loading = NO;
 }
 
 #pragma mark 网页加载完毕
@@ -188,7 +188,7 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
     
     /// 恢复加载状态
-    self.viewModel.loading = NO;
+    /// self.viewModel.loading = NO;
 }
 
 #pragma mark 网页加载失败
@@ -200,7 +200,7 @@
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
     
     /// 恢复加载状态
-    self.viewModel.loading = NO;
+    /// self.viewModel.loading = NO;
 }
 
 @end

@@ -121,8 +121,6 @@
     /// 发起请求
     [[FWNetworkBridge sharedManager] GET:FWREQUESTMEETINGGRANT params:nil className:@"FWAuthToken" resultBlock:^(BOOL result, id  _Nullable data, NSString * _Nullable errorMsg) {
         @strongify(self);
-        /// 隐藏加载状态
-        [SVProgressHUD dismiss];
         /// 请求成功处理
         if (result) {
             /// 获取请求结果对象
@@ -130,8 +128,8 @@
             /// 登录会议组件
             [self loginMeetingModuleWithToken:authToken.data];
         } else {
-            /// 切换登录视图
-            [self changeLoginView];
+            /// 隐藏加载状态
+            [SVProgressHUD dismiss];
             /// 登录失败提示
             [self loginErrorAlert:[NSString stringWithFormat:@"请求会议授权失败(%@)，请您重新登录。", errorMsg]];
         }
@@ -144,8 +142,6 @@
 - (void)loginMeetingModuleWithToken:(NSString *)authToken {
     
     @weakify(self);
-    /// 设置加载状态
-    [SVProgressHUD show];
     /// 组件登录
     [[MeetingKit sharedInstance] loginWithToken:authToken appGroup:FWAPPGROUP onSuccess:^(id _Nullable data) {
         /// @strongify(self);
@@ -169,6 +165,12 @@
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        /// 会议组件登出
+        [[MeetingKit sharedInstance] logout:nil onFailed:nil];
+        /// 本地退出登录
+        [[FWStoreDataBridge sharedManager] logout];
+        /// 切换登录视图
+        [[FWEntryBridge sharedManager] changeLoginView];
     }];
     [alert addAction:cancelAction];
     [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
