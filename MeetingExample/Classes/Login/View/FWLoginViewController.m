@@ -237,8 +237,8 @@
     
     /// 监听登录成功订阅
     [self.viewModel.loginSubject subscribeNext:^(NSNumber * _Nullable value) {
-        /// 请求会议授权
-        [[FWEntryBridge sharedManager] queryMeetingGrant];
+        /// 切换首页视图
+        [[FWEntryBridge sharedManager] changeHomeView];
     }];
 }
 

@@ -21,20 +21,8 @@
 
 @implementation FWEntryBridge
 
-#pragma mark - 创建音频播放器
-- (AVAudioPlayer *)audioPlayer {
-    
-    if (!_audioPlayer) {
-        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"audio_background_task" withExtension:@"wav"] error:nil];
-        /// 无限播放
-        _audioPlayer.numberOfLoops = -1;
-        /// 设置音量
-        _audioPlayer.volume = 0;
-    }
-    return _audioPlayer;
-}
-
-#pragma mark - 初始化方法
+#pragma mark - ------------ 外部接口 ------------
+#pragma mark 初始化方法
 /// 初始化方法
 + (FWEntryBridge *)sharedManager {
     
@@ -47,13 +35,14 @@
     return manager;
 }
 
-#pragma mark - 获取全局AppDelegate
+#pragma mark 获取全局委托
+/// 获取全局委托
 - (FWAppDelegate *)appDelegate {
     
     return (FWAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
-#pragma mark - 部分基础设置
+#pragma mark 部分基础设置
 /// 部分基础设置
 - (void)setupDefault {
     
@@ -69,7 +58,7 @@
     [NSObject addClassNamesToWhitelist:@[@"UIAlertController", @"UITextField", @"UITextView", @"SFSafariViewController", @"RPSystemBroadcastPickerView", @"RPBroadcastPickerStandaloneViewController"]];
 }
 
-#pragma mark - 设置窗口根视图
+#pragma mark 设置窗口根视图
 /// 设置窗口根视图
 - (void)setWindowRootView {
     
@@ -77,20 +66,15 @@
     FWUserModel *userModel = [[FWStoreDataBridge sharedManager] findUserModel];
     /// 根据本地用户数据来确定用户是否为登录状态
     if (userModel) {
-        /// 用户为登录状态，直接切换首页视图
+        /// 用户为登录状态，直接切换首页视图再请求会议授权，然后初始化会议组件
         [self changeHomeView];
-        /// 增加体验，延迟0.5秒钟发起相关请求等
-        FWDispatchAfter((int64_t)(0.5 * NSEC_PER_SEC), ^{
-            /// 请求会议授权，然后初始化会议组件
-            [self queryMeetingGrant];
-        });
     } else {
         /// 用户为非登录状态，直接切换到登录视图
         [self changeLoginView];
     }
 }
 
-#pragma mark - 切换登录视图
+#pragma mark 切换登录视图
 /// 切换登录视图
 - (void)changeLoginView {
     
@@ -101,9 +85,71 @@
     } completion:nil];
 }
 
-#pragma mark - 切换首页视图
+#pragma mark 切换首页视图
 /// 切换首页视图
 - (void)changeHomeView {
+    
+    /// 用户为登录状态，直接切换首页视图
+    [self _changeHomeView];
+    /// 增加体验，延迟0.5秒钟发起相关请求等
+    FWDispatchAfter((int64_t)(0.5 * NSEC_PER_SEC), ^{
+        /// 请求会议授权，然后初始化会议组件
+        [self queryMeetingGrant];
+    });
+}
+
+#pragma mark 开启后台任务
+/// 开启后台任务
+- (void)beginBackgroundTask {
+    
+    /// 停止播放音频
+    [self.audioPlayer stop];
+    
+    /// 设置后台模式和锁屏模式下依然能够播放
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:nil];
+    [[AVAudioSession sharedInstance] setActive:YES error: nil];
+    
+    /// 开始播放音频
+    [self.audioPlayer play];
+}
+
+#pragma mark 取消后台任务
+/// 取消后台任务
+- (void)cancelBackgroundTask {
+    
+    /// 停止播放音频
+    [self.audioPlayer stop];
+}
+
+
+#pragma mark - ------------ 内部接口 ------------
+#pragma mark 对象初始化
+/// 对象初始化
+- (instancetype)init {
+    
+    self = [super init];
+    if (self) {
+    }
+    return self;
+}
+
+#pragma mark 创建音频播放器
+- (AVAudioPlayer *)audioPlayer {
+    
+    if (!_audioPlayer) {
+        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"audio_background_task" withExtension:@"wav"] error:nil];
+        /// 无限播放
+        _audioPlayer.numberOfLoops = -1;
+        /// 设置音量
+        _audioPlayer.volume = 0;
+    }
+    return _audioPlayer;
+}
+
+
+#pragma mark 切换首页视图
+/// 切换首页视图
+- (void)_changeHomeView {
     
     FWBaseTabBarViewController *tabBar = [[FWBaseTabBarViewController alloc] initTabBarViewController];
     [UIView transitionWithView:[self appDelegate].window duration:0.5f options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
@@ -111,7 +157,7 @@
     } completion:nil];
 }
 
-#pragma mark - 请求会议授权
+#pragma mark 请求会议授权
 /// 请求会议授权
 - (void)queryMeetingGrant {
     
@@ -136,7 +182,7 @@
     }];
 }
 
-#pragma mark - 登录会议组件
+#pragma mark 登录会议组件
 /// 登录会议组件
 /// - Parameter authToken: 会议授权令牌
 - (void)loginMeetingModuleWithToken:(NSString *)authToken {
@@ -144,11 +190,8 @@
     @weakify(self);
     /// 组件登录
     [[MeetingKit sharedInstance] loginWithToken:authToken appGroup:FWAPPGROUP onSuccess:^(id _Nullable data) {
-        /// @strongify(self);
         /// 隐藏加载状态
         [SVProgressHUD dismiss];
-        /// 切换首页视图
-        /// [self changeHomeView];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         @strongify(self);
         /// 隐藏加载状态
@@ -158,7 +201,7 @@
     }];
 }
 
-#pragma mark - 登录失败提示
+#pragma mark 登录失败提示
 /// 登录失败提示
 /// - Parameter message: 描述信息
 - (void)loginErrorAlert:(NSString *)message {
@@ -174,29 +217,6 @@
     }];
     [alert addAction:cancelAction];
     [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
-}
-
-#pragma mark - 开启后台任务
-/// 开启后台任务
-- (void)beginBackgroundTask {
-    
-    /// 停止播放音频
-    [self.audioPlayer stop];
-    
-    /// 设置后台模式和锁屏模式下依然能够播放
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:nil];
-    [[AVAudioSession sharedInstance] setActive:YES error: nil];
-    
-    /// 开始播放音频
-    [self.audioPlayer play];
-}
-
-#pragma mark - 取消后台任务
-/// 取消后台任务
-- (void)cancelBackgroundTask {
-    
-    /// 停止播放音频
-    [self.audioPlayer stop];
 }
 
 @end
