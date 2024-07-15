@@ -56,6 +56,17 @@
     [self setupViewModel];
     /// 绑定动态响应信号
     [self bindSignal];
+    /// 设置默认数据
+    [self setupDefaultData];
+}
+
+#pragma mark - 设置默认数据
+- (void)setupDefaultData {
+    
+    /// 获取用户昵称
+    NSString *nickname = [FWStoreDataBridge sharedManager].userModel.data.nickname;
+    /// 设置当前昵称
+    self.namenickTextField.text = self.viewModel.namenickText = nickname;
 }
 
 #pragma mark - 设置ViewModel
@@ -124,8 +135,8 @@
     
     /// 监听确定成功订阅
     [self.viewModel.confirmSubject subscribeNext:^(NSNumber * _Nullable value) {
-        /// 设置根视图为首页模块
-        [[FWEntryBridge sharedManager] _setWindowRootHome];
+        /// 请求会议授权
+        [[FWEntryBridge sharedManager] queryMeetingGrant];
     }];
 }
 

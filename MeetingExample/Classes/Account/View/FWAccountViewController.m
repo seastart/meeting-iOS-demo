@@ -69,14 +69,14 @@
     
     /// 设置标题
     self.titleLabel.text = NSLocalizedString(@"我的", nil);
-    /// 获取当前头像
-    UIImage *image = kGetImage([[FWStoreDataBridge sharedManager] getAvatar]);
+    /// 获取当前头像地址
+    NSString *avatarUrl = [FWStoreDataBridge sharedManager].userModel.data.avatar;
     /// 设置用户头像
-    [self.avatarButton setImage:image forState:UIControlStateNormal];
+    [self.avatarButton sd_setImageWithURL:[NSURL URLWithString:[avatarUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] forState:UIControlStateNormal placeholderImage:kGetImage(FWDEFAULTAVATAR)];
     /// 设置用户昵称
-    [self.namenickLabel setText:[[FWStoreDataBridge sharedManager] getNickname]];
+    [self.namenickLabel setText:[FWStoreDataBridge sharedManager].userModel.data.nickname];
     /// 获取用户标识
-    NSString *userId = [NSString stringWithFormat:@"ID:%@", [FWStoreDataBridge sharedManager].userInfo.userId];
+    NSString *userId = [NSString stringWithFormat:@"ID:%@", [FWStoreDataBridge sharedManager].userModel.data.userId];
     /// 设置用户标识
     [self.accountidLabel setText:userId];
 }
@@ -150,8 +150,8 @@
     
     /// 退出登录订阅
     [self.viewModel.logoutSubject subscribeNext:^(id _Nullable message) {
-        /// 设置根视图为登录模块
-        [[FWEntryBridge sharedManager] setWindowRootEntry];
+        /// 切换登录视图
+        [[FWEntryBridge sharedManager] changeLoginView];
     }];
 }
 

@@ -88,32 +88,32 @@
     [RACObserve(self.viewModel, type) subscribeNext:^(NSNumber * _Nullable value) {
         @strongify(self);
         NSString *title = NSLocalizedString(@"免责声明", nil);
-        NSString *loadingHost = FWACCOUNTASSERTHOST;
+        NSString *loadingHost = FWACCOUNTASSERTHOST();
         switch (value.integerValue) {
             case FWAccountWebTypeAssert:
                 /// 免责声明
                 title = NSLocalizedString(@"免责声明", nil);
-                loadingHost = FWACCOUNTASSERTHOST;
+                loadingHost = FWACCOUNTASSERTHOST();
                 break;
             case FWAccountWebTypePersonal:
                 /// 个人信息收集清单
                 title = NSLocalizedString(@"个人信息收集清单", nil);
-                loadingHost = FWACCOUNTPERSONALHOST;
+                loadingHost = FWACCOUNTPERSONALHOST();
                 break;
             case FWAccountWebTypeThirdParty:
                 /// 第三方信息共享清单
                 title = NSLocalizedString(@"第三方信息共享清单", nil);
-                loadingHost = FWACCOUNTTHIRDPARTYHOST;
+                loadingHost = FWACCOUNTTHIRDPARTYHOST();
                 break;
             case FWAccountWebTypeAgreement:
                 /// 用户协议
                 title = NSLocalizedString(@"用户协议", nil);
-                loadingHost = FWACCOUNTAGREEMENTHOST;
+                loadingHost = FWACCOUNTAGREEMENTHOST();
                 break;
             case FWAccountWebTypePrivacy:
                 /// 隐私协议
                 title = NSLocalizedString(@"隐私协议", nil);
-                loadingHost = FWACCOUNTPRIVACYHOST;
+                loadingHost = FWACCOUNTPRIVACYHOST();
                 break;
             default:
                 break;

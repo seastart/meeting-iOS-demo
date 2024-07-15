@@ -274,7 +274,7 @@
 /// 跳转用户协议
 - (void)presentUserAgreement {
     
-    SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:FWACCOUNTAGREEMENTHOST]];
+    SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:FWACCOUNTAGREEMENTHOST()]];
     [self presentViewController:safariVC animated:YES completion:nil];
 }
 
@@ -282,7 +282,7 @@
 /// 跳转隐私协议
 - (void)presentPrivacyAgreement {
     
-    SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:FWACCOUNTPRIVACYHOST]];
+    SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:FWACCOUNTPRIVACYHOST()]];
     [self presentViewController:safariVC animated:YES completion:nil];
 }
 

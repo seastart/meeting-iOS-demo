@@ -6,6 +6,7 @@
 //  Copyright © 2021 SailorGa. All rights reserved.
 //
 
+#import "FWAuthToken.h"
 #import "FWEntryBridge.h"
 #import "FWLoginViewController.h"
 #import "FWBaseTabBarViewController.h"
@@ -63,12 +64,28 @@
     /// 禁用IQKeyboard的Toolbar
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
     /// 添加内存监测白名单
-    [NSObject addClassNamesToWhitelist:@[@"UIAlertController", @"UITextField", @"UITextView", @"RPSystemBroadcastPickerView", @"RPBroadcastPickerStandaloneViewController"]];
+    [NSObject addClassNamesToWhitelist:@[@"UIAlertController", @"UITextField", @"UITextView", @"SFSafariViewController", @"RPSystemBroadcastPickerView", @"RPBroadcastPickerStandaloneViewController"]];
 }
 
-#pragma mark - 设置根视图为登录模块(未登录状态下)
-/// 设置根视图为登录模块(未登录状态下)
-- (void)setWindowRootEntry {
+#pragma mark - 设置窗口根视图
+/// 设置窗口根视图
+- (void)setWindowRootView {
+    
+    /// 获取登录用户数据
+    FWUserModel *userModel = [[FWStoreDataBridge sharedManager] findUserModel];
+    /// 根据本地用户数据来确定用户是否为登录状态
+    if (userModel) {
+        /// 用户为登录状态，首先请求会议授权，然后初始化会议组件
+        [self queryMeetingGrant];
+    } else {
+        /// 用户为非登录状态，直接切换到登录视图
+        [self changeLoginView];
+    }
+}
+
+#pragma mark - 切换登录视图
+/// 切换登录视图
+- (void)changeLoginView {
     
     FWBaseNavigationViewController *navigation = [[FWBaseNavigationViewController alloc] initWithRootViewController:[[FWLoginViewController alloc] init]];
     [navigation setNavigationBarHidden:YES animated:YES];
@@ -77,26 +94,58 @@
     } completion:nil];
 }
 
-#pragma mark - 设置根视图为主功能模块(登录状态下)
-/// 设置根视图为主功能模块(登录状态下)
-- (void)setWindowRootHome {
+#pragma mark - 切换首页视图
+/// 切换首页视图
+- (void)changeHomeView {
+    
+    FWBaseTabBarViewController *tabBar = [[FWBaseTabBarViewController alloc] initTabBarViewController];
+    [UIView transitionWithView:[self appDelegate].window duration:0.5f options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
+        [self appDelegate].window.rootViewController = tabBar;
+    } completion:nil];
+}
+
+#pragma mark - 请求会议授权
+/// 请求会议授权
+- (void)queryMeetingGrant {
     
     @weakify(self);
     /// 设置加载状态
     [SVProgressHUD show];
-    /// 获取鉴权令牌
-    NSString *authToken = [FWStoreDataBridge sharedManager].authToken;
+    /// 发起请求
+    [[FWNetworkBridge sharedManager] GET:FWREQUESTMEETINGGRANT params:nil className:@"FWAuthToken" resultBlock:^(BOOL result, id  _Nullable data, NSString * _Nullable errorMsg) {
+        @strongify(self);
+        /// 隐藏加载状态
+        [SVProgressHUD dismiss];
+        /// 请求成功处理
+        if (result) {
+            /// 获取请求结果对象
+            FWAuthToken *authToken = (FWAuthToken *)data;
+            /// 登录会议组件
+            [self loginMeetingModuleWithToken:authToken.data];
+        } else {
+            /// 切换登录视图
+            [self changeLoginView];
+            /// 失败提示信息
+            [SVProgressHUD showInfoWithStatus:errorMsg];
+        }
+    }];
+}
+
+#pragma mark - 登录会议组件
+/// 登录会议组件
+/// - Parameter authToken: 会议授权令牌
+- (void)loginMeetingModuleWithToken:(NSString *)authToken {
+    
+    @weakify(self);
+    /// 设置加载状态
+    [SVProgressHUD show];
     /// 组件登录
     [[MeetingKit sharedInstance] loginWithToken:authToken appGroup:FWAPPGROUP onSuccess:^(id _Nullable data) {
         @strongify(self);
         /// 隐藏加载状态
         [SVProgressHUD dismiss];
-        /// 获取用户信息
-        SEAUserInfo *userInfo = (SEAUserInfo *)data;
-        /// 保存用户信息
-        [[FWStoreDataBridge sharedManager] configWithUserInfo:userInfo];
-        /// 设置首页根视图
-        [self _setWindowRootHome];
+        /// 切换首页视图
+        [self changeHomeView];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 隐藏加载状态
         [SVProgressHUD dismiss];
@@ -105,16 +154,6 @@
         [SVProgressHUD showInfoWithStatus:logStr];
         SGLOG(@"%@", logStr);
     }];
-}
-
-#pragma mark - 设置首页根视图
-/// 设置首页根视图
-- (void)_setWindowRootHome {
-    
-    FWBaseTabBarViewController *tabBar = [[FWBaseTabBarViewController alloc] initTabBarViewController];
-    [UIView transitionWithView:[self appDelegate].window duration:0.5f options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
-        [self appDelegate].window.rootViewController = tabBar;
-    } completion:nil];
 }
 
 #pragma mark - 开启后台任务

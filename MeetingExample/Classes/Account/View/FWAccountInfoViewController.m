@@ -66,15 +66,15 @@
     /// 设置标题
     self.navigationItem.title = NSLocalizedString(@"个人信息", nil);
     /// 获取用户昵称
-    NSString *nickname = [[FWStoreDataBridge sharedManager] getNickname];
+    NSString *nickname = [FWStoreDataBridge sharedManager].userModel.data.nickname;
     /// 设置当前昵称
     self.namenickTextField.text = self.viewModel.namenickText = nickname;
     /// 获取用户头像
-    NSString *imageName = [[FWStoreDataBridge sharedManager] getAvatar];
+    NSString *imageName = [FWStoreDataBridge sharedManager].userModel.data.avatar;
     /// 声明性别标识
     BOOL isSexState = YES;
     /// 根据当前头像设置性别标识
-    if ([imageName isEqualToString:FWDEFAULTAVATAR]) {
+    if ([imageName isEqualToString:FWREMOTEAVATAR2]) {
         /// 标识女性
         isSexState = NO;
     } else {

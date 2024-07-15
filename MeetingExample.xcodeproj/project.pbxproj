@@ -78,6 +78,7 @@
 		F43AD8592728EF4D0056B3EE /* FWEntryBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD8582728EF4D0056B3EE /* FWEntryBridge.m */; };
 		F43AD85C2728F1E70056B3EE /* FWLoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F43AD85B2728F1E70056B3EE /* FWLoginViewModel.m */; };
 		F43CDA9326C69EEE00FBB94D /* Home.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43CDA9226C69EEE00FBB94D /* Home.xcassets */; };
+		F44865072C41223E00172AD5 /* FWUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F44865062C41223E00172AD5 /* FWUserModel.m */; };
 		F45C830C27D6F50D008EEA31 /* Room.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F45C830B27D6F50D008EEA31 /* Room.xcassets */; };
 		F4644F6028913059007D46ED /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4644F5F28913059007D46ED /* SystemConfiguration.framework */; };
 		F47A3B5627D1F0FA00C88F2C /* FWStoreDataBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F47A3B5527D1F0FA00C88F2C /* FWStoreDataBridge.m */; };
@@ -328,6 +329,8 @@
 		F43AD85A2728F1E70056B3EE /* FWLoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWLoginViewModel.h; sourceTree = "<group>"; };
 		F43AD85B2728F1E70056B3EE /* FWLoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWLoginViewModel.m; sourceTree = "<group>"; };
 		F43CDA9226C69EEE00FBB94D /* Home.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Home.xcassets; sourceTree = "<group>"; };
+		F44865052C41223E00172AD5 /* FWUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWUserModel.h; sourceTree = "<group>"; };
+		F44865062C41223E00172AD5 /* FWUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWUserModel.m; sourceTree = "<group>"; };
 		F45C830B27D6F50D008EEA31 /* Room.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Room.xcassets; sourceTree = "<group>"; };
 		F4644F5F28913059007D46ED /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F47A3B5427D1F0FA00C88F2C /* FWStoreDataBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWStoreDataBridge.h; sourceTree = "<group>"; };
@@ -750,6 +753,8 @@
 		F4219D2629ACB6090069483A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F44865052C41223E00172AD5 /* FWUserModel.h */,
+				F44865062C41223E00172AD5 /* FWUserModel.m */,
 				F482EF0329B6E1CC00815C9C /* FWAuthToken.h */,
 				F482EF0429B6E1CC00815C9C /* FWAuthToken.m */,
 			);
@@ -1484,6 +1489,7 @@
 				F43AD83D2727F1780056B3EE /* FWHomeViewModel.m in Sources */,
 				F40B634826C2936C00F42370 /* FWHomeViewController.m in Sources */,
 				F4219D8B29B055AD0069483A /* FWRoomMemberModel.m in Sources */,
+				F44865072C41223E00172AD5 /* FWUserModel.m in Sources */,
 				F42CB0142B6CF51300D2A3F7 /* FWMessageTableViewCell.m in Sources */,
 				F49A411B2B55399F0049DF6D /* FWHomeTableViewCell.m in Sources */,
 				F42CAFFA2B6CE5D800D2A3F7 /* FWMessageViewModel.m in Sources */,

@@ -237,8 +237,8 @@
     
     /// 监听登录成功订阅
     [self.viewModel.loginSubject subscribeNext:^(NSNumber * _Nullable value) {
-        /// 设置根视图为首页模块
-        [[FWEntryBridge sharedManager] setWindowRootHome];
+        /// 请求会议授权
+        [[FWEntryBridge sharedManager] queryMeetingGrant];
     }];
 }
 

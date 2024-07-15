@@ -10,10 +10,8 @@
 
 @interface FWStoreDataBridge ()
 
-/// 鉴权令牌
-@property (nonatomic, copy, readwrite) NSString *authToken;
-/// 用户信息
-@property (nonatomic, strong, readwrite) SEAUserInfo *userInfo;
+/// 用户数据
+@property (nonatomic, strong, readwrite) FWUserModel *userModel;
 /// 房间号码
 @property (nonatomic, copy, readwrite) NSString *roomNo;
 /// 房间标识
@@ -36,30 +34,83 @@
     return manager;
 }
 
-#pragma mark - 设置用户信息
-/// 设置用户信息
-/// - Parameter userInfo: 用户信息
-- (void)configWithUserInfo:(SEAUserInfo *)userInfo {
-    
-    self.userInfo = userInfo;
-}
-
 #pragma mark - 登录用户
-/// @param authToken 鉴权令牌
-- (void)login:(NSString *)authToken {
+/// @param userModel 用户数据
+- (void)login:(FWUserModel *)userModel {
     
-    if (kStringIsEmpty(authToken)) {
+    /// 如果用户数据为空
+    if (!userModel) {
+        /// 丢弃此次操作
         return;
     }
-    self.authToken = authToken;
+    /// 保存用户数据
+    self.userModel = userModel;
+    /// 保存登录用户数据
+    [self storeValue:[userModel yy_modelToJSONString] withKey:FWLOGINUSERKEY];
+    /// 设置登录令牌
+    [[FWNetworkBridge sharedManager] setUserToken:userModel.data.token];
+}
+
+#pragma mark - 获取登录用户数据
+/// 获取登录用户数据
+- (nullable FWUserModel *)findUserModel {
+    
+    /// 获取本地存储用户数据
+    NSString *userJson = [self valueWithKey:FWLOGINUSERKEY];
+    /// 如果本地存储数据为空
+    if (kStringIsEmpty(userJson)) {
+        /// 返回用户数据为空
+        return nil;
+    }
+    /// 转换成用户数据对象
+    self.userModel = [FWUserModel yy_modelWithJSON:userJson];
+    /// 设置登录令牌
+    [[FWNetworkBridge sharedManager] setUserToken:self.userModel.data.token];
+    /// 返回用户数据
+    return self.userModel;
+}
+
+#pragma mark - 更新用户令牌
+/// 更新用户令牌
+/// - Parameter authToken: 用户令牌
+- (void)updateAuthToken:(NSString *)authToken {
+    
+    /// 如果用户令牌为空
+    if (kStringIsEmpty(authToken)) {
+        /// 丢弃此次设置
+        return;
+    }
+    /// 重置用户令牌
+    self.userModel.data.token = authToken;
+    /// 模拟登录一次，替换本地数据以及数据请求登录令牌
+    [self login:self.userModel];
+}
+
+#pragma mark - 更新用户基本数据
+/// 更新用户基本数据
+/// - Parameters:
+///   - name: 用户昵称
+///   - avatar: 用户头像
+- (void)updateUserInfo:(NSString *)name avatar:(NSString *)avatar {
+    
+    /// 重置用户昵称
+    self.userModel.data.nickname = name;
+    /// 重置用户头像
+    self.userModel.data.avatar = avatar;
+    /// 模拟登录一次，替换本地数据以及数据请求登录令牌
+    [self login:self.userModel];
 }
 
 #pragma mark - 退出登录
 /// 退出登录
 - (void)logout {
     
-    self.authToken = nil;
-    self.userInfo = nil;
+    /// 重置用户数据
+    self.userModel = nil;
+    /// 清除登录用户数据
+    [self storeValue:nil withKey:FWLOGINUSERKEY];
+    /// 清除登录令牌
+    [[FWNetworkBridge sharedManager] clearUserToken];
 }
 
 #pragma mark - 加入会议
@@ -95,7 +146,7 @@
 #pragma mark - 设置手机号码
 /// 设置手机号码
 /// @param mobileText 手机号码
-- (void)setMobileText:(NSString *)mobileText {
+- (void)setMobileText:(nullable NSString *)mobileText {
     
     [self storeValue:mobileText withKey:FWMOBILEKEY];
 }
@@ -114,60 +165,9 @@
 #pragma mark - 设置用户密码
 /// 设置用户密码
 /// @param passwordText 用户密码
-- (void)setPasswordText:(NSString *)passwordText {
+- (void)setPasswordText:(nullable NSString *)passwordText {
     
     [self storeValue:passwordText withKey:FWPASSWORDKEY];
-}
-
-#pragma mark - 获取用户昵称
-/// 获取用户昵称
-- (NSString *)getNickname {
-    
-    /// 构建存储KEY
-    NSString *key = [NSString stringWithFormat:@"%@-%@", self.userInfo.userId, FWNICKNAMEKEY];
-    /// 获取保存的昵称
-    NSString *nickname = [self valueWithKey:key];
-    if (!kStringIsEmpty(nickname)) {
-        return nickname;
-    }
-    /// [FWToolBridge getDeviceName]
-    return self.userInfo.userId;
-}
-
-#pragma mark - 设置用户昵称
-/// 设置用户昵称
-/// @param nickname 用户昵称
-- (void)setNickname:(NSString *)nickname {
-    
-    /// 构建存储KEY
-    NSString *key = [NSString stringWithFormat:@"%@-%@", self.userInfo.userId, FWNICKNAMEKEY];
-    /// 保存用户昵称
-    [self storeValue:nickname withKey:key];
-}
-
-#pragma mark - 设置用户头像
-/// 设置用户头像
-- (NSString *)getAvatar {
-    
-    /// 构建存储KEY
-    NSString *key = [NSString stringWithFormat:@"%@-%@", self.userInfo.userId, FWUSERAVATARKEY];
-    /// 获取保存的头像
-    NSString *avatar = [self valueWithKey:key];
-    if (!kStringIsEmpty(avatar)) {
-        return avatar;
-    }
-    return FWDEFAULTAVATAR;
-}
-
-#pragma mark - 设置用户头像
-/// 设置用户头像
-/// - Parameter avatar: 用户头像
-- (void)setAvatar:(NSString *)avatar {
-    
-    /// 构建存储KEY
-    NSString *key = [NSString stringWithFormat:@"%@-%@", self.userInfo.userId, FWUSERAVATARKEY];
-    /// 保存用户头像
-    [self storeValue:avatar withKey:key];
 }
 
 #pragma mark - 存储数据

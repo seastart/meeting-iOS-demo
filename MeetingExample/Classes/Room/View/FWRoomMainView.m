@@ -185,7 +185,7 @@
     [[MeetingKit sharedInstance] requestShare:SEAShareTypeDrawing onSuccess:^(id  _Nullable data) {
         @strongify(self);
         /// 显示画板视图
-        [self.whiteboardView showView:@"https://dev.srtc.live:9000/www/wb" userId:[FWStoreDataBridge sharedManager].userInfo.userId roomNo:[FWStoreDataBridge sharedManager].roomNo readwrite:YES];
+        [self.whiteboardView showView:@"https://dev.srtc.live:9000/www/wb" userId:[FWStoreDataBridge sharedManager].userModel.data.userId roomNo:[FWStoreDataBridge sharedManager].roomNo readwrite:YES];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求开启共享失败 code = %ld, message = %@", code, message];

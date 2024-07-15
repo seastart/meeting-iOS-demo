@@ -38,8 +38,8 @@
     
     /// 基础设置
     [[FWEntryBridge sharedManager] setupDefault];
-    /// 设置根视图
-    [[FWEntryBridge sharedManager] setWindowRootEntry];
+    /// 设置窗口根视图
+    [[FWEntryBridge sharedManager] setWindowRootView];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -42,15 +42,29 @@
         return;
     }
     
+    @weakify(self);
     /// 标记加载状态
     self.loading = YES;
-    /// 恢复加载状态
-    self.loading = NO;
-    
-    /// 提示信息
-    /// [self.toastSubject sendNext:errorMsg];
-    /// 回调验证码获取成功
-    [self.mobileCodeSubject sendNext:NSLocalizedString(@"验证码发送成功", nil)];
+    /// 创建请求参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    /// 手机号码
+    [params setValue:self.mobileText forKey:@"mobile"];
+    /// 请求场景
+    [params setValue:@"login-mobile" forKey:@"scene"];
+    /// 发起请求
+    [[FWNetworkBridge sharedManager] POST:FWREQUESTAUTHSMSCODE params:params className:@"FWBaseModel" resultBlock:^(BOOL result, id  _Nullable data, NSString * _Nullable errorMsg) {
+        @strongify(self);
+        /// 恢复加载状态
+        self.loading = NO;
+        /// 请求成功处理
+        if (result) {
+            /// 回调验证码获取成功
+            [self.mobileCodeSubject sendNext:NSLocalizedString(@"验证码发送成功", nil)];
+        } else {
+            /// 提示信息
+            [self.toastSubject sendNext:errorMsg];
+        }
+    }];
 }
 
 #pragma mark - 请求登录
@@ -80,25 +94,30 @@
         return;
     }
     
+    @weakify(self);
     /// 标记加载状态
     self.loading = YES;
     /// 创建请求参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    /// 用户标识
-    [params setValue:self.mobileText forKey:@"user_id"];
+    /// 手机号码
+    [params setValue:self.mobileText forKey:@"mobile"];
+    /// 短信验证码
+    [params setValue:self.vcodeText forKey:@"captcha"];
     /// 发起请求
-    [[FWNetworkBridge sharedManager] POST:FWSIGNATUREINFOFACE params:params className:@"FWAuthToken" resultBlock:^(BOOL result, id  _Nullable data, NSString * _Nullable errorMsg) {
+    [[FWNetworkBridge sharedManager] POST:FWREQUESTAUTHMOBILELOGIN params:params className:@"FWUserModel" resultBlock:^(BOOL result, id  _Nullable data, NSString * _Nullable errorMsg) {
+        @strongify(self);
         /// 恢复加载状态
         self.loading = NO;
         /// 请求成功处理
         if (result) {
             /// 获取请求结果对象
-            FWAuthToken *authToken = (FWAuthToken *)data;
-            /// 缓存用户输入信息
+            FWUserModel *userModel = (FWUserModel *)data;
+            /// 设置用户登录
+            [[FWStoreDataBridge sharedManager] login:userModel];
+            /// 设置手机号码
             [[FWStoreDataBridge sharedManager] setMobileText:self.mobileText];
-            [[FWStoreDataBridge sharedManager] setPasswordText:self.passwordText];
-            /// 缓存登录用户信息
-            [[FWStoreDataBridge sharedManager] login:authToken.data];
+            /// 设置登录密码
+            [[FWStoreDataBridge sharedManager] setPasswordText:nil];
             /// 回调登录成功
             [self.loginSubject sendNext:nil];
         } else {
@@ -117,25 +136,30 @@
         return;
     }
     
+    @weakify(self);
     /// 标记加载状态
     self.loading = YES;
     /// 创建请求参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    /// 用户标识
-    [params setValue:self.mobileText forKey:@"user_id"];
+    /// 手机号码
+    [params setValue:self.mobileText forKey:@"account"];
+    /// 账号密码
+    [params setValue:self.passwordText forKey:@"password"];
     /// 发起请求
-    [[FWNetworkBridge sharedManager] POST:FWSIGNATUREINFOFACE params:params className:@"FWAuthToken" resultBlock:^(BOOL result, id  _Nullable data, NSString * _Nullable errorMsg) {
+    [[FWNetworkBridge sharedManager] POST:FWREQUESTAUTHACCOUNTLOGIN params:params className:@"FWUserModel" resultBlock:^(BOOL result, id  _Nullable data, NSString * _Nullable errorMsg) {
+        @strongify(self);
         /// 恢复加载状态
         self.loading = NO;
         /// 请求成功处理
         if (result) {
             /// 获取请求结果对象
-            FWAuthToken *authToken = (FWAuthToken *)data;
-            /// 缓存用户输入信息
+            FWUserModel *userModel = (FWUserModel *)data;
+            /// 设置用户登录
+            [[FWStoreDataBridge sharedManager] login:userModel];
+            /// 设置手机号码
             [[FWStoreDataBridge sharedManager] setMobileText:self.mobileText];
+            /// 设置登录密码
             [[FWStoreDataBridge sharedManager] setPasswordText:self.passwordText];
-            /// 缓存登录用户信息
-            [[FWStoreDataBridge sharedManager] login:authToken.data];
             /// 回调登录成功
             [self.loginSubject sendNext:nil];
         } else {

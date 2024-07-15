@@ -7,15 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FWUserModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FWStoreDataBridge : NSObject
 
-/// 鉴权令牌
-@property (nonatomic, copy, readonly) NSString *authToken;
-/// 用户信息
-@property (nonatomic, strong, readonly) SEAUserInfo *userInfo;
+/// 用户数据
+@property (nonatomic, strong, readonly) FWUserModel *userModel;
 /// 房间号码
 @property (nonatomic, copy, readonly) NSString *roomNo;
 /// 房间标识
@@ -25,14 +24,25 @@ NS_ASSUME_NONNULL_BEGIN
 /// 初始化方法
 + (FWStoreDataBridge *)sharedManager;
 
-#pragma mark - 设置用户信息
-/// 设置用户信息
-/// - Parameter userInfo: 用户信息
-- (void)configWithUserInfo:(SEAUserInfo *)userInfo;
-
 #pragma mark - 登录用户
-/// @param authToken 鉴权令牌
-- (void)login:(NSString *)authToken;
+/// @param userModel 用户数据
+- (void)login:(FWUserModel *)userModel;
+
+#pragma mark - 获取登录用户数据
+/// 获取登录用户数据
+- (nullable FWUserModel *)findUserModel;
+
+#pragma mark - 更新用户令牌
+/// 更新用户令牌
+/// - Parameter authToken: 用户令牌
+- (void)updateAuthToken:(NSString *)authToken;
+
+#pragma mark - 更新用户基本数据
+/// 更新用户基本数据
+/// - Parameters:
+///   - name: 用户昵称
+///   - avatar: 用户头像
+- (void)updateUserInfo:(NSString *)name avatar:(NSString *)avatar;
 
 #pragma mark - 退出登录
 /// 退出登录
@@ -56,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 设置手机号码
 /// 设置手机号码
 /// @param mobileText 手机号码
-- (void)setMobileText:(NSString *)mobileText;
+- (void)setMobileText:(nullable NSString *)mobileText;
 
 #pragma mark - 获取用户密码
 /// 获取用户密码
@@ -65,25 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 设置用户密码
 /// 设置用户密码
 /// @param passwordText 用户密码
-- (void)setPasswordText:(NSString *)passwordText;
-
-#pragma mark - 获取用户昵称
-/// 获取用户昵称
-- (NSString *)getNickname;
-
-#pragma mark - 设置用户昵称
-/// 设置用户昵称
-/// @param nickname 用户昵称
-- (void)setNickname:(NSString *)nickname;
-
-#pragma mark - 设置用户头像
-/// 设置用户头像
-- (NSString *)getAvatar;
-
-#pragma mark - 设置用户头像
-/// 设置用户头像
-/// - Parameter avatar: 用户头像
-- (void)setAvatar:(NSString *)avatar;
+- (void)setPasswordText:(nullable NSString *)passwordText;
 
 @end
 

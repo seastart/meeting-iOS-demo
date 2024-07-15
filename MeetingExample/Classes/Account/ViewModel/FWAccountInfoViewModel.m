@@ -35,30 +35,45 @@
         return;
     }
     
+    @weakify(self);
     /// 标记加载状态
     self.loading = YES;
-    /// 恢复加载状态
-    self.loading = NO;
-    
-    /// 设置用户昵称
-    [[FWStoreDataBridge sharedManager] setNickname:self.namenickText];
+    /// 创建请求参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    /// 用户昵称
+    [params setValue:self.namenickText forKey:@"nickname"];
     /// 声明用户头像
-    NSString *imageName = FWDEFAULTAVATAR;
+    NSString *imageName = FWREMOTEAVATAR1;
     /// 根据性别标识设置头像
     if (self.isSexState) {
         /// 标识男性
-        imageName = @"icon_login_avatar1";
+        imageName = FWREMOTEAVATAR1;
     } else {
         /// 标识女性
-        imageName = @"icon_login_avatar2";
+        imageName = FWREMOTEAVATAR2;
     }
-    /// 设置用户头像
-    [[FWStoreDataBridge sharedManager] setAvatar:imageName];
-    
-    /// 提示信息
-    [self.toastSubject sendNext:@"个人信息已更新"];
-    /// 回调确定成功订阅
-    [self.confirmSubject sendNext:nil];
+    /// 用户头像
+    [params setValue:imageName forKey:@"avatar"];
+    /// 发起请求
+    [[FWNetworkBridge sharedManager] POST:FWREQUESTMEMBERMEUPDATE params:params className:@"FWUserModel" resultBlock:^(BOOL result, id  _Nullable data, NSString * _Nullable errorMsg) {
+        @strongify(self);
+        /// 恢复加载状态
+        self.loading = NO;
+        /// 请求成功处理
+        if (result) {
+            /// 获取请求结果对象
+            FWUserModel *userModel = (FWUserModel *)data;
+            /// 更新用户基本数据
+            [[FWStoreDataBridge sharedManager] updateUserInfo:userModel.data.nickname avatar:userModel.data.avatar];
+            /// 提示信息
+            [self.toastSubject sendNext:@"个人信息已更新"];
+            /// 回调确定成功订阅
+            [self.confirmSubject sendNext:nil];
+        } else {
+            /// 提示信息
+            [self.toastSubject sendNext:errorMsg];
+        }
+    }];
 }
 
 @end

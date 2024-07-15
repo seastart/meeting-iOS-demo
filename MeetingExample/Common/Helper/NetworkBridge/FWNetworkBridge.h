@@ -38,6 +38,15 @@ typedef void (^FWNetworkResultBlock)(BOOL result, id _Nullable data, NSString * 
 ///   - resultBlock: 请求回调
 - (void)POST:(NSString *)url params:(nullable NSDictionary *)params className:(nullable NSString *)className resultBlock:(FWNetworkResultBlock)resultBlock;
 
+#pragma mark - 设置登录令牌
+/// 设置登录令牌
+/// - Parameter userToken: 登录令牌
+- (void)setUserToken:(NSString *)userToken;
+
+#pragma mark - 清除登录令牌
+/// 清除登录令牌
+- (void)clearUserToken;
+
 @end
 
 NS_ASSUME_NONNULL_END

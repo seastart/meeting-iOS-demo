@@ -17,8 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否在加载状态
 @property (nonatomic, assign) BOOL loading;
 
+/// 举报类型列表
+@property (nonatomic, strong) NSMutableArray <NSDictionary *> *itemArray;
 /// 选中索引列表
-@property (nonatomic, strong) NSMutableArray *selectedArray;
+@property (nonatomic, strong) NSMutableArray <NSNumber *> *selectedArray;
 /// 描述内容
 @property (nonatomic, copy, nullable) NSString *describeText;
 

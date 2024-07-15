@@ -27,8 +27,8 @@
 /// @param type 网页加载类型
 - (void)initType:(FWAccountWebType)type {
     
-    _loading = NO;
-    _type = type;
+    self.loading = NO;
+    self.type = type;
 }
 
 @end

@@ -12,8 +12,6 @@
 
 /// 定义CollectionViewCell重用标识
 static NSString *FWReportCollectionViewCellName = @"FWReportCollectionViewCell";
-/// 列表项目数据
-#define kFWReportItemList @[@{@"type" : @(0), @"title" : NSLocalizedString(@"政治敏感", nil), @"selected" : @(YES)}, @{@"type" : @(1), @"title" : NSLocalizedString(@"低俗色情", nil), @"selected" : @(NO)}, @{@"type" : @(2), @"title" : NSLocalizedString(@"攻击辱骂", nil), @"selected" : @(NO)}, @{@"type" : @(3), @"title" : NSLocalizedString(@"血腥暴力", nil), @"selected" : @(NO)}, @{@"type" : @(4), @"title" : NSLocalizedString(@"不良广告", nil), @"selected" : @(NO)}, @{@"type" : @(5), @"title" : NSLocalizedString(@"涉嫌诈骗", nil), @"selected" : @(NO)}, @{@"type" : @(6), @"title" : NSLocalizedString(@"违法信息", nil), @"selected" : @(NO)}, @{@"type" : @(7), @"title" : NSLocalizedString(@"其他违规", nil), @"selected" : @(NO)}]
 
 @interface FWReportViewController () <UIGestureRecognizerDelegate>
 
@@ -204,7 +202,7 @@ static NSString *FWReportCollectionViewCellName = @"FWReportCollectionViewCell";
 #pragma mark 每组Cell的个数
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return kFWReportItemList.count;
+    return self.viewModel.itemArray.count;
 }
 
 #pragma mark 设置每个Cell的尺寸
@@ -233,7 +231,7 @@ static NSString *FWReportCollectionViewCellName = @"FWReportCollectionViewCell";
     /// 获取选中状态
     BOOL selected = [self.viewModel.selectedArray containsObject:@(indexPath.row)];
     /// 获取项目数据
-    NSDictionary *itemDic = [kFWReportItemList objectAtIndex:indexPath.row];
+    NSDictionary *itemDic = [self.viewModel.itemArray objectAtIndex:indexPath.row];
     /// 赋值显示
     [cell setupWithSelected:selected titleText:[itemDic objectForKey:@"title"]];
 }

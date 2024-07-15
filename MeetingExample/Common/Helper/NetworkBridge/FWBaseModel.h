@@ -14,10 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 错误码
 @property (nonatomic, assign) NSInteger code;
-/// 请求标识
-@property (nonatomic, strong) NSString *request_id;
 /// 错误描述
-@property (nonatomic, strong) NSString *message;
+@property (nonatomic, copy) NSString *msg;
 
 @end
 

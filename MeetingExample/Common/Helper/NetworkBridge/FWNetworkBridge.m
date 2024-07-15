@@ -8,8 +8,20 @@
 
 #import "FWNetworkBridge.h"
 
-/// 请求成功错误码
-#define VCSNetworkSucceed 0
+#pragma mark - 错误码表
+/// 错误码表
+typedef enum : NSUInteger {
+    
+    /// 无错误
+    VCSNetworkCodeOK = 0,
+    
+    /// 未登录
+    VCSNetworkCodeAuthFailed = 10041,
+    /// 令牌失效
+    VCSNetworkCodeTokenInvalid = 10042,
+    /// 令牌过期
+    VCSNetworkCodeTokenExpired = 10043
+} VCSNetworkCode;
 
 @interface FWNetworkBridge ()
 
@@ -45,12 +57,12 @@
     
     /// 获取请求地址
     NSString *baseurl = [self getBaseURL:url];
-    /// 设置请求头信息
-    NSDictionary *header = [self setRequestHeaderField:params];
     /// 发起请求
-    [self.sessionManager GET:baseurl parameters:params headers:header progress:^(NSProgress * _Nonnull downloadProgress) {
+    [self.sessionManager GET:baseurl parameters:params headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         /// 请求进度
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        /// 处理响应头数据
+        [self handleResponseheaders:task];
         /// 请求成功
         [self outputlog:YES way:@"GET" api:baseurl params:params response:responseObject];
         [self result:responseObject className:className resultBlock:resultBlock];
@@ -74,12 +86,12 @@
     
     /// 获取请求地址
     NSString *baseurl = [self getBaseURL:url];
-    /// 设置请求头信息
-    NSDictionary *header = [self setRequestHeaderField:params];
     /// 发起请求
-    [self.sessionManager POST:baseurl parameters:params headers:header progress:^(NSProgress * _Nonnull uploadProgress) {
+    [self.sessionManager POST:baseurl parameters:params headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         /// 请求进度
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        /// 处理响应头数据
+        [self handleResponseheaders:task];
         /// 请求成功
         [self outputlog:YES way:@"POST" api:baseurl params:params response:responseObject];
         [self result:responseObject className:className resultBlock:resultBlock];
@@ -90,6 +102,23 @@
             resultBlock(NO, error, [self networkError:error]);
         }
     }];
+}
+
+#pragma mark - 设置登录令牌
+/// 设置登录令牌
+/// - Parameter userToken: 登录令牌
+- (void)setUserToken:(NSString *)userToken {
+    
+    /// 设置请求头信息
+    [self.sessionManager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", userToken] forHTTPHeaderField:@"Authorization"];
+}
+
+#pragma mark - 清除登录令牌
+/// 清除登录令牌
+- (void)clearUserToken {
+    
+    /// 重置请求头信息
+    [self.sessionManager.requestSerializer setValue:nil forHTTPHeaderField:@"Authorization"];
 }
 
 #pragma mark - ------------ 网络组件内部方法 ------------
@@ -104,6 +133,8 @@
         _sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/plain", @"text/html", nil];
         /// 设置请求实体数据的类型(Content-Type: application/json)
         _sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+        /// 设置请求验证请求头信息
+        [_sessionManager.requestSerializer setValue:@"Bearer" forHTTPHeaderField:@"Authorization"];
         /// 设置请求实体数据类型请求头信息
         [_sessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         /// 设置请求超时时间
@@ -127,65 +158,6 @@
     return baseurl;
 }
 
-#pragma mark 设置请求头信息
-/// 设置请求头信息
-/// - Parameter params: 请求参数
-- (NSDictionary *)setRequestHeaderField:(NSDictionary *)params {
-    
-    /// 获取应用标识
-    NSString *appId = FWENGINEAPPID;
-    /// 获取随机标识字符串
-    NSString *nonce = [FWToolBridge getUniqueIdentifier];
-    /// 获取当前秒级时间戳
-    NSString *timestamp = [NSString stringWithFormat:@"%ld", (NSInteger)[FWDateBridge getNowTimeInterval]];
-    
-    /// 声明头信息字典
-    NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    [header setValue:appId forKey:@"app_id"];
-    [header setValue:nonce forKey:@"nonce"];
-    [header setValue:timestamp forKey:@"timestamp"];
-    
-    /// 获取所有头信息键值列表
-    NSArray *allkeys = [header allKeys];
-    /// 对当前头信息键值列表进行排序
-    NSArray<NSString *> *resultArray = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id _Nonnull obj1, id _Nonnull obj2) {
-        return [obj1 compare:obj2];
-    }];
-    
-    /// 遍历头信息键值列表创建签名字符串
-    __block NSMutableString *resultStr = [NSMutableString string];
-    [resultArray enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSString *itemStr = [NSString stringWithFormat:@"%@=%@&", obj, [header objectForKey:obj]];
-        [resultStr appendString:itemStr];
-    }];
-    
-    /// 如果请求参数不为空时，拼接参数串
-    if (!kDictIsEmpty(params)) {
-        /// 参数字典转换成请求串
-        NSString *paramsStr = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:params options:0 error:0] encoding:NSUTF8StringEncoding];
-        /// 追加参数串到加密串
-        [resultStr appendString:paramsStr];
-    }
-    
-    /// 移除结果串结尾的子字符串'&'并获得可签名字符串
-    NSString *signableStr = [resultStr removeLastSubString:@"&"];
-    /// HmacSHA256方式加密的字符串
-    NSString *hmacSHA256Str = [FWToolBridge HmacSHA256:FWENGINEAPPKEY data:signableStr];
-    /// 获得签名结果
-    NSString *signature = [[hmacSHA256Str stringByReplacingOccurrencesOfString:@"-" withString:@""] lowercaseString];
-    /// 补充签名结果
-    [header setValue:signature forKey:@"signature"];
-    
-    /// 设置请求头信息
-    [self.sessionManager.requestSerializer setValue:appId forHTTPHeaderField:@"app_id"];
-    [self.sessionManager.requestSerializer setValue:nonce forHTTPHeaderField:@"nonce"];
-    [self.sessionManager.requestSerializer setValue:timestamp forHTTPHeaderField:@"timestamp"];
-    [self.sessionManager.requestSerializer setValue:signature forHTTPHeaderField:@"signature"];
-    
-    /// 返回请求头信息
-    return header;
-}
-
 #pragma mark 响应结果处理
 /// 响应结果处理
 /// - Parameters:
@@ -197,7 +169,7 @@
     /// 解析请求结果
     NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
     /// 解析请求结果描述
-    NSString *message = (code == VCSNetworkSucceed) ? @"数据请求成功" : [responseObject objectForKey:@"msg"];
+    NSString *message = (code == VCSNetworkCodeOK) ? @"数据请求成功" : [responseObject objectForKey:@"msg"];
     
     /// 创建结果临时变量
     id resp = responseObject;
@@ -216,9 +188,36 @@
         }
     }
     
+    /// 令牌失效或过期需要用户重新登录
+    if (code == VCSNetworkCodeAuthFailed || code == VCSNetworkCodeTokenInvalid || code == VCSNetworkCodeTokenExpired) {
+        /// 鉴权令牌失效提示弹窗
+        [self tokenInvalidAlert];
+    }
+    
     /// 回调请求结果
     if (resultBlock) {
-        resultBlock((code == VCSNetworkSucceed), resp, message);
+        resultBlock((code == VCSNetworkCodeOK), resp, message);
+    }
+}
+
+#pragma mark 处理响应头数据
+/// 处理响应头数据
+/// - Parameter task: 请求任务
+- (void)handleResponseheaders:(NSURLSessionDataTask *)task {
+    
+    /// 判别响应数据类型
+    if ([task.response isKindOfClass:[NSHTTPURLResponse class]]) {
+        /// 转换接口响应信息
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
+        /// 获取所有的响应头数据
+        NSDictionary *headers = [httpResponse allHeaderFields];
+        /// 判断响应头中是否存在新令牌对象
+        if ([headers.allKeys containsObject:@"new-token"]) {
+            /// 获取新令牌
+            NSString *token = [headers objectForKey:@"new-token"];
+            /// 更新用户令牌
+            [[FWStoreDataBridge sharedManager] updateAuthToken:token];
+        }
     }
 }
 
@@ -276,6 +275,23 @@
         errorMsg = error.description;
     }
     return errorMsg;
+}
+
+#pragma mark 鉴权令牌失效提示弹窗
+/// 鉴权令牌失效提示弹窗
+- (void)tokenInvalidAlert {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"登录已失效，请您重新登录。" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        /// 会议组件登出
+        [[MeetingKit sharedInstance] logout:nil onFailed:nil];
+        /// 本地退出登录
+        [[FWStoreDataBridge sharedManager] logout];
+        /// 切换登录视图
+        [[FWEntryBridge sharedManager] changeLoginView];
+    }];
+    [alert addAction:cancelAction];
+    [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 @end

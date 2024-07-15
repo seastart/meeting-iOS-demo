@@ -23,17 +23,21 @@ NS_ASSUME_NONNULL_BEGIN
 /// 部分基础设置
 - (void)setupDefault;
 
-#pragma mark - 设置根视图为登录模块(未登录状态下)
-/// 设置根视图为登录模块(未登录状态下)
-- (void)setWindowRootEntry;
+#pragma mark - 设置窗口根视图
+/// 设置窗口根视图
+- (void)setWindowRootView;
 
-#pragma mark - 设置根视图为首页模块(登录状态下)
-/// 设置根视图为首页模块(登录状态下)
-- (void)setWindowRootHome;
+#pragma mark - 切换登录视图
+/// 切换登录视图
+- (void)changeLoginView;
 
-#pragma mark - 设置首页根视图
-/// 设置首页根视图
-- (void)_setWindowRootHome;
+#pragma mark - 切换首页视图
+/// 切换首页视图
+- (void)changeHomeView;
+
+#pragma mark - 请求会议授权
+/// 请求会议授权
+- (void)queryMeetingGrant;
 
 #pragma mark - 开启后台任务
 /// 开启后台任务
