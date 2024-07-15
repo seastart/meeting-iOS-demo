@@ -57,6 +57,8 @@
 /// 部分基础设置
 - (void)setupDefault {
     
+    /// 让线程休眠一段时间来达到修改启动页面停留时间效果
+    /// [NSThread sleepForTimeInterval:3];
     /// 启用键盘功能
     [[IQKeyboardManager sharedManager] setEnable:YES];
     /// 键盘弹出时点击背景键盘收回
@@ -75,8 +77,13 @@
     FWUserModel *userModel = [[FWStoreDataBridge sharedManager] findUserModel];
     /// 根据本地用户数据来确定用户是否为登录状态
     if (userModel) {
-        /// 用户为登录状态，首先请求会议授权，然后初始化会议组件
-        [self queryMeetingGrant];
+        /// 用户为登录状态，直接切换首页视图
+        [self changeHomeView];
+        /// 增加体验，延迟0.5秒钟发起相关请求等
+        FWDispatchAfter((int64_t)(0.5 * NSEC_PER_SEC), ^{
+            /// 请求会议授权，然后初始化会议组件
+            [self queryMeetingGrant];
+        });
     } else {
         /// 用户为非登录状态，直接切换到登录视图
         [self changeLoginView];
@@ -125,8 +132,8 @@
         } else {
             /// 切换登录视图
             [self changeLoginView];
-            /// 失败提示信息
-            [SVProgressHUD showInfoWithStatus:errorMsg];
+            /// 登录失败提示
+            [self loginErrorAlert:[NSString stringWithFormat:@"请求会议授权失败(%@)，请您重新登录。", errorMsg]];
         }
     }];
 }
@@ -141,19 +148,30 @@
     [SVProgressHUD show];
     /// 组件登录
     [[MeetingKit sharedInstance] loginWithToken:authToken appGroup:FWAPPGROUP onSuccess:^(id _Nullable data) {
-        @strongify(self);
+        /// @strongify(self);
         /// 隐藏加载状态
         [SVProgressHUD dismiss];
         /// 切换首页视图
-        [self changeHomeView];
+        /// [self changeHomeView];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
+        @strongify(self);
         /// 隐藏加载状态
         [SVProgressHUD dismiss];
-        /// 构造日志信息
-        NSString *logStr = [NSString stringWithFormat:@"组件登录失败 code = %ld, message = %@", code, message];
-        [SVProgressHUD showInfoWithStatus:logStr];
-        SGLOG(@"%@", logStr);
+        /// 登录失败提示
+        [self loginErrorAlert:[NSString stringWithFormat:@"会议组件登录失败(%ld，%@)，请您重新登录。", code, message]];
     }];
+}
+
+#pragma mark - 登录失败提示
+/// 登录失败提示
+/// - Parameter message: 描述信息
+- (void)loginErrorAlert:(NSString *)message {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    [alert addAction:cancelAction];
+    [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - 开启后台任务
