@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,13 +29,13 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5pQ-fD-eEo">
-                    <rect key="frame" x="0.0" y="340.66666666666674" width="393" height="511.33333333333326"/>
+                    <rect key="frame" x="0.0" y="318.33333333333331" width="393" height="553.66666666666674"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kbo-3E-4I0">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="55"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="举报" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDN-yV-UL3">
-                                    <rect key="frame" x="180.33333333333334" y="18" width="32.666666666666657" height="19.333333333333329"/>
+                                    <rect key="frame" x="180.33333333333334" y="17.666666666666686" width="32.666666666666657" height="19.333333333333329"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -76,13 +76,13 @@
                             </connections>
                         </collectionView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="举报描述（选填）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zE2-Mv-X1M">
-                            <rect key="frame" x="16" y="210.99999999999994" width="95.666666666666671" height="15.666666666666657"/>
+                            <rect key="frame" x="16" y="211.00000000000006" width="95.666666666666671" height="15.666666666666657"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Evv-lG-roA">
-                            <rect key="frame" x="16" y="234.66666666666669" width="361" height="177.66666666666669"/>
+                            <rect key="frame" x="16" y="234.66666666666669" width="361" height="200"/>
                             <color key="backgroundColor" red="0.96862745100000003" green="0.97254901959999995" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -99,7 +99,7 @@
                             </userDefinedRuntimeAttributes>
                         </textView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QkJ-pG-pk9">
-                            <rect key="frame" x="16" y="422.33333333333331" width="361" height="45"/>
+                            <rect key="frame" x="16" y="444.66666666666669" width="361" height="45"/>
                             <color key="backgroundColor" red="0.0" green="0.22352941179999999" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="tsu-XM-Qfs"/>
@@ -155,8 +155,8 @@
                 <constraint firstItem="5MX-cm-4Rp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Vgy-AP-61O"/>
                 <constraint firstAttribute="bottom" secondItem="5MX-cm-4Rp" secondAttribute="bottom" id="Z64-88-mJx"/>
                 <constraint firstAttribute="trailing" secondItem="5pQ-fD-eEo" secondAttribute="trailing" id="ZkK-Oo-pgz"/>
-                <constraint firstItem="5pQ-fD-eEo" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="3/5" id="s0f-ZA-DuS"/>
-                <constraint firstAttribute="bottom" secondItem="5pQ-fD-eEo" secondAttribute="bottom" id="smQ-KU-XAr"/>
+                <constraint firstItem="5pQ-fD-eEo" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.65" id="s0f-ZA-DuS"/>
+                <constraint firstAttribute="bottom" secondItem="5pQ-fD-eEo" secondAttribute="bottom" constant="-20" id="smQ-KU-XAr"/>
             </constraints>
             <point key="canvasLocation" x="26.717557251908396" y="19.718309859154932"/>
         </view>

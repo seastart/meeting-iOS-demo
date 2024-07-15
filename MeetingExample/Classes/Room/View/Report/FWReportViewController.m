@@ -76,6 +76,8 @@ static NSString *FWReportCollectionViewCellName = @"FWReportCollectionViewCell";
     [super viewDidAppear:animated];
     /// 设置背景样式
     self.view.backgroundColor = RGBAOF(0x000000, 0.5);
+    /// 启用IQKeyboard
+    [[IQKeyboardManager sharedManager] setEnable:YES];
 }
 
 #pragma mark - 初始化UI
@@ -208,7 +210,7 @@ static NSString *FWReportCollectionViewCellName = @"FWReportCollectionViewCell";
 #pragma mark 设置每个Cell的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    return CGSizeMake((self.collectionView.frame.size.width - 28) / 3.f, 36);
+    return CGSizeMake((self.collectionView.frame.size.width - 30) / 3.f, 36);
 }
 
 #pragma mark 设置内容整体边距
@@ -261,6 +263,13 @@ static NSString *FWReportCollectionViewCellName = @"FWReportCollectionViewCell";
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     
     return YES;
+}
+
+#pragma mark - 资源释放
+- (void)dealloc {
+    
+    /// 禁用IQKeyboard
+    [[IQKeyboardManager sharedManager] setEnable:NO];
 }
 
 @end
