@@ -11,13 +11,15 @@
 
 @interface FWRoomMemberManager()
 
-/// 当前用户角色
-@property (nonatomic, assign, readwrite) SEAUserRole role;
 /// 房间内成员列表
-@property (nonatomic, strong) NSMutableArray<FWRoomMemberModel *> *roomMemberArray;
+/// 成员标识作为Key
+/// 成员对象组成Value
+@property (nonatomic, strong, readwrite) NSMutableDictionary<NSString *, FWRoomMemberModel *> *roomMemberArray;
 
 /// 刷新成员列表回调
 @property (nonatomic, copy) FWRoomMemberManagerReloadBlock reloadBlock;
+/// 当前角色变更回调
+@property (nonatomic, copy) FWRoomMemberManagerRoleChangedBlock roleChangedBlock;
 
 @end
 
@@ -36,12 +38,12 @@
     return manager;
 }
 
-#pragma mark - 创建成员列表
+#pragma mark 创建成员列表
 /// 创建成员列表
-- (NSMutableArray<FWRoomMemberModel *> *)roomMemberArray {
+- (NSMutableDictionary<NSString *, FWRoomMemberModel *> *)roomMemberArray {
     
     if (!_roomMemberArray) {
-        _roomMemberArray = [NSMutableArray arrayWithCapacity:0];
+        _roomMemberArray = [NSMutableDictionary dictionary];
     }
     return _roomMemberArray;
 }
@@ -65,29 +67,19 @@
 
 #pragma mark - 获取当前所有成员
 /// 获取当前所有成员
-- (NSArray<FWRoomMemberModel *> *)getAllMembers {
+- (nullable NSArray<FWRoomMemberModel *> *)getAllMembers {
     
-    return [NSArray arrayWithArray:self.roomMemberArray];
+    return self.roomMemberArray.allValues;
 }
 
 #pragma mark - 查找成员信息
 /// 查找成员信息
 /// - Parameter userId: 成员标识
-- (FWRoomMemberModel *)findMemberWithUserId:(NSString *)userId {
+- (nullable FWRoomMemberModel *)findMemberWithUserId:(NSString *)userId {
     
-    /// 声明成员信息
-    __block FWRoomMemberModel *memberModel = nil;
-    /// 遍历成员列表，查找对应成员
-    [self.roomMemberArray enumerateObjectsUsingBlock:^(FWRoomMemberModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        /// 匹配列表成员
-        if ([userId isEqualToString:obj.userId]) {
-            /// 保存成员信息
-            memberModel = obj;
-            /// 结束遍历
-            *stop = YES;
-        }
-    }];
-    /// 返回成员信息
+    /// 获取对应标识的成员数据
+    FWRoomMemberModel *memberModel = [self.roomMemberArray objectForKey:userId];
+    /// 返回成员数据
     return memberModel;
 }
 
@@ -96,21 +88,20 @@
 /// - Parameter userId: 成员标识
 - (FWRoomMemberModel *)memberShareChangedWithUserId:(NSString *)userId {
     
-    /// 声明成员信息
-    __block FWRoomMemberModel *memberModel = nil;
-    /// 遍历成员列表，查找对应成员
-    [self.roomMemberArray enumerateObjectsUsingBlock:^(FWRoomMemberModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        /// 恢复其它成员共享状态
+    /// 遍历成员列表重置共享状态
+    [self.roomMemberArray enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, FWRoomMemberModel * _Nonnull obj, BOOL * _Nonnull stop) {
+        /// 重置共享状态
         obj.isSharing = NO;
-        /// 匹配列表成员
-        if ([userId isEqualToString:obj.userId]) {
-            /// 修改成员共享状态
-            obj.isSharing = YES;
-            /// 保存成员信息
-            memberModel = obj;
-        }
     }];
-    /// 返回成员信息
+    
+    /// 获取对应标识的成员数据
+    FWRoomMemberModel *memberModel = [self.roomMemberArray objectForKey:userId];
+    /// 存在该成员
+    if (memberModel) {
+        /// 标记成员共享状态
+        memberModel.isSharing = YES;
+    }
+    /// 返回成员数据
     return memberModel;
 }
 
@@ -121,40 +112,28 @@
 ///   - isMine: 是否为自己
 - (FWRoomMemberModel *)onMemberEnterRoom:(NSString *)userId isMine:(BOOL)isMine {
     
-    /// 声明成员信息
-    __block FWRoomMemberModel *memberModel = nil;
-    /// 遍历成员列表，查找对应成员
-    [self.roomMemberArray enumerateObjectsUsingBlock:^(FWRoomMemberModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        /// 匹配列表成员
-        if ([userId isEqualToString:obj.userId]) {
-            /// 保存成员信息
-            memberModel = obj;
-            /// 结束遍历
-            *stop = YES;
-        }
-    }];
+    /// 获取对应标识的成员数据
+    FWRoomMemberModel *memberModel = [self.roomMemberArray objectForKey:userId];
     /// 不存在该成员
     if (!memberModel) {
+        /// 获取用户数据
+        RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:userId];
+        /// 获取用户扩展属性
+        FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:userModel.props];
+        
         /// 创建成员信息
         memberModel = [[FWRoomMemberModel alloc] init];
         memberModel.userId = userId;
+        memberModel.userRole = extendModel.role;
         memberModel.isMine = isMine;
         memberModel.isSharing = NO;
         memberModel.subscribe = NO;
         memberModel.enterDate = [NSDate date];
-        if (isMine) {
-            /// 获取成员扩展信息
-            FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:[[MeetingKit sharedInstance] getMySelf].props];
-            /// 保存用户角色
-            self.role = extendModel.role;
-            /// 插入到成员列表
-            [self.roomMemberArray insertObject:memberModel atIndex:0];
-        } else {
-            /// 添加到成员列表
-            [self.roomMemberArray addObject:memberModel];
-        }
+        
+        /// 添加到成员列表
+        [self.roomMemberArray setValue:memberModel forKey:userId];
     }
-    /// 返回成员信息
+    /// 返回成员数据
     return memberModel;
 }
 
@@ -163,25 +142,52 @@
 /// - Parameter userId: 成员标识
 - (FWRoomMemberModel *)onMemberExitRoom:(NSString *)userId {
     
-    /// 声明成员信息
-    __block FWRoomMemberModel *memberModel = nil;
-    /// 遍历成员列表，查找对应成员
-    [self.roomMemberArray enumerateObjectsUsingBlock:^(FWRoomMemberModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        /// 匹配列表成员
-        if ([userId isEqualToString:obj.userId]) {
-            /// 保存成员信息
-            memberModel = obj;
-            /// 结束遍历
-            *stop = YES;
-        }
-    }];
+    /// 获取对应标识的成员数据
+    FWRoomMemberModel *memberModel = [self.roomMemberArray objectForKey:userId];
     /// 存在该成员
     if (memberModel) {
         /// 移除本地成员列表
-        [self.roomMemberArray removeObject:memberModel];
+        [self.roomMemberArray removeObjectForKey:userId];
     }
-    /// 返回成员信息
+    /// 返回成员数据
     return memberModel;
+}
+
+#pragma mark - 变更成员角色
+/// 变更成员角色
+/// - Parameters:
+///   - userId: 成员标识
+///   - userRole: 用户角色
+- (FWRoomMemberModel *)userRoleChanged:(NSString *)userId userRole:(SEAUserRole)userRole {
+    
+    /// 获取对应标识的成员数据
+    FWRoomMemberModel *memberModel = [self.roomMemberArray objectForKey:userId];
+    /// 存在该成员
+    if (memberModel) {
+        /// 变更成员角色
+        memberModel.userRole = userRole;
+    }
+    /// 如果当前用户角色发生变更
+    if (memberModel.isMine) {
+        /// 通知回调刷新必要视图
+        if (self.roleChangedBlock) {
+            self.roleChangedBlock();
+        }
+    }
+    /// 返回成员数据
+    return memberModel;
+}
+
+#pragma mark - 获取当前用户角色
+/// 获取当前用户角色
+- (SEAUserRole)getUserRole {
+    
+    /// 获取用户数据
+    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    /// 获取用户扩展属性
+    FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:userModel.props];
+    /// 返回用户角色
+    return extendModel.role;
 }
 
 #pragma mark - 刷新成员列表回调
@@ -190,6 +196,14 @@
 - (void)reloadBlock:(nullable FWRoomMemberManagerReloadBlock)reloadBlock {
     
     self.reloadBlock = reloadBlock;
+}
+
+#pragma mark - 当前角色变更回调
+/// 当前角色变更回调
+/// @param roleChangedBlock 当前角色变更回调
+- (void)roleChangedBlock:(nullable FWRoomMemberManagerRoleChangedBlock)roleChangedBlock {
+    
+    self.roleChangedBlock = roleChangedBlock;
 }
 
 @end

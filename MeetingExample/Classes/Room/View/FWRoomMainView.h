@@ -84,6 +84,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter userId: 成员标识
 - (void)memberUserExit:(NSString *)userId;
 
+#pragma mark - 变更成员昵称
+/// 变更成员昵称
+/// - Parameters:
+///   - userId: 成员标识
+///   - nickname: 用户昵称
+- (void)userNameChanged:(NSString *)userId nickname:(NSString *)nickname;
+
 #pragma mark - 用户摄像头状态变化
 /// 用户摄像头状态变化
 /// @param userId 成员标识

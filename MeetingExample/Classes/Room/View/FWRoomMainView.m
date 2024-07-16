@@ -350,6 +350,19 @@
     [self.roomMemberView memberExitWithUserId:userId];
 }
 
+#pragma mark - 变更成员昵称
+/// 变更成员昵称
+/// - Parameters:
+///   - userId: 成员标识
+///   - nickname: 用户昵称
+- (void)userNameChanged:(NSString *)userId nickname:(NSString *)nickname {
+    
+    /// 更新用户基本信息
+    [self.roomCaptureView setupMemberInfo];
+    /// 更新成员基本信息
+    [self.roomMemberView refreshMemberData:userId];
+}
+
 #pragma mark - 用户摄像头状态变化
 /// 用户摄像头状态变化
 /// @param userId 成员标识

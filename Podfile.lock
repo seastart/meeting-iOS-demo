@@ -24,7 +24,7 @@ PODS:
   - ReactiveObjC (3.1.1)
   - RTCControlLink (0.1.1):
     - CocoaAsyncSocket
-  - "RTCEngineKit (1.0.8-alpha.4+20240712)":
+  - "RTCEngineKit (1.0.8-alpha.5+20240716)":
     - CocoaAsyncSocket
   - SDWebImage (5.15.0):
     - SDWebImage/Core (= 5.15.0)
@@ -69,7 +69,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   RTCEngineKit:
-    :commit: d034d29a2a6dd5bbc274e3ee6afccedff41a848a
+    :commit: 1f447faf2b1daa9056d9fa595db0c146c99ea437
     :git: https://github.com/seastart/rtc-ios-cocoapods.git
   SVProgressHUD:
     :commit: ffd939e28a4aec34bf136f9dbfc272fb0154f716
@@ -85,7 +85,7 @@ SPEC CHECKSUMS:
   MyLayout: 39ee012bd780936c973bdc5d8ce0f84e3de489d7
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   RTCControlLink: d7e434b17c3268e1d0f2f28ccf75b68ffd273940
-  RTCEngineKit: 719a27f2d7eb3c867e2492982b8adfc4c5312323
+  RTCEngineKit: 284605465cd24867c11f8b8976e59cf698f3c99a
   SDWebImage: 9bec4c5cdd9579e1f57104735ee0c37df274d593
   SVProgressHUD: 75bf569c9126226b6528098e123b0d886d6f0ca4
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30

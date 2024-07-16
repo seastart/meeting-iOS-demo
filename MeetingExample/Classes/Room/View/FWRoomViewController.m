@@ -163,6 +163,8 @@
         @strongify(self);
         /// 离开房间页面
         [self pop:1];
+        /// 移除加载指示框
+        [SVProgressHUD dismiss];
         /// 清空成员列表
         [[FWRoomMemberManager sharedManager] cleanMembers];
         /// 清空聊天列表数据
@@ -266,26 +268,26 @@
 /// 开始重连事件回调
 - (void)onReconnecting {
     
+    /// 日志埋点
+    SGLOG(@"%@", @"服务开始重连");
     /// 提示操作信息
     NSString *toastStr = [NSString stringWithFormat:@"服务正在重连..."];
     /// 显示加载动画
     [SVProgressHUD showWithStatus:toastStr];
-    /// 日志埋点
-    SGLOG(@"%@", @"服务开始重连");
 }
 
 #pragma mark 重连成功事件回调
 /// 重连成功事件回调
 - (void)onReconnected {
     
+    /// 日志埋点
+    SGLOG(@"%@", @"服务重连成功");
     /// 提示操作信息
     NSString *toastStr = [NSString stringWithFormat:@"服务重连成功"];
     /// 改变显示内容
     [SVProgressHUD setStatus:toastStr];
     /// 隐藏加载动画
     [SVProgressHUD dismissWithDelay:2.f];
-    /// 日志埋点
-    SGLOG(@"%@", @"服务重连成功");
 }
 
 
@@ -310,10 +312,10 @@
 /// - Parameter reason: 离开原因
 - (void)onExitRoom:(SEALeaveReason)reason {
     
-    /// 离开房间
-    [self exitRoom:reason error:SEAErrorOK describe:nil];
     /// 日志埋点
     SGLOG(@"%@", @"您已经离开房间");
+    /// 离开房间
+    [self exitRoom:reason error:SEAErrorOK describe:nil];
 }
 
 #pragma mark 请求开启摄像头回调
@@ -490,6 +492,8 @@
     SGLOG(@"用户昵称变化，userId = %@ nickname = %@", targetUserId, nickname);
     /// 刷新成员列表
     [[FWRoomMemberManager sharedManager] reloadMemberLists];
+    /// 成员昵称变化
+    [self.roomMainView userNameChanged:targetUserId nickname:nickname];
 }
 
 #pragma mark 用户角色变化回调
@@ -503,6 +507,8 @@
     SGLOG(@"用户角色变化，userId = %@ userRole = %ld", targetUserId, userRole);
     /// 刷新成员列表
     [[FWRoomMemberManager sharedManager] reloadMemberLists];
+    /// 变更成员角色
+    [[FWRoomMemberManager sharedManager] userRoleChanged:targetUserId userRole:userRole];
 }
 
 #pragma mark 用户摄像头状态变化回调

@@ -91,6 +91,7 @@
 }
 
 #pragma mark - 设置默认数据
+/// 设置默认数据
 - (void)setupDefaultData {
     
     /// 设置页面标题
@@ -105,7 +106,7 @@
     /// 声明显示状态
     BOOL hidden = YES;
     /// 根据当前用户角色设置边距以及显示状态
-    if ([FWRoomMemberManager sharedManager].role == SEAUserRoleNormal) {
+    if ([[FWRoomMemberManager sharedManager] getUserRole] == SEAUserRoleNormal) {
         hidden = YES;
         bottomMargin = 0.0;
     } else {
@@ -190,6 +191,13 @@
         @strongify(self);
         /// 刷新成员列表
         [self reloadMemberLists];
+    }];
+    
+    /// 当前角色变更回调
+    [[FWRoomMemberManager sharedManager] roleChangedBlock:^{
+        @strongify(self);
+        /// 重新设置默认数据
+        [self setupDefaultData];
     }];
 }
 
