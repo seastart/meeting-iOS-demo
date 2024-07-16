@@ -284,10 +284,10 @@
     BOOL audioState = enterModel.audioState;
     /// 获取默认视频状态
     BOOL videoState = enterModel.videoState;
-    /// 设置默认音视频状态
-    [self setupDefaultAudioState:audioState videoState:videoState];
     /// 进入房间成功
     [self.roomMemberView enterRoom:userId];
+    /// 设置默认音视频状态
+    [self setupDefaultAudioState:audioState videoState:videoState];
 }
 
 #pragma mark - 设置默认音视频状态
@@ -356,6 +356,23 @@
 /// @param cameraState 视频状态
 - (void)userCameraStateChanged:(NSString *)userId cameraState:(SEADeviceState)cameraState {
     
+    /// 获取当前用户数据
+    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    /// 判断是否是自己的摄像头状态发生变化
+    if ([userModel.userId isEqualToString:userId]) {
+        /// 摄像头状态为开启
+        if (cameraState == SEADeviceStateOpen) {
+            /// 开启摄像头预览
+            [self.roomCaptureView startLocalPreview];
+            /// 设置底部工具栏按钮
+            [self.roomBottomTool setupVideoButtonSelected:NO];
+        } else if (cameraState == SEADeviceStateClosed) {
+            /// 停止摄像头预览
+            [self.roomCaptureView stopLocalPreview];
+            /// 设置底部工具栏按钮
+            [self.roomBottomTool setupVideoButtonSelected:YES];
+        }
+    }
     /// 用户摄像头状态变化
     [self.roomMemberView userCameraStateChanged:userId cameraState:cameraState];
 }
@@ -366,6 +383,23 @@
 /// @param micState 音频状态
 - (void)userMicStateChanged:(NSString *)userId micState:(SEADeviceState)micState {
     
+    /// 获取当前用户数据
+    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    /// 判断是否是自己的麦克风状态发生变化
+    if ([userModel.userId isEqualToString:userId]) {
+        /// 摄像头状态为开启
+        if (micState == SEADeviceStateOpen) {
+            /// 开启音频发送
+            [self.roomCaptureView startSendAudio];
+            /// 设置底部工具栏按钮
+            [self.roomBottomTool setupAudioButtonSelected:NO];
+        } else if (micState == SEADeviceStateClosed) {
+            /// 停止音频发送
+            [self.roomCaptureView stopSendAudio];
+            /// 设置底部工具栏按钮
+            [self.roomBottomTool setupAudioButtonSelected:YES];
+        }
+    }
     /// 用户麦克风状态变化
     [self.roomMemberView userMicStateChanged:userId micState:micState];
 }
@@ -386,16 +420,16 @@
 /// - Parameter source: 事件源对象
 - (void)requestOpenVideo:(UIButton *)source {
     
-    @weakify(self);
+    /// @weakify(self);
     /// 获取预览视图
     UIView *preview = self.palaceMode ? [self.roomMemberView.mineWindowView getPlayerWindow] : [self.roomCaptureView getPreview];
     /// 用户请求打开摄像头
     [[MeetingKit sharedInstance] requestOpenCamera:YES view:preview onSuccess:^(id  _Nullable data) {
-        @strongify(self);
+        /// @strongify(self);
         /// 开启摄像头预览
-        [self.roomCaptureView startLocalPreview];
+        /// [self.roomCaptureView startLocalPreview];
         /// 切换源按钮选中状态
-        source.selected = !source.selected;
+        /// source.selected = !source.selected;
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求开启视频失败 code = %ld, message = %@", code, message];
@@ -409,14 +443,14 @@
 /// - Parameter source: 事件源对象
 - (void)requestCloseVideo:(UIButton *)source {
     
-    @weakify(self);
+    /// @weakify(self);
     /// 用户关闭摄像头
     [[MeetingKit sharedInstance] closeCamera:^(id  _Nullable data) {
-        @strongify(self);
+        /// @strongify(self);
         /// 停止摄像头预览
-        [self.roomCaptureView stopLocalPreview];
+        /// [self.roomCaptureView stopLocalPreview];
         /// 切换源按钮选中状态
-        source.selected = !source.selected;
+        /// source.selected = !source.selected;
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求关闭视频失败 code = %ld, message = %@", code, message];
@@ -430,14 +464,14 @@
 /// - Parameter source: 事件源对象
 - (void)requestOpenAudio:(UIButton *)source {
     
-    @weakify(self);
+    /// @weakify(self);
     /// 用户请求打开麦克风
     [[MeetingKit sharedInstance] requestOpenMic:^(id  _Nullable data) {
-        @strongify(self);
+        /// @strongify(self);
         /// 开启音频发送
-        [self.roomCaptureView startSendAudio];
+        /// [self.roomCaptureView startSendAudio];
         /// 切换源按钮选中状态
-        source.selected = !source.selected;
+        /// source.selected = !source.selected;
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求开启音频失败 code = %ld, message = %@", code, message];
@@ -451,14 +485,14 @@
 /// - Parameter source: 事件源对象
 - (void)requestCloseAudio:(UIButton *)source {
     
-    @weakify(self);
+    /// @weakify(self);
     /// 用户关闭麦克风
     [[MeetingKit sharedInstance] closeMic:^(id  _Nullable data) {
-        @strongify(self);
+        /// @strongify(self);
         /// 停止音频发送
-        [self.roomCaptureView stopSendAudio];
+        /// [self.roomCaptureView stopSendAudio];
         /// 切换源按钮选中状态
-        source.selected = !source.selected;
+        /// source.selected = !source.selected;
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求关闭音频失败 code = %ld, message = %@", code, message];
