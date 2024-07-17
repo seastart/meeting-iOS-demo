@@ -11,7 +11,6 @@
 #import "FWRoomMemberModel.h"
 #import "FWRoomViewModel.h"
 #import "FWRoomMainView.h"
-#import "FWExtendModel.h"
 
 @interface FWRoomViewController () <MeetingKitDelegate, FWRoomMainViewDelegate>
 
@@ -431,11 +430,9 @@
     /// 日志埋点
     SGLOG(@"共享结束通知，userId = %@", userId);
     /// 获取用户数据
-    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:userId];
-    /// 获取用户扩展属性
-    FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:userModel.props];
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:userId];
     /// 用户共享状态变化
-    [self.roomMainView userShareStateChanged:userId enabled:NO shareType:extendModel.shareState];
+    [self.roomMainView userShareStateChanged:userId enabled:NO shareType:userModel.extend.shareState];
 }
 
 #pragma mark 房间举手状态变化回调

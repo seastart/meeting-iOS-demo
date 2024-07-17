@@ -7,7 +7,6 @@
 //
 
 #import "FWRoomMemberView.h"
-#import "FWExtendModel.h"
 
 /// 成员窗口视图宽度
 #define FW_WINDOW_ITEM_WIDTH (self.scrollView.sa_width - 5) / 2
@@ -179,9 +178,7 @@
     /// 不存在该成员
     if (!memberWindowView) {
         /// 获取用户数据
-        RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:userId];
-        /// 获取用户扩展属性
-        FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:userModel.props];
+        SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:userId];
         
         /// 创建成员窗口视图
         FWRoomMemberWindowView *windowView = [[FWRoomMemberWindowView alloc] initWithFrame:CGRectMake(0, 0, FW_WINDOW_ITEM_WIDTH, FW_WINDOW_ITEM_HEIGHT)];
@@ -199,9 +196,9 @@
         [self.displayItems setValue:windowView forKey:userId];
         
         /// 设置用户摄像头状态
-        [self userCameraStateChanged:userId cameraState:extendModel.cameraState];
+        [self userCameraStateChanged:userId cameraState:userModel.extend.cameraState];
         /// 设置用户麦克风状态
-        [self userMicStateChanged:userId micState:extendModel.micState];
+        [self userMicStateChanged:userId micState:userModel.extend.micState];
     } else {
         /// 更新成员信息
     }

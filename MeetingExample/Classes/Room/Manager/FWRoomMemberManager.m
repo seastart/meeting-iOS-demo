@@ -7,7 +7,6 @@
 //
 
 #import "FWRoomMemberManager.h"
-#import "FWExtendModel.h"
 
 @interface FWRoomMemberManager()
 
@@ -117,14 +116,12 @@
     /// 不存在该成员
     if (!memberModel) {
         /// 获取用户数据
-        RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:userId];
-        /// 获取用户扩展属性
-        FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:userModel.props];
+        SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:userId];
         
         /// 创建成员信息
         memberModel = [[FWRoomMemberModel alloc] init];
         memberModel.userId = userId;
-        memberModel.userRole = extendModel.role;
+        memberModel.userRole = userModel.extend.role;
         memberModel.isMine = isMine;
         memberModel.isSharing = NO;
         memberModel.subscribe = NO;
@@ -183,11 +180,9 @@
 - (SEAUserRole)getUserRole {
     
     /// 获取用户数据
-    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
-    /// 获取用户扩展属性
-    FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:userModel.props];
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
     /// 返回用户角色
-    return extendModel.role;
+    return userModel.extend.role;
 }
 
 #pragma mark - 刷新成员列表回调

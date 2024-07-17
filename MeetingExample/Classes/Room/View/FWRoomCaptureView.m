@@ -9,7 +9,6 @@
 #import "FWRoomCaptureView.h"
 #import "FWRoomStatusView.h"
 #import "FWRoomMemberModel.h"
-#import "FWExtendModel.h"
 
 @interface FWRoomCaptureView()
 
@@ -93,18 +92,16 @@
 - (void)setupMemberInfo {
     
     /// 获取用户数据
-    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
-    /// 获取用户扩展属性
-    FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:userModel.props];
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
     
     /// 设置用户头像
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[extendModel.avatar stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(FWDEFAULTAVATAR)];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[userModel.extend.extendInfo stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(FWDEFAULTAVATAR)];
     /// 设置用户昵称
     self.nameLabel.text = userModel.name;
     
     /// 设置音频状态
     NSString *audioImageName = @"icon_room_microphone_state_un";
-    if (extendModel.micState == SEADeviceStateOpen) {
+    if (userModel.extend.micState == SEADeviceStateOpen) {
         /// 开启状态
         audioImageName = @"icon_room_microphone_state";
     }
@@ -113,7 +110,7 @@
     
     /// 设置视频状态
     NSString *videoImageName = @"icon_room_camera_state_un";
-    if (extendModel.cameraState == SEADeviceStateOpen) {
+    if (userModel.extend.cameraState == SEADeviceStateOpen) {
         /// 开启状态
         videoImageName = @"icon_room_camera_state";
     }

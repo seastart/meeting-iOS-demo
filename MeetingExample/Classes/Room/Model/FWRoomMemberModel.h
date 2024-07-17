@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否在共享
 @property (nonatomic, assign) BOOL isSharing;
 /// 进入时间
-@property (nonatomic, strong) NSDate *enterDate;
+@property (nonatomic, copy) NSDate *enterDate;
 
 
 /// 是否订阅

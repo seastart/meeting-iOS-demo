@@ -10,7 +10,6 @@
 #import "FWMemberViewController.h"
 #import "FWMemberTableViewCell.h"
 #import "FWMemberViewModel.h"
-#import "FWExtendModel.h"
 
 /// 列表头部高度
 #define kFWMemberTableSectionHeaderViewH 10.0
@@ -352,23 +351,21 @@
     /// 获取目标成员
     FWRoomMemberModel *memberModel = [self.listDataSource objectAtIndex:indexPath.row];
     /// 获取用户数据
-    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:memberModel.userId];
-    /// 获取用户扩展属性
-    FWUserExtendModel *extendModel = [FWUserExtendModel yy_modelWithJSON:userModel.props];
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:memberModel.userId];
     /// 获取用户昵称
     NSString *nickname = userModel.name;
     /// 获取用户是否为主持人
-    BOOL isOwner = (extendModel.role == SEAUserRoleHost);
+    BOOL isOwner = (userModel.extend.role == SEAUserRoleHost);
     /// 获取用户是否为当前成员
     BOOL oneself = memberModel.isMine;
     /// 获取用户视频状态
-    BOOL videoState = (extendModel.cameraState == SEADeviceStateOpen);
+    BOOL videoState = (userModel.extend.cameraState == SEADeviceStateOpen);
     /// 获取用户音频状态
-    BOOL audioState = (extendModel.micState == SEADeviceStateOpen);
+    BOOL audioState = (userModel.extend.micState == SEADeviceStateOpen);
     /// 声明弱引用
     @weakify(self);
     /// 设置项目内容
-    [cell setupWithUserId:userModel.userId avatarUrl:extendModel.avatar nicknameText:nickname isOwner:isOwner oneself:oneself videoState:videoState audioState:audioState removeBlock:^(NSString * _Nonnull userId, NSString * _Nonnull nickname) {
+    [cell setupWithUserId:userModel.userId avatarUrl:userModel.extend.extendInfo nicknameText:nickname isOwner:isOwner oneself:oneself videoState:videoState audioState:audioState removeBlock:^(NSString * _Nonnull userId, NSString * _Nonnull nickname) {
         @strongify(self);
         /// 移除成员确认弹窗
         [self presentRoomKickoutAlert:userId nickname:nickname];
