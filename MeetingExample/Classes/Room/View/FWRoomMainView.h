@@ -139,6 +139,26 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter sharingType: 共享类型
 - (void)requestStopSharing:(SEAShareType)sharingType;
 
+#pragma mark - 请求关闭视频
+/// 请求关闭视频
+/// - Parameter source: 事件源对象
+- (void)requestCloseVideo:(nullable UIButton *)source;
+
+#pragma mark - 请求开启视频
+/// 请求开启视频
+/// - Parameter source: 事件源对象
+- (void)requestOpenVideo:(nullable UIButton *)source;
+
+#pragma mark - 请求关闭音频
+/// 请求关闭音频
+/// - Parameter source: 事件源对象
+- (void)requestCloseAudio:(nullable UIButton *)source;
+
+#pragma mark - 请求开启音频
+/// 请求开启音频
+/// - Parameter source: 事件源对象
+- (void)requestOpenAudio:(nullable UIButton *)source;
+
 @end
 
 NS_ASSUME_NONNULL_END

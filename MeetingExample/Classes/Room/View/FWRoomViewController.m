@@ -271,6 +271,45 @@
     [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
+#pragma mark - 主持人邀请开启摄像头
+/// 主持人邀请开启摄像头
+/// - Parameter userId: 用户标识
+- (void)adminInviteOpenCameraAlert:(NSString *)userId {
+    
+    @weakify(self);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"主持人邀请您开启摄像头" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"保持关闭" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"开启摄像头" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 请求开启视频
+        [self.roomMainView requestOpenVideo:nil];
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:ensureAction];
+    [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - 主持人邀请开启麦克风
+/// 主持人邀请开启麦克风
+/// - Parameter userId: 用户标识
+- (void)adminInviteOpenMicAlert:(NSString *)userId {
+    
+    @weakify(self);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"主持人邀请您开启麦克风" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"保持关闭" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"开启麦克风" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 请求开启音频
+        [self.roomMainView requestOpenAudio:nil];
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:ensureAction];
+    [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
+}
 
 #pragma mark - ----- MeetingKitDelegate 代理方法 -----
 #pragma mark ----- 错误事件回调 -----
@@ -372,6 +411,31 @@
     
     /// 日志埋点
     SGLOG(@"房间摄像头禁用状态变更通知，cameraDisabled = %d selfUnmuteCameraDisabled = %d", cameraDisabled, selfUnmuteCameraDisabled);
+    
+    /// 获取当前用户角色
+    SEAUserRole userRole = [[FWRoomMemberManager sharedManager] getUserRole];
+    /// 如果当前用户为主持人
+    if (userRole == SEAUserRoleHost) {
+        /// 无需处理该回调
+        return;
+    }
+    
+    /// 获取当前用户数据
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    /// 判断主持人请求我摄像头状态
+    if (cameraDisabled) {
+        /// 主持人关闭我的摄像头
+        /// 如果当前摄像头状态是打开的，关闭当前摄像头
+        if (userModel.extend.cameraState == SEADeviceStateOpen) {
+            /// 提示主持人关闭摄像头
+            [SVProgressHUD showInfoWithStatus:@"主持人已将您的摄像头关闭"];
+            /// 请求关闭视频
+            [self.roomMainView requestCloseVideo:nil];
+        }
+    } else {
+        /// 主持人邀请我开启摄像头
+        [self adminInviteOpenCameraAlert:userModel.userId];
+    }
 }
 
 #pragma mark 房间麦克风禁用状态变更回调
@@ -383,6 +447,30 @@
     
     /// 日志埋点
     SGLOG(@"房间麦克风禁用状态变更通知，micDisabled = %d selfUnmuteMicDisabled = %d", micDisabled, selfUnmuteMicDisabled);
+    /// 获取当前用户角色
+    SEAUserRole userRole = [[FWRoomMemberManager sharedManager] getUserRole];
+    /// 如果当前用户为主持人
+    if (userRole == SEAUserRoleHost) {
+        /// 无需处理该回调
+        return;
+    }
+    
+    /// 获取当前用户数据
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    /// 判断主持人请求我麦克风状态
+    if (micDisabled) {
+        /// 主持人关闭我的麦克风
+        /// 如果当前麦克风状态是打开的，关闭当前麦克风
+        if (userModel.extend.micState == SEADeviceStateOpen) {
+            /// 提示主持人关闭麦克风
+            [SVProgressHUD showInfoWithStatus:@"主持人已将您的麦克风关闭"];
+            /// 请求关闭音频
+            [self.roomMainView requestCloseAudio:nil];
+        }
+    } else {
+        /// 主持人邀请我开启麦克风
+        [self adminInviteOpenMicAlert:userModel.userId];
+    }
 }
 
 #pragma mark 房间聊天禁用状态变更回调

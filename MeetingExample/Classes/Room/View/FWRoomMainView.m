@@ -206,7 +206,7 @@
     [[MeetingKit sharedInstance] requestShare:SEAShareTypeDrawing onSuccess:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求开启共享白板失败 code = %ld, message = %@", code, message];
-        [SVProgressHUD showInfoWithStatus:toastStr];;
+        [SVProgressHUD showInfoWithStatus:toastStr];
         SGLOG(@"%@", toastStr);
     }];
 }
@@ -219,7 +219,7 @@
     [[MeetingKit sharedInstance] requestShare:SEAShareTypeScreen onSuccess:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求开启共享屏幕失败 code = %ld, message = %@", code, message];
-        [SVProgressHUD showInfoWithStatus:toastStr];;
+        [SVProgressHUD showInfoWithStatus:toastStr];
         SGLOG(@"%@", toastStr);
     }];
 }
@@ -240,7 +240,7 @@
     [[MeetingKit sharedInstance] stopShare:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求关闭共享失败 code = %ld, message = %@", code, message];
-        [SVProgressHUD showInfoWithStatus:toastStr];;
+        [SVProgressHUD showInfoWithStatus:toastStr];
         SGLOG(@"%@", toastStr);
     }];
 }
@@ -468,7 +468,19 @@
 #pragma mark - 请求开启视频
 /// 请求开启视频
 /// - Parameter source: 事件源对象
-- (void)requestOpenVideo:(UIButton *)source {
+- (void)requestOpenVideo:(nullable UIButton *)source {
+    
+    /// 获取当前用户角色
+    SEAUserRole userRole = [[FWRoomMemberManager sharedManager] getUserRole];
+    /// 获取房间详情数据
+    SEARoomModel *roomModel = [[MeetingKit sharedInstance] getRoomDetails];
+    /// 当前用户为普通成员 并且 当前房间摄像头为禁用状态 并且 不允许自我解除摄像头状态
+    if (userRole == SEAUserRoleNormal && roomModel.extend.cameraDisabled && roomModel.extend.selfUnmuteCameraDisabled) {
+        /// 提示禁用状态，不允许自我解除
+        [SVProgressHUD showInfoWithStatus:@"房间摄像头为禁用状态，不允许自我解除。"];
+        /// 结束此次操作
+        return;
+    }
     
     /// @weakify(self);
     /// 获取预览视图
@@ -483,7 +495,7 @@
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求开启视频失败 code = %ld, message = %@", code, message];
-        [SVProgressHUD showInfoWithStatus:toastStr];;
+        [SVProgressHUD showInfoWithStatus:toastStr];
         SGLOG(@"%@", toastStr);
     }];
 }
@@ -491,7 +503,7 @@
 #pragma mark - 请求关闭视频
 /// 请求关闭视频
 /// - Parameter source: 事件源对象
-- (void)requestCloseVideo:(UIButton *)source {
+- (void)requestCloseVideo:(nullable UIButton *)source {
     
     /// @weakify(self);
     /// 用户关闭摄像头
@@ -504,7 +516,7 @@
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求关闭视频失败 code = %ld, message = %@", code, message];
-        [SVProgressHUD showInfoWithStatus:toastStr];;
+        [SVProgressHUD showInfoWithStatus:toastStr];
         SGLOG(@"%@", toastStr);
     }];
 }
@@ -512,7 +524,19 @@
 #pragma mark - 请求开启音频
 /// 请求开启音频
 /// - Parameter source: 事件源对象
-- (void)requestOpenAudio:(UIButton *)source {
+- (void)requestOpenAudio:(nullable UIButton *)source {
+    
+    /// 获取当前用户角色
+    SEAUserRole userRole = [[FWRoomMemberManager sharedManager] getUserRole];
+    /// 获取房间详情数据
+    SEARoomModel *roomModel = [[MeetingKit sharedInstance] getRoomDetails];
+    /// 当前用户为普通成员 并且 当前房间麦克风为禁用状态 并且 不允许自我解除麦克风状态
+    if (userRole == SEAUserRoleNormal && roomModel.extend.micDisabled && roomModel.extend.selfUnmuteMicDisabled) {
+        /// 提示禁用状态，不允许自我解除
+        [SVProgressHUD showInfoWithStatus:@"房间麦克风为禁用状态，不允许自我解除。"];
+        /// 结束此次操作
+        return;
+    }
     
     /// @weakify(self);
     /// 用户请求打开麦克风
@@ -525,7 +549,7 @@
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求开启音频失败 code = %ld, message = %@", code, message];
-        [SVProgressHUD showInfoWithStatus:toastStr];;
+        [SVProgressHUD showInfoWithStatus:toastStr];
         SGLOG(@"%@", toastStr);
     }];
 }
@@ -533,7 +557,7 @@
 #pragma mark - 请求关闭音频
 /// 请求关闭音频
 /// - Parameter source: 事件源对象
-- (void)requestCloseAudio:(UIButton *)source {
+- (void)requestCloseAudio:(nullable UIButton *)source {
     
     /// @weakify(self);
     /// 用户关闭麦克风
@@ -546,7 +570,7 @@
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求关闭音频失败 code = %ld, message = %@", code, message];
-        [SVProgressHUD showInfoWithStatus:toastStr];;
+        [SVProgressHUD showInfoWithStatus:toastStr];
         SGLOG(@"%@", toastStr);
     }];
 }
