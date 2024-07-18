@@ -14,7 +14,6 @@
     
     self = [super init];
     if (self) {
-        _subscribe = NO;
     }
     return self;
 }

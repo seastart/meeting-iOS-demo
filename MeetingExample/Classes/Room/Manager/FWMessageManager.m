@@ -135,9 +135,9 @@
 - (void)receiveChatWithSenderId:(nullable NSString *)senderId content:(NSString *)content messageType:(SEAMessageType)messageType {
     
     /// 获取发送者数据
-    RTCEngineUserModel *senderModel = [[MeetingKit sharedInstance] findMemberWithUserId:senderId];
+    SEAUserModel *senderModel = [[MeetingKit sharedInstance] findMemberWithUserId:senderId];
     /// 获取当前账户数据
-    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
     
     /// 构建自定义聊天信息
     FWMessageItemModel *itemModel = [[FWMessageItemModel alloc] init];

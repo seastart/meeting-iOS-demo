@@ -121,6 +121,23 @@
     }];
 }
 
+#pragma mark - 变更挂断按钮标题
+/// 变更挂断按钮标题
+- (void)changeHangupTitle {
+    
+    /// 获取当前用户角色
+    SEAUserRole userRole = [[FWRoomMemberManager sharedManager] getUserRole];
+    /// 声明目标标题
+    NSString *title = @"离开房间";
+    /// 如果当前用户为主持人
+    if (userRole == SEAUserRoleHost) {
+        /// 修改目标标题
+        title = @"结束房间";
+    }
+    /// 设置按钮标题
+    [self.hangupButton setTitle:title forState:UIControlStateNormal];
+}
+
 #pragma mark - 设置数据
 /// 设置数据
 /// - Parameters:

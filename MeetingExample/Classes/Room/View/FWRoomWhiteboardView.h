@@ -45,11 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 显示视图
 /// 显示视图
 /// - Parameters:
-///   - host: 画板地址
-///   - userId: 用户标识
-///   - roomNo: 房间号码
 ///   - readwrite: 是否拥有读写权限
-- (void)showView:(NSString *)host userId:(NSString *)userId roomNo:(NSString *)roomNo readwrite:(BOOL)readwrite;
+- (void)showView:(BOOL)readwrite;
 
 #pragma mark - 隐藏视图
 /// 隐藏视图

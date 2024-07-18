@@ -141,18 +141,18 @@
 #pragma mark - 显示视图
 /// 显示视图
 /// - Parameters:
-///   - host: 画板地址
-///   - userId: 用户标识
-///   - roomNo: 房间号码
 ///   - readwrite: 是否拥有读写权限
-- (void)showView:(NSString *)host userId:(NSString *)userId roomNo:(NSString *)roomNo readwrite:(BOOL)readwrite {
+- (void)showView:(BOOL)readwrite {
     
     /// 保存是否拥有读写权限
     self.readwrite = readwrite;
-    /// 构建请求地址
-    NSString *requestUrl = [NSString stringWithFormat:@"%@?roomId=%@&userId=%@", host, roomNo, userId];
+    /// 设置按钮显示状态
+    self.leaveButton.hidden = !readwrite;
+    
+    /// 获取画板地址
+    NSString *drawingHost = [[MeetingKit sharedInstance] getDrawingHost];
     /// 加载电子画板资源
-    [self.wkWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]]];
+    [self.wkWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:drawingHost]]];
     /// 添加电子白板手势
     [self appendRecognizer];
     

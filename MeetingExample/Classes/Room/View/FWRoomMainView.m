@@ -41,9 +41,6 @@
 /// 底部工具栏
 @property (weak, nonatomic) IBOutlet FWRoomBottomView *roomBottomTool;
 
-/// 共享类型
-@property (assign, nonatomic) FWMeetingSharingType sharingType;
-
 /// 房间计时器
 @property (strong, nonatomic) FWTimerBridge *durationTimer;
 /// 屏幕共享状态
@@ -115,8 +112,6 @@
 /// 配置属性
 - (void)setupConfig {
     
-    /// 设置默认共享类型
-    self.sharingType = FWMeetingSharingTypeNormal;
     /// 启动计时器
     [self beginTimer];
 }
@@ -164,8 +159,8 @@
     }
 }
 
-#pragma mark - 唤醒屏幕录制组件视图
-/// 唤醒屏幕录制组件视图
+#pragma mark - 唤起屏幕录制组件视图
+/// 唤起屏幕录制组件视图
 - (void)wakeupBroadcastPickerView {
     
     /// 将事件传递给屏幕录制组件的开启录制按钮
@@ -180,98 +175,74 @@
 /// 唤起电子画板组件视图
 - (void)wakeupWhiteboardView {
     
-    @weakify(self);
-    /// 用户请求开启共享
-    [[MeetingKit sharedInstance] requestShare:SEAShareTypeDrawing onSuccess:^(id  _Nullable data) {
-        @strongify(self);
-        /// 显示画板视图
-        [self.whiteboardView showView:@"https://dev.srtc.live:9000/www/wb" userId:[FWStoreDataBridge sharedManager].userModel.data.userId roomNo:[FWStoreDataBridge sharedManager].roomNo readwrite:YES];
-    } onFailed:^(SEAError code, NSString * _Nonnull message) {
-        /// 构造日志信息
-        NSString *toastStr = [NSString stringWithFormat:@"请求开启共享失败 code = %ld, message = %@", code, message];
-        [SVProgressHUD showInfoWithStatus:toastStr];;
-        SGLOG(@"%@", toastStr);
-    }];
+    /// 获取当前用户角色
+    SEAUserRole userRole = [[FWRoomMemberManager sharedManager] getUserRole];
+    /// 获取当前用户是否为共享发起者
+    BOOL managers = [[FWRoomMemberManager sharedManager] isShareSponsor];
+    /// 声明是否拥有读写权限
+    BOOL readwrite = NO;
+    /// 如果当前用户是管理员或者是共享发起者
+    if (userRole == SEAUserRoleHost || managers) {
+        /// 标记拥有读写权限
+        readwrite = YES;
+    }
+    /// 切换到画板视图
+    [self.whiteboardView showView:readwrite];
 }
 
 #pragma mark - 隐藏电子画板组件视图
 /// 隐藏电子画板组件视图
 - (void)hiddenWhiteboardView {
     
-    @weakify(self);
-    /// 用户关闭共享
-    [[MeetingKit sharedInstance] stopShare:^(id  _Nullable data) {
-        @strongify(self);
-        /// 隐藏画板视图
-        [self.whiteboardView hiddenView];
-    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+    /// 切换出画板视图
+    [self.whiteboardView hiddenView];
+}
+
+#pragma mark - 请求开始共享白板
+/// 请求开始共享白板
+- (void)requestStartDrawing {
+    
+    /// 用户请求开启共享白板
+    [[MeetingKit sharedInstance] requestShare:SEAShareTypeDrawing onSuccess:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
-        NSString *toastStr = [NSString stringWithFormat:@"请求关闭共享失败 code = %ld, message = %@", code, message];
+        NSString *toastStr = [NSString stringWithFormat:@"请求开启共享白板失败 code = %ld, message = %@", code, message];
         [SVProgressHUD showInfoWithStatus:toastStr];;
         SGLOG(@"%@", toastStr);
     }];
 }
 
-#pragma mark - 请求开启房间共享
-/// 请求开启房间共享
-/// - Parameter sharingType: 共享类型
-- (void)requestStartSharing:(FWMeetingSharingType)sharingType {
+#pragma mark - 请求开始共享屏幕
+/// 请求开始共享屏幕
+- (void)requestStartScreen {
     
-    /// 保存共享类型
-    self.sharingType = sharingType;
-    /// 根据目标共享类型处理请求
-    switch (sharingType) {
-            /// 共享屏幕
-        case FWMeetingSharingTypeScreen: {
-            /// 唤醒屏幕录制组件视图
-            [self wakeupBroadcastPickerView];
-        }
-            break;
-            /// 共享白板
-        case FWMeetingSharingTypeWhiteboard: {
-            /// 唤起电子画板组件视图
-            [self wakeupWhiteboardView];
-        }
-            break;
-        default:
-            break;
-    }
-    /// 设置共享按钮选中状态
-    [self.roomBottomTool setupShareButtonSelected:YES];
+    /// 用户请求开启共享屏幕
+    [[MeetingKit sharedInstance] requestShare:SEAShareTypeScreen onSuccess:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
+        /// 构造日志信息
+        NSString *toastStr = [NSString stringWithFormat:@"请求开启共享屏幕失败 code = %ld, message = %@", code, message];
+        [SVProgressHUD showInfoWithStatus:toastStr];;
+        SGLOG(@"%@", toastStr);
+    }];
 }
 
 #pragma mark - 请求关闭房间共享
 /// 请求关闭房间共享
 /// - Parameter sharingType: 共享类型
-- (void)requestStopSharing:(FWMeetingSharingType)sharingType {
+- (void)requestStopSharing:(SEAShareType)sharingType {
     
-    /// 重置共享类型
-    self.sharingType = FWMeetingSharingTypeNormal;
-    /// 创建提示信息
-    NSString *toastStr = @"已停止共享屏幕";
-    /// 根据目标共享类型处理请求
-    switch (sharingType) {
-            /// 共享屏幕
-        case FWMeetingSharingTypeScreen: {
-            /// 重置提示信息
-            toastStr = @"已停止共享屏幕";
-        }
-            break;
-            /// 共享白板
-        case FWMeetingSharingTypeWhiteboard: {
-            /// 隐藏电子画板组件视图
-            [self hiddenWhiteboardView];
-            /// 重置提示信息
-            toastStr = @"已停止共享白板";
-        }
-            break;
-        default:
-            break;
+    /// 获取房间共享类型
+    SEAShareType currentType = [[FWRoomMemberManager sharedManager] getSharingType];
+    /// 如果房间未在共享，无需再请求一次接口关闭
+    if (currentType == SEAShareTypeNormal) {
+        /// 丢弃此次调用
+        return;
     }
-    /// 交互提示
-    [SVProgressHUD showInfoWithStatus:toastStr];
-    /// 设置共享按钮选中状态
-    [self.roomBottomTool setupShareButtonSelected:NO];
+    /// 用户关闭共享
+    [[MeetingKit sharedInstance] stopShare:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
+        /// 构造日志信息
+        NSString *toastStr = [NSString stringWithFormat:@"请求关闭共享失败 code = %ld, message = %@", code, message];
+        [SVProgressHUD showInfoWithStatus:toastStr];;
+        SGLOG(@"%@", toastStr);
+    }];
 }
 
 #pragma mark - 进入房间
@@ -286,6 +257,8 @@
     BOOL videoState = enterModel.videoState;
     /// 进入房间成功
     [self.roomMemberView enterRoom:userId];
+    /// 变更挂断按钮标题
+    [self.roomTopTool changeHangupTitle];
     /// 设置默认音视频状态
     [self setupDefaultAudioState:audioState videoState:videoState];
 }
@@ -363,6 +336,22 @@
     [self.roomMemberView refreshMemberData:userId];
 }
 
+#pragma mark - 变更成员角色
+/// 变更成员角色
+/// - Parameters:
+///   - userId: 成员标识
+///   - userRole: 用户角色
+- (void)userRoleChanged:(NSString *)userId userRole:(SEAUserRole)userRole {
+    
+    /// 获取当前用户数据
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    /// 如果检测当前用户
+    if ([userId isEqualToString:userModel.userId]) {
+        /// 变更挂断按钮标题角色发生变更
+        [self.roomTopTool changeHangupTitle];
+    }
+}
+
 #pragma mark - 用户摄像头状态变化
 /// 用户摄像头状态变化
 /// @param userId 成员标识
@@ -370,9 +359,11 @@
 - (void)userCameraStateChanged:(NSString *)userId cameraState:(SEADeviceState)cameraState {
     
     /// 获取当前用户数据
-    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
     /// 判断是否是自己的摄像头状态发生变化
     if ([userModel.userId isEqualToString:userId]) {
+        /// 日志埋点
+        SGLOG(@"【测试状态异常】我的摄像头状态发生变化 %ld", cameraState);
         /// 摄像头状态为开启
         if (cameraState == SEADeviceStateOpen) {
             /// 开启摄像头预览
@@ -397,9 +388,11 @@
 - (void)userMicStateChanged:(NSString *)userId micState:(SEADeviceState)micState {
     
     /// 获取当前用户数据
-    RTCEngineUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
     /// 判断是否是自己的麦克风状态发生变化
     if ([userModel.userId isEqualToString:userId]) {
+        /// 日志埋点
+        SGLOG(@"【测试状态异常】我的麦克风状态发生变化 %ld", micState);
         /// 摄像头状态为开启
         if (micState == SEADeviceStateOpen) {
             /// 开启音频发送
@@ -417,15 +410,59 @@
     [self.roomMemberView userMicStateChanged:userId micState:micState];
 }
 
-#pragma mark - 用户共享状态变化
-/// 用户共享状态变化
+#pragma mark - 用户开始共享
+/// 用户开始共享
 /// @param userId 成员标识
-/// @param enabled 变更状态，YES-开启 NO-关闭
 /// @param shareType 共享类型
-- (void)userShareStateChanged:(NSString *)userId enabled:(BOOL)enabled shareType:(SEAShareType)shareType {
+- (void)userRoomShareStart:(NSString *)userId shareType:(SEAShareType)shareType {
     
-    /// 用户共享状态变化
-    [self.roomMemberView userShareStateChanged:userId enabled:enabled shareType:shareType];
+    /// 获取当前用户数据
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    
+    /// 判断共享类型
+    if (shareType == SEAShareTypeScreen) {
+        /// 如果是自己的共享屏幕开始
+        if ([userModel.userId isEqualToString:userId]) {
+            /// 暂不做业务处理
+        } else {
+            /// 用户共享屏幕状态变化，订阅目标远程流
+            [self.roomMemberView userShareScreenChanged:userId enabled:YES];
+        }
+    } else if (shareType == SEAShareTypeDrawing) {
+        /// 共享白板开始，切换到画板视图
+        [self wakeupWhiteboardView];
+    }
+    
+    /// 设置共享按钮选中状态
+    [self.roomBottomTool setupShareButtonSelected:YES];
+}
+
+#pragma mark - 用户结束共享
+/// 用户结束共享
+/// @param userId 成员标识
+/// @param shareType 共享类型
+- (void)userRoomStopStart:(NSString *)userId shareType:(SEAShareType)shareType {
+    
+    /// 获取当前用户数据
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    
+    /// 判断共享类型
+    if (shareType == SEAShareTypeScreen) {
+        /// 如果是自己的共享屏幕结束
+        if ([userModel.userId isEqualToString:userId]) {
+            /// 关闭屏幕录制
+            [[MeetingKit sharedInstance] stopScreenRecord];
+        } else {
+            /// 用户共享屏幕状态变化，停止订阅目标远程流
+            [self.roomMemberView userShareScreenChanged:userId enabled:NO];
+        }
+    } else if (shareType == SEAShareTypeDrawing) {
+        /// 共享白板结束，切换出画板视图
+        [self hiddenWhiteboardView];
+    }
+    
+    /// 设置共享按钮选中状态
+    [self.roomBottomTool setupShareButtonSelected:NO];
 }
 
 #pragma mark - 请求开启视频
@@ -622,16 +659,27 @@
 ///   - source: 事件源对象
 - (void)bottomView:(FWRoomBottomView *)bottomView didSelectSharingButton:(UIButton *)source {
     
+    /// 获取房间共享类型
+    SEAShareType shareType = [[FWRoomMemberManager sharedManager] getSharingType];
     /// 根据当前共享状态处理请求回调
-    if (self.sharingType == FWMeetingSharingTypeNormal) {
+    if (shareType == SEAShareTypeNormal) {
         /// 如果当前共享类型为常规类型(回调请求开启共享)
         if (self.delegate && [self.delegate respondsToSelector:@selector(onStartScreenMainView:)]) {
             [self.delegate onStartScreenMainView:self];
         }
     } else {
+        /// 获取当前用户角色
+        SEAUserRole userRole = [[FWRoomMemberManager sharedManager] getUserRole];
+        /// 获取当前用户是否为共享发起者
+        BOOL managers = [[FWRoomMemberManager sharedManager] isShareSponsor];
+        /// 如果当前用户不是管理员也不是共享发起者
+        if (userRole != SEAUserRoleHost && !managers) {
+            /// 丢弃此次点击事件
+            return;
+        }
         /// 如果当前共享类型非常规类型(回调请求关闭共享)
         if (self.delegate && [self.delegate respondsToSelector:@selector(onStopScreenMainView:sharingType:)]) {
-            [self.delegate onStopScreenMainView:self sharingType:self.sharingType];
+            [self.delegate onStopScreenMainView:self sharingType:shareType];
         }
     }
 }

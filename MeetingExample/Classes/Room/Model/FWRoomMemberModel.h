@@ -23,10 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 进入时间
 @property (nonatomic, copy) NSDate *enterDate;
 
-
-/// 是否订阅
-@property (nonatomic, assign) BOOL subscribe;
-
 @end
 
 NS_ASSUME_NONNULL_END

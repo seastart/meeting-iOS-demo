@@ -63,12 +63,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param micState 音频状态
 - (void)userMicStateChanged:(NSString *)userId micState:(SEADeviceState)micState;
 
-#pragma mark - 用户共享状态变化
-/// 用户共享状态变化
+#pragma mark - 用户共享屏幕状态变化
+/// 用户共享屏幕状态变化
 /// @param userId 成员标识
 /// @param enabled 变更状态，YES-开启 NO-关闭
-/// @param shareType 共享类型
-- (void)userShareStateChanged:(NSString *)userId enabled:(BOOL)enabled shareType:(SEAShareType)shareType;
+- (void)userShareScreenChanged:(NSString *)userId enabled:(BOOL)enabled;
 
 @end
 

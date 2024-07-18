@@ -49,6 +49,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 回调代理
 @property (nonatomic, weak) IBOutlet id <FWRoomTopViewDelegate> delegate;
 
+#pragma mark - 变更挂断按钮标题
+/// 变更挂断按钮标题
+- (void)changeHangupTitle;
+
 #pragma mark - 设置数据
 /// 设置数据
 /// - Parameters:

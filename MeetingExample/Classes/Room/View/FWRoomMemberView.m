@@ -264,19 +264,18 @@
     }
 }
 
-#pragma mark - 用户共享状态变化
-/// 用户共享状态变化
+#pragma mark - 用户共享屏幕状态变化
+/// 用户共享屏幕状态变化
 /// @param userId 成员标识
 /// @param enabled 变更状态，YES-开启 NO-关闭
-/// @param shareType 共享类型
-- (void)userShareStateChanged:(NSString *)userId enabled:(BOOL)enabled shareType:(SEAShareType)shareType {
+- (void)userShareScreenChanged:(NSString *)userId enabled:(BOOL)enabled {
     
     /// 获取成员视图
     FWRoomMemberWindowView *windowView = [self.displayItems objectForKey:userId];
     /// 存在该成员
     if (windowView) {
         /// 用户共享状态变化
-        [windowView userShareStateChanged:enabled shareType:shareType];
+        [windowView userShareScreenChanged:enabled];
     }
 }
 

@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 停止共享事件回调
 /// @param mainView 主窗口视图
 /// @param sharingType 共享类型
-- (void)onStopScreenMainView:(FWRoomMainView *)mainView sharingType:(FWMeetingSharingType)sharingType;
+- (void)onStopScreenMainView:(FWRoomMainView *)mainView sharingType:(SEAShareType)sharingType;
 
 #pragma mark 成员选择回调
 /// 成员选择回调
@@ -91,6 +91,13 @@ NS_ASSUME_NONNULL_BEGIN
 ///   - nickname: 用户昵称
 - (void)userNameChanged:(NSString *)userId nickname:(NSString *)nickname;
 
+#pragma mark - 变更成员角色
+/// 变更成员角色
+/// - Parameters:
+///   - userId: 成员标识
+///   - userRole: 用户角色
+- (void)userRoleChanged:(NSString *)userId userRole:(SEAUserRole)userRole;
+
 #pragma mark - 用户摄像头状态变化
 /// 用户摄像头状态变化
 /// @param userId 成员标识
@@ -103,22 +110,35 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param micState 音频状态
 - (void)userMicStateChanged:(NSString *)userId micState:(SEADeviceState)micState;
 
-#pragma mark - 用户共享状态变化
-/// 用户共享状态变化
+#pragma mark - 用户开始共享
+/// 用户开始共享
 /// @param userId 成员标识
-/// @param enabled 变更状态，YES-开启 NO-关闭
 /// @param shareType 共享类型
-- (void)userShareStateChanged:(NSString *)userId enabled:(BOOL)enabled shareType:(SEAShareType)shareType;
+- (void)userRoomShareStart:(NSString *)userId shareType:(SEAShareType)shareType;
 
-#pragma mark - 请求开启房间共享
-/// 请求开启房间共享
-/// - Parameter sharingType: 共享类型
-- (void)requestStartSharing:(FWMeetingSharingType)sharingType;
+#pragma mark - 用户结束共享
+/// 用户结束共享
+/// @param userId 成员标识
+/// @param shareType 共享类型
+- (void)userRoomStopStart:(NSString *)userId shareType:(SEAShareType)shareType;
+
+#pragma mark - 唤起屏幕录制组件视图
+/// 唤起屏幕录制组件视图
+- (void)wakeupBroadcastPickerView;
+
+#pragma mark - 请求开始共享白板
+/// 请求开始共享白板
+- (void)requestStartDrawing;
+
+#pragma mark - 请求开始共享屏幕
+/// 请求开始共享屏幕
+- (void)requestStartScreen;
 
 #pragma mark - 请求关闭房间共享
 /// 请求关闭房间共享
 /// - Parameter sharingType: 共享类型
-- (void)requestStopSharing:(FWMeetingSharingType)sharingType;
+- (void)requestStopSharing:(SEAShareType)sharingType;
+
 @end
 
 NS_ASSUME_NONNULL_END

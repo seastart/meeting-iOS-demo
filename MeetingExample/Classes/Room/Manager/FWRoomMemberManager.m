@@ -124,7 +124,6 @@
         memberModel.userRole = userModel.extend.role;
         memberModel.isMine = isMine;
         memberModel.isSharing = NO;
-        memberModel.subscribe = NO;
         memberModel.enterDate = [NSDate date];
         
         /// 添加到成员列表
@@ -183,6 +182,31 @@
     SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
     /// 返回用户角色
     return userModel.extend.role;
+}
+
+#pragma mark - 获取当前用户是否为共享发起者
+/// 获取当前用户是否为共享发起者
+- (BOOL)isShareSponsor {
+    
+    /// 获取用户数据
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    /// 获取房间详情数据
+    SEARoomModel *roomModel = [[MeetingKit sharedInstance] getRoomDetails];
+    /// 如果共享者标识为当前用户
+    if ([userModel.userId isEqualToString:roomModel.extend.shareUid]) {
+        return YES;
+    }
+    return NO;
+}
+
+#pragma mark - 获取房间共享类型
+/// 获取房间共享类型
+- (SEAShareType)getSharingType {
+    
+    /// 获取房间详情数据
+    SEARoomModel *roomModel = [[MeetingKit sharedInstance] getRoomDetails];
+    /// 返回共享类型
+    return roomModel.extend.shareType;
 }
 
 #pragma mark - 刷新成员列表回调

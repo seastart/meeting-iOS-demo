@@ -66,6 +66,14 @@ typedef void(^FWRoomMemberManagerRoleChangedBlock)(void);
 /// 获取当前用户角色
 - (SEAUserRole)getUserRole;
 
+#pragma mark - 获取当前用户是否为共享发起者
+/// 获取当前用户是否为共享发起者
+- (BOOL)isShareSponsor;
+
+#pragma mark - 获取房间共享类型
+/// 获取房间共享类型
+- (SEAShareType)getSharingType;
+
 #pragma mark - 刷新成员列表回调
 /// 刷新成员列表回调
 /// @param reloadBlock 刷新成员列表回调

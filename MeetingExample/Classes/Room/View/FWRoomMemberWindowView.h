@@ -43,15 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param micState 音频状态
 - (void)userMicStateChanged:(SEADeviceState)micState;
 
-/// 用户共享状态变化
+/// 用户共享屏幕状态变化
 /// @param enabled 变更状态，YES-开启 NO-关闭
-/// @param shareType 共享类型
-- (void)userShareStateChanged:(BOOL)enabled shareType:(SEAShareType)shareType;
-
-/// 订阅成员视频流
-/// @param trackId 轨道标识
-/// @param subscribe 订阅状态，YES-订阅 NO-取消订阅
-- (void)subscribeWithtTackId:(RTCTrackIdentifierFlags)trackId subscribe:(BOOL)subscribe;
+- (void)userShareScreenChanged:(BOOL)enabled;
 
 @end
 

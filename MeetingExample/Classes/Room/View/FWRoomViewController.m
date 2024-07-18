@@ -21,6 +21,8 @@
 @property (strong, nonatomic) FWRoomViewModel *viewModel;
 /// 房间加入状态
 @property (assign, nonatomic) BOOL joinRoomStatus;
+/// 房间是否被我解散，YES-是 NO-不是
+@property (assign, nonatomic) BOOL WhetherDissolvedByMe;
 
 @end
 
@@ -136,6 +138,8 @@
         self.roomMainView.hidden = NO;
         /// 标记加入房间状态
         self.joinRoomStatus = YES;
+        /// 标记我未解散房间
+        self.WhetherDissolvedByMe = NO;
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         @strongify(self);
         /// 恢复加载状态
@@ -156,24 +160,40 @@
 /// - Parameter describe: 错误描述
 - (void)exitRoom:(SEALeaveReason)reason error:(SEAError)error describe:(nullable NSString *)describe {
     
-    @weakify(self);
     /// 离开房间
-    [[MeetingKit sharedInstance] exitRoom:^(id  _Nullable data) {
+    [[MeetingKit sharedInstance] exitRoom:nil];
+    /// 清空成员列表
+    [[FWRoomMemberManager sharedManager] cleanMembers];
+    /// 清空聊天列表数据
+    [[FWMessageManager sharedManager] cleanChatsCache];
+    /// 清空房间信息缓存
+    [[FWStoreDataBridge sharedManager] exitRoom];
+    /// 移除加载指示框
+    [SVProgressHUD dismiss];
+    /// 离开房间页面
+    [self pop:1];
+    /// 离开房间时的警告提示弹窗
+    [self exitWarnAlert:reason];
+    /// 离开房间时的错误提示弹窗
+    [self exitErrorAlert:error describe:describe];
+}
+
+#pragma mark - 解散房间
+/// 解散房间
+- (void)destroyRoom {
+    
+    @weakify(self);
+    /// 标记我解散了房间
+    self.WhetherDissolvedByMe = YES;
+    /// 主持人解散房间
+    [[MeetingKit sharedInstance] adminDestroyRoom:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
         @strongify(self);
-        /// 离开房间页面
-        [self pop:1];
-        /// 移除加载指示框
-        [SVProgressHUD dismiss];
-        /// 清空成员列表
-        [[FWRoomMemberManager sharedManager] cleanMembers];
-        /// 清空聊天列表数据
-        [[FWMessageManager sharedManager] cleanChatsCache];
-        /// 清空房间信息缓存
-        [[FWStoreDataBridge sharedManager] exitRoom];
-        /// 离开房间时的警告提示弹窗
-        [self exitWarnAlert:reason];
-        /// 离开房间时的错误提示弹窗
-        [self exitErrorAlert:error describe:describe];
+        /// 标记我未解散房间
+        self.WhetherDissolvedByMe = NO;
+        /// 构造日志信息
+        NSString *toastStr = [NSString stringWithFormat:@"请求解散房间失败 code = %ld, message = %@", code, message];
+        [SVProgressHUD showInfoWithStatus:toastStr];;
+        SGLOG(@"%@", toastStr);
     }];
 }
 
@@ -184,6 +204,12 @@
     
     /// 如果是主动离开频道，无需做任何提示处理
     if (reason == SEALeaveReasonNormal) {
+        /// 丢弃此次回调处理
+        return;
+    }
+    
+    /// 如果是我主动解散了频道，无需做任何提示处理
+    if (self.WhetherDissolvedByMe) {
         /// 丢弃此次回调处理
         return;
     }
@@ -418,21 +444,30 @@
     
     /// 日志埋点
     SGLOG(@"共享开始通知，userId = %@ shareType = %ld", userId, shareType);
-    /// 用户共享状态变化
-    [self.roomMainView userShareStateChanged:userId enabled:YES shareType:shareType];
+    /// 开始共享电子白板，更改状态栏颜色为黑色
+    if (shareType == SEAShareTypeDrawing) {
+        /// 更改状态栏颜色
+        [self statusBarAppearanceUpdateWithHiden:NO barStyle:UIStatusBarStyleDefault];
+    }
+    /// 用户开始共享
+    [self.roomMainView userRoomShareStart:userId shareType:shareType];
 }
 
 #pragma mark 共享结束回调
 /// 共享结束回调
 /// - Parameter userId: 共享成员标识
-- (void)onRoomShareStop:(NSString *)userId {
+/// - Parameter shareType: 共享类型
+- (void)onRoomShareStop:(NSString *)userId shareType:(SEAShareType)shareType {
     
     /// 日志埋点
     SGLOG(@"共享结束通知，userId = %@", userId);
-    /// 获取用户数据
-    SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:userId];
-    /// 用户共享状态变化
-    [self.roomMainView userShareStateChanged:userId enabled:NO shareType:userModel.extend.shareState];
+    /// 结束共享电子白板，更改状态栏颜色为白色
+    if (shareType == SEAShareTypeDrawing) {
+        /// 更改状态栏颜色
+        [self statusBarAppearanceUpdateWithHiden:NO barStyle:UIStatusBarStyleLightContent];
+    }
+    /// 用户结束共享
+    [self.roomMainView userRoomStopStart:userId shareType:shareType];
 }
 
 #pragma mark 房间举手状态变化回调
@@ -605,6 +640,23 @@
     
     /// 日志埋点
     SGLOG(@"屏幕共享状态通知，status = %ld", status);
+    
+    switch (status) {
+        case RTCScreenRecordStatusError:
+            /// 屏幕共享连接错误
+            /// [SVProgressHUD showInfoWithStatus:@"桌面采集连接失败"];
+            break;
+        case RTCScreenRecordStatusStop:
+            /// 请求关闭房间共享
+            [self.roomMainView requestStopSharing:SEAShareTypeScreen];
+            break;
+        case RTCScreenRecordStatusStart:
+            /// 请求开始共享屏幕
+            [self.roomMainView requestStartScreen];
+            break;
+        default:
+            break;
+    }
 }
 
 
@@ -732,15 +784,13 @@
     }];
     UIAlertAction *screenAction = [UIAlertAction actionWithTitle:@"共享屏幕" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         @strongify(self);
-        /// 请求开启房间共享(共享屏幕)
-        [self.roomMainView requestStartSharing:FWMeetingSharingTypeScreen];
+        /// 唤醒屏幕录制组件视图
+        [self.roomMainView wakeupBroadcastPickerView];
     }];
     UIAlertAction *whiteboardAction = [UIAlertAction actionWithTitle:@"共享白板" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         @strongify(self);
-        /// 更改状态栏颜色为黑色
-        [self statusBarAppearanceUpdateWithHiden:NO barStyle:UIStatusBarStyleDefault];
-        /// 请求开启房间共享(共享白板)
-        [self.roomMainView requestStartSharing:FWMeetingSharingTypeWhiteboard];
+        /// 请求开始共享电子画板
+        [self.roomMainView requestStartDrawing];
     }];
     
     [alert addAction:cancelAction];
@@ -753,7 +803,7 @@
 /// 停止共享事件回调
 /// @param mainView 主窗口视图
 /// @param sharingType 共享类型
-- (void)onStopScreenMainView:(FWRoomMainView *)mainView sharingType:(FWMeetingSharingType)sharingType {
+- (void)onStopScreenMainView:(FWRoomMainView *)mainView sharingType:(SEAShareType)sharingType {
     
     @weakify(self);
     
@@ -782,10 +832,8 @@
     }];
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         @strongify(self);
-        /// 更改状态栏颜色为白色
-        [self statusBarAppearanceUpdateWithHiden:NO barStyle:UIStatusBarStyleLightContent];
         /// 关闭房间共享电子画板
-        [self.roomMainView requestStopSharing:FWMeetingSharingTypeWhiteboard];
+        [self.roomMainView requestStopSharing:SEAShareTypeDrawing];
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];
@@ -796,6 +844,31 @@
 /// 挂断事件回调
 /// @param mainView 主窗口视图
 - (void)onHangupEventMainView:(FWRoomMainView *)mainView {
+    
+    /// 获取当前用户角色
+    SEAUserRole userRole = [[FWRoomMemberManager sharedManager] getUserRole];
+    /// 根据当前用户角色显示弹窗交互
+    if (userRole == SEAUserRoleHost) {
+        /// 主持人挂断弹窗
+        [self hostHangupEventAlert];
+    } else {
+        /// 普通成员挂断弹窗
+        [self normalHangupEventAlert];
+    }
+}
+
+#pragma mark 成员选择回调
+/// 成员选择回调
+/// @param mainView 主窗口视图
+/// @param memberModel 成员数据
+- (void)mainView:(FWRoomMainView *)mainView didSelectItemAtMemberModel:(FWRoomMemberModel *)memberModel {
+    
+    /// TODO...
+}
+
+#pragma mark - 普通成员挂断弹窗
+/// 普通成员挂断弹窗
+- (void)normalHangupEventAlert {
     
     @weakify(self);
     
@@ -812,13 +885,67 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-#pragma mark 成员选择回调
-/// 成员选择回调
-/// @param mainView 主窗口视图
-/// @param memberModel 成员数据
-- (void)mainView:(FWRoomMainView *)mainView didSelectItemAtMemberModel:(FWRoomMemberModel *)memberModel {
+#pragma mark - 主持人挂断弹窗
+/// 主持人挂断弹窗
+- (void)hostHangupEventAlert {
     
-    /// TODO...
+    @weakify(self);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:isPhone ? UIAlertControllerStyleActionSheet : UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    UIAlertAction *finishAction = [UIAlertAction actionWithTitle:@"结束房间" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 主持人解散房间弹窗
+        [self hostDestroyRoomAlert];
+    }];
+    UIAlertAction *leaveAction = [UIAlertAction actionWithTitle:@"离开房间" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 主持人离开房间弹窗
+        [self hostLeaveRoomAlert];
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:finishAction];
+    [alert addAction:leaveAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - 主持人离开房间弹窗
+/// 主持人离开房间弹窗
+- (void)hostLeaveRoomAlert {
+    
+    @weakify(self);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"离开房间后，将无主持人" message:@"离开后会造成无人管理房间秩序，是否继续？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确认离开" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 离开房间
+        [self exitRoom:SEALeaveReasonNormal error:SEAErrorOK describe:nil];
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:ensureAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - 主持人解散房间弹窗
+/// 主持人解散房间弹窗
+- (void)hostDestroyRoomAlert {
+    
+    @weakify(self);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"结束房间" message:@"结束房间，正在房间的人员将全部退出。" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 解散房间
+        [self destroyRoom];
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:ensureAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - 资源释放

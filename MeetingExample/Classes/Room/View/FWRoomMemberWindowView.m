@@ -115,6 +115,34 @@
     [self.statusView userMicStateChanged:micState];
 }
 
+#pragma mark - 用户共享屏幕状态变化
+/// 用户共享屏幕状态变化
+/// @param enabled 变更状态，YES-开启 NO-关闭
+- (void)userShareScreenChanged:(BOOL)enabled {
+    
+    /// 如果关联成员数据为当前参会账号
+    if (self.memberModel.isMine) {
+        /// 丢弃此次调用
+        return;
+    }
+    
+    /// 用户不论开始还是结束共享屏幕，首先取消订阅该成员所有远程流
+    [[MeetingKit sharedInstance] stopAllRemoteViewWithUserId:self.userId];
+    /// 根据请求状态，选择订阅远程流
+    if (enabled) {
+        /// 订阅远程共享流
+        [[MeetingKit sharedInstance] startRemoteView:self.userId trackId:RTCTrackIdentifierFlags2 view:self.playerView];
+    } else {
+        /// 获取用户数据
+        SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:self.userId];
+        /// 如果当前成员开启了摄像头
+        if (userModel.extend.cameraState == SEADeviceStateOpen) {
+            /// 重新订阅远程视频流
+            [[MeetingKit sharedInstance] startRemoteView:self.userId trackId:RTCTrackIdentifierFlags1 view:self.playerView];
+        }
+    }
+}
+
 #pragma mark - 用户共享状态变化
 /// 用户共享状态变化
 /// @param enabled YES-开启 NO-关闭

@@ -6,12 +6,13 @@
 //  Copyright © 2022 SailorGa. All rights reserved.
 //
 
+#import <MeetingKit/MeetingKit.h>
 #import "SampleHandler.h"
 
 /// Application Group Identifier
 #define kAppGroup @"group.cn.seastart.meetingkit"
 
-@interface SampleHandler()
+@interface SampleHandler() <MeetingKitScreenDelegate>
 
 @end
 
@@ -21,6 +22,7 @@
 - (void)broadcastStartedWithSetupInfo:(NSDictionary<NSString *, NSObject *> *)setupInfo {
     
     /// User has requested to start the broadcast. Setup info from the UI extension can be supplied but optional.
+    [[MeetingKit sharedInstance] broadcastStartedWithAppGroup:kAppGroup delegate:self];
 }
 
 #pragma mark - 暂停广播
@@ -49,6 +51,23 @@
 - (void)processSampleBuffer:(CMSampleBufferRef)sampleBuffer withType:(RPSampleBufferType)sampleBufferType {
     
     /// 媒体数据(音视频)发送
+    [[MeetingKit sharedInstance] sendSampleBuffer:sampleBuffer withType:sampleBufferType];
+}
+
+
+#pragma mark - ----- MeetingKitScreenDelegate 代理方法 -----
+#pragma mark 录屏完成回调
+/// 录屏完成回调
+/// @param engine 回调实例
+/// @param reason 结束原因
+- (void)broadcastFinished:(MeetingKit *)engine reason:(NSString *)reason {
+    
+    /// 声明描述
+    NSString *describe = @"屏幕录制已结束";
+    /// 构建Error信息
+    NSError *error = [NSError errorWithDomain:NSStringFromClass(self.class) code:0 userInfo:@{NSLocalizedFailureReasonErrorKey : describe}];
+    /// 完成屏幕录制
+    [self finishBroadcastWithError:error];
 }
 
 @end
