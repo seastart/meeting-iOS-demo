@@ -270,10 +270,13 @@
 ///   - videoState: 视频状态
 - (void)setupDefaultAudioState:(BOOL)audioState videoState:(BOOL)videoState {
     
-    /// 设置默认音频状态
-    [self.roomBottomTool setupDefaultAudioState:audioState];
-    /// 设置默认视频状态
-    [self.roomBottomTool setupDefaultVideoState:videoState];
+    /// 延迟重置按钮激活状态
+    FWDispatchAfter((int64_t)(1.5 * NSEC_PER_SEC), ^{
+        /// 设置默认音频状态
+        [self.roomBottomTool setupDefaultAudioState:audioState];
+        /// 设置默认视频状态
+        [self.roomBottomTool setupDefaultVideoState:videoState];
+    });
 }
 
 #pragma mark - 成员加入房间
@@ -363,7 +366,7 @@
     /// 判断是否是自己的摄像头状态发生变化
     if ([userModel.userId isEqualToString:userId]) {
         /// 日志埋点
-        SGLOG(@"【测试状态异常】我的摄像头状态发生变化 %ld", cameraState);
+        SGLOG(@"[测试状态异常] 我的摄像头状态发生变化 %ld", cameraState);
         /// 摄像头状态为开启
         if (cameraState == SEADeviceStateOpen) {
             /// 开启摄像头预览
@@ -392,7 +395,7 @@
     /// 判断是否是自己的麦克风状态发生变化
     if ([userModel.userId isEqualToString:userId]) {
         /// 日志埋点
-        SGLOG(@"【测试状态异常】我的麦克风状态发生变化 %ld", micState);
+        SGLOG(@"[测试状态异常] 我的麦克风状态发生变化 %ld", micState);
         /// 摄像头状态为开启
         if (micState == SEADeviceStateOpen) {
             /// 开启音频发送
@@ -482,6 +485,8 @@
         return;
     }
     
+    /// 日志埋点
+    SGLOG(@"[测试状态异常] 我请求打开摄像头");
     /// @weakify(self);
     /// 获取预览视图
     UIView *preview = self.palaceMode ? [self.roomMemberView.mineWindowView getPlayerWindow] : [self.roomCaptureView getPreview];
@@ -505,6 +510,8 @@
 /// - Parameter source: 事件源对象
 - (void)requestCloseVideo:(nullable UIButton *)source {
     
+    /// 日志埋点
+    SGLOG(@"[测试状态异常] 我请求关闭摄像头");
     /// @weakify(self);
     /// 用户关闭摄像头
     [[MeetingKit sharedInstance] closeCamera:^(id  _Nullable data) {
@@ -538,6 +545,8 @@
         return;
     }
     
+    /// 日志埋点
+    SGLOG(@"[测试状态异常] 我请求打开麦克风");
     /// @weakify(self);
     /// 用户请求打开麦克风
     [[MeetingKit sharedInstance] requestOpenMic:^(id  _Nullable data) {
@@ -559,6 +568,8 @@
 /// - Parameter source: 事件源对象
 - (void)requestCloseAudio:(nullable UIButton *)source {
     
+    /// 日志埋点
+    SGLOG(@"[测试状态异常] 我请求关闭麦克风");
     /// @weakify(self);
     /// 用户关闭麦克风
     [[MeetingKit sharedInstance] closeMic:^(id  _Nullable data) {
@@ -633,7 +644,8 @@
 /// - Parameters:
 ///   - bottomView: 工具栏视图
 ///   - source: 事件源对象
-- (void)bottomView:(FWRoomBottomView *)bottomView didSelectAudioButton:(UIButton *)source {
+///   - astate: 音频状态
+- (void)bottomView:(FWRoomBottomView *)bottomView didSelectAudioButton:(UIButton *)source astate:(BOOL)astate {
     
     @weakify(self);
     /// 检测麦克风权限
@@ -641,7 +653,7 @@
         @strongify(self);
         if (status) {
             /// 分辨请求开启还是关闭音频
-            if (source.selected) {
+            if (astate) {
                 /// 请求开启音频
                 [self requestOpenAudio:source];
             } else {
@@ -657,7 +669,8 @@
 /// - Parameters:
 ///   - bottomView: 工具栏视图
 ///   - source: 事件源对象
-- (void)bottomView:(FWRoomBottomView *)bottomView didSelectVideoButton:(UIButton *)source {
+///   - vstate: 视频状态
+- (void)bottomView:(FWRoomBottomView *)bottomView didSelectVideoButton:(UIButton *)source vstate:(BOOL)vstate {
     
     @weakify(self);
     /// 检测摄像头权限
@@ -665,7 +678,7 @@
         @strongify(self);
         if (status) {
             /// 分辨请求开启还是关闭视频
-            if (source.selected) {
+            if (vstate) {
                 /// 请求开启视频
                 [self requestOpenVideo:source];
             } else {

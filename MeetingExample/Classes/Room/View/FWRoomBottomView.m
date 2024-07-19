@@ -152,8 +152,8 @@
     [[self.audioButton rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
         @strongify(self);
         /// 回调父组件处理
-        if (self.delegate && [self.delegate respondsToSelector:@selector(bottomView:didSelectAudioButton:)]) {
-            [self.delegate bottomView:self didSelectAudioButton:control];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(bottomView:didSelectAudioButton:astate:)]) {
+            [self.delegate bottomView:self didSelectAudioButton:control astate:control.selected];
         }
     }];
     
@@ -161,8 +161,8 @@
     [[self.videoButton rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
         @strongify(self);
         /// 回调父组件处理
-        if (self.delegate && [self.delegate respondsToSelector:@selector(bottomView:didSelectVideoButton:)]) {
-            [self.delegate bottomView:self didSelectVideoButton:control];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(bottomView:didSelectVideoButton:vstate:)]) {
+            [self.delegate bottomView:self didSelectVideoButton:control vstate:control.selected];
         }
     }];
     
@@ -211,13 +211,9 @@
 /// - Parameter audioState: 音频状态
 - (void)setupDefaultAudioState:(BOOL)astate {
     
-    if (!astate) {
-        /// 原本默认即为关闭，如果设置的默认也是关闭，则丢弃此次操作
-        return;
-    }
     /// 回调父组件处理
-    if (self.delegate && [self.delegate respondsToSelector:@selector(bottomView:didSelectAudioButton:)]) {
-        [self.delegate bottomView:self didSelectAudioButton:self.audioButton];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(bottomView:didSelectAudioButton:astate:)]) {
+        [self.delegate bottomView:self didSelectAudioButton:self.audioButton astate:astate];
     }
 }
 
@@ -226,13 +222,9 @@
 /// - Parameter videoState: 视频状态
 - (void)setupDefaultVideoState:(BOOL)vstate {
     
-    if (!vstate) {
-        /// 原本默认即为关闭，如果设置的默认也是关闭，则丢弃此次操作
-        return;
-    }
     /// 回调父组件处理
-    if (self.delegate && [self.delegate respondsToSelector:@selector(bottomView:didSelectVideoButton:)]) {
-        [self.delegate bottomView:self didSelectVideoButton:self.videoButton];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(bottomView:didSelectVideoButton:vstate:)]) {
+        [self.delegate bottomView:self didSelectVideoButton:self.videoButton vstate:vstate];
     }
 }
 

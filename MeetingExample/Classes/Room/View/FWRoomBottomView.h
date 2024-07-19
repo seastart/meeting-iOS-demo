@@ -19,14 +19,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameters:
 ///   - bottomView: 工具栏视图
 ///   - source: 事件源对象
-- (void)bottomView:(FWRoomBottomView *)bottomView didSelectAudioButton:(UIButton *)source;
+///   - astate: 音频状态
+- (void)bottomView:(FWRoomBottomView *)bottomView didSelectAudioButton:(UIButton *)source astate:(BOOL)astate;
 
 #pragma mark 视频控制事件回调
 /// 视频控制事件回调
 /// - Parameters:
 ///   - bottomView: 工具栏视图
 ///   - source: 事件源对象
-- (void)bottomView:(FWRoomBottomView *)bottomView didSelectVideoButton:(UIButton *)source;
+///   - vstate: 视频状态
+- (void)bottomView:(FWRoomBottomView *)bottomView didSelectVideoButton:(UIButton *)source vstate:(BOOL)vstate;
 
 #pragma mark 共享控制事件回调
 /// 共享控制事件回调
