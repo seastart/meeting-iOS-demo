@@ -23,14 +23,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) RACSubject *succeedSubject;
 
 /// 设置全体静音状态
-/// - Parameter micDisabled: 全体音频禁用状态，YES-禁用 NO-不禁用
-/// - Parameter selfUnmuteCameraDisabled: 是否允许自我解除，YES-允许 NO-不允许
-- (void)setRoomFrequencyState:(BOOL)micDisabled selfUnmuteMicDisabled:(BOOL)selfUnmuteCameraDisabled;
+/// - Parameter micDisabled: 房间音频禁用状态，YES-禁用 NO-不禁用
+/// - Parameter selfUnmuteMicDisabled: 是否禁止自我解除音频状态，YES-禁止 NO-不禁止
+- (void)setRoomFrequencyState:(BOOL)micDisabled selfUnmuteMicDisabled:(BOOL)selfUnmuteMicDisabled;
 
 /// 设置全体禁画状态
 /// - Parameters:
-///   - cameraDisabled: 全体视频禁用状态，YES-禁用 NO-不禁用
-///   - selfUnmuteCameraDisabled: 是否允许自我解除，YES-允许 NO-不允许
+///   - cameraDisabled: 房间视频禁用状态，YES-禁用 NO-不禁用
+///   - selfUnmuteCameraDisabled: 是否禁止自我解除视频状态，YES-禁止 NO-不禁止
 - (void)setRoomFramesState:(BOOL)cameraDisabled selfUnmuteCameraDisabled:(BOOL)selfUnmuteCameraDisabled;
 
 /// 请求踢出成员

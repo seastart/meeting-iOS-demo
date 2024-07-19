@@ -181,8 +181,8 @@
     BOOL managers = [[FWRoomMemberManager sharedManager] isShareSponsor];
     /// 声明是否拥有读写权限
     BOOL readwrite = NO;
-    /// 如果当前用户是管理员或者是共享发起者
-    if (userRole == SEAUserRoleHost || managers) {
+    /// 如果当前用户是管理员、联席管理员或者是共享发起者
+    if (userRole == SEAUserRoleHost || userRole == SEAUserRoleUnionHost || managers) {
         /// 标记拥有读写权限
         readwrite = YES;
     }
@@ -697,7 +697,7 @@
         /// 获取当前用户是否为共享发起者
         BOOL managers = [[FWRoomMemberManager sharedManager] isShareSponsor];
         /// 如果当前用户不是管理员也不是共享发起者
-        if (userRole != SEAUserRoleHost && !managers) {
+        if (userRole == SEAUserRoleNormal && !managers) {
             /// 丢弃此次点击事件
             return;
         }

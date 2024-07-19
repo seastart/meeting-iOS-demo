@@ -404,8 +404,8 @@
 #pragma mark ----- 房间事件回调 -----
 #pragma mark 房间摄像头禁用状态变更回调
 /// 房间摄像头禁用状态变更回调
-/// - Parameter cameraDisabled: 进入房间是否关闭视频，YES-关闭 NO-不关闭
-/// - Parameter selfUnmuteCameraDisabled: 是否允许自我解除，YES-允许 NO-不允许
+/// - Parameter cameraDisabled: 房间视频禁用状态，YES-禁用 NO-不禁用
+/// - Parameter selfUnmuteCameraDisabled: 是否禁止自我解除视频状态，YES-禁止 NO-不禁止
 /// - Parameter userId: 操作者标识
 - (void)onRoomCameraStateChanged:(BOOL)cameraDisabled selfUnmuteCameraDisabled:(BOOL)selfUnmuteCameraDisabled userId:(NSString *)userId {
     
@@ -415,7 +415,7 @@
     /// 获取当前用户角色
     SEAUserRole userRole = [[FWRoomMemberManager sharedManager] getUserRole];
     /// 如果当前用户为主持人
-    if (userRole == SEAUserRoleHost) {
+    if (userRole == SEAUserRoleHost || userRole == SEAUserRoleUnionHost) {
         /// 无需处理该回调
         return;
     }
@@ -440,8 +440,8 @@
 
 #pragma mark 房间麦克风禁用状态变更回调
 /// 房间麦克风禁用状态变更回调
-/// - Parameter micDisabled: 进入房间是否关闭音频，YES-关闭 NO-不关闭
-/// - Parameter selfUnmuteMicDisabled: 是否允许自我解除，YES-允许 NO-不允许
+/// - Parameter micDisabled: 房间音频禁用状态，YES-禁用 NO-不禁用
+/// - Parameter selfUnmuteMicDisabled: 是否禁止自我解除音频状态，YES-禁止 NO-不禁止
 /// - Parameter userId: 操作者标识
 - (void)onRoomMicStateChanged:(BOOL)micDisabled selfUnmuteMicDisabled:(BOOL)selfUnmuteMicDisabled userId:(NSString *)userId {
     
@@ -450,7 +450,7 @@
     /// 获取当前用户角色
     SEAUserRole userRole = [[FWRoomMemberManager sharedManager] getUserRole];
     /// 如果当前用户为主持人
-    if (userRole == SEAUserRoleHost) {
+    if (userRole == SEAUserRoleHost || userRole == SEAUserRoleUnionHost) {
         /// 无需处理该回调
         return;
     }
@@ -936,7 +936,7 @@
     /// 获取当前用户角色
     SEAUserRole userRole = [[FWRoomMemberManager sharedManager] getUserRole];
     /// 根据当前用户角色显示弹窗交互
-    if (userRole == SEAUserRoleHost) {
+    if (userRole == SEAUserRoleHost || userRole == SEAUserRoleUnionHost) {
         /// 主持人挂断弹窗
         [self hostHangupEventAlert];
     } else {

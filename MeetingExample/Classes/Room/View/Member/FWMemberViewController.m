@@ -233,7 +233,7 @@
     FWMemberAlertViewController *alertVC = [FWMemberAlertViewController alertControllerWithTitle:@"所有以及新加入的成员将被静音" message:@"允许成员自我解除静音" cancelTitle:@"取消" ensureTitle:@"全体静音" cancelBlock:nil ensureBlock:^(BOOL selected) {
         @strongify(self);
         /// 设置全体静音状态
-        [self.viewModel setRoomFrequencyState:YES selfUnmuteMicDisabled:selected];
+        [self.viewModel setRoomFrequencyState:YES selfUnmuteMicDisabled:!selected];
     }];
     [self presentViewController:alertVC animated:NO completion:nil];
 }
@@ -250,7 +250,7 @@
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         @strongify(self);
         /// 设置全体静音状态
-        [self.viewModel setRoomFrequencyState:NO selfUnmuteMicDisabled:YES];
+        [self.viewModel setRoomFrequencyState:NO selfUnmuteMicDisabled:NO];
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];
@@ -266,7 +266,7 @@
     FWMemberAlertViewController *alertVC = [FWMemberAlertViewController alertControllerWithTitle:@"所有以及新加入的成员将被禁画" message:@"允许成员自我开启视频" cancelTitle:@"取消" ensureTitle:@"全体禁画" cancelBlock:nil ensureBlock:^(BOOL selected) {
         @strongify(self);
         /// 设置全体禁画状态
-        [self.viewModel setRoomFramesState:YES selfUnmuteCameraDisabled:selected];
+        [self.viewModel setRoomFramesState:YES selfUnmuteCameraDisabled:!selected];
     }];
     [self presentViewController:alertVC animated:NO completion:nil];
 }
@@ -283,7 +283,7 @@
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         @strongify(self);
         /// 设置全体禁画状态
-        [self.viewModel setRoomFramesState:NO selfUnmuteCameraDisabled:YES];
+        [self.viewModel setRoomFramesState:NO selfUnmuteCameraDisabled:NO];
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];
@@ -355,7 +355,7 @@
     /// 获取用户昵称
     NSString *nickname = userModel.name;
     /// 获取用户是否为主持人
-    BOOL isOwner = (userModel.extend.role == SEAUserRoleHost);
+    BOOL isOwner = (userModel.extend.role == SEAUserRoleHost || userModel.extend.role == SEAUserRoleUnionHost);
     /// 获取用户是否为当前成员
     BOOL oneself = memberModel.isMine;
     /// 获取用户视频状态

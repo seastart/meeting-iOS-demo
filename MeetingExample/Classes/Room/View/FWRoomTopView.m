@@ -130,7 +130,7 @@
     /// 声明目标标题
     NSString *title = @"离开房间";
     /// 如果当前用户为主持人
-    if (userRole == SEAUserRoleHost) {
+    if (userRole == SEAUserRoleHost || userRole == SEAUserRoleUnionHost) {
         /// 修改目标标题
         title = @"结束房间";
     }
