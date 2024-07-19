@@ -96,7 +96,8 @@
     return self;
 }
 
-#pragma mark - 懒加载屏幕录制组件
+#pragma mark - 创建屏幕录制组件
+/// 创建屏幕录制组件
 - (RPSystemBroadcastPickerView *)broadcastPickerView API_AVAILABLE(ios(12.0)) {
     
     if (!_broadcastPickerView) {
@@ -270,13 +271,10 @@
 ///   - videoState: 视频状态
 - (void)setupDefaultAudioState:(BOOL)audioState videoState:(BOOL)videoState {
     
-    /// 延迟重置按钮激活状态
-    FWDispatchAfter((int64_t)(1.5 * NSEC_PER_SEC), ^{
-        /// 设置默认音频状态
-        [self.roomBottomTool setupDefaultAudioState:audioState];
-        /// 设置默认视频状态
-        [self.roomBottomTool setupDefaultVideoState:videoState];
-    });
+    /// 设置默认音频状态
+    [self.roomBottomTool setupDefaultAudioState:audioState];
+    /// 设置默认视频状态
+    [self.roomBottomTool setupDefaultVideoState:videoState];
 }
 
 #pragma mark - 成员加入房间
@@ -491,13 +489,7 @@
     /// 获取预览视图
     UIView *preview = self.palaceMode ? [self.roomMemberView.mineWindowView getPlayerWindow] : [self.roomCaptureView getPreview];
     /// 用户请求打开摄像头
-    [[MeetingKit sharedInstance] requestOpenCamera:YES view:preview onSuccess:^(id  _Nullable data) {
-        /// @strongify(self);
-        /// 开启摄像头预览
-        /// [self.roomCaptureView startLocalPreview];
-        /// 切换源按钮选中状态
-        /// source.selected = !source.selected;
-    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+    [[MeetingKit sharedInstance] requestOpenCamera:YES view:preview onSuccess:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求开启视频失败 code = %ld, message = %@", code, message];
         [SVProgressHUD showInfoWithStatus:toastStr];
@@ -514,13 +506,7 @@
     SGLOG(@"[测试状态异常] 我请求关闭摄像头");
     /// @weakify(self);
     /// 用户关闭摄像头
-    [[MeetingKit sharedInstance] closeCamera:^(id  _Nullable data) {
-        /// @strongify(self);
-        /// 停止摄像头预览
-        /// [self.roomCaptureView stopLocalPreview];
-        /// 切换源按钮选中状态
-        /// source.selected = !source.selected;
-    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+    [[MeetingKit sharedInstance] closeCamera:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求关闭视频失败 code = %ld, message = %@", code, message];
         [SVProgressHUD showInfoWithStatus:toastStr];
@@ -549,13 +535,7 @@
     SGLOG(@"[测试状态异常] 我请求打开麦克风");
     /// @weakify(self);
     /// 用户请求打开麦克风
-    [[MeetingKit sharedInstance] requestOpenMic:^(id  _Nullable data) {
-        /// @strongify(self);
-        /// 开启音频发送
-        /// [self.roomCaptureView startSendAudio];
-        /// 切换源按钮选中状态
-        /// source.selected = !source.selected;
-    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+    [[MeetingKit sharedInstance] requestOpenMic:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求开启音频失败 code = %ld, message = %@", code, message];
         [SVProgressHUD showInfoWithStatus:toastStr];
@@ -572,13 +552,7 @@
     SGLOG(@"[测试状态异常] 我请求关闭麦克风");
     /// @weakify(self);
     /// 用户关闭麦克风
-    [[MeetingKit sharedInstance] closeMic:^(id  _Nullable data) {
-        /// @strongify(self);
-        /// 停止音频发送
-        /// [self.roomCaptureView stopSendAudio];
-        /// 切换源按钮选中状态
-        /// source.selected = !source.selected;
-    } onFailed:^(SEAError code, NSString * _Nonnull message) {
+    [[MeetingKit sharedInstance] closeMic:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求关闭音频失败 code = %ld, message = %@", code, message];
         [SVProgressHUD showInfoWithStatus:toastStr];
@@ -652,7 +626,7 @@
     [FWToolBridge requestAuthorization:FWPermissionsStateAudio superVC:[FWEntryBridge sharedManager].appDelegate.window.rootViewController result:^(BOOL status) {
         @strongify(self);
         if (status) {
-            /// 分辨请求开启还是关闭音频
+            /// 判断请求开启还是关闭音频
             if (astate) {
                 /// 请求开启音频
                 [self requestOpenAudio:source];
@@ -677,7 +651,7 @@
     [FWToolBridge requestAuthorization:FWPermissionsStateVideo superVC:[FWEntryBridge sharedManager].appDelegate.window.rootViewController result:^(BOOL status) {
         @strongify(self);
         if (status) {
-            /// 分辨请求开启还是关闭视频
+            /// 判断请求开启还是关闭视频
             if (vstate) {
                 /// 请求开启视频
                 [self requestOpenVideo:source];
