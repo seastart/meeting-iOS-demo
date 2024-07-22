@@ -125,6 +125,7 @@
     SEAMeetingEnterParam *meetingEnterParam = [[SEAMeetingEnterParam alloc] init];
     meetingEnterParam.roomNo = self.viewModel.enterModel.roomNo;
     meetingEnterParam.nickname = self.viewModel.enterModel.nickname;
+    meetingEnterParam.avatar = self.viewModel.enterModel.avatar;
     /// 加入房间
     [[MeetingKit sharedInstance] enterRoom:meetingEnterParam onSuccess:^(id  _Nullable data) {
         @strongify(self);

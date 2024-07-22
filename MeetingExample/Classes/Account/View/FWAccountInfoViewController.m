@@ -74,7 +74,7 @@
     /// 声明性别标识
     BOOL isSexState = YES;
     /// 根据当前头像设置性别标识
-    if ([imageName isEqualToString:FWREMOTEAVATAR2]) {
+    if ([imageName isEqualToString:FWREMOTEAVATAR2()]) {
         /// 标识女性
         isSexState = NO;
     } else {

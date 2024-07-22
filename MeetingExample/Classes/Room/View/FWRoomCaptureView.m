@@ -76,7 +76,8 @@
 #pragma mark - 配置属性
 - (void)setupConfig {
     
-    /// 配置属性
+    /// 设置默认显示数据
+    [self setupMemberInfo];
 }
 
 #pragma mark - 获取预览视图
@@ -95,7 +96,7 @@
     SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
     
     /// 设置用户头像
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[userModel.extend.extendInfo stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(FWDEFAULTAVATAR)];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[userModel.extend.avatar stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(FWDEFAULTAVATAR)];
     /// 设置用户昵称
     self.nameLabel.text = userModel.name;
     

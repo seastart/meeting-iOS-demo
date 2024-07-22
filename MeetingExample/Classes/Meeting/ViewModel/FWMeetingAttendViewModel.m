@@ -91,6 +91,7 @@
     enterModel.nickname = nickname;
     enterModel.audioState = self.isMicrophone;
     enterModel.videoState = self.isCamera;
+    enterModel.avatar = [[FWStoreDataBridge sharedManager] findUserModel].data.avatar;
     /// 回调请求成功
     [self.succeedSubject sendNext:enterModel];
 }

@@ -1677,7 +1677,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "MeetingExample/Resources/MeetingExample-Prefix.pch";
 				INFOPLIST_FILE = "MeetingExample/Resources/MeetingExample-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
+				INFOPLIST_KEY_CFBundleDisplayName = STMLink;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
@@ -1724,7 +1724,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "MeetingExample/Resources/MeetingExample-Prefix.pch";
 				INFOPLIST_FILE = "MeetingExample/Resources/MeetingExample-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
+				INFOPLIST_KEY_CFBundleDisplayName = STMLink;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
@@ -1772,7 +1772,7 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MeetingBroadcastUpload/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
+				INFOPLIST_KEY_CFBundleDisplayName = STMLink;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 SailorGa. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -1805,7 +1805,7 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MeetingBroadcastUpload/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
+				INFOPLIST_KEY_CFBundleDisplayName = STMLink;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 SailorGa. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -1838,7 +1838,7 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MeetingBroadcastUpload/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
+				INFOPLIST_KEY_CFBundleDisplayName = STMLink;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 SailorGa. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -1923,7 +1923,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = "MeetingExample/Resources/MeetingExample-Prefix.pch";
 				INFOPLIST_FILE = "MeetingExample/Resources/MeetingExample-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "海星音视频";
+				INFOPLIST_KEY_CFBundleDisplayName = STMLink;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;

@@ -12,10 +12,6 @@
 /// Application Group Identifier
 NSString * const FWAPPGROUP = @"group.cn.seastart.meetingkit";
 
-/// 远端头像地址1
-NSString * const FWREMOTEAVATAR1 = @"http://localv2.srtc.live:8089/resource/avatar01.png";
-/// 远端头像地址2
-NSString * const FWREMOTEAVATAR2 = @"http://localv2.srtc.live:8089/resource/avatar02.png";
 /// 默认头像地址
 NSString * const FWDEFAULTAVATAR = @"icon_login_avatar2";
 /// 存储用户数据的KEY
@@ -30,7 +26,7 @@ NSString * const FWNICKNAMEKEY = @"cn.seastart.meetingkit.nickname";
 NSString * const FWUSERAVATARKEY = @"cn.seastart.meetingkit.avatar";
 
 /// 服务器地址
-NSString * const FWSERVICEURI = @"http://localv2.srtc.live:8089";
+NSString * const FWSERVICEURI = @"http://192.168.0.172:8089";
 /// 数据请求短链接头部
 NSString * const FWSERVICESHORTHEADER = @"/api/v1/";
 /// 获取短信验证码
@@ -62,6 +58,18 @@ NSString * const FWACCOUNTTHIRDPARTPARAM = @"?key=share-list&html=yes";
 NSString * const FWACCOUNTAGREEMENTPARAM = @"?key=user-agreement&html=yes";
 /// 隐私协议参数
 NSString * const FWACCOUNTPRIVACYPARAM = @"?key=privacy-policy&html=yes";
+
+/// 远端头像地址1
+NSString * FWREMOTEAVATAR1(void) {
+    
+    return [NSString stringWithFormat:@"%@%@", FWSERVICEURI, @"/resource/avatar01.png"];
+}
+
+/// 远端头像地址2
+NSString * FWREMOTEAVATAR2(void) {
+    
+    return [NSString stringWithFormat:@"%@%@", FWSERVICEURI, @"/resource/avatar02.png"];
+}
 
 /// 免责声明地址
 NSString * FWACCOUNTASSERTHOST(void) {

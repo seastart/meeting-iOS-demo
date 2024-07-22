@@ -61,7 +61,7 @@
 - (void)setupDefaultData {
     
     /// 设置标题
-    self.navigationItem.title = NSLocalizedString(@"海星音视频", nil);
+    self.navigationItem.title = NSLocalizedString(@"STMLink", nil);
 }
 
 #pragma mark - 设置ViewModel

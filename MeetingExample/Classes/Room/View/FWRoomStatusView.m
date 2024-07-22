@@ -105,7 +105,7 @@
     SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:memberModel.userId];
     
     /// 设置头像
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[userModel.extend.extendInfo stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(FWDEFAULTAVATAR)];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[userModel.extend.avatar stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(FWDEFAULTAVATAR)];
     
     /// 设置音频状态
     NSString *audioImageName = @"icon_room_microphone_state_un";

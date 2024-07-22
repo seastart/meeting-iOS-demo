@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *roomNo;
 /// 参会昵称
 @property (nonatomic, copy) NSString *nickname;
+/// 参会头像
+@property (nonatomic, copy) NSString *avatar;
 /// 视频状态，YES-开启 NO-关闭 默认NO
 @property (nonatomic, assign) BOOL videoState;
 /// 音频状态，YES-开启 NO-关闭 默认NO

@@ -14,10 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// Application Group Identifier
 FOUNDATION_EXTERN NSString *__nonnull const FWAPPGROUP;
 
-/// 远端头像地址1
-FOUNDATION_EXTERN NSString *__nonnull const FWREMOTEAVATAR1;
-/// 远端头像地址2
-FOUNDATION_EXTERN NSString *__nonnull const FWREMOTEAVATAR2;
 /// 默认头像地址
 FOUNDATION_EXTERN NSString *__nonnull const FWDEFAULTAVATAR;
 /// 存储用户数据的KEY
@@ -64,6 +60,11 @@ FOUNDATION_EXTERN NSString *__nonnull const FWACCOUNTTHIRDPARTPARAM;
 FOUNDATION_EXTERN NSString *__nonnull const FWACCOUNTAGREEMENTPARAM;
 /// 隐私协议参数
 FOUNDATION_EXTERN NSString *__nonnull const FWACCOUNTPRIVACYPARAM;
+
+/// 远端头像地址1
+FOUNDATION_EXTERN NSString *__nonnull FWREMOTEAVATAR1(void);
+/// 远端头像地址2
+FOUNDATION_EXTERN NSString *__nonnull FWREMOTEAVATAR2(void);
 
 /// 免责声明地址
 FOUNDATION_EXTERN NSString *__nonnull FWACCOUNTASSERTHOST(void);

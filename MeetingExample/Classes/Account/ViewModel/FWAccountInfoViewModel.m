@@ -43,14 +43,14 @@
     /// 用户昵称
     [params setValue:self.namenickText forKey:@"nickname"];
     /// 声明用户头像
-    NSString *imageName = FWREMOTEAVATAR1;
+    NSString *imageName = FWREMOTEAVATAR1();
     /// 根据性别标识设置头像
     if (self.isSexState) {
         /// 标识男性
-        imageName = FWREMOTEAVATAR1;
+        imageName = FWREMOTEAVATAR1();
     } else {
         /// 标识女性
-        imageName = FWREMOTEAVATAR2;
+        imageName = FWREMOTEAVATAR2();
     }
     /// 用户头像
     [params setValue:imageName forKey:@"avatar"];
