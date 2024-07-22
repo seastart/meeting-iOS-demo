@@ -52,15 +52,16 @@
 
 #pragma mark - 成员信息更新
 /// 成员信息更新
-/// @param uid 用户标识
-- (void)changeMemberWithUserid:(nonnull NSString *)uid {
+/// @param userId 用户标识
+- (void)changeMemberWithUserid:(NSString *)userId {
     
-    if (kStringIsEmpty(uid)) {
+    if (kStringIsEmpty(userId)) {
         /// 目标用户标识为空，丢弃该指令
         return;
     }
-    /// 获取成员详细信息
-    /// RTCEngineUserModel *memberModel = [[FWEngineBridge sharedManager] findMemberWithUserId:uid];
+    
+    /// 获取发送者数据
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:userId];
     /// 同步锁保护列表篡改
     @synchronized (self.listData) {
         /// 遍历消息分组数据
@@ -68,11 +69,9 @@
             /// 遍历消息列表数据
             [obj.listData enumerateObjectsUsingBlock:^(FWMessageItemModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 /// 寻找对应发送者
-                if ([uid isEqualToString:obj.userId]) {
+                if ([userId isEqualToString:obj.userId]) {
                     /// 更改成员昵称
-                    obj.name = @"";
-                    /// 更改成员头像
-                    obj.avatar = @"";
+                    obj.name = userModel.name;
                 }
             }];
         }];
@@ -143,7 +142,7 @@
     FWMessageItemModel *itemModel = [[FWMessageItemModel alloc] init];
     itemModel.userId = senderModel.userId;
     itemModel.name = senderModel.name;
-    itemModel.avatar = nil;
+    itemModel.avatar = senderModel.extend.avatar;
     itemModel.content = content;
     itemModel.messageType = messageType;
     itemModel.isMine = [userModel.userId isEqualToString:senderId];

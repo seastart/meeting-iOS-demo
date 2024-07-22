@@ -202,35 +202,35 @@
 /// - Parameter reason: 离开原因
 - (void)exitWarnAlert:(SEALeaveReason)reason {
     
-    /// 如果是主动离开频道，无需做任何提示处理
+    /// 如果是主动离开会议，无需做任何提示处理
     if (reason == SEALeaveReasonNormal) {
         /// 丢弃此次回调处理
         return;
     }
     
-    /// 如果是我主动解散了频道，无需做任何提示处理
+    /// 如果是我主动解散了会议，无需做任何提示处理
     if (self.WhetherDissolvedByMe) {
         /// 丢弃此次回调处理
         return;
     }
     
     /// 声明提示信息
-    NSString *message = @"您已经主动离开频道";
+    NSString *message = @"您已经主动离开会议";
     switch (reason) {
         case SEALeaveReasonNormal:
-            message = @"您已经主动离开频道";
+            message = @"您已经主动离开会议";
             break;
         case SEALeaveReasonKickout:
-            message = @"您已被管理员踢出频道";
+            message = @"您已被管理员踢出会议";
             break;
         case SEALeaveReasonReplaced:
-            message = @"您已在其它设备登录，请用新设备重新加入频道";
+            message = @"您已在其它设备登录，请用新设备重新加入会议";
             break;
         case SEALeaveReasonTimeout:
             message = @"您已超时离线";
             break;
         case SEALeaveReasonDestroy:
-            message = @"频道已经解散";
+            message = @"会议已经解散";
             break;
         default:
             break;
@@ -612,6 +612,8 @@
     SGLOG(@"用户昵称变化，userId = %@ nickname = %@", targetUserId, nickname);
     /// 刷新成员列表
     [[FWRoomMemberManager sharedManager] reloadMemberLists];
+    /// 成员信息更新
+    [[FWMessageManager sharedManager] changeMemberWithUserid:targetUserId];
     /// 成员昵称变化
     [self.roomMainView userNameChanged:targetUserId nickname:nickname];
 }

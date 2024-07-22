@@ -23,8 +23,8 @@ typedef void(^FWMessageManagerReloadDataBlock)(void);
 - (void)cleanChatsCache;
 
 /// 成员信息更新
-/// @param uid 用户标识
-- (void)changeMemberWithUserid:(nonnull NSString *)uid;
+/// @param userId 用户标识
+- (void)changeMemberWithUserid:(NSString *)userId;
 
 /// 获取聊天数据
 - (NSArray<FWMessageModel *> *)getAllChats;
