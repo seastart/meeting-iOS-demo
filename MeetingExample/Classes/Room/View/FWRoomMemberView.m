@@ -177,9 +177,6 @@
     FWRoomMemberWindowView *memberWindowView = [self.displayItems objectForKey:userId];
     /// 不存在该成员
     if (!memberWindowView) {
-        /// 获取用户数据
-        SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:userId];
-        
         /// 创建成员窗口视图
         FWRoomMemberWindowView *windowView = [[FWRoomMemberWindowView alloc] initWithFrame:CGRectMake(0, 0, FW_WINDOW_ITEM_WIDTH, FW_WINDOW_ITEM_HEIGHT)];
         /// 关联用户标识
@@ -194,11 +191,6 @@
         [self.flowLayout addSubview:windowView];
         /// 添加到本地成员列表
         [self.displayItems setValue:windowView forKey:userId];
-        
-        /// 设置用户摄像头状态
-        [self userCameraStateChanged:userId cameraState:userModel.extend.cameraState];
-        /// 设置用户麦克风状态
-        [self userMicStateChanged:userId micState:userModel.extend.micState];
     } else {
         /// 更新成员信息
     }
@@ -213,6 +205,8 @@
     FWRoomMemberWindowView *memberWindowView = [self.displayItems objectForKey:userId];
     /// 存在该成员
     if (memberWindowView) {
+        /// 停止订阅指定远端用户的所有视频流
+        [[MeetingKit sharedInstance] stopAllRemoteViewWithUserId:userId];
         /// 移除本地成员列表
         [self.displayItems removeObjectForKey:userId];
         /// 释放成员窗口视图
