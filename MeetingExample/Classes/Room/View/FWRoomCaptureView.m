@@ -76,8 +76,12 @@
 #pragma mark - 配置属性
 - (void)setupConfig {
     
-    /// 设置默认显示数据
-    [self setupMemberInfo];
+    /// 获取当前用户基本信息
+    FWUserDetailsModel *detailsModel = [[FWStoreDataBridge sharedManager] findUserModel].data;
+    /// 设置用户头像
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[detailsModel.avatar stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(FWDEFAULTAVATAR)];
+    /// 设置用户昵称
+    self.nameLabel.text = detailsModel.nickname;
 }
 
 #pragma mark - 获取预览视图

@@ -256,6 +256,8 @@
     BOOL audioState = enterModel.audioState;
     /// 获取默认视频状态
     BOOL videoState = enterModel.videoState;
+    /// 更新用户基本数据
+    [self.roomCaptureView setupMemberInfo];
     /// 进入房间成功
     [self.roomMemberView enterRoom:userId];
     /// 变更挂断按钮标题
