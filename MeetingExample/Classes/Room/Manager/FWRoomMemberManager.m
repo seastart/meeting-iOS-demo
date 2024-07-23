@@ -19,6 +19,10 @@
 @property (nonatomic, copy) FWRoomMemberManagerReloadBlock reloadBlock;
 /// 当前角色变更回调
 @property (nonatomic, copy) FWRoomMemberManagerRoleChangedBlock roleChangedBlock;
+/// 当前用户聊天禁用状态变更回调
+@property (nonatomic, copy) FWRoomMemberManagerUserChatDisabledChangedBlock userChatDisabledChangedBlock;
+/// 当前房间聊天禁用状态变更回调
+@property (nonatomic, copy) FWRoomMemberManagerRoomChatDisabledChangedBlock roomChatDisabledChangedBlock;
 
 @end
 
@@ -61,6 +65,36 @@
     
     if (self.reloadBlock) {
         self.reloadBlock();
+    }
+}
+
+#pragma mark - 用户聊天禁用状态变更
+/// 用户聊天禁用状态变更
+/// - Parameter chatDisabled: 禁用状态，YES-禁用 NO-不禁用
+- (void)userChatDisabledChanged:(BOOL)chatDisabled {
+    
+    if (!chatDisabled) {
+        /// 用户聊天状态解除了禁用，结束此次调用
+        return;
+    }
+    
+    if (self.userChatDisabledChangedBlock) {
+        self.userChatDisabledChangedBlock(chatDisabled);
+    }
+}
+
+#pragma mark - 房间聊天禁用状态变更
+/// 房间聊天禁用状态变更
+/// - Parameter chatDisabled: 禁用状态，YES-禁用 NO-不禁用
+- (void)roomChatDisabledChanged:(BOOL)chatDisabled {
+    
+    if (!chatDisabled) {
+        /// 房间聊天状态解除了禁用，结束此次调用
+        return;
+    }
+    
+    if (self.roomChatDisabledChangedBlock) {
+        self.roomChatDisabledChangedBlock(chatDisabled);
     }
 }
 
@@ -223,6 +257,22 @@
 - (void)roleChangedBlock:(nullable FWRoomMemberManagerRoleChangedBlock)roleChangedBlock {
     
     self.roleChangedBlock = roleChangedBlock;
+}
+
+#pragma mark - 当前用户聊天禁用状态变更回调
+/// 当前用户聊天禁用状态变更回调
+/// @param userChatDisabledChangedBlock 当前用户聊天禁用状态变更回调
+- (void)userChatDisabledChangedBlock:(nullable FWRoomMemberManagerUserChatDisabledChangedBlock)userChatDisabledChangedBlock {
+    
+    self.userChatDisabledChangedBlock = userChatDisabledChangedBlock;
+}
+
+#pragma mark - 当前房间聊天禁用状态变更回调
+/// 当前房间聊天禁用状态变更回调
+/// @param roomChatDisabledChangedBlock 当前房间聊天禁用状态变更回调
+- (void)roomChatDisabledChangedBlock:(nullable FWRoomMemberManagerRoomChatDisabledChangedBlock)roomChatDisabledChangedBlock {
+    
+    self.roomChatDisabledChangedBlock = roomChatDisabledChangedBlock;
 }
 
 @end

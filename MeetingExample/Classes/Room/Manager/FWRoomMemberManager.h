@@ -15,6 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^FWRoomMemberManagerReloadBlock)(void);
 /// 当前角色变更回调
 typedef void(^FWRoomMemberManagerRoleChangedBlock)(void);
+/// 当前用户聊天禁用状态变更回调
+typedef void(^FWRoomMemberManagerUserChatDisabledChangedBlock)(BOOL chatDisabled);
+/// 当前房间聊天禁用状态变更回调
+typedef void(^FWRoomMemberManagerRoomChatDisabledChangedBlock)(BOOL chatDisabled);
 
 @interface FWRoomMemberManager : NSObject
 
@@ -28,6 +32,16 @@ typedef void(^FWRoomMemberManagerRoleChangedBlock)(void);
 #pragma mark - 刷新成员列表
 /// 刷新成员列表
 - (void)reloadMemberLists;
+
+#pragma mark - 用户聊天禁用状态变更
+/// 用户聊天禁用状态变更
+/// - Parameter chatDisabled: 禁用状态，YES-禁用 NO-不禁用
+- (void)userChatDisabledChanged:(BOOL)chatDisabled;
+
+#pragma mark - 房间聊天禁用状态变更
+/// 房间聊天禁用状态变更
+/// - Parameter chatDisabled: 禁用状态，YES-禁用 NO-不禁用
+- (void)roomChatDisabledChanged:(BOOL)chatDisabled;
 
 #pragma mark - 获取当前所有成员
 /// 获取当前所有成员
@@ -83,6 +97,16 @@ typedef void(^FWRoomMemberManagerRoleChangedBlock)(void);
 /// 当前角色变更回调
 /// @param roleChangedBlock 当前角色变更回调
 - (void)roleChangedBlock:(nullable FWRoomMemberManagerRoleChangedBlock)roleChangedBlock;
+
+#pragma mark - 当前用户聊天禁用状态变更回调
+/// 当前用户聊天禁用状态变更回调
+/// @param userChatDisabledChangedBlock 当前用户聊天禁用状态变更回调
+- (void)userChatDisabledChangedBlock:(nullable FWRoomMemberManagerUserChatDisabledChangedBlock)userChatDisabledChangedBlock;
+
+#pragma mark - 当前房间聊天禁用状态变更回调
+/// 当前房间聊天禁用状态变更回调
+/// @param roomChatDisabledChangedBlock 当前房间聊天禁用状态变更回调
+- (void)roomChatDisabledChangedBlock:(nullable FWRoomMemberManagerRoomChatDisabledChangedBlock)roomChatDisabledChangedBlock;
 
 @end
 

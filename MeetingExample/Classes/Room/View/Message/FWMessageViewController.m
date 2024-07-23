@@ -161,6 +161,42 @@ static NSString *FWMessageTableSectionHeaderViewIdentifier = @"FWMessageTableSec
         /// 列表滚动到底部
         [self scrollBottomWithAnimated:YES];
     }];
+    
+    /// 当前用户聊天禁用状态变更回调
+    [[FWRoomMemberManager sharedManager] userChatDisabledChangedBlock:^(BOOL chatDisabled) {
+        @strongify(self);
+        /// 如果用户聊天状态被禁用
+        if (chatDisabled) {
+            /// 离开聊天页面
+            [self pop:1];
+            /// 主持人禁用聊天状态提示弹窗
+            [self adminChatDisabledAlert:@"您的聊天状态已被主持人禁用。"];
+        }
+    }];
+    
+    /// 当前房间聊天禁用状态变更回调
+    [[FWRoomMemberManager sharedManager] roomChatDisabledChangedBlock:^(BOOL chatDisabled) {
+        @strongify(self);
+        /// 如果房间聊天状态被禁用
+        if (chatDisabled) {
+            /// 离开聊天页面
+            [self pop:1];
+            /// 主持人禁用聊天状态提示弹窗
+            [self adminChatDisabledAlert:@"房间的聊天状态已被主持人禁用。"];
+        }
+    }];
+}
+
+#pragma mark - 主持人禁用聊天状态提示弹窗
+/// 主持人禁用聊天状态提示弹窗
+/// - Parameter message: 弹窗描述
+- (void)adminChatDisabledAlert:(NSString *)message {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    [alert addAction:cancelAction];
+    [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - 键盘弹出通知

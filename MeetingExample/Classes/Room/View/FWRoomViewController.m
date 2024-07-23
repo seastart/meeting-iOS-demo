@@ -272,10 +272,9 @@
     [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
-#pragma mark - 主持人邀请开启摄像头
-/// 主持人邀请开启摄像头
-/// - Parameter userId: 用户标识
-- (void)adminInviteOpenCameraAlert:(NSString *)userId {
+#pragma mark - 主持人邀请开启摄像头提示弹窗
+/// 主持人邀请开启摄像头提示弹窗
+- (void)adminInviteOpenCameraAlert {
     
     @weakify(self);
     
@@ -292,10 +291,9 @@
     [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
-#pragma mark - 主持人邀请开启麦克风
-/// 主持人邀请开启麦克风
-/// - Parameter userId: 用户标识
-- (void)adminInviteOpenMicAlert:(NSString *)userId {
+#pragma mark - 主持人邀请开启麦克风提示弹窗
+/// 主持人邀请开启麦克风提示弹窗
+- (void)adminInviteOpenMicAlert {
     
     @weakify(self);
     
@@ -390,6 +388,8 @@
     
     /// 日志埋点
     SGLOG(@"%@", @"主持人请求你开启摄像头");
+    /// 主持人邀请我开启摄像头提示弹窗
+    [self adminInviteOpenCameraAlert];
 }
 
 #pragma mark 请求开启麦克风回调
@@ -399,6 +399,8 @@
     
     /// 日志埋点
     SGLOG(@"%@", @"主持人请求你开启麦克风");
+    /// 主持人邀请我开启麦克风提示弹窗
+    [self adminInviteOpenMicAlert];
 }
 
 
@@ -434,8 +436,8 @@
             [self.roomMainView requestCloseVideo:nil];
         }
     } else {
-        /// 主持人邀请我开启摄像头
-        [self adminInviteOpenCameraAlert:userModel.userId];
+        /// 主持人邀请我开启摄像头提示弹窗
+        [self adminInviteOpenCameraAlert];
     }
 }
 
@@ -469,8 +471,8 @@
             [self.roomMainView requestCloseAudio:nil];
         }
     } else {
-        /// 主持人邀请我开启麦克风
-        [self adminInviteOpenMicAlert:userModel.userId];
+        /// 主持人邀请我开启麦克风提示弹窗
+        [self adminInviteOpenMicAlert];
     }
 }
 
@@ -482,6 +484,13 @@
     
     /// 日志埋点
     SGLOG(@"房间聊天禁用状态变更通知，chatDisabled = %d", chatDisabled);
+    /// 如果房间聊天状态禁用被解除
+    if (!chatDisabled) {
+        /// 提示房间聊天禁用状态已被解除
+        [SVProgressHUD showInfoWithStatus:@"房间聊天禁用状态已被主持人解除。"];
+    }
+    /// 房间聊天禁用状态变更
+    [[FWRoomMemberManager sharedManager] roomChatDisabledChanged:chatDisabled];
 }
 
 #pragma mark 房间截图禁用状态变更回调
@@ -523,6 +532,18 @@
     
     /// 日志埋点
     SGLOG(@"房间转移主持人通知，userId = %@ sourceUserId = %@", userId, sourceUserId);
+    /// 刷新成员列表
+    [[FWRoomMemberManager sharedManager] reloadMemberLists];
+    
+    /// 变更新主持人成员角色(更新成员操作按钮等)
+    [[FWRoomMemberManager sharedManager] userRoleChanged:userId userRole:SEAUserRoleHost];
+    /// 变更新主持人成员角色(顶部操作栏按钮标题等)
+    [self.roomMainView userRoleChanged:userId userRole:SEAUserRoleHost];
+    
+    /// 变更原主持人成员角色(更新成员操作按钮等)
+    [[FWRoomMemberManager sharedManager] userRoleChanged:sourceUserId userRole:SEAUserRoleNormal];
+    /// 变更原主持人成员角色(顶部操作栏按钮标题等)
+    [self.roomMainView userRoleChanged:sourceUserId userRole:SEAUserRoleNormal];
 }
 
 #pragma mark 共享开始回调
@@ -630,8 +651,11 @@
     SGLOG(@"用户角色变化，userId = %@ userRole = %ld", targetUserId, userRole);
     /// 刷新成员列表
     [[FWRoomMemberManager sharedManager] reloadMemberLists];
-    /// 变更成员角色
+    
+    /// 变更成员角色(更新成员操作按钮等)
     [[FWRoomMemberManager sharedManager] userRoleChanged:targetUserId userRole:userRole];
+    /// 变更成员角色(顶部操作栏按钮标题等)
+    [self.roomMainView userRoleChanged:targetUserId userRole:userRole];
 }
 
 #pragma mark 用户摄像头状态变化回调
@@ -672,6 +696,13 @@
     
     /// 日志埋点
     SGLOG(@"用户聊天能力禁用状态变化，chatDisabled = %d", chatDisabled);
+    /// 如果用户聊天状态禁用被解除
+    if (!chatDisabled) {
+        /// 提示用户解除了聊天禁用状态
+        [SVProgressHUD showInfoWithStatus:@"您的聊天禁用状态已被主持人解除。"];
+    }
+    /// 用户聊天禁用状态变更
+    [[FWRoomMemberManager sharedManager] userChatDisabledChanged:chatDisabled];
 }
 
 #pragma mark 举手处理结果回调
@@ -682,7 +713,7 @@
 - (void)onHandupConfirm:(SEAHandupType)handupType approve:(BOOL)approve userId:(NSString *)userId {
     
     /// 日志埋点
-    SGLOG(@"举手处理结果通知，handupType = %ld approve = %d", handupType, approve);
+    SGLOG(@"举手处理结果通知(主持人回馈了你的举手操作)，handupType = %ld approve = %d", handupType, approve);
 }
 
 

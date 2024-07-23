@@ -717,6 +717,25 @@
 ///   - source: 事件源对象
 - (void)bottomView:(FWRoomBottomView *)bottomView didSelectChatButton:(UIButton *)source {
     
+    /// 获取房间数据
+    SEARoomModel *roomModel = [[MeetingKit sharedInstance] getRoomDetails];
+    /// 获取用户数据
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    /// 如果房间聊天状态为禁用
+    if (roomModel.extend.chatDisabled) {
+        /// 提示用户禁用聊天
+        [SVProgressHUD showInfoWithStatus:@"当前房间聊天状态已经被主持人禁用"];
+        /// 结束此次回调
+        return;
+    }
+    /// 如果用户聊天状态为禁用
+    if (userModel.extend.chatDisabled) {
+        /// 提示用户禁用聊天
+        [SVProgressHUD showInfoWithStatus:@"您的聊天状态已经被主持人禁用"];
+        /// 结束此次回调
+        return;
+    }
+    
     /// 回调控制器层处理
     if (self.delegate && [self.delegate respondsToSelector:@selector(onChatEventMainView:)]) {
         [self.delegate onChatEventMainView:self];
