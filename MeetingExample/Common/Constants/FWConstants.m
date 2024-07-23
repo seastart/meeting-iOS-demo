@@ -26,7 +26,7 @@ NSString * const FWNICKNAMEKEY = @"cn.seastart.meetingkit.nickname";
 NSString * const FWUSERAVATARKEY = @"cn.seastart.meetingkit.avatar";
 
 /// 服务器地址
-NSString * const FWSERVICEURI = @"http://192.168.0.172:8089";
+NSString * const FWSERVICEURI = @"http://localv2.srtc.live:8089";
 /// 数据请求短链接头部
 NSString * const FWSERVICESHORTHEADER = @"/api/v1/";
 /// 获取短信验证码
