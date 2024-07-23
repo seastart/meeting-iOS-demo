@@ -580,15 +580,16 @@
     [self.roomMainView userRoomStopStart:userId shareType:shareType];
 }
 
-#pragma mark 房间举手状态变化回调
-/// 房间举手状态变化回调
+#pragma mark 房间成员举手状态变化回调
+/// 房间成员举手状态变化回调
+/// 成员发起举手时，拥有管理权限的成员会收到该回调通知
 /// - Parameter userId: 成员标识
 /// - Parameter enable: 举手状态，YES-申请举手 NO-取消举手
 /// - Parameter handupType: 举手申请类型
 - (void)onRoomHandUpChanged:(NSString *)userId enable:(BOOL)enable handupType:(SEAHandupType)handupType {
     
     /// 日志埋点
-    SGLOG(@"房间举手状态变化通知，userId = %@ %@ handupType = %ld", userId, enable ? @"申请举手" : @"取消举手", handupType);
+    SGLOG(@"房间成员举手状态变化通知，userId = %@ %@ handupType = %ld", userId, enable ? @"申请举手" : @"取消举手", handupType);
 }
 
 
@@ -707,6 +708,7 @@
 
 #pragma mark 举手处理结果回调
 /// 举手处理结果回调
+/// 成员发起举手请求，主持人处理请求后，会通过该回调通知给对应成员
 /// - Parameter handupType: 申请类型
 /// - Parameter approve: 处理结果
 /// - Parameter userId: 处理人标识
@@ -725,21 +727,15 @@
 /// - Parameter messageType: 消息类型
 - (void)onReceiveChatMessage:(NSString *)senderId message:(NSString *)message messageType:(SEAMessageType)messageType {
     
-    /// 设置接收聊天消息
-    [[FWMessageManager sharedManager] receiveChatWithSenderId:senderId content:message messageType:messageType];
     /// 日志埋点
     SGLOG(@"收到聊天消息，senderId = %@ message = %@ messageType = %ld", senderId, message, messageType);
-}
-
-#pragma mark 收到自定义消息回调
-/// 收到自定义消息回调
-/// - Parameters:
-///   - senderId: 发送者标识
-///   - content: 自定义消息内容
-- (void)onReceiveCustomMessage:(NSString *)senderId content:(NSString *)content {
-    
-    /// 日志埋点
-    SGLOG(@"收到自定义消息，senderId = %@ content = %@", senderId, content);
+    /// 根据业务要求进行处理，本示例DEMO暂时无需处理自定义消息
+    if (messageType == SEAMessageTypeCustom) {
+        /// 丢弃此次回调
+        return;
+    }
+    /// 设置接收聊天消息
+    [[FWMessageManager sharedManager] receiveChatWithSenderId:senderId content:message messageType:messageType];
 }
 
 #pragma mark 收到系统消息回调

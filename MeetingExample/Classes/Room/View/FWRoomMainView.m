@@ -218,6 +218,8 @@
     
     /// 用户请求开启共享屏幕
     [[MeetingKit sharedInstance] requestShare:SEAShareTypeScreen onSuccess:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
+        /// 关闭屏幕录制
+        [[MeetingKit sharedInstance] stopScreenRecord];
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求开启共享屏幕失败 code = %ld, message = %@", code, message];
         [SVProgressHUD showInfoWithStatus:toastStr];
