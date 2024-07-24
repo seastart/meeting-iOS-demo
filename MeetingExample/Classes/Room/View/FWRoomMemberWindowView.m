@@ -103,7 +103,7 @@
     /// 用户摄像头状态变化
     [self.statusView userCameraStateChanged:cameraState];
     /// 订阅成员视频流
-    [self subscribeWithtTackId:RTCTrackIdentifierFlags1 subscribe:(cameraState == SEADeviceStateOpen)];
+    [self subscribeRemoteVideoWithStreamType:SEAVideoStreamTypeBig subscribe:(cameraState == SEADeviceStateOpen)];
 }
 
 #pragma mark - 用户麦克风状态变化
@@ -131,39 +131,23 @@
     /// 根据请求状态，选择订阅远程流
     if (enabled) {
         /// 订阅远程共享流
-        [[MeetingKit sharedInstance] startRemoteView:self.userId trackId:RTCTrackIdentifierFlags2 view:self.playerView];
+        [[MeetingKit sharedInstance] startRemoteView:self.userId streamType:SEAVideoStreamTypeScreen view:self.playerView];
     } else {
         /// 获取用户数据
         SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:self.userId];
         /// 如果当前成员开启了摄像头
         if (userModel.extend.cameraState == SEADeviceStateOpen) {
             /// 重新订阅远程视频流
-            [[MeetingKit sharedInstance] startRemoteView:self.userId trackId:RTCTrackIdentifierFlags1 view:self.playerView];
+            [[MeetingKit sharedInstance] startRemoteView:self.userId streamType:SEAVideoStreamTypeBig view:self.playerView];
         }
     }
 }
 
-#pragma mark - 用户共享状态变化
-/// 用户共享状态变化
-/// @param enabled YES-开启 NO-关闭
-/// @param shareType 共享类型
-- (void)userShareStateChanged:(BOOL)enabled shareType:(SEAShareType)shareType {
-    
-    /// 成员共享类型非屏幕
-    if (shareType != SEAShareTypeScreen) {
-        /// 丢弃此次调用
-        return;
-    }
-    
-    /// 订阅成员视频流
-    [self subscribeWithtTackId:RTCTrackIdentifierFlags1 subscribe:enabled];
-}
-
-#pragma mark - 订阅成员视频流
-/// 订阅成员视频流
-/// @param trackId 轨道标识
+#pragma mark - 订阅远端视频流
+/// 订阅远端视频流
+/// @param streamType 视频流类型
 /// @param subscribe 订阅状态，YES-订阅 NO-取消订阅
-- (void)subscribeWithtTackId:(RTCTrackIdentifierFlags)trackId subscribe:(BOOL)subscribe {
+- (void)subscribeRemoteVideoWithStreamType:(SEAVideoStreamType)streamType subscribe:(BOOL)subscribe {
     
     /// 如果关联成员数据为当前参会账号
     if (self.memberModel.isMine) {
@@ -173,10 +157,10 @@
     
     if (subscribe) {
         /// 订阅远端用户的视频流
-        [[MeetingKit sharedInstance] startRemoteView:self.userId trackId:trackId view:self.playerView];
+        [[MeetingKit sharedInstance] startRemoteView:self.userId streamType:streamType view:self.playerView];
     } else {
         /// 停止订阅远端用户的视频流
-        [[MeetingKit sharedInstance] stopRemoteView:self.userId trackId:trackId];
+        [[MeetingKit sharedInstance] stopRemoteView:self.userId streamType:streamType];
     }
 }
 
