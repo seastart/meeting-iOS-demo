@@ -77,5 +77,14 @@ FOUNDATION_EXTERN NSString *__nonnull FWACCOUNTAGREEMENTHOST(void);
 /// 隐私协议地址
 FOUNDATION_EXTERN NSString *__nonnull FWACCOUNTPRIVACYHOST(void);
 
+/// 请求开启摄像头通知
+FOUNDATION_EXTERN NSString *__nonnull const FWMeetingQueryOpenCameraNotification;
+/// 请求开启麦克风通知
+FOUNDATION_EXTERN NSString *__nonnull const FWMeetingQueryOpenMicrophoneNotification;
+/// 请求关闭摄像头通知
+FOUNDATION_EXTERN NSString *__nonnull const FWMeetingQueryCloseCameraNotification;
+/// 请求关闭麦克风通知
+FOUNDATION_EXTERN NSString *__nonnull const FWMeetingQueryCloseMicrophoneNotification;
+
 
 NS_ASSUME_NONNULL_END

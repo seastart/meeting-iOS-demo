@@ -100,3 +100,12 @@ NSString * FWACCOUNTPRIVACYHOST(void) {
     
     return [NSString stringWithFormat:@"%@%@%@%@", FWSERVICEURI, FWSERVICESHORTHEADER, FWREQUESTDOCUMENTDETAIL, FWACCOUNTPRIVACYPARAM];
 }
+
+/// 请求开启摄像头通知
+NSString * const FWMeetingQueryOpenCameraNotification = @"FWMeetingQueryOpenCameraNotification";
+/// 请求开启麦克风通知
+NSString * const FWMeetingQueryOpenMicrophoneNotification = @"FWMeetingQueryOpenMicrophoneNotification";
+/// 请求关闭摄像头通知
+NSString * const FWMeetingQueryCloseCameraNotification = @"FWMeetingQueryCloseCameraNotification";
+/// 请求关闭麦克风通知
+NSString * const FWMeetingQueryCloseMicrophoneNotification = @"FWMeetingQueryCloseMicrophoneNotification";

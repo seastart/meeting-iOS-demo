@@ -284,7 +284,7 @@ typedef enum : NSUInteger {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"登录已失效，请您重新登录。" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
         /// 会议组件登出
-        [[MeetingKit sharedInstance] logout:nil onFailed:nil];
+        [[MeetingKit sharedInstance] logout];
         /// 本地退出登录
         [[FWStoreDataBridge sharedManager] logout];
         /// 切换登录视图

@@ -376,6 +376,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    /// 获取目标成员
+    FWRoomMemberModel *memberModel = [self.listDataSource objectAtIndex:indexPath.row];
+    /// 成员被选中事件
+    [self didSelectRowAtMemberModel:memberModel];
 }
 
 #pragma mark - 移除成员确认弹窗
@@ -396,6 +400,227 @@
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - 成员被选中事件
+/// 成员被选中事件
+/// @param memberModel 成员信息
+- (void)didSelectRowAtMemberModel:(FWRoomMemberModel *)memberModel {
+    
+    /// 获取当前账户信息
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    
+    if (memberModel.isMine) {
+        /// 成员选中自己提示弹窗
+        [self memberSelectMineAlert:memberModel.userId];
+    } else {
+        /// 当前用户不为普通成员
+        if (userModel.extend.role != SEAUserRoleNormal) {
+            /// 主持人选中成员提示弹窗
+            [self adminSelectMemberAlert:memberModel.userId];
+        }
+    }
+}
+
+#pragma mark - 主持人选中成员提示弹窗
+/// 主持人选中成员提示弹窗
+/// @param userId 用户标识
+- (void)adminSelectMemberAlert:(NSString *)userId {
+    
+    @weakify(self);
+    
+    /// 获取用户数据
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:userId];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:userModel.name message:nil preferredStyle:isPhone ? UIAlertControllerStyleActionSheet : UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    [alert addAction:cancelAction];
+    
+    UIAlertAction *renameAction = [UIAlertAction actionWithTitle:@"改名" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 更新成员参会名称提示弹窗
+        [self changeMemberNickname:userModel isMine:NO];
+    }];
+    [alert addAction:renameAction];
+    
+    /// 获取当前麦克风状态
+    BOOL microphoneState = (userModel.extend.micState == SEADeviceStateOpen);
+    UIAlertAction *microphoneAction = [UIAlertAction actionWithTitle:microphoneState ? @"关闭麦克风" : @"开启麦克风" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 根据当前状态发起请求
+        if (microphoneState) {
+            /// 关闭远端用户麦克风
+            [self.viewModel adminCloseUserMic:userId nickname:userModel.name];
+        } else {
+            /// 请求打开成员麦克风
+            [self.viewModel adminRequestUserOpenMic:userId nickname:userModel.name];
+        }
+    }];
+    [alert addAction:microphoneAction];
+    
+    /// 获取当前摄像头状态
+    BOOL cameraState = (userModel.extend.cameraState == SEADeviceStateOpen);
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:cameraState ? @"关闭摄像头" : @"开启摄像头" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 根据当前状态发起请求
+        if (cameraState) {
+            /// 关闭远端用户摄像头
+            [self.viewModel adminCloseUserCamera:userId nickname:userModel.name];
+        } else {
+            /// 请求打开成员摄像头
+            [self.viewModel adminRequestUserOpenCamera:userId nickname:userModel.name];
+        }
+    }];
+    [alert addAction:cameraAction];
+    
+    /// 获取聊天禁用状态
+    BOOL chatDisabled = userModel.extend.chatDisabled;
+    UIAlertAction *chatAction = [UIAlertAction actionWithTitle:chatDisabled ? @"解除聊天禁用" : @"设置聊天禁用" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 变更用户聊天状态
+        [self.viewModel adminUpdateUserChatDisabled:userId chatDisabled:!chatDisabled nickname:userModel.name];
+    }];
+    [alert addAction:chatAction];
+    
+    /// 该成员正在共享
+    if (userModel.extend.shareType != SEAShareTypeNormal) {
+        UIAlertAction *stopShareAction = [UIAlertAction actionWithTitle:@"停止他的共享" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            @strongify(self);
+            /// 关闭共享
+            [self.viewModel adminStopRoomShare:userModel.name];
+        }];
+        [alert addAction:stopShareAction];
+    }
+    
+    /// 该成员不是主持人
+    if (userModel.extend.role != SEAUserRoleHost) {
+        /// 该成员当前为联席主持人
+        if (userModel.extend.role == SEAUserRoleUnionHost) {
+            UIAlertAction *removeUnionHostAction = [UIAlertAction actionWithTitle:@"回收联席主持人" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                @strongify(self);
+                /// 变更用户角色
+                [self.viewModel adminUpdateUserRole:userId userRole:SEAUserRoleNormal nickname:userModel.name];
+            }];
+            [alert addAction:removeUnionHostAction];
+        }
+        /// 该成员当前为普通成员
+        if (userModel.extend.role == SEAUserRoleNormal) {
+            UIAlertAction *unionHostAction = [UIAlertAction actionWithTitle:@"设置联席主持人" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                @strongify(self);
+                /// 变更用户角色
+                [self.viewModel adminUpdateUserRole:userId userRole:SEAUserRoleUnionHost nickname:userModel.name];
+            }];
+            [alert addAction:unionHostAction];
+        }
+        
+        UIAlertAction *moveHostAction = [UIAlertAction actionWithTitle:@"设置主持人" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            @strongify(self);
+            /// 转移主持人
+            [self.viewModel adminMoveHost:userId nickname:userModel.name];
+        }];
+        [alert addAction:moveHostAction];
+    }
+    
+    UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"移出会议" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 移除成员确认弹窗
+        [self presentRoomKickoutAlert:userId nickname:userModel.name];
+    }];
+    [alert addAction:removeAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - 成员选中自己提示弹窗
+/// 成员选中自己提示弹窗
+/// @param userId 用户标识
+- (void)memberSelectMineAlert:(NSString *)userId {
+    
+    @weakify(self);
+    
+    /// 获取当前账户信息
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:userModel.name message:nil preferredStyle:isPhone ? UIAlertControllerStyleActionSheet : UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    [alert addAction:cancelAction];
+    
+    UIAlertAction *renameAction = [UIAlertAction actionWithTitle:@"改名" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 更新成员参会名称提示弹窗
+        [self changeMemberNickname:userModel isMine:YES];
+    }];
+    [alert addAction:renameAction];
+    
+    /// 获取当前麦克风状态
+    BOOL microphoneState = (userModel.extend.micState == SEADeviceStateOpen);
+    UIAlertAction *microphoneAction = [UIAlertAction actionWithTitle:microphoneState ? @"关闭麦克风" : @"开启麦克风" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        /// 根据当前状态发起请求
+        if (microphoneState) {
+            /// 发送请求关闭麦克风通知
+            [[NSNotificationCenter defaultCenter] postNotificationName:FWMeetingQueryCloseMicrophoneNotification object:nil];
+        } else {
+            /// 发送请求开启麦克风通知
+            [[NSNotificationCenter defaultCenter] postNotificationName:FWMeetingQueryOpenMicrophoneNotification object:nil];
+        }
+    }];
+    [alert addAction:microphoneAction];
+    
+    /// 获取当前摄像头状态
+    BOOL cameraState = (userModel.extend.cameraState == SEADeviceStateOpen);
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:cameraState ? @"关闭摄像头" : @"开启摄像头" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        /// 根据当前状态发起请求
+        if (cameraState) {
+            /// 发送请求关闭摄像头通知
+            [[NSNotificationCenter defaultCenter] postNotificationName:FWMeetingQueryCloseCameraNotification object:nil];
+        } else {
+            /// 发送请求开启摄像头通知
+            [[NSNotificationCenter defaultCenter] postNotificationName:FWMeetingQueryOpenCameraNotification object:nil];
+        }
+    }];
+    [alert addAction:cameraAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - 更新成员参会名称提示弹窗
+/// 更新成员参会名称提示弹窗
+/// - Parameter userModel: 用户数据
+/// - Parameter isMine: 是否是自己
+- (void)changeMemberNickname:(SEAUserModel *)userModel isMine:(BOOL)isMine {
+    
+    @weakify(self);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"改名" preferredStyle:UIAlertControllerStyleAlert];
+    
+    /// 在对话框中添加输入框
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        /// 设置输入框内容
+        textField.text = userModel.name;
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    [alert addAction:cancelAction];
+    
+    UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 获取新昵称
+        NSString *nickname = [[alert textFields] firstObject].text;
+        /// 根据选中用户是否为自己发起请求
+        if (isMine) {
+            /// 更新自己的昵称
+            [self.viewModel queryUpdateMineName:nickname];
+        } else {
+            /// 更新成员昵称
+            [self.viewModel queryUpdateName:userModel.userId nickname:nickname];
+        }
+    }];
+    [alert addAction:ensureAction];
+    
     [self presentViewController:alert animated:YES completion:nil];
 }
 

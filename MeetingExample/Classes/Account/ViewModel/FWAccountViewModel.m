@@ -25,7 +25,7 @@
 - (void)onLogoutEvent {
     
     /// 会议组件登出
-    [[MeetingKit sharedInstance] logout:nil onFailed:nil];
+    [[MeetingKit sharedInstance] logout];
     /// 本地退出登录
     [[FWStoreDataBridge sharedManager] logout];
     /// 通知退出登录订阅

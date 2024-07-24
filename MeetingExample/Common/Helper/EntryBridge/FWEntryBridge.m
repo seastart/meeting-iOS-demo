@@ -209,7 +209,7 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
         /// 会议组件登出
-        [[MeetingKit sharedInstance] logout:nil onFailed:nil];
+        [[MeetingKit sharedInstance] logout];
         /// 本地退出登录
         [[FWStoreDataBridge sharedManager] logout];
         /// 切换登录视图

@@ -74,10 +74,25 @@
 #pragma mark - 初始化操作
 - (void)buildView {
     
+    /// 绑定监听通知
+    [self bindNotification];
     /// 设置ViewModel
     [self setupViewModel];
     /// 绑定动态响应信号
     [self bindSignal];
+}
+
+#pragma mark - 绑定监听通知
+- (void)bindNotification {
+    
+    /// 监听请求开启摄像头通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleQueryOpenCamera:) name:FWMeetingQueryOpenCameraNotification object:nil];
+    /// 监听请求开启麦克风通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleQueryOpenMicrophone:) name:FWMeetingQueryOpenMicrophoneNotification object:nil];
+    /// 监听请求关闭摄像头通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleQueryCloseCamera:) name:FWMeetingQueryCloseCameraNotification object:nil];
+    /// 监听请求关闭麦克风通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleQueryCloseMicrophone:) name:FWMeetingQueryCloseMicrophoneNotification object:nil];
 }
 
 #pragma mark - 设置ViewModel
@@ -309,6 +324,43 @@
     [alert addAction:ensureAction];
     [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
+
+#pragma mark - 处理请求开启摄像头通知
+/// 处理请求开启摄像头通知
+/// - Parameter notification: 通知对象
+- (void)handleQueryOpenCamera:(NSNotification *)notification {
+    
+    /// 请求开启视频
+    [self.roomMainView requestOpenVideo:nil];
+}
+
+#pragma mark - 处理请求开启麦克风通知
+/// 处理请求开启麦克风通知
+/// - Parameter notification: 通知对象
+- (void)handleQueryOpenMicrophone:(NSNotification *)notification {
+    
+    /// 请求开启音频
+    [self.roomMainView requestOpenAudio:nil];
+}
+
+#pragma mark - 处理请求关闭摄像头通知
+/// 处理请求关闭摄像头通知
+/// - Parameter notification: 通知对象
+- (void)handleQueryCloseCamera:(NSNotification *)notification {
+    
+    /// 请求关闭视频
+    [self.roomMainView requestCloseVideo:nil];
+}
+
+#pragma mark - 处理请求关闭麦克风通知
+/// 处理请求关闭麦克风通知
+/// - Parameter notification: 通知对象
+- (void)handleQueryCloseMicrophone:(NSNotification *)notification {
+    
+    /// 请求关闭音频
+    [self.roomMainView requestCloseAudio:nil];
+}
+
 
 #pragma mark - ----- MeetingKitDelegate 代理方法 -----
 #pragma mark ----- 错误事件回调 -----
@@ -596,6 +648,32 @@
     [self.roomMainView userRoomStopStart:userId shareType:shareType];
 }
 
+#pragma mark 主持人结束房间共享回调
+/// 主持人结束房间共享回调
+/// 主持人调用 adminStopRoomShare: 接口执行关闭共享后，当前房间所有成员都会收到该事件通知。
+/// - Parameters:
+/// - Parameter userId: 共享成员标识
+/// - Parameter shareType: 共享类型
+- (void)onAdminRoomShareStop:(NSString *)userId shareType:(SEAShareType)shareType {
+    
+    /// 日志埋点
+    SGLOG(@"主持人结束房间共享通知，userId = %@", userId);
+    /// 结束共享电子白板，更改状态栏颜色为白色
+    if (shareType == SEAShareTypeDrawing) {
+        /// 更改状态栏颜色
+        [self statusBarAppearanceUpdateWithHiden:NO barStyle:UIStatusBarStyleLightContent];
+    }
+    /// 用户结束共享
+    [self.roomMainView userRoomStopStart:userId shareType:shareType];
+    /// 获取当前用户数据
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    /// 如果是自己的共享被主持人结束
+    if ([userModel.userId isEqualToString:userId]) {
+        /// 共享被结束提示信息
+        [SVProgressHUD showInfoWithStatus:@"您的共享已被主持人结束。"];
+    }
+}
+
 #pragma mark 房间成员举手状态变化回调
 /// 房间成员举手状态变化回调
 /// 成员调用 requestHandup: 接口执行请求举手后，拥有管理权限的成员会收到该事件通知。
@@ -818,7 +896,7 @@
 /// @param audioArray 成员音频列表
 - (void)onRemoteMemberAudioStatus:(NSArray<RTCStreamAudioModel *> *)audioArray {
     
-    /// 暂不做处理
+    /// 暂时不做业务处理
 }
 
 
@@ -829,7 +907,7 @@
 /// @param state 下行码率自适应状态
 - (void)onDownBitrateAdaptiveUserId:(NSString *)userId state:(RTCDownBitrateAdaptiveState)state {
     
-    /// 暂不做处理
+    /// 暂时不做业务处理
 }
 
 #pragma mark 上行码率自适应状态回调
@@ -837,7 +915,7 @@
 /// @param state 上行码率自适应状态
 - (void)onUploadBitrateAdaptiveState:(RTCUploadBitrateAdaptiveState)state {
     
-    /// 暂不做处理
+    /// 暂时不做业务处理
 }
 
 #pragma mark 下行平均丢包档位变化回调
@@ -845,7 +923,7 @@
 /// @param state 下行平均丢包档位
 - (void)onDownLossLevelChangeState:(RTCDownLossLevelState)state {
     
-    /// 暂不做处理
+    /// 暂时不做业务处理
 }
 
 #pragma mark 下行平均丢包率回调
@@ -853,7 +931,7 @@
 /// @param average 下行平均丢包率
 - (void)onDownLossRateAverage:(CGFloat)average {
     
-    /// 暂不做处理
+    /// 暂时不做业务处理
 }
 
 #pragma mark 流媒体发送状态数据回调
@@ -861,7 +939,7 @@
 /// @param sendModel 流媒体发送状态数据
 - (void)onSendStreamModel:(RTCStreamSendModel *)sendModel {
     
-    /// 暂不做处理
+    /// 暂时不做业务处理
 }
 
 #pragma mark 流媒体接收状态数据回调
@@ -869,7 +947,7 @@
 /// @param receiveModel 流媒体接收状态数据
 - (void)onReceiveStreamModel:(RTCStreamReceiveModel *)receiveModel {
     
-    /// 暂不做处理
+    /// 暂时不做业务处理
 }
 
 
@@ -880,7 +958,7 @@
 /// @param cpuUsage CUP使用率
 - (void)onApplicationPerformance:(CGFloat)memory cpuUsage:(CGFloat)cpuUsage {
     
-    /// 暂不做处理
+    /// 暂时不做业务处理
 }
 
 

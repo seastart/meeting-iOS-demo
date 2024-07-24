@@ -37,6 +37,59 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter userId: 成员标识
 - (void)queryRoomKickoutWithUserId:(NSString *)userId;
 
+/// 更新自己的昵称
+/// - Parameter nickname: 新昵称
+- (void)queryUpdateMineName:(NSString *)nickname;
+
+/// 更新成员昵称
+/// - Parameter userid: 用户标识
+/// - Parameter nickname: 新昵称
+- (void)queryUpdateName:(NSString *)userid nickname:(NSString *)nickname;
+
+/// 请求打开成员摄像头
+/// - Parameter userId: 用户标识
+/// - Parameter nickname: 用户名称
+- (void)adminRequestUserOpenCamera:(NSString *)userId nickname:(NSString *)nickname;
+
+/// 关闭远端用户摄像头
+/// - Parameter userId: 用户标识
+/// - Parameter nickname: 用户名称
+- (void)adminCloseUserCamera:(NSString *)userId nickname:(NSString *)nickname;
+
+/// 请求打开成员麦克风
+/// - Parameter userId: 用户标识
+/// - Parameter nickname: 用户名称
+- (void)adminRequestUserOpenMic:(NSString *)userId nickname:(NSString *)nickname;
+
+/// 关闭远端用户麦克风
+/// - Parameter userId: 用户标识
+/// - Parameter nickname: 用户名称
+- (void)adminCloseUserMic:(NSString *)userId nickname:(NSString *)nickname;
+
+/// 关闭共享
+/// - Parameter nickname: 用户名称
+- (void)adminStopRoomShare:(NSString *)nickname;
+
+/// 变更用户角色
+/// - Parameters:
+///   - userId: 用户标识
+///   - userRole: 用户角色
+///   - nickname: 用户名称
+- (void)adminUpdateUserRole:(NSString *)userId userRole:(SEAUserRole)userRole nickname:(NSString *)nickname;
+
+/// 转移主持人
+/// - Parameters:
+///   - userId: 用户标识
+///   - nickname: 用户名称
+- (void)adminMoveHost:(NSString *)userId nickname:(NSString *)nickname;
+
+/// 变更用户聊天状态
+/// - Parameters:
+///   - userId: 用户标识
+///   - chatDisabled: 禁用状态，YES-禁用 NO-不禁用
+///   - nickname: 用户名称
+- (void)adminUpdateUserChatDisabled:(NSString *)userId chatDisabled:(BOOL)chatDisabled nickname:(NSString *)nickname;
+
 @end
 
 NS_ASSUME_NONNULL_END
