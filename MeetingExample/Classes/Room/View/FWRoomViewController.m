@@ -778,21 +778,21 @@
 #pragma mark 屏幕共享状态回调
 /// 屏幕共享状态回调
 /// @param status 状态码
-- (void)onScreenRecordStatus:(RTCScreenRecordStatus)status {
+- (void)onScreenRecordStatus:(SEAScreenRecordStatus)status {
     
     /// 日志埋点
     SGLOG(@"屏幕共享状态通知，status = %ld", status);
     
     switch (status) {
-        case RTCScreenRecordStatusError:
+        case SEAScreenRecordStatusError:
             /// 屏幕共享连接错误
             /// [SVProgressHUD showInfoWithStatus:@"桌面采集连接失败"];
             break;
-        case RTCScreenRecordStatusStop:
+        case SEAScreenRecordStatusStop:
             /// 请求关闭房间共享
             [self.roomMainView requestStopSharing:SEAShareTypeScreen];
             break;
-        case RTCScreenRecordStatusStart:
+        case SEAScreenRecordStatusStart:
             /// 请求开始共享屏幕
             [self.roomMainView requestStartScreen];
             break;
@@ -807,7 +807,7 @@
 /// 音频路由变更回调
 /// @param route 音频路由
 /// @param previousRoute 变更前的音频路由
-- (void)onAudioRouteChange:(RTCAudioRoute)route previousRoute:(RTCAudioRoute)previousRoute {
+- (void)onAudioRouteChange:(SEAAudioRoute)route previousRoute:(SEAAudioRoute)previousRoute {
     
     /// 日志埋点
     SGLOG(@"音频路由变更通知，route = %ld previousRoute = %ld", route, previousRoute);
