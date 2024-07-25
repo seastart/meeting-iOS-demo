@@ -38,7 +38,7 @@ def meetingPods
   # 实时音视频服务引擎
   pod 'RTCEngineKit', :git => "https://github.com/seastart/rtc-ios-cocoapods.git"
   # 依赖会议服务引擎
-  # pod 'MeetingKit'
+  # pod 'MeetingKit', :git => "https://github.com/seastart/meeting-ios-cocoapods.git"
 end
 
 target 'MeetingExample' do
