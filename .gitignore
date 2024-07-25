@@ -4,8 +4,10 @@
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
 ## Build generated
-# build/
+build/
+Symbolic/
 DerivedData
+build_app
 
 ## Various settings
 *.pbxuser
