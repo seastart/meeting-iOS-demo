@@ -7,7 +7,7 @@
 build/
 Symbolic/
 DerivedData
-build_app
+build_app.sh
 
 ## Various settings
 *.pbxuser
