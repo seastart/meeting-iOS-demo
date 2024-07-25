@@ -27,6 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 提示框订阅
 @property (nonatomic, strong, readonly) RACSubject *toastSubject;
+/// 操作成功订阅
+@property (nonatomic, strong, readonly) RACSubject *succeedSubject;
+
+/// 主持人处理举手请求
+/// - Parameters:
+/// @param userId 用户标识
+/// @param handupType 举手申请类型
+/// @param approve 处理举手申请，YES-同意 NO-拒绝
+- (void)adminConfirmHandup:(NSString *)userId handupType:(SEAHandupType)handupType approve:(BOOL)approve;
 
 @end
 

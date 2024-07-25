@@ -178,7 +178,7 @@
         }
     }];
     
-    /// 创建房间成功订阅
+    /// 操作成功订阅
     [self.viewModel.succeedSubject subscribeNext:^(id _Nullable message) {
         if (!kStringIsEmpty(message)) {
             [SVProgressHUD showInfoWithStatus:message];
@@ -377,9 +377,9 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     /// 获取目标成员
-    FWRoomMemberModel *memberModel = [self.listDataSource objectAtIndex:indexPath.row];
+    /// FWRoomMemberModel *memberModel = [self.listDataSource objectAtIndex:indexPath.row];
     /// 成员被选中事件
-    [self didSelectRowAtMemberModel:memberModel];
+    /// [self didSelectRowAtMemberModel:memberModel];
 }
 
 #pragma mark - 移除成员确认弹窗

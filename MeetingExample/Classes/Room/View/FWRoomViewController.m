@@ -124,6 +124,13 @@
             [SVProgressHUD showInfoWithStatus:message];
         }
     }];
+    
+    /// 操作成功订阅
+    [self.viewModel.succeedSubject subscribeNext:^(id _Nullable message) {
+        if (!kStringIsEmpty(message)) {
+            [SVProgressHUD showInfoWithStatus:message];
+        }
+    }];
 }
 
 #pragma mark - 加入房间
@@ -359,6 +366,115 @@
     
     /// 请求关闭音频
     [self.roomMainView requestCloseAudio:nil];
+}
+
+#pragma mark - 主持人同意音频举手提示弹窗
+/// 主持人同意音频举手提示弹窗
+- (void)hostApproveAudioHandupAlert {
+    
+    @weakify(self);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"主持人已同意开启麦克风的举手请求" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"保持关闭" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"开启麦克风" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 请求开启音频
+        [self.roomMainView requestOpenAudio:nil];
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:ensureAction];
+    [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - 主持人同意视频举手提示弹窗
+/// 主持人同意视频举手提示弹窗
+- (void)hostApproveVideoHandupAlert {
+    
+    @weakify(self);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"主持人已同意开启摄像头的举手请求" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"保持关闭" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"开启摄像头" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 请求开启视频
+        [self.roomMainView requestOpenVideo:nil];
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:ensureAction];
+    [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - 主持人同意聊天举手提示弹窗
+/// 主持人同意聊天举手提示弹窗
+- (void)hostApproveChatHandupAlert {
+    
+    @weakify(self);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"主持人已同意开启聊天的举手请求" message:@"你可以通过房间底部“聊天”入口进入聊天界面发送消息啦。" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"加入聊天" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 跳转消息页面
+        [self push:@"FWMessageViewController" block:nil];
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:ensureAction];
+    [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - 处理成员举手请求提示弹窗
+/// 处理成员举手请求提示弹窗
+/// - Parameters:
+///   - userId: 成员标识
+///   - handupType: 举手申请类型
+- (void)handleHandupRequestAlert:(NSString *)userId handupType:(SEAHandupType)handupType {
+    
+    /// 获取当前用户角色
+    SEAUserRole userRole = [[FWRoomMemberManager sharedManager] getUserRole];
+    /// 如果当前成员非主持人，丢弃此次调用处理
+    if (userRole == SEAUserRoleNormal) {
+        /// 结束此次调用
+        return;
+    }
+    /// 获取举手成员数据
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:userId];
+    /// 声明举手类型描述
+    NSString *handupTypeDescribe = @"开启麦克风举手";
+    /// 根据举手类型确定对应描述
+    switch (handupType) {
+        case SEAHandupTypeOpenAudio:
+            handupTypeDescribe = @"开启麦克风举手";
+            break;
+        case SEAHandupTypeOpenVideo:
+            handupTypeDescribe = @"开启摄像头举手";
+            break;
+        case SEAHandupTypeChat:
+            handupTypeDescribe = @"开启聊天举手";
+            break;
+        default:
+            break;
+    }
+    /// 声明弹窗描述
+    NSString *describe = [NSString stringWithFormat:@"%@ 申请%@", userModel.name, handupTypeDescribe];
+    
+    @weakify(self);
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:describe preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *refuseAction = [UIAlertAction actionWithTitle:@"拒绝请求" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 主持人处理举手请求
+        [self.viewModel adminConfirmHandup:userId handupType:handupType approve:NO];
+    }];
+    UIAlertAction *agreeAction = [UIAlertAction actionWithTitle:@"同意请求" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 主持人处理举手请求
+        [self.viewModel adminConfirmHandup:userId handupType:handupType approve:YES];
+    }];
+    [alert addAction:refuseAction];
+    [alert addAction:agreeAction];
+    [[FWEntryBridge sharedManager].appDelegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 
@@ -684,6 +800,14 @@
     
     /// 日志埋点
     SGLOG(@"房间成员举手状态变化通知，userId = %@ %@ handupType = %ld", userId, enable ? @"申请举手" : @"取消举手", handupType);
+    /// 如果接收到取消举手操作
+    if (!enable) {
+        /// TODO... 如：对应的提示、变更成员举手状态、移除举手列表等。
+        /// 结束此次回调处理
+        return;
+    }
+    /// 处理成员举手请求提示弹窗
+    [self handleHandupRequestAlert:userId handupType:handupType];
 }
 
 
@@ -817,6 +941,30 @@
     
     /// 日志埋点
     SGLOG(@"举手处理结果通知(主持人回馈了你的举手操作)，handupType = %ld approve = %d", handupType, approve);
+    /// 如果举手操作被主持人拒绝
+    if (!approve) {
+        /// 提醒用户举手被拒绝
+        [SVProgressHUD showInfoWithStatus:@"您的举手请求已被主持人拒绝。"];
+        /// 结束此次回调处理
+        return;
+    }
+    /// 根据申请类型进行业务处理
+    switch (handupType) {
+        case SEAHandupTypeOpenAudio:
+            /// 主持人同意开启麦克风
+            [self hostApproveAudioHandupAlert];
+            break;
+        case SEAHandupTypeOpenVideo:
+            /// 主持人同意开启摄像头
+            [self hostApproveVideoHandupAlert];
+            break;
+        case SEAHandupTypeChat:
+            /// 主持人同意解除聊天禁用
+            [self hostApproveChatHandupAlert];
+            break;
+        default:
+            break;
+    }
 }
 
 
