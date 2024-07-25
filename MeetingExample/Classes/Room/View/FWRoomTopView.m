@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 /// 举报按钮
 @property (weak, nonatomic) IBOutlet UIButton *reportButton;
+/// 举手按钮
+@property (weak, nonatomic) IBOutlet UIButton *handupButton;
 /// 时间
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 /// 房间号码
@@ -108,6 +110,15 @@
         /// 回调父组件处理
         if (self.delegate && [self.delegate respondsToSelector:@selector(topView:didSelectReportButton:)]) {
             [self.delegate topView:self didSelectReportButton:control];
+        }
+    }];
+    
+    /// 绑定举手按钮事件
+    [[self.handupButton rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        /// 回调父组件处理
+        if (self.delegate && [self.delegate respondsToSelector:@selector(topView:didSelectHandupButton:)]) {
+            [self.delegate topView:self didSelectHandupButton:control];
         }
     }];
     

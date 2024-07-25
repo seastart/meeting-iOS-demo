@@ -445,20 +445,20 @@
     NSString *handupTypeDescribe = @"开启麦克风举手";
     /// 根据举手类型确定对应描述
     switch (handupType) {
-        case SEAHandupTypeOpenAudio:
-            handupTypeDescribe = @"开启麦克风举手";
+        case SEAHandupTypeMic:
+            handupTypeDescribe = @"开启麦克风";
             break;
-        case SEAHandupTypeOpenVideo:
-            handupTypeDescribe = @"开启摄像头举手";
+        case SEAHandupTypeCamera:
+            handupTypeDescribe = @"开启摄像头";
             break;
         case SEAHandupTypeChat:
-            handupTypeDescribe = @"开启聊天举手";
+            handupTypeDescribe = @"开启聊天";
             break;
         default:
             break;
     }
     /// 声明弹窗描述
-    NSString *describe = [NSString stringWithFormat:@"%@ 申请%@", userModel.name, handupTypeDescribe];
+    NSString *describe = [NSString stringWithFormat:@"%@ 举手请求%@", userModel.name, handupTypeDescribe];
     
     @weakify(self);
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:describe preferredStyle:UIAlertControllerStyleAlert];
@@ -950,11 +950,11 @@
     }
     /// 根据申请类型进行业务处理
     switch (handupType) {
-        case SEAHandupTypeOpenAudio:
+        case SEAHandupTypeMic:
             /// 主持人同意开启麦克风
             [self hostApproveAudioHandupAlert];
             break;
-        case SEAHandupTypeOpenVideo:
+        case SEAHandupTypeCamera:
             /// 主持人同意开启摄像头
             [self hostApproveVideoHandupAlert];
             break;
@@ -1223,6 +1223,43 @@
         /// 普通成员挂断弹窗
         [self normalHangupEventAlert];
     }
+}
+
+#pragma mark 举手事件回调
+/// 举手事件回调
+/// @param mainView 主窗口视图
+- (void)onHandupRequestEventMainView:(FWRoomMainView *)mainView {
+    
+    @weakify(self);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"发起举手请求" message:nil preferredStyle:isPhone ? UIAlertControllerStyleActionSheet : UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    
+    UIAlertAction *microphoneAction = [UIAlertAction actionWithTitle:@"开启麦克风" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 请求开启麦克风举手
+        [self.viewModel requestHandup:SEAHandupTypeMic];
+    }];
+    
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"开启摄像头" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 请求开启摄像头举手
+        [self.viewModel requestHandup:SEAHandupTypeCamera];
+    }];
+    
+    UIAlertAction *chatAction = [UIAlertAction actionWithTitle:@"开启聊天" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        @strongify(self);
+        /// 请求开启聊天举手
+        [self.viewModel requestHandup:SEAHandupTypeChat];
+    }];
+    
+    [alert addAction:cancelAction];
+    [alert addAction:microphoneAction];
+    [alert addAction:cameraAction];
+    [alert addAction:chatAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark 成员选择回调

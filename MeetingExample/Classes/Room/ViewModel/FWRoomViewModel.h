@@ -30,6 +30,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// 操作成功订阅
 @property (nonatomic, strong, readonly) RACSubject *succeedSubject;
 
+/// 请求举手
+/// - Parameter handupType: 申请类型
+- (void)requestHandup:(SEAHandupType)handupType;
+
+/// 取消举手
+/// - Parameter handupType: 申请类型
+- (void)cancelHandup:(SEAHandupType)handupType;
+
 /// 主持人处理举手请求
 /// - Parameters:
 /// @param userId 用户标识

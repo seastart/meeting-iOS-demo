@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FWRoomTopView">
             <connections>
                 <outlet property="cameraButton" destination="nVo-Zq-Za7" id="ZsQ-Dt-Aml"/>
+                <outlet property="handupButton" destination="u4s-Vm-1PJ" id="vUp-6R-lzP"/>
                 <outlet property="hangupButton" destination="T4B-8O-UGi" id="04X-RF-Xct"/>
                 <outlet property="reportButton" destination="Ed4-dX-MhL" id="Rj2-XE-BpY"/>
                 <outlet property="roomNoLabel" destination="XRp-Mj-xkf" id="uUe-8L-faO"/>
@@ -41,6 +42,9 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ed4-dX-MhL">
                     <rect key="frame" x="86" y="42" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Ed4-dX-MhL" secondAttribute="height" multiplier="1:1" id="4Vz-D6-i60"/>
+                    </constraints>
                     <state key="normal" image="icon_room_report"/>
                     <state key="selected" image="icon_room_speaker_un"/>
                 </button>
@@ -77,20 +81,28 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4s-Vm-1PJ">
+                    <rect key="frame" x="121" y="42" width="35" height="35"/>
+                    <state key="normal" image="icon_room_handup"/>
+                    <state key="selected" image="icon_room_speaker_un"/>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="C41-2A-Xbk"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Ed4-dX-MhL" firstAttribute="width" secondItem="Ed4-dX-MhL" secondAttribute="height" multiplier="1:1" id="4Vz-D6-i60"/>
+                <constraint firstItem="u4s-Vm-1PJ" firstAttribute="leading" secondItem="Ed4-dX-MhL" secondAttribute="trailing" id="3OI-Ht-Zyo"/>
                 <constraint firstItem="C41-2A-Xbk" firstAttribute="bottom" secondItem="nVo-Zq-Za7" secondAttribute="bottom" constant="2" id="4ju-gb-Q9m"/>
                 <constraint firstItem="vDt-Zs-ked" firstAttribute="top" secondItem="XRp-Mj-xkf" secondAttribute="bottom" constant="2" id="5Gv-47-sEp"/>
                 <constraint firstItem="nVo-Zq-Za7" firstAttribute="leading" secondItem="C41-2A-Xbk" secondAttribute="leading" constant="16" id="CLn-NT-MWX"/>
                 <constraint firstItem="Ed4-dX-MhL" firstAttribute="height" secondItem="Oe8-au-r5u" secondAttribute="height" id="Cuf-q8-P8I"/>
+                <constraint firstItem="u4s-Vm-1PJ" firstAttribute="width" secondItem="u4s-Vm-1PJ" secondAttribute="height" multiplier="1:1" id="FR5-Nw-q60"/>
                 <constraint firstItem="Ed4-dX-MhL" firstAttribute="centerY" secondItem="Oe8-au-r5u" secondAttribute="centerY" id="GMc-EK-tWX"/>
+                <constraint firstItem="u4s-Vm-1PJ" firstAttribute="centerY" secondItem="Ed4-dX-MhL" secondAttribute="centerY" id="Nnw-fe-h2l"/>
                 <constraint firstItem="XRp-Mj-xkf" firstAttribute="centerX" secondItem="vDt-Zs-ked" secondAttribute="centerX" id="Uba-Yk-aBu"/>
                 <constraint firstItem="T4B-8O-UGi" firstAttribute="centerY" secondItem="Oe8-au-r5u" secondAttribute="centerY" id="Vxf-wi-aOk"/>
                 <constraint firstItem="Oe8-au-r5u" firstAttribute="height" secondItem="nVo-Zq-Za7" secondAttribute="height" id="aSj-DV-CAD"/>
                 <constraint firstItem="vDt-Zs-ked" firstAttribute="centerX" secondItem="XTa-48-PiP" secondAttribute="centerX" id="eRQ-9V-UWB"/>
+                <constraint firstItem="u4s-Vm-1PJ" firstAttribute="height" secondItem="Ed4-dX-MhL" secondAttribute="height" id="emd-1R-S5q"/>
                 <constraint firstItem="Oe8-au-r5u" firstAttribute="centerY" secondItem="nVo-Zq-Za7" secondAttribute="centerY" id="fRw-wd-WsR"/>
                 <constraint firstItem="C41-2A-Xbk" firstAttribute="bottom" secondItem="vDt-Zs-ked" secondAttribute="bottom" constant="5" id="hn3-Uu-uL6"/>
                 <constraint firstItem="Ed4-dX-MhL" firstAttribute="leading" secondItem="Oe8-au-r5u" secondAttribute="trailing" id="lIp-0G-idt"/>
@@ -103,6 +115,7 @@
     </objects>
     <resources>
         <image name="icon_room_camera_switch" width="20" height="20"/>
+        <image name="icon_room_handup" width="24" height="24"/>
         <image name="icon_room_report" width="20" height="20"/>
         <image name="icon_room_speaker" width="20" height="20"/>
         <image name="icon_room_speaker_un" width="20" height="20"/>

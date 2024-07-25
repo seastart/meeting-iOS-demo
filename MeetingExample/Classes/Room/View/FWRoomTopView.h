@@ -35,6 +35,13 @@ NS_ASSUME_NONNULL_BEGIN
 ///   - source: 事件源对象
 - (void)topView:(FWRoomTopView *)topView didSelectReportButton:(UIButton *)source;
 
+#pragma mark 举手事件回调
+/// 举手事件回调
+/// - Parameters:
+///   - topView: 工具栏视图
+///   - source: 事件源对象
+- (void)topView:(FWRoomTopView *)topView didSelectHandupButton:(UIButton *)source;
+
 #pragma mark 挂断事件回调
 /// 挂断事件回调
 /// - Parameters:

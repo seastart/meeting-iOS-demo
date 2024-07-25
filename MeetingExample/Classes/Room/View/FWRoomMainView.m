@@ -603,6 +603,19 @@
     }
 }
 
+#pragma mark 举手事件回调
+/// 举手事件回调
+/// - Parameters:
+///   - topView: 工具栏视图
+///   - source: 事件源对象
+- (void)topView:(FWRoomTopView *)topView didSelectHandupButton:(UIButton *)source {
+    
+    /// 回调控制器层处理
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onHandupRequestEventMainView:)]) {
+        [self.delegate onHandupRequestEventMainView:self];
+    }
+}
+
 #pragma mark 挂断事件回调
 /// 挂断事件回调
 /// - Parameters:

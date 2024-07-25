@@ -59,6 +59,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param mainView 主窗口视图
 - (void)onHangupEventMainView:(FWRoomMainView *)mainView;
 
+#pragma mark 举手事件回调
+/// 举手事件回调
+/// @param mainView 主窗口视图
+- (void)onHandupRequestEventMainView:(FWRoomMainView *)mainView;
+
 @end
 
 @interface FWRoomMainView : UIView
