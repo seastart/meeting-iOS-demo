@@ -1042,7 +1042,7 @@
 #pragma mark 远程成员音频状态回调
 /// 远程成员音频状态回调
 /// @param audioArray 成员音频列表
-- (void)onRemoteMemberAudioStatus:(NSArray<RTCStreamAudioModel *> *)audioArray {
+- (void)onRemoteMemberAudioStatus:(NSArray<SEAStreamAudioModel *> *)audioArray {
     
     /// 暂时不做业务处理
 }
@@ -1053,7 +1053,7 @@
 /// 下行码率自适应状态回调
 /// @param userId 用户标识
 /// @param state 下行码率自适应状态
-- (void)onDownBitrateAdaptiveUserId:(NSString *)userId state:(RTCDownBitrateAdaptiveState)state {
+- (void)onDownBitrateAdaptiveUserId:(NSString *)userId state:(SEADownBitrateAdaptiveState)state {
     
     /// 暂时不做业务处理
 }
@@ -1061,7 +1061,7 @@
 #pragma mark 上行码率自适应状态回调
 /// 上行码率自适应状态回调
 /// @param state 上行码率自适应状态
-- (void)onUploadBitrateAdaptiveState:(RTCUploadBitrateAdaptiveState)state {
+- (void)onUploadBitrateAdaptiveState:(SEAUploadBitrateAdaptiveState)state {
     
     /// 暂时不做业务处理
 }
@@ -1069,7 +1069,7 @@
 #pragma mark 下行平均丢包档位变化回调
 /// 下行平均丢包档位变化回调
 /// @param state 下行平均丢包档位
-- (void)onDownLossLevelChangeState:(RTCDownLossLevelState)state {
+- (void)onDownLossLevelChangeState:(SEADownLossLevelState)state {
     
     /// 暂时不做业务处理
 }
@@ -1085,7 +1085,7 @@
 #pragma mark 流媒体发送状态数据回调
 /// 流媒体发送状态数据回调
 /// @param sendModel 流媒体发送状态数据
-- (void)onSendStreamModel:(RTCStreamSendModel *)sendModel {
+- (void)onSendStreamModel:(SEAStreamSendModel *)sendModel {
     
     /// 暂时不做业务处理
 }
@@ -1093,7 +1093,7 @@
 #pragma mark 流媒体接收状态数据回调
 /// 流媒体接收状态数据回调
 /// @param receiveModel 流媒体接收状态数据
-- (void)onReceiveStreamModel:(RTCStreamReceiveModel *)receiveModel {
+- (void)onReceiveStreamModel:(SEAStreamReceiveModel *)receiveModel {
     
     /// 暂时不做业务处理
 }
