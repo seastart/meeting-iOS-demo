@@ -10,6 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 成员麦克风事件回调
+typedef void(^FWMemberTableViewCellMicrophoneBlock)(NSInteger index);
+/// 成员摄像头事件回调
+typedef void(^FWMemberTableViewCellCameraBlock)(NSInteger index);
 /// 成员移除事件回调
 typedef void(^FWMemberTableViewCellRemoveBlock)(NSString *userId, NSString *nickname);
 
@@ -28,8 +32,11 @@ typedef void(^FWMemberTableViewCellRemoveBlock)(NSString *userId, NSString *nick
 ///   - oneself: 是否是自己
 ///   - videoState: 视频状态
 ///   - audioState: 音频状态
+///   - index: 成员索引
+///   - microphoneBlock: 成员麦克风事件回调
+///   - cameraBlock: 成员摄像头事件回调
 ///   - removeBlock: 成员移除事件回调
-- (void)setupWithUserId:(NSString *)userId avatarUrl:(NSString *)avatarUrl nicknameText:(NSString *)nicknameText isOwner:(BOOL)isOwner oneself:(BOOL)oneself videoState:(BOOL)videoState audioState:(BOOL)audioState removeBlock:(FWMemberTableViewCellRemoveBlock)removeBlock;
+- (void)setupWithUserId:(NSString *)userId avatarUrl:(NSString *)avatarUrl nicknameText:(NSString *)nicknameText isOwner:(BOOL)isOwner oneself:(BOOL)oneself videoState:(BOOL)videoState audioState:(BOOL)audioState index:(NSInteger)index microphoneBlock:(FWMemberTableViewCellMicrophoneBlock)microphoneBlock cameraBlock:(FWMemberTableViewCellCameraBlock)cameraBlock removeBlock:(FWMemberTableViewCellRemoveBlock)removeBlock;
 
 @end
 

@@ -30,12 +30,18 @@ static NSString *FWMemberTableViewCellName = @"FWMemberTableViewCell";
 /// 视频状态按钮右边距
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *videoRightMarginH;
 
+/// 成员麦克风事件回调
+@property (copy, nonatomic) FWMemberTableViewCellMicrophoneBlock microphoneBlock;
+/// 成员摄像头事件回调
+@property (copy, nonatomic) FWMemberTableViewCellCameraBlock cameraBlock;
 /// 成员移除事件回调
 @property (copy, nonatomic) FWMemberTableViewCellRemoveBlock removeBlock;
 /// 成员标识
 @property (copy, nonatomic) NSString *userId;
 /// 成员昵称
 @property (copy, nonatomic) NSString *nickname;
+/// 成员索引
+@property (assign, nonatomic) NSInteger index;
 
 @end
 
@@ -78,6 +84,22 @@ static NSString *FWMemberTableViewCellName = @"FWMemberTableViewCell";
     
     @weakify(self);
     
+    /// 绑定音频状态按钮事件
+    [[self.audioButton rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        if (self.microphoneBlock) {
+            self.microphoneBlock(self.index);
+        }
+    }];
+    
+    /// 绑定视频状态按钮事件
+    [[self.videoButton rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
+        @strongify(self);
+        if (self.cameraBlock) {
+            self.cameraBlock(self.index);
+        }
+    }];
+    
     /// 绑定移除成员按钮事件
     [[self.removeButton rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable control) {
         @strongify(self);
@@ -97,15 +119,24 @@ static NSString *FWMemberTableViewCellName = @"FWMemberTableViewCell";
 ///   - oneself: 是否是自己
 ///   - videoState: 视频状态
 ///   - audioState: 音频状态
+///   - index: 成员索引
+///   - microphoneBlock: 成员麦克风事件回调
+///   - cameraBlock: 成员摄像头事件回调
 ///   - removeBlock: 成员移除事件回调
-- (void)setupWithUserId:(NSString *)userId avatarUrl:(NSString *)avatarUrl nicknameText:(NSString *)nicknameText isOwner:(BOOL)isOwner oneself:(BOOL)oneself videoState:(BOOL)videoState audioState:(BOOL)audioState removeBlock:(FWMemberTableViewCellRemoveBlock)removeBlock {
+- (void)setupWithUserId:(NSString *)userId avatarUrl:(NSString *)avatarUrl nicknameText:(NSString *)nicknameText isOwner:(BOOL)isOwner oneself:(BOOL)oneself videoState:(BOOL)videoState audioState:(BOOL)audioState index:(NSInteger)index microphoneBlock:(FWMemberTableViewCellMicrophoneBlock)microphoneBlock cameraBlock:(FWMemberTableViewCellCameraBlock)cameraBlock removeBlock:(FWMemberTableViewCellRemoveBlock)removeBlock {
     
+    /// 保存麦克风事件回调
+    self.microphoneBlock = microphoneBlock;
+    /// 保存摄像头事件回调
+    self.cameraBlock = cameraBlock;
     /// 保存移除事件回调
     self.removeBlock = removeBlock;
     /// 保存成员昵称
     self.nickname = nicknameText;
     /// 保存成员标识
     self.userId = userId;
+    /// 保存成员索引
+    self.index = index;
     
     /// 设置头像
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[avatarUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:kGetImage(FWDEFAULTAVATAR)];

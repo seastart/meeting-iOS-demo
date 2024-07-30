@@ -887,14 +887,15 @@
 /// - Parameters:
 ///   - targetUserId: 目标成员标识
 ///   - cameraState: 视频状态
-- (void)onUserCameraStateChanged:(NSString *)targetUserId cameraState:(SEADeviceState)cameraState {
+///   - reason: 发生变化原因
+- (void)onUserCameraStateChanged:(NSString *)targetUserId cameraState:(SEADeviceState)cameraState reason:(SEAChangeReason)reason {
     
     /// 日志埋点
-    SGLOG(@"用户摄像头状态变化，userId = %@ cameraState = %ld", targetUserId, cameraState);
+    SGLOG(@"用户摄像头状态变化，userId = %@ cameraState = %ld reason = %ld", targetUserId, cameraState, reason);
     /// 刷新成员列表
     [[FWRoomMemberManager sharedManager] reloadMemberLists];
     /// 用户摄像头状态变化
-    [self.roomMainView userCameraStateChanged:targetUserId cameraState:cameraState];
+    [self.roomMainView userCameraStateChanged:targetUserId cameraState:cameraState reason:reason];
 }
 
 #pragma mark 用户麦克风状态变化回调
@@ -903,14 +904,15 @@
 /// - Parameters:
 ///   - targetUserId: 目标成员标识
 ///   - micState: 音频状态
-- (void)onUserMicStateChanged:(NSString *)targetUserId micState:(SEADeviceState)micState {
+///   - reason: 发生变化原因
+- (void)onUserMicStateChanged:(NSString *)targetUserId micState:(SEADeviceState)micState reason:(SEAChangeReason)reason {
     
     /// 日志埋点
-    SGLOG(@"用户麦克风状态变化，userId = %@ micState = %ld", targetUserId, micState);
+    SGLOG(@"用户麦克风状态变化，userId = %@ micState = %ld reason = %ld", targetUserId, micState, reason);
     /// 刷新成员列表
     [[FWRoomMemberManager sharedManager] reloadMemberLists];
     /// 用户麦克风状态变化
-    [self.roomMainView userMicStateChanged:targetUserId micState:micState];
+    [self.roomMainView userMicStateChanged:targetUserId micState:micState reason:reason];
 }
 
 #pragma mark 用户聊天能力禁用状态变化回调

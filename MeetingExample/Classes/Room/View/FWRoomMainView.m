@@ -361,7 +361,8 @@
 /// 用户摄像头状态变化
 /// @param userId 成员标识
 /// @param cameraState 视频状态
-- (void)userCameraStateChanged:(NSString *)userId cameraState:(SEADeviceState)cameraState {
+/// @param reason 发生变化原因
+- (void)userCameraStateChanged:(NSString *)userId cameraState:(SEADeviceState)cameraState reason:(SEAChangeReason)reason {
     
     /// 获取当前用户数据
     SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
@@ -376,6 +377,11 @@
             /// 设置底部工具栏按钮
             [self.roomBottomTool setupVideoButtonSelected:NO];
         } else if (cameraState == SEADeviceStateClosed) {
+            /// 如果是主持人或联席主持人操作我关闭
+            if (reason == SEAChangeReasonByAdmin) {
+                /// 提示被关闭信息
+                [SVProgressHUD showInfoWithStatus:@"您的摄像头已被主持人关闭。"];
+            }
             /// 停止摄像头预览
             [self.roomCaptureView stopLocalPreview];
             /// 设置底部工具栏按钮
@@ -390,7 +396,8 @@
 /// 用户麦克风状态变化
 /// @param userId 成员标识
 /// @param micState 音频状态
-- (void)userMicStateChanged:(NSString *)userId micState:(SEADeviceState)micState {
+/// @param reason 发生变化原因
+- (void)userMicStateChanged:(NSString *)userId micState:(SEADeviceState)micState reason:(SEAChangeReason)reason {
     
     /// 获取当前用户数据
     SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
@@ -405,6 +412,11 @@
             /// 设置底部工具栏按钮
             [self.roomBottomTool setupAudioButtonSelected:NO];
         } else if (micState == SEADeviceStateClosed) {
+            /// 如果是主持人或联席主持人操作我关闭
+            if (reason == SEAChangeReasonByAdmin) {
+                /// 提示被关闭信息
+                [SVProgressHUD showInfoWithStatus:@"您的麦克风已被主持人关闭。"];
+            }
             /// 停止音频发送
             [self.roomCaptureView stopSendAudio];
             /// 设置底部工具栏按钮

@@ -365,7 +365,15 @@
     /// 声明弱引用
     @weakify(self);
     /// 设置项目内容
-    [cell setupWithUserId:userModel.userId avatarUrl:userModel.extend.avatar nicknameText:nickname isOwner:isOwner oneself:oneself videoState:videoState audioState:audioState removeBlock:^(NSString * _Nonnull userId, NSString * _Nonnull nickname) {
+    [cell setupWithUserId:userModel.userId avatarUrl:userModel.extend.avatar nicknameText:nickname isOwner:isOwner oneself:oneself videoState:videoState audioState:audioState index:indexPath.row microphoneBlock:^(NSInteger index) {
+        @strongify(self);
+        /// 成员麦克风被选中事件
+        [self didSelectRowAtMemberMicrophone:index];
+    } cameraBlock:^(NSInteger index) {
+        @strongify(self);
+        /// 成员摄像头被选中事件
+        [self didSelectRowAtMemberCamera:index];
+    } removeBlock:^(NSString * _Nonnull userId, NSString * _Nonnull nickname) {
         @strongify(self);
         /// 移除成员确认弹窗
         [self presentRoomKickoutAlert:userId nickname:nickname];
@@ -377,9 +385,146 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     /// 获取目标成员
-    /// FWRoomMemberModel *memberModel = [self.listDataSource objectAtIndex:indexPath.row];
+    FWRoomMemberModel *memberModel = [self.listDataSource objectAtIndex:indexPath.row];
     /// 成员被选中事件
-    /// [self didSelectRowAtMemberModel:memberModel];
+    [self didSelectRowAtMemberModel:memberModel];
+}
+
+#pragma mark - 成员麦克风被选中事件
+/// 成员麦克风被选中事件
+/// @param index 成员索引
+- (void)didSelectRowAtMemberMicrophone:(NSInteger)index {
+    
+    /// 获取目标成员数据
+    FWRoomMemberModel *memberModel = [self.listDataSource objectAtIndex:index];
+    /// 获取当前账户数据
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    
+    if (memberModel.isMine) {
+        /// 成员选中自己的麦克风
+        [self didSelectMineMicrophone:userModel];
+    } else {
+        /// 当前用户不为普通成员
+        if (userModel.extend.role != SEAUserRoleNormal) {
+            /// 主持人选中成员的麦克风
+            [self didSelectMemberMicrophone:memberModel.userId];
+        }
+    }
+}
+
+#pragma mark - 成员选中自己的麦克风
+/// 成员选中自己的麦克风
+/// - Parameter userModel: 当前账户数据
+- (void)didSelectMineMicrophone:(SEAUserModel *)userModel {
+    
+    /// 获取当前麦克风状态
+    BOOL microphoneState = (userModel.extend.micState == SEADeviceStateOpen);
+    /// 根据当前状态发起请求
+    if (microphoneState) {
+        /// 发送请求关闭麦克风通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:FWMeetingQueryCloseMicrophoneNotification object:nil];
+    } else {
+        /// 发送请求开启麦克风通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:FWMeetingQueryOpenMicrophoneNotification object:nil];
+    }
+}
+
+#pragma mark - 主持人选中成员的麦克风
+/// 主持人选中成员的麦克风
+/// - Parameter userId: 成员标识
+- (void)didSelectMemberMicrophone:(NSString *)userId {
+    
+    /// 获取用户数据
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:userId];
+    /// 获取用户当前麦克风状态
+    BOOL microphoneState = (userModel.extend.micState == SEADeviceStateOpen);
+    /// 根据当前状态发起请求
+    if (microphoneState) {
+        /// 关闭远端用户麦克风
+        [self.viewModel adminCloseUserMic:userId nickname:userModel.name];
+    } else {
+        /// 请求打开远端用户麦克风
+        @weakify(self);
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"您确定要请求“%@”开启麦克风吗？", userModel.name] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        }];
+        UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            @strongify(self);
+            /// 请求打开成员麦克风
+            [self.viewModel adminRequestUserOpenMic:userId nickname:userModel.name];
+        }];
+        [alert addAction:cancelAction];
+        [alert addAction:ensureAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
+#pragma mark - 成员摄像头被选中事件
+/// 成员摄像头被选中事件
+/// @param index 成员索引
+- (void)didSelectRowAtMemberCamera:(NSInteger)index {
+    
+    /// 获取目标成员数据
+    FWRoomMemberModel *memberModel = [self.listDataSource objectAtIndex:index];
+    /// 获取当前账户数据
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
+    
+    if (memberModel.isMine) {
+        /// 成员选中自己的摄像头
+        [self didSelectMineCamera:userModel];
+    } else {
+        /// 当前用户不为普通成员
+        if (userModel.extend.role != SEAUserRoleNormal) {
+            /// 主持人选中成员的摄像头
+            [self didSelectMemberCamera:memberModel.userId];
+        }
+    }
+}
+
+#pragma mark - 成员选中自己的摄像头
+/// 成员选中自己的摄像头
+/// - Parameter userModel: 当前账户数据
+- (void)didSelectMineCamera:(SEAUserModel *)userModel {
+    
+    /// 获取当前摄像头状态
+    BOOL cameraState = (userModel.extend.cameraState == SEADeviceStateOpen);
+    /// 根据当前状态发起请求
+    if (cameraState) {
+        /// 发送请求关闭摄像头通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:FWMeetingQueryCloseCameraNotification object:nil];
+    } else {
+        /// 发送请求开启摄像头通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:FWMeetingQueryOpenCameraNotification object:nil];
+    }
+}
+
+#pragma mark - 主持人选中成员的摄像头
+/// 主持人选中成员的摄像头
+/// - Parameter userId: 成员标识
+- (void)didSelectMemberCamera:(NSString *)userId {
+    
+    /// 获取用户数据
+    SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:userId];
+    /// 获取用户当前摄像头状态
+    BOOL cameraState = (userModel.extend.cameraState == SEADeviceStateOpen);
+    /// 根据当前状态发起请求
+    if (cameraState) {
+        /// 关闭远端用户摄像头
+        [self.viewModel adminCloseUserCamera:userId nickname:userModel.name];
+    } else {
+        @weakify(self);
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"您确定要请求“%@”开启摄像头吗？", userModel.name] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        }];
+        UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            @strongify(self);
+            /// 请求打开成员摄像头
+            [self.viewModel adminRequestUserOpenCamera:userId nickname:userModel.name];
+        }];
+        [alert addAction:cancelAction];
+        [alert addAction:ensureAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 #pragma mark - 移除成员确认弹窗

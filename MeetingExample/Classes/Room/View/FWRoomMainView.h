@@ -107,13 +107,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// 用户摄像头状态变化
 /// @param userId 成员标识
 /// @param cameraState 视频状态
-- (void)userCameraStateChanged:(NSString *)userId cameraState:(SEADeviceState)cameraState;
+/// @param reason 发生变化原因
+- (void)userCameraStateChanged:(NSString *)userId cameraState:(SEADeviceState)cameraState reason:(SEAChangeReason)reason;
 
 #pragma mark - 用户麦克风状态变化
 /// 用户麦克风状态变化
 /// @param userId 成员标识
 /// @param micState 音频状态
-- (void)userMicStateChanged:(NSString *)userId micState:(SEADeviceState)micState;
+/// @param reason 发生变化原因
+- (void)userMicStateChanged:(NSString *)userId micState:(SEADeviceState)micState reason:(SEAChangeReason)reason;
 
 #pragma mark - 用户开始共享
 /// 用户开始共享

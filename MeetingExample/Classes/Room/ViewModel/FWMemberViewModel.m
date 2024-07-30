@@ -191,7 +191,7 @@
         /// 恢复加载状态
         self.loading = NO;
         /// 请求成功回调
-        [self.succeedSubject sendNext:[NSString stringWithFormat:@"已请求%@开启摄像头。", nickname]];
+        /// [self.succeedSubject sendNext:[NSString stringWithFormat:@"已请求%@开启摄像头。", nickname]];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         @strongify(self);
         /// 恢复加载状态
@@ -218,7 +218,7 @@
         /// 恢复加载状态
         self.loading = NO;
         /// 请求成功回调
-        [self.succeedSubject sendNext:[NSString stringWithFormat:@"已将%@的摄像头关闭。", nickname]];
+        /// [self.succeedSubject sendNext:[NSString stringWithFormat:@"已将%@的摄像头关闭。", nickname]];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         @strongify(self);
         /// 恢复加载状态
@@ -245,7 +245,7 @@
         /// 恢复加载状态
         self.loading = NO;
         /// 请求成功回调
-        [self.succeedSubject sendNext:[NSString stringWithFormat:@"已请求%@开启麦克风。", nickname]];
+        /// [self.succeedSubject sendNext:[NSString stringWithFormat:@"已请求%@开启麦克风。", nickname]];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         @strongify(self);
         /// 恢复加载状态
@@ -272,7 +272,7 @@
         /// 恢复加载状态
         self.loading = NO;
         /// 请求成功回调
-        [self.succeedSubject sendNext:[NSString stringWithFormat:@"已将%@的麦克风关闭。", nickname]];
+        /// [self.succeedSubject sendNext:[NSString stringWithFormat:@"已将%@的麦克风关闭。", nickname]];
     } onFailed:^(SEAError code, NSString * _Nonnull message) {
         @strongify(self);
         /// 恢复加载状态
