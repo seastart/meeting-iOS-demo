@@ -166,6 +166,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter source: 事件源对象
 - (void)requestOpenAudio:(nullable UIButton *)source;
 
+#pragma mark - 回复同意打开摄像头请求
+/// 回复同意打开摄像头请求
+/// - Parameters:
+///   - userId: 回复的用户标识(主持人或者联席主持人用户标识)
+- (void)confirmAdminOpenCamera:(NSString *)userId;
+
+#pragma mark - 回复同意打开麦克风请求
+/// 回复同意打开麦克风请求
+/// - Parameters:
+///   - userId: 回复的用户标识(主持人或者联席主持人用户标识)
+- (void)confirmAdminOpenMic:(NSString *)userId;
+
 @end
 
 NS_ASSUME_NONNULL_END

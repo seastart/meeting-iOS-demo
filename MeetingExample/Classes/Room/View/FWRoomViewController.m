@@ -296,7 +296,8 @@
 
 #pragma mark - 主持人邀请开启摄像头提示弹窗
 /// 主持人邀请开启摄像头提示弹窗
-- (void)adminInviteOpenCameraAlert {
+/// - Parameter userId: 回复的用户标识(主持人或者联席主持人用户标识)
+- (void)adminInviteOpenCameraAlert:(NSString *)userId {
     
     @weakify(self);
     
@@ -305,8 +306,8 @@
     }];
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"开启摄像头" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         @strongify(self);
-        /// 请求开启视频
-        [self.roomMainView requestOpenVideo:nil];
+        /// 回复同意打开摄像头请求
+        [self.roomMainView confirmAdminOpenCamera:userId];
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];
@@ -315,7 +316,8 @@
 
 #pragma mark - 主持人邀请开启麦克风提示弹窗
 /// 主持人邀请开启麦克风提示弹窗
-- (void)adminInviteOpenMicAlert {
+/// - Parameter userId: 回复的用户标识(主持人或者联席主持人用户标识)
+- (void)adminInviteOpenMicAlert:(NSString *)userId {
     
     @weakify(self);
     
@@ -324,8 +326,8 @@
     }];
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"开启麦克风" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         @strongify(self);
-        /// 请求开启音频
-        [self.roomMainView requestOpenAudio:nil];
+        /// 回复同意打开麦克风请求
+        [self.roomMainView confirmAdminOpenMic:userId];
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];
@@ -370,7 +372,8 @@
 
 #pragma mark - 主持人同意音频举手提示弹窗
 /// 主持人同意音频举手提示弹窗
-- (void)hostApproveAudioHandupAlert {
+/// - Parameter userId: 回复的用户标识(主持人或者联席主持人用户标识)
+- (void)hostApproveAudioHandupAlert:(NSString *)userId {
     
     @weakify(self);
     
@@ -379,8 +382,8 @@
     }];
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"开启麦克风" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         @strongify(self);
-        /// 请求开启音频
-        [self.roomMainView requestOpenAudio:nil];
+        /// 回复同意打开麦克风请求
+        [self.roomMainView confirmAdminOpenMic:userId];
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];
@@ -389,7 +392,8 @@
 
 #pragma mark - 主持人同意视频举手提示弹窗
 /// 主持人同意视频举手提示弹窗
-- (void)hostApproveVideoHandupAlert {
+/// - Parameter userId: 回复的用户标识(主持人或者联席主持人用户标识)
+- (void)hostApproveVideoHandupAlert:(NSString *)userId {
     
     @weakify(self);
     
@@ -398,8 +402,8 @@
     }];
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"开启摄像头" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
         @strongify(self);
-        /// 请求开启视频
-        [self.roomMainView requestOpenVideo:nil];
+        /// 回复同意打开摄像头请求
+        [self.roomMainView confirmAdminOpenCamera:userId];
     }];
     [alert addAction:cancelAction];
     [alert addAction:ensureAction];
@@ -563,7 +567,7 @@
     /// 日志埋点
     SGLOG(@"%@", @"主持人请求你开启摄像头");
     /// 主持人邀请我开启摄像头提示弹窗
-    [self adminInviteOpenCameraAlert];
+    [self adminInviteOpenCameraAlert:userId];
 }
 
 #pragma mark 请求开启麦克风回调
@@ -575,7 +579,7 @@
     /// 日志埋点
     SGLOG(@"%@", @"主持人请求你开启麦克风");
     /// 主持人邀请我开启麦克风提示弹窗
-    [self adminInviteOpenMicAlert];
+    [self adminInviteOpenMicAlert:userId];
 }
 
 
@@ -613,7 +617,7 @@
         }
     } else {
         /// 主持人邀请我开启摄像头提示弹窗
-        [self adminInviteOpenCameraAlert];
+        [self adminInviteOpenCameraAlert:userId];
     }
 }
 
@@ -649,7 +653,7 @@
         }
     } else {
         /// 主持人邀请我开启麦克风提示弹窗
-        [self adminInviteOpenMicAlert];
+        [self adminInviteOpenMicAlert:userId];
     }
 }
 
@@ -954,11 +958,11 @@
     switch (handupType) {
         case SEAHandupTypeMic:
             /// 主持人同意开启麦克风
-            [self hostApproveAudioHandupAlert];
+            [self hostApproveAudioHandupAlert:userId];
             break;
         case SEAHandupTypeCamera:
             /// 主持人同意开启摄像头
-            [self hostApproveVideoHandupAlert];
+            [self hostApproveVideoHandupAlert:userId];
             break;
         case SEAHandupTypeChat:
             /// 主持人同意解除聊天禁用

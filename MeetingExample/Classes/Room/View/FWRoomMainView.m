@@ -368,8 +368,6 @@
     SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
     /// 判断是否是自己的摄像头状态发生变化
     if ([userModel.userId isEqualToString:userId]) {
-        /// 日志埋点
-        SGLOG(@"[测试状态异常] 我的摄像头状态发生变化 %ld", cameraState);
         /// 摄像头状态为开启
         if (cameraState == SEADeviceStateOpen) {
             /// 开启摄像头预览
@@ -403,8 +401,6 @@
     SEAUserModel *userModel = [[MeetingKit sharedInstance] getMySelf];
     /// 判断是否是自己的麦克风状态发生变化
     if ([userModel.userId isEqualToString:userId]) {
-        /// 日志埋点
-        SGLOG(@"[测试状态异常] 我的麦克风状态发生变化 %ld", micState);
         /// 摄像头状态为开启
         if (micState == SEADeviceStateOpen) {
             /// 开启音频发送
@@ -499,8 +495,6 @@
         return;
     }
     
-    /// 日志埋点
-    SGLOG(@"[测试状态异常] 我请求打开摄像头");
     /// @weakify(self);
     /// 获取预览视图
     UIView *preview = self.palaceMode ? [self.roomMemberView.mineWindowView getPlayerWindow] : [self.roomCaptureView getPreview];
@@ -518,8 +512,6 @@
 /// - Parameter source: 事件源对象
 - (void)requestCloseVideo:(nullable UIButton *)source {
     
-    /// 日志埋点
-    SGLOG(@"[测试状态异常] 我请求关闭摄像头");
     /// @weakify(self);
     /// 用户关闭摄像头
     [[MeetingKit sharedInstance] closeCamera:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
@@ -547,8 +539,6 @@
         return;
     }
     
-    /// 日志埋点
-    SGLOG(@"[测试状态异常] 我请求打开麦克风");
     /// @weakify(self);
     /// 用户请求打开麦克风
     [[MeetingKit sharedInstance] requestOpenMic:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
@@ -564,13 +554,45 @@
 /// - Parameter source: 事件源对象
 - (void)requestCloseAudio:(nullable UIButton *)source {
     
-    /// 日志埋点
-    SGLOG(@"[测试状态异常] 我请求关闭麦克风");
     /// @weakify(self);
     /// 用户关闭麦克风
     [[MeetingKit sharedInstance] closeMic:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
         /// 构造日志信息
         NSString *toastStr = [NSString stringWithFormat:@"请求关闭音频失败 code = %ld, message = %@", code, message];
+        [SVProgressHUD showInfoWithStatus:toastStr];
+        SGLOG(@"%@", toastStr);
+    }];
+}
+
+#pragma mark - 回复同意打开摄像头请求
+/// 回复同意打开摄像头请求
+/// - Parameters:
+///   - userId: 回复的用户标识(主持人或者联席主持人用户标识)
+- (void)confirmAdminOpenCamera:(NSString *)userId {
+    
+    /// @weakify(self);
+    /// 获取预览视图
+    UIView *preview = self.palaceMode ? [self.roomMemberView.mineWindowView getPlayerWindow] : [self.roomCaptureView getPreview];
+    /// 回复同意打开摄像头请求
+    [[MeetingKit sharedInstance] confirmAdminOpenCamera:userId frontCamera:YES view:preview onSuccess:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
+        /// 构造日志信息
+        NSString *toastStr = [NSString stringWithFormat:@"回复同意打开摄像头请求失败 code = %ld, message = %@", code, message];
+        [SVProgressHUD showInfoWithStatus:toastStr];
+        SGLOG(@"%@", toastStr);
+    }];
+}
+
+#pragma mark - 回复同意打开麦克风请求
+/// 回复同意打开麦克风请求
+/// - Parameters:
+///   - userId: 回复的用户标识(主持人或者联席主持人用户标识)
+- (void)confirmAdminOpenMic:(NSString *)userId {
+    
+    /// @weakify(self);
+    /// 回复同意打开麦克风请求
+    [[MeetingKit sharedInstance] confirmAdminOpenMic:userId onSuccess:nil onFailed:^(SEAError code, NSString * _Nonnull message) {
+        /// 构造日志信息
+        NSString *toastStr = [NSString stringWithFormat:@"回复同意打开麦克风请求失败 code = %ld, message = %@", code, message];
         [SVProgressHUD showInfoWithStatus:toastStr];
         SGLOG(@"%@", toastStr);
     }];
