@@ -102,48 +102,30 @@
 /// 获取当前所有成员
 - (nullable NSArray<FWRoomMemberModel *> *)getAllMembers {
     
-    /// 创建成员列表数据
-    __block NSMutableArray <FWRoomMemberModel *> *sortLists = [NSMutableArray array];
-    /// 获取房间内成员列表
-    NSDictionary<NSString *, FWRoomMemberModel *> *memberLists = [NSDictionary dictionaryWithDictionary:self.roomMemberArray];
-    /// 遍历成员列表对列表顺序进行调整
-    [memberLists enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, FWRoomMemberModel * _Nonnull obj, BOOL * _Nonnull stop) {
-        if (obj.isMine) {
-            /// 该成员为自己
-            if (kArrayIsEmpty(sortLists)) {
-                /// 当前列表无数据
-                /// 直接添加到列表
-                [sortLists addObject:obj];
-            } else {
-                /// 当前列表有数据
-                /// 插入到列表第一个数据
-                [sortLists insertObject:obj atIndex:0];
-            }
+    /// 获取成员列表数据
+    NSArray <FWRoomMemberModel *> *memberLists = self.roomMemberArray.allValues;
+    /// 声明排序后成员数据列表
+    NSArray <FWRoomMemberModel *> *resultArray = [NSArray array];
+    /// 对成员数据列表进行排序
+    resultArray = [memberLists sortedArrayUsingComparator:^NSComparisonResult(FWRoomMemberModel * _Nonnull obj1, FWRoomMemberModel * _Nonnull obj2) {
+        /// 先进行成员角色的排序
+        if (obj1.userRole < obj2.userRole) {
+            return NSOrderedDescending;
+        } else if (obj1.userRole > obj1.userRole) {
+            return NSOrderedAscending;
         } else {
-            /// 该成员非自己
-            /// 获取用户数据
-            SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:obj.userId];
-            /// 判断成员用户角色
-            if (userModel.extend.role != SEAUserRoleNormal) {
-                /// 成员为管理人员
-                if (kArrayIsEmpty(sortLists)) {
-                    /// 当前列表无数据
-                    /// 直接添加到列表
-                    [sortLists addObject:obj];
-                } else {
-                    /// 当前列表有数据
-                    /// 插入到列表第二个数据
-                    [sortLists insertObject:obj atIndex:1];
-                }
+            /// 再进行是否为自己排序
+            if (obj1.isMine < obj2.isMine) {
+                return NSOrderedDescending;
+            } else if (obj1.isMine > obj1.isMine) {
+                return NSOrderedAscending;
             } else {
-                /// 成员为普通成员，直接添加到列表
-                [sortLists addObject:obj];
+                return NSOrderedSame;
             }
         }
     }];
-    /// 返回成员列表数据
-    /// return self.roomMemberArray.allValues;
-    return [NSArray arrayWithArray:sortLists];
+    /// 返回排序后成员列表数据
+    return resultArray;
 }
 
 #pragma mark - 查找成员信息
