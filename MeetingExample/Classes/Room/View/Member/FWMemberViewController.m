@@ -355,9 +355,9 @@
     /// 获取用户昵称
     NSString *nickname = userModel.name;
     /// 获取用户是否为主持人
-    BOOL isOwner = (userModel.extend.role == SEAUserRoleHost || userModel.extend.role == SEAUserRoleUnionHost);
+    BOOL isOwner = (userModel.extend.role != SEAUserRoleNormal);
     /// 获取用户是否为当前成员
-    BOOL oneself = memberModel.isMine;
+    BOOL isMine = memberModel.isMine;
     /// 获取用户视频状态
     BOOL videoState = (userModel.extend.cameraState == SEADeviceStateOpen);
     /// 获取用户音频状态
@@ -365,7 +365,7 @@
     /// 声明弱引用
     @weakify(self);
     /// 设置项目内容
-    [cell setupWithUserId:userModel.userId avatarUrl:userModel.extend.avatar nicknameText:nickname isOwner:isOwner oneself:oneself videoState:videoState audioState:audioState index:indexPath.row microphoneBlock:^(NSInteger index) {
+    [cell setupWithUserId:userModel.userId avatarUrl:userModel.extend.avatar nicknameText:nickname isOwner:isOwner isMine:isMine videoState:videoState audioState:audioState index:indexPath.row microphoneBlock:^(NSInteger index) {
         @strongify(self);
         /// 成员麦克风被选中事件
         [self didSelectRowAtMemberMicrophone:index];

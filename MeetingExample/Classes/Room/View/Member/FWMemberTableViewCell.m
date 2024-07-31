@@ -116,14 +116,14 @@ static NSString *FWMemberTableViewCellName = @"FWMemberTableViewCell";
 ///   - avatarUrl: 头像地址
 ///   - nicknameText: 昵称
 ///   - isOwner: 是否是主持人
-///   - oneself: 是否是自己
+///   - isMine: 是否是自己
 ///   - videoState: 视频状态
 ///   - audioState: 音频状态
 ///   - index: 成员索引
 ///   - microphoneBlock: 成员麦克风事件回调
 ///   - cameraBlock: 成员摄像头事件回调
 ///   - removeBlock: 成员移除事件回调
-- (void)setupWithUserId:(NSString *)userId avatarUrl:(NSString *)avatarUrl nicknameText:(NSString *)nicknameText isOwner:(BOOL)isOwner oneself:(BOOL)oneself videoState:(BOOL)videoState audioState:(BOOL)audioState index:(NSInteger)index microphoneBlock:(FWMemberTableViewCellMicrophoneBlock)microphoneBlock cameraBlock:(FWMemberTableViewCellCameraBlock)cameraBlock removeBlock:(FWMemberTableViewCellRemoveBlock)removeBlock {
+- (void)setupWithUserId:(NSString *)userId avatarUrl:(NSString *)avatarUrl nicknameText:(NSString *)nicknameText isOwner:(BOOL)isOwner isMine:(BOOL)isMine videoState:(BOOL)videoState audioState:(BOOL)audioState index:(NSInteger)index microphoneBlock:(FWMemberTableViewCellMicrophoneBlock)microphoneBlock cameraBlock:(FWMemberTableViewCellCameraBlock)cameraBlock removeBlock:(FWMemberTableViewCellRemoveBlock)removeBlock {
     
     /// 保存麦克风事件回调
     self.microphoneBlock = microphoneBlock;
@@ -148,14 +148,14 @@ static NSString *FWMemberTableViewCellName = @"FWMemberTableViewCell";
     NSString *positionText = @"";
     if (isOwner) {
         /// 主持人角色
-        if (oneself) {
+        if (isMine) {
             positionText = @"(我，主持人)";
         } else {
             positionText = @"(主持人)";
         }
     } else {
         /// 非主持人角色
-        if (oneself) {
+        if (isMine) {
             positionText = @"(我)";
         } else {
             positionText = @"";
@@ -169,23 +169,32 @@ static NSString *FWMemberTableViewCellName = @"FWMemberTableViewCell";
     self.audioButton.selected = !audioState;
     
     /// 设置部分视图显示状态
-    if (!isOwner && !oneself) {
+    if (!isOwner && !isMine) {
+        /// 该成员不是主持人同时也不是当前用户
+        /// 隐藏角色标签与顶部昵称标签
         self.positionLabel.hidden = YES;
         self.nicknameLabel.hidden = YES;
         self.centreNicknameLabel.hidden = NO;
     } else {
+        /// 该成员是主持人或者是当前用户
+        /// 隐藏中间昵称标签
         self.positionLabel.hidden = NO;
         self.nicknameLabel.hidden = NO;
         self.centreNicknameLabel.hidden = YES;
     }
     
-    if (!oneself && !isOwner) {
-        /// 该成员是自己且当前登录成员为主持人
+    /// 获取当前用户角色
+    SEAUserRole userRole = [[FWRoomMemberManager sharedManager] getUserRole];
+    
+    if (userRole != SEAUserRoleNormal && !isMine) {
+        /// 当前用户是管理员并且该成员不是自己
+        /// 显示踢人按钮
         self.removeButton.hidden = NO;
         /// 设置视频状态按钮右边距
         self.videoRightMarginH.constant = 51.0;
     } else {
-        /// 该成员非自己且当前登录成员非主持人
+        /// 当前用户不是管理员或者该成员是自己
+        /// 隐藏踢人按钮
         self.removeButton.hidden = YES;
         /// 设置视频状态按钮右边距
         self.videoRightMarginH.constant = 16.0;
