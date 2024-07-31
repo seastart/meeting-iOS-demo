@@ -102,7 +102,48 @@
 /// 获取当前所有成员
 - (nullable NSArray<FWRoomMemberModel *> *)getAllMembers {
     
-    return self.roomMemberArray.allValues;
+    /// 创建成员列表数据
+    __block NSMutableArray <FWRoomMemberModel *> *sortLists = [NSMutableArray array];
+    /// 获取房间内成员列表
+    NSDictionary<NSString *, FWRoomMemberModel *> *memberLists = [NSDictionary dictionaryWithDictionary:self.roomMemberArray];
+    /// 遍历成员列表对列表顺序进行调整
+    [memberLists enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, FWRoomMemberModel * _Nonnull obj, BOOL * _Nonnull stop) {
+        if (obj.isMine) {
+            /// 该成员为自己
+            if (kArrayIsEmpty(sortLists)) {
+                /// 当前列表无数据
+                /// 直接添加到列表
+                [sortLists addObject:obj];
+            } else {
+                /// 当前列表有数据
+                /// 插入到列表第一个数据
+                [sortLists insertObject:obj atIndex:0];
+            }
+        } else {
+            /// 该成员非自己
+            /// 获取用户数据
+            SEAUserModel *userModel = [[MeetingKit sharedInstance] findMemberWithUserId:obj.userId];
+            /// 判断成员用户角色
+            if (userModel.extend.role != SEAUserRoleNormal) {
+                /// 成员为管理人员
+                if (kArrayIsEmpty(sortLists)) {
+                    /// 当前列表无数据
+                    /// 直接添加到列表
+                    [sortLists addObject:obj];
+                } else {
+                    /// 当前列表有数据
+                    /// 插入到列表第二个数据
+                    [sortLists insertObject:obj atIndex:1];
+                }
+            } else {
+                /// 成员为普通成员，直接添加到列表
+                [sortLists addObject:obj];
+            }
+        }
+    }];
+    /// 返回成员列表数据
+    /// return self.roomMemberArray.allValues;
+    return [NSArray arrayWithArray:sortLists];
 }
 
 #pragma mark - 查找成员信息
