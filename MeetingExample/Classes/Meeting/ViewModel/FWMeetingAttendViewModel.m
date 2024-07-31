@@ -31,7 +31,7 @@
     _succeedSubject = [RACSubject subject];
     _toastSubject = [RACSubject subject];
     _isMicrophone = YES;
-    _isCamera = YES;
+    _isCamera = NO;
     _loading = NO;
     _type = type;
 }
