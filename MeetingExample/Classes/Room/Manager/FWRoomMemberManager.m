@@ -108,16 +108,16 @@
     NSArray <FWRoomMemberModel *> *resultArray = [NSArray array];
     /// 对成员数据列表进行排序
     resultArray = [memberLists sortedArrayUsingComparator:^NSComparisonResult(FWRoomMemberModel * _Nonnull obj1, FWRoomMemberModel * _Nonnull obj2) {
-        /// 先进行成员角色的排序
-        if (obj1.userRole < obj2.userRole) {
-            return NSOrderedDescending;
-        } else if (obj1.userRole > obj1.userRole) {
+        /// 先按照按 isMine 排序
+        if (obj1.isMine && !obj2.isMine) {
             return NSOrderedAscending;
+        } else if (!obj1.isMine && obj2.isMine) {
+            return NSOrderedDescending;
         } else {
-            /// 再进行是否为自己排序
-            if (obj1.isMine < obj2.isMine) {
+            /// 如果 isMine 相同，则按 userRole 排序
+            if (obj1.userRole < obj2.userRole) {
                 return NSOrderedDescending;
-            } else if (obj1.isMine > obj1.isMine) {
+            } else if (obj1.userRole > obj1.userRole) {
                 return NSOrderedAscending;
             } else {
                 return NSOrderedSame;
