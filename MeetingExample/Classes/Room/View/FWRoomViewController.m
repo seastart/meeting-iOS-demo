@@ -74,6 +74,8 @@
 #pragma mark - 初始化操作
 - (void)buildView {
     
+    /// 设置应用忙碌状态
+    [[FWEntryBridge sharedManager] setRoomBusy:YES];
     /// 绑定监听通知
     [self bindNotification];
     /// 设置ViewModel
@@ -1362,6 +1364,8 @@
 #pragma mark - 资源释放
 - (void)dealloc {
     
+    /// 设设置应用空闲状态
+    [[FWEntryBridge sharedManager] setRoomBusy:NO];
     /// 启用IQKeyboard
     [[IQKeyboardManager sharedManager] setEnable:YES];
     /// 启用IQKeyboard的Toolbar

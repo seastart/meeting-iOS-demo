@@ -14,6 +14,8 @@
 
 @interface FWEntryBridge()
 
+/// 当前是否在房间内
+@property (nonatomic, assign, readwrite) BOOL isRoomBusy;
 /// 后台保活音频播放器
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 
@@ -40,6 +42,15 @@
 - (FWAppDelegate *)appDelegate {
     
     return (FWAppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
+#pragma mark 设置应用忙碌状态
+/// 设置应用忙碌状态
+/// - Parameter state: 忙碌状态，YES-忙碌 NO-空闲
+- (void)setRoomBusy:(BOOL)state {
+    
+    /// 保存应用忙碌状态
+    self.isRoomBusy = state;
 }
 
 #pragma mark 部分基础设置
@@ -102,6 +113,11 @@
 /// 开启后台任务
 - (void)beginBackgroundTask {
     
+    if (self.isRoomBusy) {
+        /// 如果当前应用处于房间忙碌状态，无需开启后台任务
+        return;
+    }
+    
     /// 停止播放音频
     [self.audioPlayer stop];
     
@@ -116,6 +132,11 @@
 #pragma mark 取消后台任务
 /// 取消后台任务
 - (void)cancelBackgroundTask {
+    
+    if (self.isRoomBusy) {
+        /// 如果当前应用处于房间忙碌状态，无需开启后台任务
+        return;
+    }
     
     /// 停止播放音频
     [self.audioPlayer stop];
